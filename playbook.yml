@@ -1,7 +1,21 @@
 ---
-- hosts: all
-  become_user: sudo
-  become_method: sudo
-  tasks:
-    - name: Install python
-      pacman: name=python state=latest
+- hosts: localhost-test
+  roles:
+    - archlinux
+
+  vars_prompt:
+    - name: "archlinux_user_name"
+      prompt: "Enter your username"
+      private: no
+    - name: "archlinux_user_password"
+      prompt: "Enter your password"
+      private: yes
+      encrypt: "sha512_crypt"
+      confirm: yes
+      salt_size: 14
+    - name: "archlinux_user_email"
+      prompt: "Enter your email (for gitconfig)"
+      private: no
+    - name: "archlinux_time_zone"
+      prompt: "Enter your time zone"
+      private: no

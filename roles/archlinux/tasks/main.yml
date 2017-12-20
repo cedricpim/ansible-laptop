@@ -1,2 +1,10 @@
 ---
 # tasks file for archlinux
+- name: update packages
+  pacman:
+    update_cache: yes
+    upgrade: yes
+  become: yes
+
+- import_tasks: locale.yml
+- import_tasks: time_zone.yml

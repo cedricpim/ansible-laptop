@@ -1,0 +1,21 @@
+---
+- name: enable the en_GB.UTF-8 locale
+  locale_gen:
+    name: en_GB.UTF-8
+    state: present
+  become: yes
+
+- name: enable the en_US.UTF-8 locale
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+  become: yes
+
+- name: copy locale configuration to /etc/locale.conf
+  copy:
+    src: locale.conf
+    dest: /etc/locale.conf
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"
+  become: yes

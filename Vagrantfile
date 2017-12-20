@@ -63,13 +63,25 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   apt-get update
-  #   apt-get install -y apache2
-  # SHELL
+  config.vm.provision "shell", inline: <<-SHELL
+    if [ ! `command -v python` ]; then
+      pacman -S python --noconfirm
+    fi
+  SHELL
+
+  # Define hostname to be used by ansible
+  config.vm.define "localhost-test" do |l|
+    l.vm.hostname = "localhost-test"
+  end
 
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
     ansible.playbook = "playbook.yml"
+    ansible.extra_vars = {
+      archlinux_user_name: 'vagrant',
+      archlinux_user_email: 'vagrant@localhost',
+      archlinux_user_password: 'vagrant',
+      archlinux_time_zone: 'UTC'
+    }
   end
 end
