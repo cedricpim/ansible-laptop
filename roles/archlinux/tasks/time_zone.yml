@@ -2,6 +2,5 @@
 - name: set timezone to "{{ archlinux_time_zone }}"
   timezone:
     name: "{{ archlinux_time_zone }}"
-  become: yes
   notify:
     - process time zone

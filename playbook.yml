@@ -1,5 +1,6 @@
 ---
 - hosts: localhost-test
+  become: yes
   roles:
     - archlinux
 

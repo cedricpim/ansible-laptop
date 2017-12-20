@@ -3,13 +3,11 @@
   pacman:
     name: sudo
     state: present
-  become: yes
 
 - name: Make sure we have a 'wheel' group
   group:
     name: wheel
     state: present
-  become: yes
 
 - name: Allow 'wheel' group to have passwordless sudo
   replace:
@@ -18,4 +16,3 @@
     replace: "%wheel"
     validate: visudo -cf %s
     backup: yes
-  become: yes

@@ -2,4 +2,3 @@
 - name: add hostname
   hostname:
     name: "{{ archlinux_hostname }}"
-  become: yes
