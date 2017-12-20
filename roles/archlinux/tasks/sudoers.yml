@@ -1,0 +1,21 @@
+---
+- name: install sudo package
+  pacman:
+    name: sudo
+    state: present
+  become: yes
+
+- name: Make sure we have a 'wheel' group
+  group:
+    name: wheel
+    state: present
+  become: yes
+
+- name: Allow 'wheel' group to have passwordless sudo
+  replace:
+    path: /etc/sudoers
+    regexp: "^# %wheel"
+    replace: "%wheel"
+    validate: visudo -cf %s
+    backup: yes
+  become: yes
