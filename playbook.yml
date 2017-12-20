@@ -19,3 +19,6 @@
     - name: "archlinux_time_zone"
       prompt: "Enter your time zone"
       private: no
+    - name: "archlinux_hostname"
+      prompt: "Enter your hostname"
+      private: no

@@ -81,7 +81,8 @@ Vagrant.configure("2") do |config|
       archlinux_user_name: 'vagrant',
       archlinux_user_email: 'vagrant@localhost',
       archlinux_user_password: 'vagrant',
-      archlinux_time_zone: 'UTC'
+      archlinux_time_zone: 'UTC',
+      archlinux_hostname: 'vagrant'
     }
   end
 end
