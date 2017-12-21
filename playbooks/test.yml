@@ -1,7 +1,9 @@
 ---
 - hosts: localhost-test
   become: yes
+
   roles:
+    - { role: "pacman", tags: "pacman" }
     - { role: "settings", tags: "settings" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }

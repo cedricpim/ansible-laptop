@@ -1,9 +1,3 @@
 ---
-# tasks file for archlinux
-- name: update packages
-  pacman:
-    update_cache: yes
-    upgrade: yes
-
 - import_tasks: system.yml
 - import_tasks: ui.yml
