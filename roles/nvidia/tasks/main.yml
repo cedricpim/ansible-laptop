@@ -10,9 +10,8 @@
     - xf86-video-intel
     - nvidia
     - bbswitch
-    - networkmanager
 
-- name: install bumblebee
+- name: install bumblebee package
   pacman:
     name: bumblebee
     state: present

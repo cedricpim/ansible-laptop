@@ -1,7 +1,7 @@
 ---
 - name: bumblebee installed
   user:
-    name: "{{ archlinux_user_name }}"
+    name: "{{ user_name }}"
     groups: bumblebee
     append: yes
     state: present

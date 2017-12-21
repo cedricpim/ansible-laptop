@@ -5,3 +5,4 @@
     - { role: "settings", tags: "settings" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
+    - { role: "nvidia", tags: "nvidia" }
