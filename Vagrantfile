@@ -75,8 +75,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-    ansible.verbose = "v"
-    ansible.playbook = "playbook.yml"
+    ansible.playbook = ENV['VAGRANT_PLAYBOOK'] || 'playbook.yml'
     ansible.extra_vars = {
       archlinux_user_name: 'vagrant-test',
       archlinux_user_email: 'vagrant-test@localhost',
