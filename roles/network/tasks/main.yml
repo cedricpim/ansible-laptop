@@ -1,0 +1,9 @@
+---
+- name: Install network tools
+  pacman:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - iw
+    - wpa_supplicant
+    - networkmanager
