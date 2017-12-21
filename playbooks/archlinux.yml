@@ -1,9 +1,8 @@
 ---
-- hosts: localhost-test
+- hosts: all
   become: yes
   roles:
     - { role: "settings", tags: "settings" }
-    - { role: "archlinux", tags: "archlinux" }
 
   vars_prompt:
     - name: "archlinux_user_name"
@@ -17,4 +16,10 @@
       salt_size: 14
     - name: "archlinux_user_email"
       prompt: "Enter your email (for gitconfig)"
+      private: no
+    - name: "system_time_zone"
+      prompt: "Enter your time zone"
+      private: no
+    - name: "system_hostname"
+      prompt: "Enter your hostname"
       private: no
