@@ -1,0 +1,16 @@
+---
+- name: create staff group
+  group:
+    name: staff
+    state: present
+
+- name: create user "{{ archlinux_user_name }}"
+  user:
+    name: "{{ archlinux_user_name }}"
+    password: "{{ archlinux_user_password }}"
+    createhome: yes
+    groups:
+      - wheel
+      - staff
+    append: yes
+    state: present

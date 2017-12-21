@@ -9,3 +9,4 @@
 - import_tasks: time_zone.yml
 - import_tasks: hostname.yml
 - import_tasks: sudoers.yml
+- import_tasks: users.yml
