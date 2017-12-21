@@ -79,9 +79,7 @@ Vagrant.configure("2") do |config|
     ansible.extra_vars = {
       archlinux_user_name: 'vagrant-test',
       archlinux_user_email: 'vagrant-test@localhost',
-      archlinux_user_password: 'vagrant-test',
-      archlinux_time_zone: 'UTC',
-      archlinux_hostname: 'vagrant'
+      archlinux_user_password: 'vagrant-test'
     }
   end
 end

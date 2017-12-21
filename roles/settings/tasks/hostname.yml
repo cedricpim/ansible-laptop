@@ -1,4 +1,4 @@
 ---
 - name: add hostname
   hostname:
-    name: "{{ archlinux_hostname }}"
+    name: "{{ system_hostname }}"

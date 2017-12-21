@@ -1,0 +1,6 @@
+---
+- name: set timezone to "{{ system_time_zone }}"
+  timezone:
+    name: "{{ system_time_zone }}"
+  notify:
+    - process time zone

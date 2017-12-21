@@ -1,7 +1,4 @@
 ---
-- name: process time zone
-  command: "hwclock --systohc"
-
 - name: bumblebee installed
   user:
     name: "{{ archlinux_user_name }}"
