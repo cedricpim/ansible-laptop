@@ -1,0 +1,21 @@
+---
+- name: Install Gnome and Budgie
+  pacman:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - gnome
+    - budgie-desktop
+    - seahorse
+    - gnome-tweak-tool
+
+- name: Enable GDM
+  systemd:
+    name: gdm
+    enabled: yes
+
+- name: Define mouse scroll settings
+  command: "gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false"
+
+- name: Define mouse click settings
+  command: "gsettings set org.gnome.desktop.peripherals.touchpad click-method fingers"
