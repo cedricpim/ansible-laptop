@@ -1,11 +1,11 @@
 ---
-- name: Install Gnome and Budgie
+- name: Install Budgie
   pacman:
     name: "{{ item }}"
     state: present
   with_items:
-    - gnome
     - budgie-desktop
+    - gnome
     - seahorse
     - gnome-tweak-tool
 

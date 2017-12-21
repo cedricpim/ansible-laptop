@@ -8,3 +8,4 @@
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
     - { role: "nvidia", tags: "nvidia" }
+    - { role: "budgie", tags: "budgie" }
