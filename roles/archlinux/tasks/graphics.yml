@@ -1,0 +1,26 @@
+---
+- name: install graphic's related packages
+  pacman:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - xorg-xinit
+    - xorg-setxkbmap
+    - mesa
+    - xf86-video-intel
+    - nvidia
+    - bbswitch
+    - networkmanager
+
+- name: install bumblebee
+  pacman:
+    name: bumblebee
+    state: present
+  notify:
+    - bumblebee installed
+
+- name: start service for bumblebee
+  systemd:
+    name: bumblebeed
+    state: started
+    enabled: yes

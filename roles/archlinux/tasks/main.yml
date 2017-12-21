@@ -10,3 +10,4 @@
 - import_tasks: hostname.yml
 - import_tasks: sudoers.yml
 - import_tasks: users.yml
+- import_tasks: graphics.yml
