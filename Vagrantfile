@@ -76,10 +76,5 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbooks/#{ENV['VAGRANT_PLAYBOOK'] || 'test.yml'}"
-    ansible.extra_vars = {
-      archlinux_user_name: 'vagrant-test',
-      archlinux_user_email: 'vagrant-test@localhost',
-      archlinux_user_password: 'vagrant-test'
-    }
   end
 end

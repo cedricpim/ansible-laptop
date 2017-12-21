@@ -4,10 +4,10 @@
     name: staff
     state: present
 
-- name: create user "{{ archlinux_user_name }}"
+- name: create user "{{ user_name }}"
   user:
-    name: "{{ archlinux_user_name }}"
-    password: "{{ archlinux_user_password }}"
+    name: "{{ user_name }}"
+    password: "{{ user_password }}"
     createhome: yes
     groups:
       - wheel

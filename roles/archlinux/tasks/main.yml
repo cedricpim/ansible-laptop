@@ -5,7 +5,6 @@
     update_cache: yes
     upgrade: yes
 
-- import_tasks: sudoers.yml
 - import_tasks: users.yml
 - import_tasks: graphics.yml
 - import_tasks: system.yml
