@@ -1,5 +1,5 @@
 ---
-- name: Install Budgie
+- name: install Budgie
   pacman:
     name: "{{ item }}"
     state: present
@@ -9,13 +9,29 @@
     - seahorse
     - gnome-tweak-tool
 
-- name: Enable GDM
+- name: enable GDM
   systemd:
     name: gdm
     enabled: yes
 
-- name: Define mouse scroll settings
-  command: "gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false"
+- name: get mouse scroll settings
+  command: "gsettings get org.gnome.desktop.peripherals.touchpad natural-scroll"
+  become_user: "{{ user_name }}"
+  changed_when: false
+  register: mouse_scroll_settings
 
-- name: Define mouse click settings
-  command: "gsettings set org.gnome.desktop.peripherals.touchpad click-method fingers"
+- name: get mouse click settings
+  command: "gsettings get org.gnome.desktop.peripherals.touchpad click-method"
+  become_user: "{{ user_name }}"
+  changed_when: false
+  register: mouse_click_settings
+
+- name: define mouse scroll settings
+  command: "dbus-launch gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false"
+  become_user: "{{ user_name }}"
+  when: mouse_scroll_settings.stdout|bool
+
+- name: define mouse click settings
+  command: "dbus-launch gsettings set org.gnome.desktop.peripherals.touchpad click-method 'fingers'"
+  become_user: "{{ user_name }}"
+  when: mouse_click_settings.stdout != "'fingers'"

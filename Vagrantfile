@@ -76,5 +76,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbooks/#{ENV['VAGRANT_PLAYBOOK'] || 'test.yml'}"
+    ansible.tags = ENV['VAGRANT_TAGS']
   end
 end
