@@ -11,4 +11,4 @@
     - { role: "budgie", tags: "budgie" }
     - { role: "fonts", tags: "fonts" }
     - { role: "ssd", tags: "ssd" }
-    - { role: "shell", tags: "shell" }
+    - { role: "utilities", tags: "utilities" }
