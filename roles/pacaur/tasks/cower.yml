@@ -1,0 +1,28 @@
+---
+- name: add gpg key for cower
+  command: "gpg --recv-keys --keyserver hkp://pgp.mit.edu {{ cower_gpg_key }}"
+  become_user: "{{ user_name }}"
+  when: aur_pacaur_check.rc != 0
+
+- name: create temporary folder for cower
+  file:
+    path: "~{{ user_name }}/pacaur.tmp/cower"
+    state: directory
+  become_user: "{{ user_name }}"
+  when: aur_pacaur_check.rc != 0
+
+- name: download cower
+  get_url:
+    url: "{{ aur_repo }}/PKGBUILD?h=cower"
+    dest: "~{{ user_name }}/pacaur.tmp/cower/PKGBUILD"
+  become_user: "{{ user_name }}"
+  when: aur_pacaur_check.rc != 0
+
+- name: install cower
+  command: "makepkg -i PKGBUILD --noconfirm"
+  args:
+    chdir: "~{{ user_name }}/pacaur.tmp/cower"
+  environment:
+    PATH: '{{ ansible_env.PATH }}:/usr/bin/core_perl'
+  become_user: "{{ user_name }}"
+  when: aur_pacaur_check.rc != 0

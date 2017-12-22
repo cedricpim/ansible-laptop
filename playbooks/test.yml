@@ -3,9 +3,4 @@
   become: yes
 
   roles:
-    - { role: "pacman", tags: "pacman" }
-    - { role: "settings", tags: "settings" }
-    - { role: "sudo", tags: "sudo" }
-    - { role: "users", tags: "users" }
-    - { role: "nvidia", tags: "nvidia" }
-    - { role: "budgie", tags: "budgie" }
+    - { role: "pacaur", tags: "pacaur" }
