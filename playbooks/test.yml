@@ -9,4 +9,5 @@
     - { role: "users", tags: "users" }
     - { role: "nvidia", tags: "nvidia" }
     - { role: "budgie", tags: "budgie" }
+    - { role: "fonts", tags: "fonts" }
     - { role: "pacaur", tags: "pacaur" }
