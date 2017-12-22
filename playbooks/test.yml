@@ -12,3 +12,4 @@
     - { role: "fonts", tags: "fonts" }
     - { role: "pacaur", tags: "pacaur" }
     - { role: "ssd", tags: "ssd" }
+    - { role: "shell", tags: "shell" }
