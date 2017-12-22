@@ -8,6 +8,7 @@
     - gnome
     - seahorse
     - gnome-tweak-tool
+    - gnome-keyring
 
 - name: enable GDM
   systemd:
