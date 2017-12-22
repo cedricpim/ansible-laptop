@@ -10,7 +10,7 @@
     - git
 
 - name: check if pacaur is installed
-  command: 'pacman -Q pacaur'
+  command: "pacman -Q pacaur"
   failed_when: false
   changed_when: aur_pacaur_check.rc != 0
   register: aur_pacaur_check
@@ -28,3 +28,9 @@
 
 - import_tasks: pacaur.yml
   when: aur_pacaur_check.rc != 0
+
+- name: update pacaur
+  command: "pacaur -Syu"
+  become_user: "{{ user_name }}"
+  register: pacaur_install_result
+  changed_when: pacaur_install_result.stdout.find('there is nothing to do') == -1
