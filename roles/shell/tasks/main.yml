@@ -5,7 +5,6 @@
     state: present
   with_items:
     - git
-    - zsh
     - openssh
     - easy-rsa
     - rsync
