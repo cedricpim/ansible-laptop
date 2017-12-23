@@ -7,3 +7,10 @@
     - iw
     - wpa_supplicant
     - networkmanager
+    - ntp
+
+- name: start service for NTP
+  systemd:
+    name: ntpd
+    state: started
+    enabled: yes
