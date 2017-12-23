@@ -12,3 +12,5 @@
     - xdotool
     - wmctrl
     - ripgrep
+    - ntfs-3g
+    - htop
