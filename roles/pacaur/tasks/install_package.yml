@@ -1,0 +1,6 @@
+---
+- name: "install {{ pkg_name|mandatory }}"
+  command: "pacaur -S {{ pkg_name|mandatory }} --needed --noconfirm"
+  become: "{{ user_name }}"
+  register: package_install_result
+  changed_when: package_install_result.stdout.find('there is nothing to do') == -1

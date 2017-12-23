@@ -11,8 +11,8 @@
   include_role:
     name: pacaur
 
-- name: install zsh-autosuggestions
-  command: "pacaur -S zsh-autosuggestions --needed --noconfirm"
-  become: "{{ user_name }}"
-  register: pacaur_install_result
-  changed_when: pacaur_install_result.stdout.find('there is nothing to do') == -1
+- include_role:
+    name: pacaur
+    tasks_from: install_package
+  vars:
+    pkg_name: zsh-autosuggestions
