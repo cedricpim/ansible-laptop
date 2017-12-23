@@ -12,3 +12,4 @@
     - { role: "fonts", tags: "fonts" }
     - { role: "ssd", tags: "ssd" }
     - { role: "utilities", tags: "utilities" }
+    - { role: "zsh", tags: "zsh" }
