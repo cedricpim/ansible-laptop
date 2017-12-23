@@ -15,4 +15,4 @@
     dest: /etc/locale.conf
     owner: root
     group: root
-    mode: "u=rw,g=r,o=r"
+    mode: 0644

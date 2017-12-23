@@ -1,0 +1,8 @@
+---
+- name: sysctl configured
+  command: "sysctl -p"
+
+- name: restart transmission
+  systemd:
+    name: transmission
+    state: restarted

@@ -29,3 +29,14 @@
     name: transmission
     state: started
     enabled: yes
+
+- name: copy sysctl configuration to /etc/sysctl.conf
+  template:
+    src: sysctl.conf.j2
+    dest: /etc/sysctl.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - sysctl configured
+    - restart transmission
