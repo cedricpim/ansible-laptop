@@ -13,3 +13,4 @@
     - { role: "ssd", tags: "ssd" }
     - { role: "utilities", tags: "utilities" }
     - { role: "zsh", tags: "zsh" }
+    - { role: "openvpn", tags: "openvpn" }
