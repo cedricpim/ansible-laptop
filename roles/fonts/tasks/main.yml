@@ -11,6 +11,12 @@
   include_role:
     name: pacaur
 
+- name: install ttf-fira-code font
+  command: "pacaur -S ttf-fira-code --needed --noconfirm"
+  become: "{{ user_name }}"
+  register: pacaur_install_result
+  changed_when: pacaur_install_result.stdout.find('there is nothing to do') == -1
+
 - name: install nerd fonts
   command: "pacaur -S nerd-fonts-complete --needed --noconfirm"
   become: "{{ user_name }}"
