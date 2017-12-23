@@ -1,6 +1,11 @@
 ---
 - hosts: localhost-test
   become: yes
+  vars:
+    user_name: 'vagrant-test'
+    user_password: 'vagrant-test'
+    system_time_zone: 'UTC'
+    system_hostname: 'vagrant'
 
   roles:
     - { role: "network", tags: "network" }
@@ -15,3 +20,4 @@
     - { role: "utilities", tags: "utilities" }
     - { role: "zsh", tags: "zsh" }
     - { role: "openvpn", tags: "openvpn" }
+    - { role: "applications", tags: "applications" }

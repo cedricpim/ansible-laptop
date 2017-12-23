@@ -1,7 +1,0 @@
----
-- name: bumblebee installed
-  user:
-    name: "{{ user_name }}"
-    groups: bumblebee
-    append: yes
-    state: present
