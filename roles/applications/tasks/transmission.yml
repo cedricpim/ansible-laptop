@@ -1,0 +1,31 @@
+---
+- name: install transmission-cli
+  pacman:
+    name: transmission-cli
+    state: present
+
+- name: create staff group
+  group:
+    name: staff
+    state: present
+
+- name: add user transmission to staff group
+  user:
+    name: transmission
+    groups: staff
+    append: yes
+    state: present
+
+- name: create folder for torrents
+  file:
+    path: /data/torrents
+    state: directory
+    mode: 0770
+    owner: transmission
+    group: staff
+
+- name: start and enable service for transmission-cli
+  systemd:
+    name: transmission
+    state: started
+    enabled: yes
