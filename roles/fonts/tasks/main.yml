@@ -9,10 +9,8 @@
 
 - include_role:
     name: pacaur_package
-  vars:
-    pkg_name: ttf-fira-code
-
-- include_role:
-    name: pacaur_package
-  vars:
-    pkg_name: nerd-fonts-complete
+  with_items:
+    - ttf-fira-code
+    - nerd-fonts-complete
+  loop_control:
+    loop_var: pkg_name

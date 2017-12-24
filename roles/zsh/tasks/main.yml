@@ -7,6 +7,11 @@
     - zsh
     - zsh-completions
 
+- name: change default shell to zsh
+  user:
+    name: "{{ user_name }}"
+    shell: /usr/bin/zsh
+
 - include_role:
     name: pacaur_package
   vars:
