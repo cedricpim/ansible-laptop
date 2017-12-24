@@ -1,0 +1,3 @@
+---
+dependencies:
+  - { role: 'pacaur', tags: 'pacaur' }

@@ -21,4 +21,9 @@
     - { role: "zsh", tags: "zsh" }
     - { role: "openvpn", tags: "openvpn" }
     - { role: "applications", tags: "applications" }
-    - { role: "pacaur", tags: "pacaur" }
+
+  post_tasks:
+    - name: update packages
+      include_role:
+        name: pacaur_package
+        tasks_from: update

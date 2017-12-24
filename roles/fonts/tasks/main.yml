@@ -7,18 +7,12 @@
     - ttf-dejavu
     - ttf-liberation
 
-- name: ensure pacaur is installed
-  include_role:
-    name: pacaur
-
 - include_role:
-    name: pacaur
-    tasks_from: install_package
+    name: pacaur_package
   vars:
     pkg_name: ttf-fira-code
 
 - include_role:
-    name: pacaur
-    tasks_from: install_package
+    name: pacaur_package
   vars:
     pkg_name: nerd-fonts-complete

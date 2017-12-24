@@ -1,0 +1,11 @@
+---
+- name: "check if {{ pkg_name }} is installed"
+  command: "pacman -Q {{ pkg_name }}"
+  failed_when: false
+  changed_when: aur_package_check.rc != 0
+  register: aur_package_check
+
+- name: "install {{ pkg_name }}"
+  command: "pacaur -S {{ pkg_name }} --needed --noconfirm"
+  become: "{{ user_name }}"
+  when: aur_package_check|changed
