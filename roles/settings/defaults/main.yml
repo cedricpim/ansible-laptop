@@ -1,3 +1,11 @@
 ---
-system_time_zone: UTC
-system_hostname: vagrant
+locales:
+  - en_GB.UTF-8
+  - en_US.UTF-8
+
+lang: en_GB.UTF-8
+numeric: en_GB.UTF-8
+time: en_GB.UTF-8
+monetary: en_GB.UTF-8
+paper: en_GB.UTF-8
+measurement: en_GB.UTF-8

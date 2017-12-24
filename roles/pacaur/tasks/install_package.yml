@@ -1,6 +1,11 @@
 ---
+- name: "check if {{ pkg_name|mandatory }} is installed"
+  command: "pacman -Q {{ pkg_name|mandatory }}"
+  failed_when: false
+  changed_when: aur_package_check.rc != 0
+  register: aur_package_check
+
 - name: "install {{ pkg_name|mandatory }}"
   command: "pacaur -S {{ pkg_name|mandatory }} --needed --noconfirm"
   become: "{{ user_name }}"
-  register: package_install_result
-  changed_when: package_install_result.stdout.find('there is nothing to do') == -1
+  when: aur_package_check|changed

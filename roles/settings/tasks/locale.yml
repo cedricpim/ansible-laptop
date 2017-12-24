@@ -1,17 +1,13 @@
 ---
-- name: enable the en_GB.UTF-8 locale
+- name: enable the defined locales
   locale_gen:
-    name: en_GB.UTF-8
+    name: "{{ item }}"
     state: present
-
-- name: enable the en_US.UTF-8 locale
-  locale_gen:
-    name: en_US.UTF-8
-    state: present
+  with_items: "{{ locales }}"
 
 - name: copy locale configuration to /etc/locale.conf
-  copy:
-    src: locale.conf
+  template:
+    src: locale.conf.j2
     dest: /etc/locale.conf
     owner: root
     group: root

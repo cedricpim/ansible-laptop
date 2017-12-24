@@ -1,16 +1,15 @@
 ---
-- name: create staff group
+- name: create initial groups
   group:
-    name: staff
+    name: "{{ item }}"
     state: present
+  with_items: "{{ users_groups }}"
 
 - name: create user "{{ user_name }}"
   user:
     name: "{{ user_name }}"
     password: "{{ user_password }}"
     createhome: yes
-    groups:
-      - wheel
-      - staff
+    groups: "{{ users_groups }}"
     append: yes
     state: present

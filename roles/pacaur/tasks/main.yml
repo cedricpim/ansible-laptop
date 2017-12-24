@@ -21,16 +21,16 @@
     append: true
     groups: wheel
     state: present
-  when: aur_pacaur_check.rc != 0
+  when: aur_pacaur_check|changed
 
 - import_tasks: cower.yml
-  when: aur_pacaur_check.rc != 0
+  when: aur_pacaur_check|changed
 
 - import_tasks: pacaur.yml
-  when: aur_pacaur_check.rc != 0
+  when: aur_pacaur_check|changed
 
 - name: update pacaur
-  command: "pacaur -Syu"
+  command: "pacaur -Syu --noconfirm"
   become_user: "{{ user_name }}"
   register: pacaur_install_result
-  changed_when: pacaur_install_result.stdout.find('there is nothing to do') == -1
+  changed_when: pacaur_install_result.stdout.find(available_packages_message) != -1

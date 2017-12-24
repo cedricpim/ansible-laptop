@@ -15,8 +15,13 @@
   pacman:
     name: bumblebee
     state: present
-  notify:
-    - bumblebee installed
+
+- name: add bumblebee group to {{ user_name }}
+  user:
+    name: "{{ user_name }}"
+    groups: bumblebee
+    append: yes
+    state: present
 
 - name: start service for bumblebee
   systemd:
