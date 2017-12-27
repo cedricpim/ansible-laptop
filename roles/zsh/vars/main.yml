@@ -6,11 +6,16 @@ ripgrep_autocomplete_url: "https://raw.githubusercontent.com/BurntSushi/ripgrep/
 ripgrep_autocomplete_dest: "/usr/share/zsh/functions/Completion/Zsh/_rg"
 zsh_directory: '~/.zsh'
 zsh_config_files:
-  - { filename: "zlogin", dir: "~/." }
-  - { filename: "zlogout", dir: "~/." }
-  - { filename: "zpreztorc", dir: "~/." }
-  - { filename: "zshenv", dir: "~/." }
-  - { filename: "zshrc", dir: "~/." }
-  - { filename: "zsettings", dir: "{{ zsh_directory }}/" }
-  - { filename: "zstyles", dir: "{{ zsh_directory }}/" }
-  - { filename: "ssh-warning.zsh", dir: "{{ zsh_directory }}/" }
+  - { filename: "aliases",     dir: "{{ zsh_directory }}/" }
+  - { filename: "dircolors",   dir: "{{ zsh_directory }}/" }
+  - { filename: "exports",     dir: "{{ zsh_directory }}/" }
+  - { filename: "functions",   dir: "{{ zsh_directory }}/" }
+  - { filename: "ssh-warning", dir: "{{ zsh_directory }}/" }
+  - { filename: "start",       dir: "{{ zsh_directory }}/" }
+  - { filename: "zsettings",   dir: "{{ zsh_directory }}/" }
+  - { filename: "zstyles",     dir: "{{ zsh_directory }}/" }
+  - { filename: "zlogin",      dir: "~/." }
+  - { filename: "zlogout",     dir: "~/." }
+  - { filename: "zpreztorc",   dir: "~/." }
+  - { filename: "zshenv",      dir: "~/." }
+  - { filename: "zshrc",       dir: "~/." }

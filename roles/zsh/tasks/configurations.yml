@@ -22,7 +22,7 @@
     state: directory
   become_user: "{{ user_name }}"
 
-- name: "symlink zsh configuration files to {{ zsh_directory }} directory"
+- name: symlink zsh configuration files
   file:
     src: "{{ dotfiles_dest }}/zsh/{{ item.filename }}"
     dest: "{{ item.dir }}{{ item.filename }}"
