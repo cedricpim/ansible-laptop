@@ -1,0 +1,13 @@
+---
+- name: install git
+  pacman:
+    name: git
+    state: present
+
+- name: clone dotfiles repo
+  git:
+    repo: "{{ dotfiles_repository }}"
+    dest: "{{ dotfiles_destination }}"
+    clone: yes
+    update: yes
+  become_user: "{{ user_name }}"
