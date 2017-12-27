@@ -1,5 +1,6 @@
 ---
 - name: cleanup pacaur build directory
   file:
-    path: "~{{ user_name }}/pacaur.tmp"
+    path: "~/{{ temp_folder }}"
     state: absent
+  become_user: "{{ user_name }}"

@@ -1,20 +1,20 @@
 ---
 - name: create temporary folder for pacaur
   file:
-    path: "~{{ user_name }}/{{ pacaur_folder }}"
+    path: "~/{{ temp_folder }}/{{ pacaur_folder }}"
     state: directory
   become_user: "{{ user_name }}"
 
 - name: download pacaur
   get_url:
     url: "{{ aur_repo }}/PKGBUILD?h=pacaur"
-    dest: "~{{ user_name }}/{{ pacaur_folder }}/PKGBUILD"
+    dest: "~/{{ temp_folder }}/{{ pacaur_folder }}/PKGBUILD"
   become_user: "{{ user_name }}"
 
 - name: install pacaur
   command: "makepkg -i PKGBUILD --noconfirm"
   args:
-    chdir: "~{{ user_name }}/{{ pacaur_folder }}"
+    chdir: "~/{{ temp_folder }}/{{ pacaur_folder }}"
   environment:
     PATH: '{{ ansible_env.PATH }}:/usr/bin/core_perl'
   become_user: "{{ user_name }}"
