@@ -1,0 +1,10 @@
+---
+- name: install  ripgrep
+  pacman:
+    name: ripgrep
+    state: present
+
+- name: setup ripgrep autocomplete for zsh
+  get_url:
+    url: "{{ ripgrep_autocomplete_url }}"
+    dest: "{{ ripgrep_autocomplete_dest }}"

@@ -16,3 +16,6 @@
     name: pacaur_package
   vars:
     pkg_name: zsh-autosuggestions
+
+- import_tasks: configurations.yml
+- import_tasks: ripgrep.yml

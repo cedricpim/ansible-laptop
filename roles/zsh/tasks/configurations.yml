@@ -1,0 +1,33 @@
+---
+- name: clone zprezto
+  git:
+    repo: "{{ zprezto_repo }}"
+    dest: "{{ zprezto_dest }}"
+    clone: yes
+    update: yes
+    recursive: yes
+  become_user: "{{ user_name }}"
+  register: cloned_zprezto
+
+- name: pull zprezto submodules
+  command: "git submodule update --init --recursive"
+  args:
+    chdir: "{{ zprezto_dest }}"
+  become_user: "{{ user_name }}"
+  when: cloned_zprezto is defined and cloned_zprezto.submodules_changed is defined
+
+- name: create folder for zsh configuration files
+  file:
+    path: "{{ zsh_directory }}"
+    state: directory
+  become_user: "{{ user_name }}"
+
+- name: "symlink zsh configuration files to {{ zsh_directory }} directory"
+  file:
+    src: "{{ dotfiles_dest }}/zsh/{{ item.filename }}"
+    dest: "{{ item.dir }}{{ item.filename }}"
+    mode: 0644
+    force: yes
+    state: link
+  with_items: "{{ zsh_config_files }}"
+  become_user: "{{ user_name }}"
