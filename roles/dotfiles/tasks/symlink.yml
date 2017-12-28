@@ -9,6 +9,7 @@
 - name: "get files on {{ src }}"
   shell: "ls {{ dotfiles_dest }}/{{ src }}/*"
   become_user: "{{ user_name }}"
+  changed_when: false
   register: path_files
 
 - name: "symlink files from {{ src }}"
