@@ -21,3 +21,10 @@
   vars:
     src: "{{ git_directory }}"
     create_directory: no
+
+- name: "copy git-details configuration to {{ git_details }}"
+  template:
+    src: "git-details.j2"
+    dest: "{{ git_details }}"
+    mode: 0600
+  become_user: "{{ user_name }}"

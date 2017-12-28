@@ -6,12 +6,16 @@
   become_user: "{{ user_name }}"
   when: create_directory
 
+- name: "get files on {{ src }}"
+  shell: "ls {{ dotfiles_dest }}/{{ src }}/*"
+  become_user: "{{ user_name }}"
+  register: path_files
+
 - name: "symlink files from {{ src }}"
   file:
     src: "{{ item }}"
     dest: "~/{{ create_directory | ternary(['.',src,'/']|join(''), '.') }}{{ item | basename }}"
     force: yes
     state: link
+  with_items: "{{ path_files.stdout_lines }}"
   become_user: "{{ user_name }}"
-  with_fileglob:
-    - "{{ dotfiles_dest }}/{{ src }}/*"

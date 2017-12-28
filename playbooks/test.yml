@@ -4,6 +4,8 @@
   vars:
     user_name: 'vagrant-test'
     user_password: 'vagrant-test'
+    full_name: 'Vagrant Test'
+    email: 'vagrant-test@localhost'
     system_time_zone: 'UTC'
     system_hostname: 'vagrant'
 
