@@ -19,7 +19,7 @@
     - { role: "budgie", tags: "budgie" }
     - { role: "fonts", tags: "fonts" }
     - { role: "ssd", tags: "ssd" }
-    - { role: "utilities", tags: "utilities" }
+    - { role: "terminal", tags: "terminal" }
     - { role: "zsh", tags: "zsh" }
     - { role: "openvpn", tags: "openvpn" }
     - { role: "applications", tags: "applications" }
