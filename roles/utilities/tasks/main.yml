@@ -14,3 +14,15 @@
     - ripgrep
     - ntfs-3g
     - htop
+
+- include_role:
+    name: pacaur_package
+  vars:
+    pkg_name: urlview
+
+- include_role:
+    name: dotfiles
+    tasks_from: symlink
+  vars:
+    src: "{{ utilities_directory }}"
+    create_directory: no
