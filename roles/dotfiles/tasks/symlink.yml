@@ -1,0 +1,17 @@
+---
+- name: "create folder for symlinks from {{ src }}"
+  file:
+    path: "~/.{{ src }}"
+    state: directory
+  become_user: "{{ user_name }}"
+  when: create_directory
+
+- name: "symlink files from {{ src }}"
+  file:
+    src: "{{ item }}"
+    dest: "~/{{ create_directory | ternary(['.',src,'/']|join(''), '.') }}{{ item | basename }}"
+    force: yes
+    state: link
+  become_user: "{{ user_name }}"
+  with_fileglob:
+    - "{{ dotfiles_dest }}/{{ src }}/*"

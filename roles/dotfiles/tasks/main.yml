@@ -4,10 +4,20 @@
     name: git
     state: present
 
-- name: clone dotfiles repo
+- name: ensure dotfiles is cloned and up-to-date
   git:
-    repo: "{{ dotfiles_repository }}"
-    dest: "{{ dotfiles_destination }}"
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ dotfiles_dest }}"
     clone: yes
     update: yes
   become_user: "{{ user_name }}"
+
+- include_tasks: symlink.yml
+  vars:
+    src: "{{ scripts_directory }}"
+    create_directory: yes
+
+- include_tasks: symlink.yml
+  vars:
+    src: "{{ git_directory }}"
+    create_directory: no

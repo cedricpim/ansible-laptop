@@ -1,3 +1,5 @@
 ---
-dotfiles_repository: "https://github.com/cedricpim/dotfiles.git"
-dotfiles_destination: "~/.dotfiles"
+dotfiles_repo: "https://github.com/cedricpim/dotfiles.git"
+dotfiles_dest: "~/.dotfiles"
+scripts_directory: "scripts"
+git_directory: "git"
