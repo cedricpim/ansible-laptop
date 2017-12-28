@@ -26,3 +26,5 @@
   vars:
     src: "{{ utilities_directory }}"
     create_directory: no
+
+- import_tasks: tmux.yml

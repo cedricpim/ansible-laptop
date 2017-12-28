@@ -1,0 +1,20 @@
+---
+- name: install tmux
+  pacman:
+    name: tmux
+    state: present
+
+- name: install tmux plugin manager
+  git:
+    repo: "{{ tmux_plugin_repo }}"
+    dest: "{{ tmux_plugin_dest }}"
+    clone: yes
+    update: yes
+  become_user: "{{ user_name }}"
+
+- include_role:
+    name: dotfiles
+    tasks_from: symlink
+  vars:
+    src: "{{ tmux_directory }}"
+    create_directory: no

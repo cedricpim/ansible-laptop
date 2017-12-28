@@ -1,2 +1,6 @@
 ---
 utilities_directory: "utilities"
+
+tmux_plugin_repo: "https://github.com/tmux-plugins/tpm"
+tmux_plugin_dest: "~/.tmux/plugins/tpm"
+tmux_directory: "tmux"
