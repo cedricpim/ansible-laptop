@@ -5,20 +5,20 @@
 
 - name: create temporary folder for cower
   file:
-    path: "~/{{ temp_folder }}/{{ cower_folder }}"
+    path: "{{ cower_folder }}"
     state: directory
   become_user: "{{ user_name }}"
 
 - name: download cower
   get_url:
     url: "{{ aur_repo }}/PKGBUILD?h=cower"
-    dest: "~/{{ temp_folder }}/{{ cower_folder }}/PKGBUILD"
+    dest: "{{ cower_folder }}/PKGBUILD"
   become_user: "{{ user_name }}"
 
 - name: install cower
   command: "makepkg -i PKGBUILD --noconfirm"
   args:
-    chdir: "~/{{ temp_folder }}/{{ cower_folder }}"
+    chdir: "{{ cower_folder }}"
   environment:
     PATH: '{{ ansible_env.PATH }}:/usr/bin/core_perl'
   become_user: "{{ user_name }}"

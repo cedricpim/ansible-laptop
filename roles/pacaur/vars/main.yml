@@ -1,6 +1,5 @@
 ---
 cower_gpg_key: 1EB2638FF56C0C53
 aur_repo: https://aur.archlinux.org/cgit/aur.git/plain
-temp_folder: 'pacaur.tmp'
-cower_folder: 'cower'
-pacaur_folder: 'pacaur'
+cower_folder: '~/cower.tmp'
+pacaur_folder: '~/pacaur.tmp'
