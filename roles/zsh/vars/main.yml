@@ -1,21 +1,7 @@
 ---
 zprezto_repo: "https://github.com/sorin-ionescu/prezto.git"
 zprezto_dest: "~/.zprezto"
-dotfiles_dest: "~/.dotfiles"
 ripgrep_autocomplete_url: "https://raw.githubusercontent.com/BurntSushi/ripgrep/master/complete/_rg"
 ripgrep_autocomplete_dest: "/usr/share/zsh/functions/Completion/Zsh/_rg"
-zsh_directory: '~/.zsh'
-zsh_config_files:
-  - { filename: "aliases",     dir: "{{ zsh_directory }}/" }
-  - { filename: "dircolors",   dir: "{{ zsh_directory }}/" }
-  - { filename: "exports",     dir: "{{ zsh_directory }}/" }
-  - { filename: "functions",   dir: "{{ zsh_directory }}/" }
-  - { filename: "ssh-warning", dir: "{{ zsh_directory }}/" }
-  - { filename: "start",       dir: "{{ zsh_directory }}/" }
-  - { filename: "zsettings",   dir: "{{ zsh_directory }}/" }
-  - { filename: "zstyles",     dir: "{{ zsh_directory }}/" }
-  - { filename: "zlogin",      dir: "~/." }
-  - { filename: "zlogout",     dir: "~/." }
-  - { filename: "zpreztorc",   dir: "~/." }
-  - { filename: "zshenv",      dir: "~/." }
-  - { filename: "zshrc",       dir: "~/." }
+zsh_directory: "zsh"
+shell_directory: "shell"

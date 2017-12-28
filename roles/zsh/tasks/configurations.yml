@@ -1,5 +1,5 @@
 ---
-- name: clone zprezto
+- name: ensure zprezto is cloned and up-to-date
   git:
     repo: "{{ zprezto_repo }}"
     dest: "{{ zprezto_dest }}"
@@ -16,18 +16,16 @@
   become_user: "{{ user_name }}"
   when: cloned_zprezto is defined and cloned_zprezto.submodules_changed is defined
 
-- name: create folder for zsh configuration files
-  file:
-    path: "{{ zsh_directory }}"
-    state: directory
-  become_user: "{{ user_name }}"
+- include_role:
+    name: dotfiles
+    tasks_from: symlink
+  vars:
+    src: "{{ zsh_directory }}"
+    create_directory: no
 
-- name: symlink zsh configuration files
-  file:
-    src: "{{ dotfiles_dest }}/zsh/{{ item.filename }}"
-    dest: "{{ item.dir }}{{ item.filename }}"
-    mode: 0644
-    force: yes
-    state: link
-  with_items: "{{ zsh_config_files }}"
-  become_user: "{{ user_name }}"
+- include_role:
+    name: dotfiles
+    tasks_from: symlink
+  vars:
+    src: "{{ shell_directory }}"
+    create_directory: yes
