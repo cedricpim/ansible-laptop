@@ -13,3 +13,5 @@ neovim_spell_dictionaries:
   - en.utf-8.spl
   - en.utf-8.sug
 neovim_directory: "config/nvim"
+
+neofetch_directory: "config/neofetch"
