@@ -4,6 +4,13 @@
     name: tmux
     state: present
 
+- include_role:
+    name: dotfiles
+    tasks_from: symlink
+  vars:
+    src: "{{ tmux_directory }}"
+    create_directory: no
+
 - name: install tmux plugin manager
   git:
     repo: "{{ tmux_plugin_repo }}"
@@ -12,9 +19,12 @@
     update: yes
   become_user: "{{ user_name }}"
 
-- include_role:
-    name: dotfiles
-    tasks_from: symlink
-  vars:
-    src: "{{ tmux_directory }}"
-    create_directory: no
+- name: install plugins
+  command: "{{ tmux_plugin_dest }}/bin/install_plugins"
+  become_user: "{{ user_name }}"
+  register: tpm_install_result
+  changed_when: tpm_install_result.stdout.find(tmux_tpm_installation_message) != -1
+
+- name: update pmux_plugin_dest
+  command: "{{ tmux_plugin_dest }}/bin/update_plugins all"
+  become_user: "{{ user_name }}"
