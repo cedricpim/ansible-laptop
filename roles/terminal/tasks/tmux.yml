@@ -23,7 +23,7 @@
   command: "{{ tmux_plugin_dest }}/bin/install_plugins"
   become_user: "{{ user_name }}"
   register: tpm_install_result
-  changed_when: tpm_install_result.stdout.find(tmux_tpm_installation_message) != -1
+  changed_when: tpm_install_result.stdout.find(tmux_plugin_installation_message) != -1
 
 - name: update pmux_plugin_dest
   command: "{{ tmux_plugin_dest }}/bin/update_plugins all"

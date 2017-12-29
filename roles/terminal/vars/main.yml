@@ -1,0 +1,4 @@
+---
+tmux_plugin_installation_message: "Installing"
+
+neovim_plugin_installation_message: "Cloning"

@@ -12,7 +12,6 @@
     - xdotool
     - wmctrl
     - ripgrep
-    - ntfs-3g
     - htop
 
 - include_role:
@@ -28,3 +27,4 @@
     create_directory: no
 
 - import_tasks: tmux.yml
+- import_tasks: neovim.yml
