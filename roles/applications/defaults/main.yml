@@ -1,3 +1,5 @@
 ---
 sysctl_rmem_max: 4194304
 sysctl_wmem_max: 1048576
+
+copyq_directory: "config/copyq"

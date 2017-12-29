@@ -1,0 +1,12 @@
+---
+- include_role:
+    name: pacaur_package
+  vars:
+    pkg_name: copyq
+
+- include_role:
+    name: dotfiles
+    tasks_from: symlink
+  vars:
+    src: "{{ copyq_directory }}"
+    create_directory: yes

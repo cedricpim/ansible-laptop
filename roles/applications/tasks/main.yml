@@ -1,0 +1,37 @@
+---
+- name: install applications
+  pacman:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - calibre
+    - feh
+    - ffmpeg
+    - firefox
+    - keepassxc
+    - offlineimap
+    - neomutt
+    - newsboat
+    - notmuch
+    - powerline
+    - qpdfview
+    - rxvt-unicode-terminfo
+    - syncthing
+    - vlc
+    - w3m
+
+- import_tasks: transmission.yml
+- import_tasks: copyq.yml
+
+- include_role:
+    name: pacaur_package
+  with_items:
+    - khard
+    - todotxt
+    - python2-neovim
+    - rxvt-unicode-patched
+    - spotify
+    - khal
+    - vdirsyncer
+  loop_control:
+    loop_var: pkg_name
