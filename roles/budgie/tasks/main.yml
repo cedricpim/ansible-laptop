@@ -9,6 +9,7 @@
     - seahorse
     - gnome-tweak-tool
     - gnome-keyring
+    - ntfs-3g
 
 - name: enable GDM
   systemd:
