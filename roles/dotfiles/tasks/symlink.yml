@@ -7,7 +7,7 @@
   when: create_directory
 
 - name: "get files on {{ src }}"
-  shell: "ls {{ dotfiles_dest }}/{{ src }}/*"
+  shell: "ls {{ dotfiles_dest }}/{{ src.split('/') | last }}/*"
   become_user: "{{ user_name }}"
   changed_when: false
   register: path_files
