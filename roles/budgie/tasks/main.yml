@@ -16,6 +16,19 @@
     name: gdm
     enabled: yes
 
+- name: create folder for autostart programs
+  file:
+    path: "{{ autostart_dir }}"
+    state: directory
+  become_user: "{{ user_name }}"
+
+- name: copy xprofile to autostart
+  template:
+    src: xprofile.desktop.j2
+    dest: "{{ autostart_dir }}/xprofile.desktop"
+    mode: 0644
+  become_user: "{{ user_name }}"
+
 - name: get mouse scroll settings
   command: "gsettings get {{ touchpad_settings }} natural-scroll"
   become_user: "{{ user_name }}"

@@ -1,3 +1,5 @@
 ---
 natural_scroll: 'false'
 click_method: "'fingers'"
+
+autostart_dir: "~/.config/autostart"
