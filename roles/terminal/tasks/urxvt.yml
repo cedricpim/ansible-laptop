@@ -1,0 +1,37 @@
+---
+- name: install urxvt
+  pacman:
+    name: rxvt-unicode-terminfo
+    state: present
+
+- include_role:
+    name: pacaur_package
+  vars:
+    pkg_name: rxvt-unicode-patched
+
+- include_role:
+    name: dotfiles
+    tasks_from: symlink
+  vars:
+    src: "{{ urxvt_directory }}"
+    create_directory: yes
+
+- name: create folder for urxvt icon
+  file:
+    path: "{{ urxvt_icon_dest }}"
+    state: directory
+  become_user: "{{ user_name }}"
+
+- name: copy urxvt icon
+  copy:
+    src: urxvt.png
+    dest: "{{ urxvt_icon_dest }}"
+    mode: 0644
+  become_user: "{{ user_name }}"
+
+- include_role:
+    name: dotfiles
+    tasks_from: symlink
+  vars:
+    src: "{{ startx_directory }}"
+    create_directory: no

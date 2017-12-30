@@ -16,7 +16,6 @@
   file:
     src: "{{ item }}"
     dest: "~/{{ create_directory | ternary(['.',src,'/']|join(''), '.') }}{{ item | basename }}"
-    force: yes
     state: link
   with_items: "{{ path_files.stdout_lines }}"
   become_user: "{{ user_name }}"

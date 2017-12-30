@@ -16,8 +16,11 @@
 
 - include_role:
     name: pacaur_package
-  vars:
-    pkg_name: urlview
+  with_items:
+    - urlview
+    - diff-so-fancy
+  loop_control:
+    loop_var: pkg_name
 
 - include_role:
     name: dotfiles
@@ -26,6 +29,14 @@
     src: "{{ utilities_directory }}"
     create_directory: no
 
+- include_role:
+    name: dotfiles
+    tasks_from: symlink
+  vars:
+    src: "{{ linux_directory }}"
+    create_directory: no
+
 - import_tasks: tmux.yml
 - import_tasks: neovim.yml
 - import_tasks: neofetch.yml
+- import_tasks: urxvt.yml
