@@ -1,0 +1,7 @@
+---
+user_name: 'vagrant-test'
+user_password: 'vagrant-test'
+git_full_name: 'Vagrant Test'
+git_email: 'vagrant-test@localhost'
+system_time_zone: 'UTC'
+system_hostname: 'vagrant'
