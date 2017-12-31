@@ -69,13 +69,9 @@ Vagrant.configure("2") do |config|
     fi
   SHELL
 
-  # Define hostname to be used by ansible
-  config.vm.define "localhost-test" do |l|
-    l.vm.hostname = "localhost-test"
-  end
-
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
+    ansible.inventory_path = 'inventory.ini'
     ansible.playbook = "playbooks/#{ENV['VAGRANT_PLAYBOOK'] || 'test.yml'}"
     ansible.tags = ENV['VAGRANT_TAGS']
   end
