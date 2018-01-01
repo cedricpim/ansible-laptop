@@ -14,6 +14,8 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "ogarcia/archlinux-x64"
 
+  config.ssh.forward_agent = true
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -73,6 +75,6 @@ Vagrant.configure("2") do |config|
     ansible.verbose = "v"
     ansible.inventory_path = 'inventory.ini'
     ansible.playbook = "playbooks/#{ENV['VAGRANT_PLAYBOOK']}.yml"
-    ansible.tags = ENV['VAGRANT_TAGS'].empty? ? nil : ENV['VAGRANT_TAGS']
+    ansible.tags = ENV['VAGRANT_TAGS'].nil? || ENV['VAGRANT_TAGS'].empty? ? nil : ENV['VAGRANT_TAGS']
   end
 end
