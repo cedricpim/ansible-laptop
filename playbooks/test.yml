@@ -14,6 +14,7 @@
     - { role: "terminal", tags: "terminal" }
     - { role: "zsh", tags: "zsh" }
     - { role: "openvpn", tags: "openvpn" }
+    - { role: "dotfiles", tags: "dotfiles" }
     - { role: "applications", tags: "applications" }
 
   post_tasks:
