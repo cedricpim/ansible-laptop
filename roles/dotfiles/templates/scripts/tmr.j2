@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -eo pipefail
+IFS=$'\n\t'
+
+#
+##  {{ ansible_managed }}
+#
+
+move_dir=/home/cedro/Downloads
+
+case $1 in
+  list|l)
+    watch -n 2 transmission-remote --list
+    ;;
+
+  move|mv)
+    torrent_list=`transmission-remote --list | grep "100%" | awk '{print $1}'`
+
+    for torrent_id in $torrent_list; do
+      base_dir=`transmission-remote -t $torrent_id -i | grep -e "Location: " | sed "s/\s*Location: //"`
+      filename=`transmission-remote -t $torrent_id -i | grep -e "Name: " | sed "s/\s*Name: //"`
+      mv $base_dir/$filename $move_dir/$filename
+      transmission-remote --torrent $torrent_id --remove > /dev/null
+      echo "$filename has been moved and removed from list"
+    done
+    ;;
+
+  *)
+    echo $"Usage: $0 {(l)ist|(m)o(v)e}"
+    exit 1
+esac

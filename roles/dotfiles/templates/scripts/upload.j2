@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+set -eo pipefail
+IFS=$'\n\t'
+
+#
+##  {{ ansible_managed }}
+#
+
+base_dir="$HOME/Sync/public"
+
+case $1 in
+  add)
+    # Exit if file given doesn't exist
+    if [ ! -f "$2" ]; then
+      echo "$2 doesn't exist"
+      exit 1
+    fi
+
+    original_filename=$(basename "$2")
+    if echo $original_filename | grep -q '\.'; then
+      extension=".${original_filename##*.}"
+    else
+      extension=""
+    fi
+
+    # Create upload folder (if it doesn't exist)
+    mkdir -p $base_dir
+
+    # Generate random UUID - which will be used as the file name
+    filename="$(uuidgen)$extension"
+
+    # Copy file over to Syncthing public folder
+    cp "$2" "$base_dir/$filename"
+
+    # Keep index of files uploaded
+    touch "$base_dir/index"
+    echo "$original_filename => $filename" | tee -a "$base_dir/index" > /dev/null
+
+    url="https://$SERVER/public/$filename"
+
+    # Check if file was been uploaded
+    while [ "`curl -s -o /dev/null -I -w "%{http_code}" $url`" != "200" ]; do sleep 5; done
+
+    # Print out link to the file on the server
+    echo $url
+    ;;
+
+  rm)
+    # Get generate file names matching name provided
+    filenames=( $(sed -n -r "s/^$(echo $2)[^>]*> //gp" "$base_dir/index") )
+
+    # Exit if file given doesn't exist
+    if [ ! -n "$filenames" ]; then
+      echo "$2 doesn't exist"
+      exit 128
+    fi
+
+    for filename in ${filenames[@]}; do
+      # Delete file from public dir
+      rm $base_dir/$filename
+
+      # Delete entry from dictionary
+      sed -E -i "/.*$filename$/d" "$base_dir/index"
+    done
+    ;;
+
+  *)
+    echo $"Usage: $0 {add|rm} file"
+    exit 1
+esac

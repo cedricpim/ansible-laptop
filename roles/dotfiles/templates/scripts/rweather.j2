@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -eo pipefail
+IFS=$'\n\t'
+
+#
+##  {{ ansible_managed }}
+#
+
+# Get weather function
+source ~/.shell/aliases
+
+# Print weather and refresh every hour
+while true; do
+  clear
+  weather
+  sleep 3600
+done

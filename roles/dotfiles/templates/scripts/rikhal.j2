@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+set -euo pipefail
+IFS=$'\n\t'
+
+#
+##  {{ ansible_managed }}
+#
+
+# Every hour, kill the khal interactive process,
+# in order to refresh the calendar
+restart() {
+  while true; do
+    sleep 3600
+    pkill -INT -f "khal interactive"
+  done
+}
+
+# When Control-C is pressed, exit the script
+trap "exit" SIGINT
+
+restart &
+
+# Start khal interactive
+while true; do
+  clear
+  khal interactive
+done

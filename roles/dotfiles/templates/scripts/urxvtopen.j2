@@ -1,0 +1,25 @@
+#!/bin/sh
+
+#
+##  {{ ansible_managed }}
+#
+
+#
+# Taken from: https://bbs.archlinux.org/viewtopic.php?pid=550184#p550184
+#
+wid=$(xdotool search --classname urxvtq)
+
+if [ -z "$wid" ]; then
+  urxvtc -name urxvtq -geometry 80x28
+  wid=$(xdotool search --classname urxvtq)
+  xdotool windowfocus $wid
+
+  wmctrl -r $(xdotool getwindowname $wid) -b toggle,fullscreen
+elif [ -z "$(xdotool search --onlyvisible --classname urxvtq 2>/dev/null)" ]; then
+  xdotool windowmap $wid
+  xdotool windowfocus $wid
+
+  wmctrl -r $(xdotool getwindowname $wid) -b toggle,fullscreen
+else
+  xdotool windowunmap $wid
+fi

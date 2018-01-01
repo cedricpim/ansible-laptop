@@ -3,6 +3,7 @@
   pacman:
     name: git
     state: present
+  become: yes
 
 - name: ensure dotfiles is cloned and up-to-date
   git:
@@ -10,21 +11,22 @@
     dest: "{{ dotfiles_dest }}"
     clone: yes
     update: yes
-  become_user: "{{ user_name }}"
 
-- include_tasks: symlink.yml
-  vars:
-    src: "{{ scripts_directory }}"
-    create_directory: yes
+- name: create folder for scripts
+  file:
+    path: "{{ scripts_directory }}"
+    state: directory
 
-- include_tasks: symlink.yml
-  vars:
-    src: "{{ git_directory }}"
-    create_directory: no
-
-- name: "copy git-details configuration to {{ git_details }}"
+- name: copy scripts files
   template:
-    src: "git-details.j2"
-    dest: "{{ git_details }}"
+    src: "{{ item }}"
+    dest: "{{ scripts_directory }}/{{ item | basename | regex_replace('.j2$','') }}"
+    mode: 0700
+  with_fileglob: ../templates/scripts/*.j2
+
+- name: copy git files
+  template:
+    src: "{{ item }}"
+    dest: "~/.{{ item | basename | regex_replace('.j2$','') }}"
     mode: 0600
-  become_user: "{{ user_name }}"
+  with_fileglob: ../templates/git/*.j2

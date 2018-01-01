@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+#
+##  {{ ansible_managed }}
+#
+
+/usr/bin/transmission-remote --add "$1"
+/usr/bin/notify-send "Transmission" "Magnet added"

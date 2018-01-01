@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -eo pipefail
+IFS=$'\n\t'
+
+#
+##  {{ ansible_managed }}
+#
+
+case $1 in
+  enable)
+    crontab -l | sed "/^#[0-9/*]/s/^#//" | crontab -
+    ;;
+
+  disable)
+    crontab -l | sed "/^[^#]/s/^/#/" | crontab -
+    ;;
+
+  *)
+    echo $"Usage: $0 {enable|disable}"
+    exit 1
+esac

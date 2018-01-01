@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -eo pipefail
+IFS=$'\n\t'
+
+#
+##  {{ ansible_managed }}
+#
+
+case $1 in
+  codes)
+    cat $2 | cut -d '"' -f3 | cut -d ' ' -f2 | sort | uniq -c | sort -rn
+    ;;
+
+  broken-links)
+    awk '($9 ~ /404/)' $2 | awk '{print $7}' | sort | uniq -c | sort -rn
+    ;;
+
+  ips)
+    while read -r line; do
+      ip=`echo $line | cut -d ' ' -f2`
+      country=`curl -s ipinfo.io/$ip | grep "country" | awk -F'"' '{print $4}'`
+      echo "$line $country"
+    done <<< `cat $2 | awk '{print $1}' | sort | uniq -c | sort -r`
+    ;;
+
+  *)
+    echo $"Usage: $0 {codes|broken-links|ips} file"
+    exit 1
+esac

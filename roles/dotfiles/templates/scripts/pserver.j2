@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -eo pipefail
+IFS=$'\n\t'
+
+#
+##  {{ ansible_managed }}
+#
+
+# Only run if internet connection exists
+if ! /sbin/ping -c 1 8.8.8.8 >> /dev/null 2>&1; then
+  echo "No internet connection"
+  exit 1
+fi
+
+case $1 in
+  photos)
+    local_dir=`echo ~/Pictures/Photos/$2*`
+    # Upload album to server
+    scp -r -C $local_dir $SERVER_HOST:/home/me/pictures
+    # Process uploaded photos
+    ssh -t $SERVER_HOST '~/scripts/process-photos'
+    ;;
+
+  *)
+    echo $"Usage: $0 {photos}"
+    exit 1
+esac

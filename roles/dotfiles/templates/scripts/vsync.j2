@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -eo pipefail
+IFS=$'\n\t'
+
+#
+##  {{ ansible_managed }}
+#
+
+# Source private ENVIRONMENT variables
+source ~/.shell/extra
+
+# Only run if internet connection exists
+if ! /sbin/ping -c 1 8.8.8.8 >> /dev/null 2>&1; then
+  echo "No internet connection"
+  exit 1
+fi
+
+# While python module has problems with format DATE-TIME, we need to scrap all its references before syncing
+if [ `command -v sed` ]; then
+  sed -E -i 's/(^DT.*);VALUE=DATE-TIME/\1/' $HOME/.config/vdirsyncer/calendars/cedricpim/**/*.ics
+fi
+
+vdirsyncer $@
