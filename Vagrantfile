@@ -72,7 +72,7 @@ Vagrant.configure("2") do |config|
   SHELL
 
   config.vm.provision "ansible" do |ansible|
-    ansible.verbose = "v"
+    ansible.verbose = ENV['VAGRANT_VERBOSE']
     ansible.inventory_path = 'inventory.ini'
     ansible.playbook = "playbooks/#{ENV['VAGRANT_PLAYBOOK']}.yml"
     ansible.tags = ENV['VAGRANT_TAGS'].nil? || ENV['VAGRANT_TAGS'].empty? ? nil : ENV['VAGRANT_TAGS']

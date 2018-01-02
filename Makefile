@@ -1,12 +1,14 @@
 PLAYBOOK ?= main
 VAGRANT_PLAYBOOK ?= test
 TAGS ?=
+VERBOSE ?=
 ANSIBLE_VAULT_PASSWORD_FILE = group_vars/local/vault.sh
 ANSIBLE_OPTS = --vault-password-file ${ANSIBLE_VAULT_PASSWORD_FILE}
 
 deploy-local:
 	$(if ${TAGS}, $(eval ANSIBLE_OPTS += --tags ${TAGS}))
+	$(if ${VERBOSE}, $(eval ANSIBLE_OPTS += -${VERBOSE}))
 	ansible-playbook playbooks/${PLAYBOOK}.yml --ask-become-pass ${ANSIBLE_OPTS}
 
 deploy-vagrant:
-	VAGRANT_TAGS=${TAGS} VAGRANT_PLAYBOOK=${VAGRANT_PLAYBOOK} vagrant provision
+	VAGRANT_VERBOSE=${VERBOSE} VAGRANT_TAGS=${TAGS} VAGRANT_PLAYBOOK=${VAGRANT_PLAYBOOK} vagrant provision
