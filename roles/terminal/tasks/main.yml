@@ -4,7 +4,6 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - git
     - openssh
     - easy-rsa
     - rsync
@@ -12,16 +11,12 @@
     - xdotool
     - wmctrl
     - ripgrep
-    - htop
   become: yes
 
 - include_role:
     name: pacaur_package
-  with_items:
-    - urlview
-    - diff-so-fancy
-  loop_control:
-    loop_var: pkg_name
+  vars:
+    pkg_name: diff-so-fancy
 
 - name: create folder for scripts
   file:
@@ -35,36 +30,15 @@
     mode: 0700
   with_fileglob: ../templates/scripts/*.j2
 
-- name: copy git configuration files
+- name: copy dircolors configuration file
   template:
-    src: "{{ item }}.j2"
-    dest: "~/.{{ item }}"
-    mode: 0600
-  with_items:
-    - gitconfig
-    - gitdetails
-    - gitignore
-
-- name: copy general configuration files
-  template:
-    src: "{{ item }}.j2"
-    dest: "~/.{{ item }}"
-    mode: 0600
-  with_items:
-    - urlview
-    - dircolors
-
-- name: create folder for htop configuration
-  file:
-    path: "{{ htop_directory }}"
-    state: directory
-
-- name: copy htop configuration file
-  template:
-    src: "htop/htoprc.j2"
-    dest: "{{ htop_directory }}/htoprc"
+    src: "dircolors.j2"
+    dest: "~/.dircolors"
     mode: 0600
 
+- import_tasks: git.yml
+- import_tasks: htop.yml
+- import_tasks: urlview.yml
 - import_tasks: tmux.yml
 - import_tasks: neovim.yml
 - import_tasks: neofetch.yml

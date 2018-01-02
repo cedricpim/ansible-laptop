@@ -1,0 +1,16 @@
+---
+- name: install git
+  pacman:
+    name: git
+    state: present
+  become: yes
+
+- name: copy git configuration files
+  template:
+    src: "git/{{ item }}.j2"
+    dest: "~/.{{ item }}"
+    mode: 0600
+  with_items:
+    - gitconfig
+    - gitdetails
+    - gitignore
