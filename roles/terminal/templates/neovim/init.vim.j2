@@ -1,0 +1,308 @@
+"
+""  {{ ansible_managed }}
+"
+
+" File:        $HOME/.config/nvim/init.vim
+" Description: Neovim configuration file
+
+call plug#begin('~/.local/share/nvim/plugged')
+
+Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim' " FZF finder Ctrl+P
+Plug 'jeetsukumaran/vim-buffergator' " List buffers
+Plug 'neomake/neomake' " Linter
+Plug 'kassio/neoterm' " Better terminal
+Plug 'janko-m/vim-test' " Better tests
+Plug 'tpope/vim-fugitive' " Git on nvim
+Plug 'airblade/vim-gitgutter' " Git diff on files
+Plug 'tpope/vim-surround' " Change enclosing symbols
+Plug 'tpope/vim-commentary' " Comment out
+Plug 'scrooloose/nerdtree' " Add tree to the left side
+Plug 'jistr/vim-nerdtree-tabs' " Better nerdtree with tabs
+Plug 'vim-airline/vim-airline' " Add airline to vim
+Plug 'vim-airline/vim-airline-themes' " Better airline themes
+Plug 'szw/vim-maximizer' " Maximize window
+Plug 'majutsushi/tagbar' " Ctags
+Plug 'terryma/vim-multiple-cursors' " Multiple cursors
+Plug 'chaoren/vim-wordmotion' " Better word moving
+Plug 'tpope/vim-rails' " Rails helpers
+Plug 'vim-ruby/vim-ruby' " Configurations for ruby
+Plug 'iamcco/markdown-preview.vim' " Add markdown viewer
+Plug 'jremmen/vim-ripgrep' " Ripgrep on nvim
+Plug 'bogado/file-line' " Open file on a given line
+Plug 'tpope/vim-abolish' " Renaming strings
+Plug 'flazz/vim-colorschemes' " Moar colorschemes
+Plug 'tpope/vim-dispatch' " Add dispatch to vim
+Plug 'radenling/vim-dispatch-neovim' " Place dispatch as the main handler on neovim
+Plug 'tpope/vim-endwise' " Automate adding end
+Plug 'sheerun/vim-polyglot' " Add syntax
+Plug 'ryanoasis/vim-devicons' " Add icons to vim
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Add color to icons on nerdtree
+Plug 'xolox/vim-misc' " Needed for vim-notes
+Plug 'xolox/vim-notes' " Allow note taking
+Plug 'tpope/vim-rhubarb' " Used by vim-fugitive :Gbrowser
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete
+Plug 'fishbullet/deoplete-ruby' " Autocomplete for Ruby
+Plug 'tpope/vim-obsession' " Continuously update session files
+
+call plug#end()
+
+
+"""""""""""
+" General "
+"""""""""""
+set number " line number
+set cursorline " highlight current line
+set incsearch " do incremental searching
+set autoindent
+set smartindent
+set expandtab " insert space characters whenever tab is pressed
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set laststatus=2
+set autoread " set to auto read when a file is changed from the outside
+set nofoldenable " do not immediately fold when opening a file
+set spell " set spell checker
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set background=dark
+  colorscheme PaperColor
+endif
+
+if has("unix")
+  set clipboard=unnamed,unnamedplus " Clipboard to work with X
+endif
+
+" Set my leader to the comma key.
+let g:mapleader=','
+
+
+""""""""""""""""""
+" Configurations "
+""""""""""""""""""
+
+nnoremap <C-p> :FZF<CR>
+
+let g:neoterm_position = 'horizontal'
+let g:neoterm_automap_keys = ',tt'
+
+" Useful maps
+" hide/close terminal
+nnoremap <silent> ,th :call neoterm#close()<cr>
+" clear terminal
+nnoremap <silent> ,tl :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+nnoremap <silent> ,tc :call neoterm#kill()<cr>
+" Toggle terminal
+nnoremap <silent> <leader>tt :Ttoggle<CR>
+
+nnoremap cc :cclose<CR>
+
+" Auto start terminal
+autocmd VimEnter * :Ttoggle
+autocmd VimEnter * :Ttoggle
+
+" Map moving out of insert mode in terminal
+:tnoremap <ESC> <C-\><C-n>
+
+" Vim-test
+let test#strategy = "neoterm"
+nnoremap <leader>tn :TestNearest<CR>
+nnoremap <leader>tf :TestFile<CR>
+nnoremap <leader>ts :TestSuite<CR>
+nnoremap <leader>tl :TestLast<CR>
+nnoremap <leader>tv :TestVisit<CR>
+
+" Nerdtree configs
+map <C-b> <plug>NERDTreeTabsToggle<CR>
+map <C-f> :NERDTreeFind<CR>
+let g:nerdtree_tabs_autofind=1
+let g:nerdtree_tabs_open_on_gui_startup=0
+
+" Airline configs
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'papercolor'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+" This is required since current system cannot display the default symbol
+let g:airline_symbols.linenr = '¶'
+
+" Tagbar configs
+nmap <F9> :TagbarToggle<CR>
+let g:tagbar_autoclose = 1
+let g:tagbar_type_ruby = {
+  \ 'kinds' : [
+    \ 'm:modules',
+    \ 'c:classes',
+    \ 'd:describes',
+    \ 'C:contexts',
+    \ 'f:methods',
+    \ 'F:singleton methods'
+  \ ]
+\ }
+
+" Rails (rails-vim)
+" Projections to other folders
+let g:rails_projections = {
+  \ "apq/*.rb": {
+    \ "test": [
+      \ "test/apq/{}_test.rb",
+      \ "spec/apq/{}_spec.rb"
+    \ ]
+  \ },
+  \ "spec/apq/*_spec.rb": {
+    \ "alternate": [
+      \ "apq/{}.rb"
+    \ ]
+  \ }
+\ }
+
+" Markdown
+let g:mkdp_path_to_chrome = "firefox"
+nmap <silent> <Leader>m <Plug>MarkdownPreview<CR>     " for normal mode
+imap <silent> <Leader>m <Plug>MarkdownPreview<CR>     " for insert mode
+nmap <silent> <Leader>d <Plug>StopMarkdownPreview<CR> " for normal mode
+imap <silent> <Leader>d <Plug>StopMarkdownPreview<CR> " for insert mode
+
+" Define maximization settings
+let g:maximizer_set_mapping_with_bang = 1
+let g:maximizer_default_mapping_key = '<C-o>'
+
+" Notes configs
+let g:notes_suffix = '.md'
+
+" Ripgrep configs
+" Use RipGrep for lightning fast Gsearch command
+set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
+set grepformat=%f:%l:%c:%m,%f:%l:%m
+
+function! GetVisual()
+  let reg_save = getreg('"')
+  let regtype_save = getregtype('"')
+  let cb_save = &clipboard
+  set clipboard&
+  normal! ""gvy
+  let selection = getreg('"')
+  call setreg('"', reg_save, regtype_save)
+  let &clipboard = cb_save
+  return selection
+endfunction
+
+" Open the Rg command and place the cursor into the quotes
+" grep for string provided
+nmap <Leader>rg :Rg --hidden ""<Left>
+" grep visual selection
+vnoremap <Leader>a :<C-U>execute "Rg --hidden " . GetVisual()<CR>
+" grep the current word using ,k (mnemonic Kurrent)
+nnoremap <silent> <Leader>a :Rg --hidden <cword><CR>
+" grep for 'def foo'
+nnoremap <silent> <Leader>ad :Rg --hidden 'def <cword>'<CR>
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+" Disable deoplete when using multiple cursors
+function g:Multiple_cursors_before()
+  let g:deoplete#disable_auto_complete = 1
+endfunction
+function g:Multiple_cursors_after()
+  let g:deoplete#disable_auto_complete = 0
+endfunction
+
+""""""""""""
+" Mappings "
+""""""""""""
+" Disable arrow keys
+nnoremap <up>    <nop>
+nnoremap <down>  <nop>
+nnoremap <left>  <nop>
+nnoremap <right> <nop>
+vnoremap <up>    <nop>
+vnoremap <down>  <nop>
+vnoremap <left>  <nop>
+vnoremap <right> <nop>
+" Allow arrow keys to be used for insert
+" inoremap <up>    <nop>
+" inoremap <down>  <nop>
+" inoremap <left>  <nop>
+" inoremap <right> <nop>
+
+" On insert mode, Shift-Tab to unindent
+inoremap <S-Tab> <C-D>
+" On visual mode, use tab and shift tab to indent the current selected text
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+" Tabs control
+nnoremap <C-t> :tabe<CR>
+nnoremap <C-l> :tabn<CR>
+nnoremap <C-h> :tabp<CR>
+nnoremap <C-j> 20j<CR>
+nnoremap <C-k> 20k<CR>
+
+" Yank full file path (also with current line)
+nnoremap <leader>fp :let @+=expand("%:p")<CR>
+nnoremap <leader>rp :let @+=expand("%")<CR>
+nnoremap <leader>lfp :let @+=expand("%:p") . ':' . line(".")<CR>
+nnoremap <leader>rfp :let @+=expand("%") . ':' . line(".")<CR>
+
+" Switch between dark and ligh background
+map <Leader>tD :set background=dark<CR>
+map <Leader>tL :set background=light<CR>
+
+" Notes related mappings
+noremap <Leader>n  :tabedit note:
+noremap <Leader>nd :DeleteNote<CR>
+noremap <Leader>ns :SearchNote<space>
+noremap <Leader>nl :RecentNotes<CR>
+noremap <Leader>nt :ShowTaggedNotes<CR>
+
+" Vim-fugitive mappings
+noremap <Leader>gd :Gdiff<CR>
+noremap <Leader>gb :Gblame<CR>
+noremap <Leader>gs :Gstatus<CR>
+noremap <Leader>gc :Gcommit<CR>
+noremap <Leader>gp :Gpush<CR>
+noremap <Leader>gb :Gbrowse<CR>
+
+" Save with sudo
+cmap w!! w !sudo tee > /dev/null %
+
+
+"""""""""""
+" Autocmd "
+"""""""""""
+
+autocmd! BufWritePost * Neomake
+autocmd BufWritePre * :%s/\s\+$//e " Trim whitespaces
+autocmd FileType crontab setlocal nobackup nowritebackup " Edit crontab files
+autocmd FileType gitcommit setlocal spell textwidth=72 " Helps Git commit messages
+autocmd BufRead,BufNewFile *.md setlocal textwidth=80 " Apply 80 characters limit to Markdown
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+" Also don't do it when the mark is in the first line, that is the default
+" position when opening a file.
+autocmd BufReadPost *
+  \ if line("'\"") > 1 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
+endif
+
+
+" Allow background color to be changed without changing the main NVIM
+" configuration. Useful for people changing background color according to the
+" time of day
+if filereadable(expand("~/.config/nvim/background_color"))
+  source ~/.config/nvim/background_color
+endif

@@ -6,41 +6,41 @@
   with_items:
     - vim
     - neovim
+  become: yes
 
-- include_role:
-    name: dotfiles
-    tasks_from: symlink
-  vars:
-    src: "{{ neovim_directory }}"
-    create_directory: yes
+- name: create folder for neovim configuration
+  file:
+    path: "{{ neovim_directory }}"
+    state: directory
 
-- name: create folder for neovim dictionary
+- name: copy neovim configuration file
+  template:
+    src: "neovim/init.vim.j2"
+    dest: "{{ neovim_directory }}/init.vim"
+    mode: 0600
+
+- name: create folder for neovim dictionaries
   file:
     path: "{{ neovim_spell_dest }}"
     state: directory
-  become_user: "{{ user_name }}"
 
 - name: install neovim dictionaries
   get_url:
     url: "{{ neovim_spell_url }}/{{ item }}"
     dest: "{{ neovim_spell_dest }}"
   with_items: "{{ neovim_spell_dictionaries }}"
-  become_user: "{{ user_name }}"
 
 - name: create folder for neovim plugin manager
   file:
     path: "{{ neovim_plug_dest }}"
     state: directory
-  become_user: "{{ user_name }}"
 
 - name: install neovim plugin manager
   get_url:
     url: "{{ neovim_plug_url }}"
     dest: "{{ neovim_plug_dest }}"
-  become_user: "{{ user_name }}"
 
 - name: install/update plugins defined on neovim configuration
   command: "nvim +'PlugUpdate --sync' +qa"
-  become_user: "{{ user_name }}"
   register: neovim_plug_install_result
   changed_when: neovim_plug_install_result.stdout.find(neovim_plugin_installation_message) != -1

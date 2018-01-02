@@ -4,6 +4,7 @@ htop_directory: "~/.config/htop"
 tmux_plugin_repo: "https://github.com/tmux-plugins/tpm"
 tmux_plugin_dest: "~/.tmux/plugins/tpm"
 
+neovim_directory: "~/.config/nvim"
 neovim_plug_url: 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 neovim_plug_dest: '~/.local/share/nvim/site/autoload'
 neovim_spell_url: 'ftp://ftp.vim.org/pub/vim/runtime/spell'
@@ -11,7 +12,6 @@ neovim_spell_dest: '~/.local/share/nvim/site/spell'
 neovim_spell_dictionaries:
   - en.utf-8.spl
   - en.utf-8.sug
-neovim_directory: "config/nvim"
 
 neofetch_directory: "config/neofetch"
 

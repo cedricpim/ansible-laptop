@@ -7,7 +7,7 @@
 
 - name: copy tmux configuration
   template:
-    src: "tmux.conf.j2"
+    src: "tmux/tmux.conf.j2"
     dest: "~/.tmux.conf"
     mode: 0600
 
