@@ -13,6 +13,7 @@
     - wmctrl
     - ripgrep
     - htop
+  become: yes
 
 - include_role:
     name: pacaur_package
@@ -22,19 +23,23 @@
   loop_control:
     loop_var: pkg_name
 
-- include_role:
-    name: dotfiles
-    tasks_from: symlink
-  vars:
-    src: "{{ utilities_directory }}"
-    create_directory: no
+- name: copy general configuration files
+  template:
+    src: "{{ item }}"
+    dest: "~/.{{ (item | basename | splitext)[0] }}"
+    mode: 0600
+  with_fileglob: ../templates/*.j2
 
-- include_role:
-    name: dotfiles
-    tasks_from: symlink
-  vars:
-    src: "{{ linux_directory }}"
-    create_directory: no
+- name: create folder for htop configuration
+  file:
+    path: "{{ htop_directory }}"
+    state: directory
+
+- name: copy htop configuration file
+  template:
+    src: "{{ htop_directory }}/htoprc.j2"
+    dest: "~/.{{ htop_directory }}/htoprc"
+    mode: 0600
 
 - import_tasks: tmux.yml
 - import_tasks: neovim.yml

@@ -17,6 +17,7 @@
     dest: "{{ tmux_plugin_dest }}"
     clone: yes
     update: yes
+    accept_hostkey: yes
   become_user: "{{ user_name }}"
 
 - name: install plugins
