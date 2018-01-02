@@ -9,3 +9,4 @@
   get_url:
     url: "{{ ripgrep_autocomplete_url }}"
     dest: "{{ ripgrep_autocomplete_dest }}"
+  become: yes
