@@ -4,6 +4,7 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - python3
     - vim
     - neovim
   become: yes
