@@ -1,19 +1,16 @@
 ---
 - name: add gpg key for cower
   command: "gpg --recv-keys --keyserver hkp://pgp.mit.edu {{ cower_gpg_key }}"
-  become_user: "{{ user_name }}"
 
 - name: create temporary folder for cower
   file:
     path: "{{ cower_folder }}"
     state: directory
-  become_user: "{{ user_name }}"
 
 - name: download cower
   get_url:
     url: "{{ aur_repo }}/PKGBUILD?h=cower"
     dest: "{{ cower_folder }}/PKGBUILD"
-  become_user: "{{ user_name }}"
 
 - name: install cower
   command: "makepkg -i PKGBUILD --noconfirm"
@@ -21,4 +18,3 @@
     chdir: "{{ cower_folder }}"
   environment:
     PATH: '{{ ansible_env.PATH }}:/usr/bin/core_perl'
-  become_user: "{{ user_name }}"

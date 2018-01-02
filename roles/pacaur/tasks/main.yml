@@ -8,6 +8,7 @@
     - yajl
     - sudo
     - git
+  become: yes
 
 - name: check if pacaur is installed
   command: "pacman -Q pacaur"
@@ -22,6 +23,7 @@
     groups: wheel
     state: present
   when: aur_pacaur_check|changed
+  become: yes
 
 - import_tasks: cower.yml
   when: aur_pacaur_check|changed

@@ -3,13 +3,11 @@
   file:
     path: "{{ pacaur_folder }}"
     state: directory
-  become_user: "{{ user_name }}"
 
 - name: download pacaur
   get_url:
     url: "{{ aur_repo }}/PKGBUILD?h=pacaur"
     dest: "{{ pacaur_folder }}/PKGBUILD"
-  become_user: "{{ user_name }}"
 
 - name: install pacaur
   command: "makepkg -i PKGBUILD --noconfirm"
@@ -17,5 +15,4 @@
     chdir: "{{ pacaur_folder }}"
   environment:
     PATH: '{{ ansible_env.PATH }}:/usr/bin/core_perl'
-  become_user: "{{ user_name }}"
   notify: cleanup pacaur build directory
