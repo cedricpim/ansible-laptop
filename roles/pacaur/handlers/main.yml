@@ -1,9 +1,10 @@
 ---
-- name: cleanup temporary directories used to install pacaur
+- name: cleanup cower build directory
   file:
-    path: "{{ item }}"
+    path: "{{ cower_folder }}"
     state: absent
-  with_items:
-    - "{{ cower_folder }}"
-    - "{{ pacaur_folder }}"
-  become_user: "{{ user_name }}"
+
+- name: cleanup pacaur build directory
+  file:
+    path: "{{ pacaur_folder }}"
+    state: absent

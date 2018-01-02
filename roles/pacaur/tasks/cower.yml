@@ -18,3 +18,4 @@
     chdir: "{{ cower_folder }}"
   environment:
     PATH: '{{ ansible_env.PATH }}:/usr/bin/core_perl'
+  notify: cleanup cower build directory
