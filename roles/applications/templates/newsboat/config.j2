@@ -1,0 +1,68 @@
+#
+## {{ ansible_managed }}
+#
+
+# General configurations
+browser "firefox %u"
+article-sort-order date-asc
+download-full-page yes
+download-retries 3
+external-url-viewer "urlview"
+ignore-mode "display"
+show-read-feeds  no
+notify-program "notify-send 'Newsboat'"
+openbrowser-and-mark-jumps-to-next-unread yes
+refresh-on-startup yes
+reload-threads 3
+auto-reload yes
+reload-time 60
+goto-next-feed no
+feedlist-format    "%10L %n %4U %t"
+articlelist-format "%4i %f %D   %?T?|%-17T|  ?%t"
+notify-format      "%d new articles (%n unread articles, %f unread feeds)"
+
+# File Configurations
+urls-source "newsblur"
+newsblur-login "{{ newsboat_username }}"
+newsblur-passwordeval "gpg -q --for-your-eyes-only --no-tty -d ~/.config/newsboat/pass.gpg"
+cookie-cache "{{ newsboat_directory }}/cookies.txt"
+error-log "{{ newsboat_directory }}/error.log"
+save-path "{{ newsboat_directory }}/offline"
+
+# Bindings
+unbind-key j
+unbind-key k
+unbind-key J
+unbind-key K
+unbind-key n
+unbind-key p
+unbind-key N
+unbind-key o
+unbind-key O
+bind-key j next
+bind-key k prev
+bind-key h prev-feed
+bind-key l next-feed
+bind-key J next-unread
+bind-key K prev-unread
+bind-key H prev-unread-feed
+bind-key L next-unread-feed
+bind-key M toggle-show-read-feeds
+bind-key m toggle-article-read
+bind-key o open-in-browser-and-mark-read
+bind-key O open-in-browser
+
+# Colors
+color background color229 default
+color listnormal color229 default
+color listfocus  color229 color61 bold
+color info       color247 color235
+color article    color229 default
+
+# Highlights
+highlight article  "^(Feed|Link):.*$"         color46 default bold
+highlight article  "^(Title|Date|Author):.*$" color39 default bold
+highlight article  "https?://[^ ]+"           color46 default underline
+highlight article  "\\[[0-9]+\\]"             color63 default bold
+highlight article  "\\[image\\ [0-9]+\\]"     color63 default bold
+highlight feedlist "^─.*$"                    color61 color235 bold

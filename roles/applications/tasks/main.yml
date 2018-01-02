@@ -1,34 +1,38 @@
 ---
-- name: install applications
-  pacman:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - calibre
-    - feh
-    - ffmpeg
-    - firefox
-    - keepassxc
-    - offlineimap
-    - neomutt
-    - newsboat
-    - notmuch
-    - qpdfview
-    - syncthing
-    - vlc
-    - w3m
-  become: yes
+# - name: install applications
+#   pacman:
+#     name: "{{ item }}"
+#     state: present
+#   with_items:
+#     - calibre
+#     - feh
+#     - ffmpeg
+#     - firefox
+#     - keepassxc
+#     - offlineimap
+#     - neomutt
+#     - newsboat
+#     - notmuch
+#     - qpdfview
+#     - syncthing
+#     - vlc
+#     - w3m
+#   become: yes
 
-- import_tasks: transmission.yml
-- import_tasks: copyq.yml
+# - import_tasks: transmission.yml
+# - import_tasks: copyq.yml
+# - import_tasks: firefox.yml
+# - import_tasks: email.yml
+- import_tasks: newsboat.yml
+# - import_tasks: calendar.yml
 
-- include_role:
-    name: pacaur_package
-  with_items:
-    - khard
-    - todotxt
-    - spotify
-    - khal
-    - vdirsyncer
-  loop_control:
-    loop_var: pkg_name
+# - include_role:
+#     name: pacaur_package
+#   with_items:
+#     - khard
+#     - todotxt
+#     - spotify
+#     - khal
+#     - vdirsyncer
+#   loop_control:
+#     loop_var: pkg_name

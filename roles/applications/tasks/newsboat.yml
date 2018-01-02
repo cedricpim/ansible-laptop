@@ -1,0 +1,28 @@
+---
+- name: install newsboat feed reader
+  pacman:
+    name: newsboat
+    state: present
+  become: yes
+
+- name: ensure urlview is installed
+  include_role:
+    name: terminal
+    tasks_from: urlview
+
+- name: create folder for newsboat configuration
+  file:
+    path: "{{ newsboat_directory }}"
+    state: directory
+
+- name: copy newsboat configuration
+  template:
+    src: "newsboat/config.j2"
+    dest: "{{ newsboat_directory }}/config"
+    mode: 0600
+
+- name: copy newsboat credentials
+  copy:
+    src: "newsboat/pass.gpg"
+    dest: "{{ newsboat_directory }}/pass.gpg"
+    mode: 0600
