@@ -4,9 +4,9 @@
   roles:
     - { role: "network", tags: "network" }
     - { role: "pacman", tags: "pacman" }
-    - { role: "settings", tags: "settings" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
+    - { role: "settings", tags: "settings" }
     - { role: "nvidia", tags: "nvidia" }
     - { role: "budgie", tags: "budgie" }
     - { role: "fonts", tags: "fonts" }

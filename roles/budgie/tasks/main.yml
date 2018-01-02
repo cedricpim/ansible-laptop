@@ -40,7 +40,7 @@
   register: mouse_click_settings
 
 - name: define mouse scroll settings
-  command: "dbus-launch gsettings set {{ touchpad_settings }} natural-scroll {{ natural_scroll|bool }}"
+  command: "dbus-launch gsettings set {{ touchpad_settings }} natural-scroll {{ natural_scroll }}"
   when: mouse_scroll_settings is defined and mouse_scroll_settings.stdout != natural_scroll
 
 - name: define mouse click settings
