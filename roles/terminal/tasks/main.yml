@@ -11,6 +11,7 @@
     - xdotool
     - wmctrl
     - ripgrep
+    - powerline
   become: yes
 
 - include_role:

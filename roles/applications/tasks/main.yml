@@ -13,9 +13,7 @@
     - neomutt
     - newsboat
     - notmuch
-    - powerline
     - qpdfview
-    - rxvt-unicode-terminfo
     - syncthing
     - vlc
     - w3m
@@ -29,8 +27,6 @@
   with_items:
     - khard
     - todotxt
-    - python2-neovim
-    - rxvt-unicode-patched
     - spotify
     - khal
     - vdirsyncer
