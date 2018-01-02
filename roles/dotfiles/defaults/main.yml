@@ -1,5 +1,0 @@
----
-dotfiles_repo: "git@github.com:cedricpim/dotfiles.git"
-dotfiles_dest: "~/.dotfiles"
-
-scripts_directory: "~/.scripts"

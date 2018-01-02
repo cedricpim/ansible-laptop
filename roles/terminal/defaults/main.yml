@@ -1,4 +1,6 @@
 ---
+scripts_directory: "~/.scripts"
+
 htop_directory: "~/.config/htop"
 
 tmux_plugin_repo: "https://github.com/tmux-plugins/tpm"
