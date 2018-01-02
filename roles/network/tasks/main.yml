@@ -16,3 +16,24 @@
     state: started
     enabled: yes
   become: yes
+
+- name: set the network interface UP
+  command: "ip link set {{ network_interface }} up"
+  become: yes
+  when: network_interface is defined and network_interface != ""
+
+- name: connect to WI-FI
+  command: "wpa_supplicant -B -i {{ network_interface }} -C <(wpa_passphrase {{ network_name }} {{ network_passphrase }})"
+  become: yes
+  when:
+    - network_interface is defined
+    - network_interface != ""
+    - network_name is defined
+    - network_name != ""
+    - network_passphrase is defined
+    - network_passphrase != ""
+
+- name: acquire IP
+  command: "dhcpcd {{ network_interface }}"
+  become: yes
+  when: network_interface is defined and network_interface != ""
