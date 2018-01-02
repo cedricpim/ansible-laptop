@@ -25,10 +25,12 @@
 
 - name: copy general configuration files
   template:
-    src: "{{ item }}"
-    dest: "~/.{{ (item | basename | splitext)[0] }}"
+    src: "{{ item }}.j2"
+    dest: "~/.{{ item }}"
     mode: 0600
-  with_fileglob: ../templates/*.j2
+  with_items:
+    - urlview
+    - dircolors
 
 - name: create folder for htop configuration
   file:
@@ -37,11 +39,11 @@
 
 - name: copy htop configuration file
   template:
-    src: "{{ htop_directory }}/htoprc.j2"
-    dest: "~/.{{ htop_directory }}/htoprc"
+    src: "htoprc.j2"
+    dest: "{{ htop_directory }}/htoprc"
     mode: 0600
 
 - import_tasks: tmux.yml
-- import_tasks: neovim.yml
-- import_tasks: neofetch.yml
-- import_tasks: urxvt.yml
+# - import_tasks: neovim.yml
+# - import_tasks: neofetch.yml
+# - import_tasks: urxvt.yml
