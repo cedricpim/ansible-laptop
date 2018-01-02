@@ -3,13 +3,13 @@
   pacman:
     name: tmux
     state: present
+  become: yes
 
-- include_role:
-    name: dotfiles
-    tasks_from: symlink
-  vars:
-    src: "{{ tmux_directory }}"
-    create_directory: no
+- name: copy tmux configuration
+  template:
+    src: "tmux.conf.j2"
+    dest: "~/.tmux.conf"
+    mode: 0600
 
 - name: install tmux plugin manager
   git:
@@ -17,15 +17,14 @@
     dest: "{{ tmux_plugin_dest }}"
     clone: yes
     update: yes
-    accept_hostkey: yes
-  become_user: "{{ user_name }}"
 
 - name: install plugins
   command: "{{ tmux_plugin_dest }}/bin/install_plugins"
-  become_user: "{{ user_name }}"
   register: tpm_install_result
   changed_when: tpm_install_result.stdout.find(tmux_plugin_installation_message) != -1
 
 - name: update pmux_plugin_dest
   command: "{{ tmux_plugin_dest }}/bin/update_plugins all"
-  become_user: "{{ user_name }}"
+  register: tpm_update_result
+  failed_when: tpm_install_result.stderr != ""
+  changed_when: false
