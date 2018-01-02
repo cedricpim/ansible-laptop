@@ -1,0 +1,35 @@
+!
+!!  {{ ansible_managed }}
+!
+
+URxvt*font: xft:Fira\ Code:size=15,xft:DejaVuSansMono\ Nerd\ Font\ Mono:regular:size=15
+URxvt*boldFont: xft:Fira\ Code:bold:size=15,xft:DejaVuSansMono Nerd Font Mono:bold:size=15
+URxvt*italicFont: xft:Fira\ Code:italic:size=15,xft:DejaVuSansMono Nerd Font Mono:italic:size=15
+URxvt*boldItalicFont: xft:Fira\ Code:bold:italic:size=15,xft:DejaVuSansMono Nerd Font Mono:bold:italic:size=15
+URxvt.letterSpace: -1
+! No need for scrollbar
+URxvt.scrollBar: false
+! Specifies the terminal type name to be set in the TERM environment variable (helpful for tmux)
+URxvt*termName: screen-256color
+! Start as a login shell by prepending a - to argv[0] of the shell (helpful for tmux)
+URxvt*loginShell: true
+! Fade the text by the given percentage when focus is lost.
+URxvt*fading: 30
+! Use visual bell on receipt of a bell character. Helpful to be used with inputrc and tmux.
+URxvt*visualBell: false
+URxvt*saveLines: 12000
+URxvt.urlLauncher: firefox
+URxvt.perl-ext-common:
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+
+URxvt*dynamicColors: on
+
+! Support Ctrl+arrows for word jumping
+URxvt.keysym.Control-Up:    \033[1;5A
+URxvt.keysym.Control-Down:  \033[1;5B
+URxvt.keysym.Control-Left:  \033[1;5D
+URxvt.keysym.Control-Right: \033[1;5C
+
+#include ".config/Xresources.d/colorscheme"

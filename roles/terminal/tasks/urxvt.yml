@@ -3,35 +3,43 @@
   pacman:
     name: rxvt-unicode-terminfo
     state: present
+  become: yes
 
 - include_role:
     name: pacaur_package
   vars:
     pkg_name: rxvt-unicode-patched
 
-- include_role:
-    name: dotfiles
-    tasks_from: symlink
-  vars:
-    src: "{{ urxvt_directory }}"
-    create_directory: yes
-
 - name: create folder for urxvt icon
   file:
     path: "{{ urxvt_icon_dest }}"
     state: directory
-  become_user: "{{ user_name }}"
 
 - name: copy urxvt icon
   copy:
     src: urxvt.png
     dest: "{{ urxvt_icon_dest }}"
     mode: 0644
-  become_user: "{{ user_name }}"
 
-- include_role:
-    name: dotfiles
-    tasks_from: symlink
-  vars:
-    src: "{{ startx_directory }}"
-    create_directory: no
+- name: create folder for urxvt colorscheme
+  file:
+    path: "{{ urxvt_directory }}"
+    state: directory
+
+- name: copy urxvt colorscheme
+  template:
+    src: "urxvt/colorscheme.j2"
+    dest: "{{ urxvt_directory }}/colorscheme"
+    mode: 0600
+
+- name: copy urxvt configuration
+  template:
+    src: "urxvt/Xresources.j2"
+    dest: "~/.Xresources"
+    mode: 0600
+
+- name: copy startx configuration file
+  template:
+    src: "startx/xprofile.j2"
+    dest: "~/.xprofile"
+    mode: 0600

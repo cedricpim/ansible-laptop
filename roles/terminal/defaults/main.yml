@@ -15,7 +15,5 @@ neovim_spell_dictionaries:
 
 neofetch_directory: "~/.config/neofetch"
 
-urxvt_directory: "config/Xresources.d"
+urxvt_directory: "~/.config/Xresources.d"
 urxvt_icon_dest: "~/.local/share/icons/hicolor/128x128/apps"
-
-startx_directory: "startx"
