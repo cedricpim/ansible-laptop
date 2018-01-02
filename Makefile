@@ -4,6 +4,7 @@ TAGS ?=
 VERBOSE ?=
 ANSIBLE_VAULT_PASSWORD_FILE = group_vars/local/vault.sh
 ANSIBLE_OPTS = --vault-password-file ${ANSIBLE_VAULT_PASSWORD_FILE}
+VAULT ?= group_vars/local/vault.yml
 
 deploy-local:
 	$(if ${TAGS}, $(eval ANSIBLE_OPTS += --tags ${TAGS}))
@@ -12,3 +13,6 @@ deploy-local:
 
 deploy-vagrant:
 	VAGRANT_VERBOSE=${VERBOSE} VAGRANT_TAGS=${TAGS} VAGRANT_PLAYBOOK=${VAGRANT_PLAYBOOK} vagrant provision
+
+edit-vault:
+	ansible-vault edit ${VAULT} ${ANSIBLE_OPTS}
