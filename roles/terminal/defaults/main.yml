@@ -13,7 +13,7 @@ neovim_spell_dictionaries:
   - en.utf-8.spl
   - en.utf-8.sug
 
-neofetch_directory: "config/neofetch"
+neofetch_directory: "~/.config/neofetch"
 
 urxvt_directory: "config/Xresources.d"
 urxvt_icon_dest: "~/.local/share/icons/hicolor/128x128/apps"

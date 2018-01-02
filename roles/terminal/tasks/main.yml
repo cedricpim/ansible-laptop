@@ -45,5 +45,5 @@
 
 - import_tasks: tmux.yml
 - import_tasks: neovim.yml
-# - import_tasks: neofetch.yml
+- import_tasks: neofetch.yml
 # - import_tasks: urxvt.yml

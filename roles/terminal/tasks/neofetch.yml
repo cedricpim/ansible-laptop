@@ -4,9 +4,13 @@
   vars:
     pkg_name: neofetch
 
-- include_role:
-    name: dotfiles
-    tasks_from: symlink
-  vars:
-    src: "{{ neofetch_directory }}"
-    create_directory: yes
+- name: create folder for neofetch configuration
+  file:
+    path: "{{ neofetch_directory }}"
+    state: directory
+
+- name: copy neofetch configuration file
+  template:
+    src: "neofetch/config.j2"
+    dest: "{{ neofetch_directory }}/config"
+    mode: 0600
