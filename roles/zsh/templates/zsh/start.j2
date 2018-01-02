@@ -3,7 +3,8 @@
 #
 
 # Display system information on login
-if [ -f /usr/bin/neofetch ]; then neofetch; fi
+# NOTE: Ansible doesn't play along well with neofetch being called when shell is started
+if [ `command -v neofetch` ] && [ `whoami` != "vagrant" ]; then neofetch; fi
 
 # Start always on tmux existing session
 if [ -z "$TMUX" ]; then tmux attach > /dev/null 2>&1; fi

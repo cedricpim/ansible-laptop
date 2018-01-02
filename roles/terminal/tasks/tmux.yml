@@ -23,7 +23,7 @@
   register: tpm_install_result
   changed_when: tpm_install_result.stdout.find(tmux_plugin_installation_message) != -1
 
-- name: update pmux_plugin_dest
+- name: update tmux plugins
   command: "{{ tmux_plugin_dest }}/bin/update_plugins all"
   register: tpm_update_result
   failed_when: tpm_install_result.stderr != ""
