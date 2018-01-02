@@ -1,22 +1,7 @@
 ---
-- hosts: all
-  become: yes
-  roles:
-    - { role: "settings", tags: "settings" }
+- hosts: local
 
-  vars_prompt:
-    - name: "user_name"
-      prompt: "Enter your username"
-      private: no
-    - name: "user_password"
-      prompt: "Enter your password"
-      private: yes
-      encrypt: "sha512_crypt"
-      confirm: yes
-      salt_size: 14
-    - name: "system_time_zone"
-      prompt: "Enter your time zone"
-      private: no
-    - name: "system_hostname"
-      prompt: "Enter your hostname"
-      private: no
+  roles:
+    - { role: "zsh", tags: "zsh" }
+    - { role: "terminal", tags: "terminal" }
+    - { role: "applications", tags: "applications" }
