@@ -14,16 +14,38 @@
     chdir: "{{ zprezto_dest }}"
   when: cloned_zprezto is defined and cloned_zprezto.submodules_changed is defined
 
-- include_role:
-    name: dotfiles
-    tasks_from: symlink
-  vars:
-    src: "{{ zsh_directory }}"
-    create_directory: no
+- name: copy zprezto configuration file
+  template:
+    src: "zprezto/zpreztorc.j2"
+    dest: "~/.zpreztorc"
+    mode: 0600
 
-- include_role:
-    name: dotfiles
-    tasks_from: symlink
-  vars:
-    src: "{{ shell_directory }}"
-    create_directory: yes
+- name: create folder for zsh configuration files
+  file:
+    path: "{{ zsh_directory }}"
+    state: directory
+
+- name: copy main zsh configuration files
+  template:
+    src: "zsh/{{ item }}.j2"
+    dest: "~/.{{ item }}"
+    mode: 0600
+  with_items:
+    - zlogin
+    - zlogout
+    - zshenv
+    - zshrc
+
+- name: copy the remaining zsh configuration files
+  template:
+    src: "zsh/{{ item }}.j2"
+    dest: "{{ zsh_directory }}/{{ item }}"
+    mode: 0600
+  with_items:
+    - aliases
+    - exports
+    - functions
+    - ssh-warning
+    - start
+    - zsettings
+    - zstyles

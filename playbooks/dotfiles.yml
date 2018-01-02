@@ -2,6 +2,7 @@
 - hosts: local
 
   roles:
+    - { role: "zsh", tags: "zsh" }
     - { role: "dotfiles", tags: "dotfiles" }
     - { role: "terminal", tags: "terminal" }
     - { role: "applications", tags: "applications" }

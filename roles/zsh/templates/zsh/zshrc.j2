@@ -1,0 +1,72 @@
+#
+##  {{ ansible_managed }}
+#
+
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+autoload -U colors && colors
+autoload zmv
+autoload -Uz compinit && compinit
+autoload -Uz run-help
+alias help=run-help
+
+# Source zsh config files
+for file in `find -L ~/.zsh -maxdepth 1 -type f`; do
+  [ -r $file ] && [ -f $file ] && source $file
+done
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
+
+# Set the list of directories that Zsh searches for programs.
+path=( $path )
+
+#
+# Temporary Files
+#
+if [[ ! -d "$TMPDIR" ]]; then
+  export TMPDIR="/tmp/$USER"
+  mkdir -p -m 700 "$TMPDIR"
+fi
+
+TMPPREFIX="${TMPDIR%/}/zsh"
+if [[ ! -d "$TMPPREFIX" ]]; then
+  mkdir -p "$TMPPREFIX"
+fi
+
+# rbenv
+if [ `command -v rbenv` ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
+if [ `command -v gem` ] && [ `command -v ruby` ]; then
+  export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+fi
+
+# New colors for ls
+if [ `command -v dircolors` ]; then
+  eval $(dircolors -b $HOME/.dircolors)
+fi
+
+# Add scripts to PATH
+export PATH=$PATH:$HOME/.scripts
+
+if [ -d "/usr/share/zsh/plugins/zsh-autosuggestions" ]; then
+  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+[ -f ~/.config/fzf/shell/key-bindings.zsh ] && source ~/.config/fzf/shell/key-bindings.zsh
+[ -f ~/.config/fzf/shell/completion.zsh ] && source ~/.config/fzf/shell/completion.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -1,0 +1,4 @@
+---
+zprezto_dest: "~/.zprezto"
+ripgrep_autocomplete_dest: "/usr/share/zsh/functions/Completion/Zsh/_rg"
+zsh_directory: "~/.zsh"

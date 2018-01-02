@@ -1,7 +1,3 @@
 ---
 zprezto_repo: "https://github.com/sorin-ionescu/prezto.git"
-zprezto_dest: "~/.zprezto"
 ripgrep_autocomplete_url: "https://raw.githubusercontent.com/BurntSushi/ripgrep/master/complete/_rg"
-ripgrep_autocomplete_dest: "/usr/share/zsh/functions/Completion/Zsh/_rg"
-zsh_directory: "zsh"
-shell_directory: "shell"

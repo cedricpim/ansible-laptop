@@ -12,6 +12,7 @@
   user:
     name: "{{ user_name }}"
     shell: /usr/bin/zsh
+  become: yes
 
 - include_role:
     name: pacaur_package
