@@ -30,12 +30,6 @@
     mode: 0700
   with_fileglob: ../templates/scripts/*.j2
 
-- name: copy dircolors configuration file
-  template:
-    src: "dircolors.j2"
-    dest: "~/.dircolors"
-    mode: 0600
-
 - import_tasks: git.yml
 - import_tasks: htop.yml
 - import_tasks: urlview.yml

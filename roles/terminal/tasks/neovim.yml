@@ -32,15 +32,15 @@
 
 - name: create folder for neovim plugin manager
   file:
-    path: "{{ neovim_plug_dest }}"
+    path: "{{ neovim_plugin_dest }}"
     state: directory
 
 - name: install neovim plugin manager
   get_url:
-    url: "{{ neovim_plug_url }}"
-    dest: "{{ neovim_plug_dest }}"
+    url: "{{ neovim_plugin_url }}"
+    dest: "{{ neovim_plugin_dest }}"
 
 - name: install/update plugins defined on neovim configuration
   command: "nvim +'PlugUpdate --sync' +qa"
-  register: neovim_plug_install_result
-  changed_when: neovim_plug_install_result.stdout.find(neovim_plugin_installation_message) != -1
+  register: neovim_plugin_install_result
+  changed_when: neovim_plugin_install_result.stdout.find(neovim_plugin_installation_message) != -1
