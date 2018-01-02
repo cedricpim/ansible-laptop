@@ -3,11 +3,13 @@
   pacman:
     name: transmission-cli
     state: present
+  become: yes
 
 - name: create staff group
   group:
     name: staff
     state: present
+  become: yes
 
 - name: add user transmission to staff group
   user:
@@ -15,6 +17,7 @@
     groups: staff
     append: yes
     state: present
+  become: yes
 
 - name: create folder for torrents
   file:
@@ -23,12 +26,14 @@
     mode: 0770
     owner: transmission
     group: staff
+  become: yes
 
 - name: start and enable service for transmission-cli
   systemd:
     name: transmission
     state: started
     enabled: yes
+  become: yes
 
 - name: copy sysctl configuration to /etc/sysctl.conf
   template:
@@ -37,6 +42,7 @@
     owner: root
     group: root
     mode: 0644
+  become: yes
   notify:
     - sysctl configured
     - restart transmission

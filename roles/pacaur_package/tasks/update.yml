@@ -1,6 +1,5 @@
 ---
 - name: update pacaur
   command: "pacaur -Syu --noconfirm"
-  become_user: "{{ user_name }}"
   register: pacaur_install_result
   changed_when: pacaur_install_result.stdout.find(available_packages_message) != -1

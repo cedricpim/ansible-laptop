@@ -10,43 +10,39 @@
     - gnome-tweak-tool
     - gnome-keyring
     - ntfs-3g
+  become: yes
 
 - name: enable GDM
   systemd:
     name: gdm
     enabled: yes
+  become: yes
 
 - name: create folder for autostart programs
   file:
     path: "{{ autostart_dir }}"
     state: directory
-  become_user: "{{ user_name }}"
 
 - name: copy xprofile to autostart
   template:
     src: xprofile.desktop.j2
     dest: "{{ autostart_dir }}/xprofile.desktop"
     mode: 0644
-  become_user: "{{ user_name }}"
 
 - name: get mouse scroll settings
   command: "gsettings get {{ touchpad_settings }} natural-scroll"
-  become_user: "{{ user_name }}"
   changed_when: false
   register: mouse_scroll_settings
 
 - name: get mouse click settings
   command: "gsettings get {{ touchpad_settings }} click-method"
-  become_user: "{{ user_name }}"
   changed_when: false
   register: mouse_click_settings
 
 - name: define mouse scroll settings
   command: "dbus-launch gsettings set {{ touchpad_settings }} natural-scroll {{ natural_scroll|bool }}"
-  become_user: "{{ user_name }}"
   when: mouse_scroll_settings is defined and mouse_scroll_settings.stdout != natural_scroll
 
 - name: define mouse click settings
   command: "dbus-launch gsettings set {{ touchpad_settings }} click-method {{ click_method }}"
-  become_user: "{{ user_name }}"
   when: mouse_click_settings is defined and mouse_click_settings.stdout != click_method

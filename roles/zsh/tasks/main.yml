@@ -6,6 +6,7 @@
   with_items:
     - zsh
     - zsh-completions
+  become: yes
 
 - name: change default shell to zsh
   user:

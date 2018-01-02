@@ -8,9 +8,11 @@
     - wpa_supplicant
     - networkmanager
     - ntp
+  become: yes
 
 - name: start service for NTP
   systemd:
     name: ntpd
     state: started
     enabled: yes
+  become: yes

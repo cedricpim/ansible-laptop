@@ -22,8 +22,8 @@
     append: true
     groups: wheel
     state: present
-  when: aur_pacaur_check|changed
   become: yes
+  when: aur_pacaur_check|changed
 
 - import_tasks: cower.yml
   when: aur_pacaur_check|changed

@@ -7,5 +7,4 @@
 
 - name: "install {{ pkg_name }}"
   command: "pacaur -S {{ pkg_name }} --needed --noconfirm"
-  become: "{{ user_name }}"
   when: aur_package_check|changed

@@ -6,14 +6,12 @@
     clone: yes
     update: yes
     recursive: yes
-  become_user: "{{ user_name }}"
   register: cloned_zprezto
 
 - name: pull zprezto submodules
   command: "git submodule update --init --recursive"
   args:
     chdir: "{{ zprezto_dest }}"
-  become_user: "{{ user_name }}"
   when: cloned_zprezto is defined and cloned_zprezto.submodules_changed is defined
 
 - include_role:

@@ -10,11 +10,13 @@
     - xf86-video-intel
     - nvidia
     - bbswitch
+  become: yes
 
 - name: install bumblebee package
   pacman:
     name: bumblebee
     state: present
+  become: yes
 
 - name: add bumblebee group to {{ user_name }}
   user:
@@ -22,9 +24,11 @@
     groups: bumblebee
     append: yes
     state: present
+  become: yes
 
 - name: start service for bumblebee
   systemd:
     name: bumblebeed
     state: started
     enabled: yes
+  become: yes

@@ -1,3 +1,4 @@
 ---
 - name: process time zone
   command: "hwclock --systohc"
+  become: yes

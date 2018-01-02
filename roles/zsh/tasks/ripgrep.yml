@@ -3,6 +3,7 @@
   pacman:
     name: ripgrep
     state: present
+  become: yes
 
 - name: setup ripgrep autocomplete for zsh
   get_url:

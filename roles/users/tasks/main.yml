@@ -4,6 +4,7 @@
     name: "{{ item }}"
     state: present
   with_items: "{{ users_groups }}"
+  become: yes
 
 - name: create user "{{ user_name }}"
   user:
@@ -13,3 +14,4 @@
     groups: "{{ users_groups }}"
     append: yes
     state: present
+  become: yes

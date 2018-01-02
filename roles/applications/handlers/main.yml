@@ -1,8 +1,10 @@
 ---
 - name: sysctl configured
   command: "sysctl -p"
+  become: yes
 
 - name: restart transmission
   systemd:
     name: transmission
     state: restarted
+  become: yes
