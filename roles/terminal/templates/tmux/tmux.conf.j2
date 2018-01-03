@@ -75,8 +75,8 @@ bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
 set -g @resurrect-strategy-nvim 'session'
 set -g @resurrect-capture-pane-contents 'on'
 set -g @continuum-save-interval '15'
-set -g @continuum-boot 'on'
-set -g @continuum-restore 'on'
+set -g @continuum-boot '{{ tmux_continuum }}'
+set -g @continuum-restore '{{ tmux_continuum }}'
 set -g @resurrect-processes ':all:'
 
 # List of plugins

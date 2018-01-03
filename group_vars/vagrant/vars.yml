@@ -8,4 +8,4 @@ git_email: 'vagrant@localhost'
 system_time_zone: 'UTC'
 system_hostname: 'vagrant'
 
-newsboat_username: "vagrant"
+tmux_continuum: "off"
