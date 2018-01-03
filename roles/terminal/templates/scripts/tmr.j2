@@ -19,7 +19,8 @@ case $1 in
     for torrent_id in $torrent_list; do
       base_dir=`transmission-remote -t $torrent_id -i | grep -e "Location: " | sed "s/\s*Location: //"`
       filename=`transmission-remote -t $torrent_id -i | grep -e "Name: " | sed "s/\s*Name: //"`
-      mv $base_dir/$filename $move_dir/$filename
+      sudo mv $base_dir/$filename $move_dir/$filename
+      sudo chown -R $USER: $move_dir/$filename
       transmission-remote --torrent $torrent_id --remove > /dev/null
       echo "$filename has been moved and removed from list"
     done
