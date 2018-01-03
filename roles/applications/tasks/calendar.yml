@@ -29,10 +29,11 @@
     path: "{{ systemd_user_directory }}"
     state: directory
 
-- name: get service and timer for vdirsyncer from its repo
-  get_url:
-    url: "{{ vdirsyncer_contrib }}/{{ item }}"
+- name: symlink service and timer for vdirsyncer
+  file:
+    src: "{{ vdirsyncer_aur_systemd }}/{{ item }}"
     dest: "{{ systemd_user_directory }}/{{ item }}"
+    state: link
   with_items:
     - vdirsyncer.service
     - vdirsyncer.timer

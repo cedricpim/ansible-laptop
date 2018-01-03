@@ -1,2 +1,2 @@
 ---
-vdirsyncer_contrib: "https://raw.githubusercontent.com/pimutils/vdirsyncer/master/contrib"
+vdirsyncer_aur_systemd: "/usr/lib/systemd/user"
