@@ -7,6 +7,7 @@ newsboat_username: "newsboat"
 
 vdirsyncer_directory: "~/.config/vdirsyncer"
 khal_directory: "~/.config/khal"
+khard_directory: "~/.config/khard"
 
 dav_server: "dav.server"
 dav_username: "dav.username"

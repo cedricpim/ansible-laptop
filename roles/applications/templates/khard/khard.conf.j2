@@ -1,0 +1,32 @@
+#
+## {{ ansible_managed }}
+#
+
+[addressbooks]
+[[contacts]]
+path = {{ vdirsyncer_directory }}/contacts/cedricpim/contacts/
+
+[general]
+debug          = no
+default_action = list
+editor         = nvim
+merge_editor   = vimdiff
+
+[contact table]
+display              = first_name # display names by first or last name: first_name / last_name
+group_by_addressbook = no # group by address book: yes / no
+reverse              = no # reverse table ordering: yes / no
+show_nicknames       = yes # append nicknames to name column: yes / no
+show_uids            = yes # show uid table column: yes / no
+sort                 = first_name # sort by first or last name: first_name / last_name
+
+[vcard]
+# extend contacts with your own private objects
+# these objects are stored with a leading "X-" before the object name in the vcard files
+# every object label may only contain letters, digits and the - character
+# example:
+#   private_objects = Jabber, Skype, Twitter
+private_objects        = Jabber, Skype, Twitter
+preferred_version      = 4.0 # preferred vcard version: 3.0 / 4.0
+search_in_source_files = no # Look into source vcf files to speed up search queries: yes / no
+skip_unparsable        = no # skip unparsable vcard files: yes / no

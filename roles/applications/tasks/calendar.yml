@@ -4,6 +4,7 @@
   with_items:
     - vdirsyncer
     - khal
+    - khard
   loop_control:
     loop_var: pkg_name
 
@@ -61,3 +62,17 @@
     src: "khal/config.j2"
     dest: "{{ khal_directory }}/config"
     mode: 0600
+
+- name: create folder for khard configuration
+  file:
+    path: "{{ khard_directory }}"
+    state: directory
+
+- name: copy khard configuration
+  template:
+    src: "khard/{{ item }}.j2"
+    dest: "{{ khard_directory }}/{{ item }}"
+    mode: 0600
+  with_items:
+    - contact.yml
+    - khard.conf
