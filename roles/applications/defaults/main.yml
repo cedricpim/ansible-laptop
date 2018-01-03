@@ -3,5 +3,14 @@ sysctl_rmem_max: 4194304
 sysctl_wmem_max: 1048576
 
 newsboat_directory: "~/.config/newsboat"
+newsboat_username: "newsboat"
+
+vdirsyncer_directory: "~/.config/vdirsyncer"
+khal_directory: "~/.config/khal"
+
+dav_server: "dav.server"
+dav_username: "dav.username"
+
+systemd_user_directory: "~/.config/systemd/user"
 
 copyq_directory: "config/copyq"

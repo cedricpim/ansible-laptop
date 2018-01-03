@@ -1,0 +1,37 @@
+#
+## {{ ansible_managed }}
+#
+
+[calendars]
+  [[personal]]
+    path = {{ vdirsyncer_directory }}/calendars/cedricpim/personal/
+    color = "#15FF00"
+  [[travels]]
+    path = {{ vdirsyncer_directory }}/calendars/cedricpim/travel/
+    color = "#0CA1FF"
+  [[sporting_cp]]
+    path = {{ vdirsyncer_directory }}/calendars/cedricpim/sporting_cp/
+    color = "#40A54C"
+    readonly = True
+  [[real_madrid]]
+    path = {{ vdirsyncer_directory }}/calendars/cedricpim/real_madrid/
+    color = "#649EAD"
+    readonly = True
+  [[premier_league]]
+    path = {{ vdirsyncer_directory }}/calendars/cedricpim/premier_league/
+    color = "#CC2B23"
+    readonly = True
+  [[tv_maze]]
+    path = {{ vdirsyncer_directory }}/calendars/cedricpim/tv_maze/
+    color = "#DFB656"
+    readonly = True
+
+[default]
+  default_calendar = personal
+  highlight_event_days = true
+
+[sqlite]
+  path = {{ khal_directory }}/cache
+
+[view]
+  event_view_always_visible = True

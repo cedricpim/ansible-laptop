@@ -11,7 +11,6 @@
 #     - keepassxc
 #     - offlineimap
 #     - neomutt
-#     - newsboat
 #     - notmuch
 #     - qpdfview
 #     - syncthing
@@ -24,7 +23,7 @@
 # - import_tasks: firefox.yml
 # - import_tasks: email.yml
 - import_tasks: newsboat.yml
-# - import_tasks: calendar.yml
+- import_tasks: calendar.yml
 
 # - include_role:
 #     name: pacaur_package
@@ -32,7 +31,5 @@
 #     - khard
 #     - todotxt
 #     - spotify
-#     - khal
-#     - vdirsyncer
 #   loop_control:
 #     loop_var: pkg_name

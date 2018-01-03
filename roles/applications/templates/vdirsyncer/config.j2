@@ -1,0 +1,52 @@
+#
+## {{ ansible_managed }}
+#
+
+[general]
+  status_path = "{{ vdirsyncer_directory }}/status/"
+
+############################
+######### Contacts #########
+############################
+
+[pair my_contacts]
+  a = "my_contacts_local"
+  b = "my_contacts_remote"
+  collections = ["contacts"]
+  conflict_resolution = "a wins"
+
+[storage my_contacts_local]
+  type = "filesystem"
+  path = "{{ vdirsyncer_directory }}/contacts/cedricpim"
+  fileext = ".vcf"
+
+[storage my_contacts_remote]
+  type = "carddav"
+  url = "https://{{ dav_server }}"
+  auth = "basic"
+  username = "{{ dav_username }}"
+  password.fetch = ["command", "sh", "-c", "gpg -q --for-your-eyes-only --no-tty -d {{ vdirsyncer_directory }}/pass.gpg"]
+
+#############################
+######### Calendars #########
+#############################
+
+#### Personal Calendar ####
+[pair my_calendar]
+  a = "my_calendar_local"
+  b = "my_calendar_remote"
+  collections = ["personal", "travel", "tv_maze", "sporting_cp", "real_madrid", "premier_league"]
+  conflict_resolution = "a wins"
+  metadata = ["color", "displayname"]
+
+[storage my_calendar_local]
+  type = "filesystem"
+  path = "{{ vdirsyncer_directory }}/calendars/cedricpim"
+  fileext = ".ics"
+
+[storage my_calendar_remote]
+  type = "caldav"
+  url = "https://{{ dav_server }}"
+  auth = "basic"
+  username = "{{ dav_username }}"
+  password.fetch = ["command", "sh", "-c", "gpg -q --for-your-eyes-only --no-tty -d {{ vdirsyncer_directory }}/pass.gpg"]
