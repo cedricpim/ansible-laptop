@@ -9,9 +9,6 @@
 #     - ffmpeg
 #     - firefox
 #     - keepassxc
-#     - offlineimap
-#     - neomutt
-#     - notmuch
 #     - qpdfview
 #     - syncthing
 #     - vlc
@@ -21,14 +18,10 @@
 # - import_tasks: transmission.yml
 # - import_tasks: copyq.yml
 # - import_tasks: firefox.yml
-# - import_tasks: email.yml
-- import_tasks: newsboat.yml
-- import_tasks: calendar.yml
 
 # - include_role:
 #     name: pacaur_package
 #   with_items:
-#     - khard
 #     - todotxt
 #     - spotify
 #   loop_control:

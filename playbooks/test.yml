@@ -15,6 +15,9 @@
     - { role: "zsh", tags: "zsh" }
     - { role: "openvpn", tags: "openvpn" }
     - { role: "applications", tags: "applications" }
+    - { role: "calendar", tags: "calendar" }
+    - { role: "feeds", tags: "feeds" }
+    - { role: "email", tags: "email" }
 
   post_tasks:
     - name: update packages

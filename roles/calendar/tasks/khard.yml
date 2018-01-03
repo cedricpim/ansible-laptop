@@ -1,0 +1,19 @@
+---
+- include_role:
+    name: pacaur_package
+  vars:
+    pkg_name: khard
+
+- name: create folder for khard configuration
+  file:
+    path: "{{ khard_directory }}"
+    state: directory
+
+- name: copy khard configuration
+  template:
+    src: "khard/{{ item }}.j2"
+    dest: "{{ khard_directory }}/{{ item }}"
+    mode: 0600
+  with_items:
+    - contact.yml
+    - khard.conf

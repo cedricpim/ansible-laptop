@@ -1,28 +1,24 @@
 ---
 - include_role:
     name: pacaur_package
-  with_items:
-    - vdirsyncer
-    - khal
-    - khard
-  loop_control:
-    loop_var: pkg_name
+  vars:
+    pkg_name: vdirsyncer
 
 - name: create folder for vdirsyncer configuration
   file:
     path: "{{ vdirsyncer_directory }}"
     state: directory
 
-- name: copy vdirsyncer configuration
-  template:
-    src: "vdirsyncer/config.j2"
-    dest: "{{ vdirsyncer_directory }}/config"
-    mode: 0600
-
 - name: copy vdirsyncer credentials
   copy:
     src: "vdirsyncer/pass.gpg"
     dest: "{{ vdirsyncer_directory }}/pass.gpg"
+    mode: 0600
+
+- name: copy vdirsyncer configuration
+  template:
+    src: "vdirsyncer/config.j2"
+    dest: "{{ vdirsyncer_directory }}/config"
     mode: 0600
 
 - name: create folder for systemd
@@ -51,28 +47,3 @@
     dest: "{{ systemd_user_directory }}/vdirsyncer.service.d/override.conf"
     mode: 0600
   notify: updated vdirsyncer timer
-
-- name: create folder for khal configuration
-  file:
-    path: "{{ khal_directory }}"
-    state: directory
-
-- name: copy khal configuration
-  template:
-    src: "khal/config.j2"
-    dest: "{{ khal_directory }}/config"
-    mode: 0600
-
-- name: create folder for khard configuration
-  file:
-    path: "{{ khard_directory }}"
-    state: directory
-
-- name: copy khard configuration
-  template:
-    src: "khard/{{ item }}.j2"
-    dest: "{{ khard_directory }}/{{ item }}"
-    mode: 0600
-  with_items:
-    - contact.yml
-    - khard.conf

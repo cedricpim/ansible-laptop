@@ -1,0 +1,7 @@
+---
+- name: updated vdirsyncer timer
+  systemd:
+    name: vdirsyncer.timer
+    state: restarted
+    daemon_reload: yes
+    user: yes

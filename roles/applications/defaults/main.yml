@@ -2,16 +2,12 @@
 sysctl_rmem_max: 4194304
 sysctl_wmem_max: 1048576
 
-newsboat_directory: "~/.config/newsboat"
-newsboat_username: "newsboat"
+email_directory: "~/.cache/Mail"
 
-vdirsyncer_directory: "~/.config/vdirsyncer"
-khal_directory: "~/.config/khal"
-khard_directory: "~/.config/khard"
-
-dav_server: "dav.server"
-dav_username: "dav.username"
-
-systemd_user_directory: "~/.config/systemd/user"
+notmuch_full_name: "Full Name"
+notmuch_primary_email: "primary@email.localhost"
+notmuch_other_emails:
+  - second@email.localhost
+  - third@email.localhost
 
 copyq_directory: "config/copyq"
