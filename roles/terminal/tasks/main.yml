@@ -45,7 +45,7 @@
     state: present
   with_items:
     - { key: "binding", value: "{{ urxvt_shorcut_keys }}" }
-    - { key: "command", value: "'gnome-terminal -- {{ urxvt_directory | expanduser }}/urxvtopen'" }
+    - { key: "command", value: "'gnome-terminal -- {{ urxvt_directory | regex_replace('~', ansible_env.HOME) }}/urxvtopen'" }
     - { key: "name", value: "{{ urxvt_shorcut_name }}" }
 
 - name: copy urxvt configuration
