@@ -1,40 +1,48 @@
 ---
-- name: install terminal utilities
+- name: install urxvt
   pacman:
-    name: "{{ item }}"
+    name: rxvt-unicode-terminfo
     state: present
-  with_items:
-    - openssh
-    - easy-rsa
-    - rsync
-    - xsel
-    - xdotool
-    - wmctrl
-    - ripgrep
-    - powerline
   become: yes
 
 - include_role:
     name: pacaur_package
   vars:
-    pkg_name: diff-so-fancy
+    pkg_name: rxvt-unicode-patched
 
-- name: create folder for scripts
+- name: create folder for urxvt icon
   file:
-    path: "{{ scripts_directory }}"
+    path: "{{ urxvt_icon_dest }}"
     state: directory
 
-- name: copy scripts files
-  template:
-    src: "{{ item }}"
-    dest: "{{ scripts_directory }}/{{ (item | basename | splitext)[0] }}"
-    mode: 0700
-  with_fileglob: ../templates/scripts/*.j2
+- name: copy urxvt icon
+  copy:
+    src: urxvt.png
+    dest: "{{ urxvt_icon_dest }}"
+    mode: 0644
 
-- import_tasks: git.yml
-- import_tasks: htop.yml
-- import_tasks: urlview.yml
-- import_tasks: tmux.yml
-- import_tasks: neovim.yml
-- import_tasks: neofetch.yml
-- import_tasks: urxvt.yml
+- name: create folder for urxvt colorscheme
+  file:
+    path: "{{ urxvt_directory }}"
+    state: directory
+
+- name: copy urxvt colorscheme
+  template:
+    src: "urxvt/{{ item.file }}.j2"
+    dest: "{{ urxvt_directory }}/{{ item.file }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { file: "colorscheme", mode: "0600" }
+    - { file: "urxvtopen", mode: "0700" }
+
+- name: copy urxvt configuration
+  template:
+    src: "urxvt/Xresources.j2"
+    dest: "~/.Xresources"
+    mode: 0600
+
+- name: copy startx configuration file
+  template:
+    src: "startx/xprofile.j2"
+    dest: "~/.xprofile"
+    mode: 0600
