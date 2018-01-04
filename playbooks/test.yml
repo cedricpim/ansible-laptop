@@ -11,6 +11,7 @@
     - { role: "budgie", tags: "budgie" }
     - { role: "fonts", tags: "fonts" }
     - { role: "ssd", tags: "ssd" }
+    - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
     - { role: "zsh", tags: "zsh" }
     - { role: "openvpn", tags: "openvpn" }
