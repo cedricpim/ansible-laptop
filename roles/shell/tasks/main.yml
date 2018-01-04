@@ -12,6 +12,7 @@
     - wmctrl
     - ripgrep
     - powerline
+    - cryptsetup
   become: yes
 
 - include_role:
@@ -26,10 +27,12 @@
 
 - name: copy scripts files
   template:
-    src: "{{ item }}"
-    dest: "{{ scripts_directory }}/{{ (item | basename | splitext)[0] }}"
+    src: "{{ item }}.j2"
+    dest: "{{ scripts_directory }}/{{ item }}"
     mode: 0700
-  with_fileglob: ../templates/scripts/*.j2
+  with_items:
+    - "luks"
+    - "update-repos"
 
 - import_tasks: git.yml
 - import_tasks: htop.yml
