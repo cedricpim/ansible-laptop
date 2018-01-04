@@ -7,7 +7,7 @@
 
 - name: ensure urlview is installed
   include_role:
-    name: terminal
+    name: shell
     tasks_from: urlview
 
 - name: create folder for newsboat configuration

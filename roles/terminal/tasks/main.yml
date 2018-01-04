@@ -1,8 +1,11 @@
 ---
-- name: install urxvt
+- name: install urxvt and python-psutil (for dconf)
   pacman:
-    name: rxvt-unicode-terminfo
+    name: "{{ item }}"
     state: present
+  with_items:
+    - "rxvt-unicode-terminfo"
+    - "python-psutil"
   become: yes
 
 - include_role:
@@ -21,28 +24,32 @@
     dest: "{{ urxvt_icon_dest }}"
     mode: 0644
 
-- name: create folder for urxvt colorscheme
+- name: create folder for urxvt extra configurations
   file:
     path: "{{ urxvt_directory }}"
     state: directory
 
-- name: copy urxvt colorscheme
+- name: copy urxvt extra configurations
   template:
-    src: "urxvt/{{ item.file }}.j2"
+    src: "{{ item.file }}.j2"
     dest: "{{ urxvt_directory }}/{{ item.file }}"
     mode: "{{ item.mode }}"
   with_items:
     - { file: "colorscheme", mode: "0600" }
     - { file: "urxvtopen", mode: "0700" }
 
+- name: Set global shortcut for urxvt
+  dconf:
+    key: "{{ urxvt_dconf_shortcut_base_key }}{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items:
+    - { key: "binding", value: "{{ urxvt_shorcut_keys }}" }
+    - { key: "command", value: "'gnome-terminal -- {{ urxvt_directory | expanduser }}/urxvtopen'" }
+    - { key: "name", value: "{{ urxvt_shorcut_name }}" }
+
 - name: copy urxvt configuration
   template:
-    src: "urxvt/Xresources.j2"
+    src: "Xresources.j2"
     dest: "~/.Xresources"
-    mode: 0600
-
-- name: copy startx configuration file
-  template:
-    src: "startx/xprofile.j2"
-    dest: "~/.xprofile"
     mode: 0600

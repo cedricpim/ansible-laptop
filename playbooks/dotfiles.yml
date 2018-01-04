@@ -3,6 +3,7 @@
 
   roles:
     - { role: "zsh", tags: "zsh" }
+    - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
     - { role: "applications", tags: "applications" }
     - { role: "calendar", tags: "calendar" }

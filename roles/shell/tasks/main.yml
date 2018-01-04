@@ -1,5 +1,5 @@
 ---
-- name: install terminal utilities
+- name: install shell utilities
   pacman:
     name: "{{ item }}"
     state: present

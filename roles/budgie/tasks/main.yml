@@ -18,6 +18,12 @@
     enabled: yes
   become: yes
 
+- name: copy startx configuration file
+  template:
+    src: xprofile.j2
+    dest: "~/.xprofile"
+    mode: 0600
+
 - name: create folder for autostart programs
   file:
     path: "{{ autostart_dir }}"
