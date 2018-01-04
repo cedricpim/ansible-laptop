@@ -14,3 +14,14 @@
     src: "khal/config.j2"
     dest: "{{ khal_directory }}/config"
     mode: 0600
+
+- name: create folder for scripts
+  file:
+    path: "{{ scripts_directory }}"
+    state: directory
+
+- name: copy khal custom script
+  template:
+    src: "khal/rikhal.j2"
+    dest: "{{ scripts_directory }}/rikhal"
+    mode: 0700
