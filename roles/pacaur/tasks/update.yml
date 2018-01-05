@@ -1,5 +1,5 @@
 ---
-- name: update pacaur
+- name: "update pacaur packages"
   command: "pacaur -Syu --noconfirm"
   register: pacaur_install_result
   changed_when: pacaur_install_result.stdout.find(available_packages_message) != -1

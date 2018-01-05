@@ -2,5 +2,8 @@
 key_server: "hkp://pgp.mit.edu:80"
 cower_gpg_key: "1EB2638FF56C0C53"
 aur_repo: "https://aur.archlinux.org/cgit/aur.git/plain"
+
 cower_folder: "~/cower.tmp"
 pacaur_folder: "~/pacaur.tmp"
+
+available_packages_message: 'Total Download Size'

@@ -20,7 +20,8 @@
 # - import_tasks: firefox.yml
 
 # - include_role:
-#     name: pacaur_package
+#     name: pacaur
+#     tasks_from: install
 #   with_items:
 #     - todotxt
 #     - spotify

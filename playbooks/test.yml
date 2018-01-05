@@ -23,5 +23,5 @@
   post_tasks:
     - name: update packages
       include_role:
-        name: pacaur_package
+        name: pacaur
         tasks_from: update

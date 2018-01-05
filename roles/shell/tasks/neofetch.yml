@@ -1,6 +1,7 @@
 ---
 - include_role:
-    name: pacaur_package
+    name: pacaur
+    tasks_from: install
   vars:
     pkg_name: neofetch
 
