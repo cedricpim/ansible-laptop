@@ -46,3 +46,17 @@
   notify:
     - sysctl configured
     - restart transmission
+
+- name: create folder for transmission scripts
+  file:
+    path: "{{ scripts_directory }}"
+    state: directory
+
+- name: copy transmission scripts
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ scripts_directory }}/{{ item }}"
+    mode: 0700
+  with_items:
+    - magnet
+    - tmr
