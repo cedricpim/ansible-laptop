@@ -4,3 +4,5 @@ urxvt_icon_dest: "~/.local/share/icons/hicolor/128x128/apps"
 
 urxvt_shorcut_keys: "'<Super>space'"
 urxvt_shorcut_name: "'urxvtopen'"
+
+urxvt_desktop: "/usr/share/applications"

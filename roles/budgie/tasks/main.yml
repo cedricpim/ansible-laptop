@@ -35,6 +35,12 @@
     dest: "{{ autostart_dir }}/xprofile.desktop"
     mode: 0644
 
+- name: "install python-psutil for dconf"
+  pacman:
+    name: "python-psutil"
+    state: present
+  become: yes
+
 - name: "set mouse settings"
   dconf:
     key: "{{ touchpad_dconf_base_key }}/{{ item.key }}"

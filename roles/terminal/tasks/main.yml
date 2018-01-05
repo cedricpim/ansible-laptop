@@ -1,36 +1,27 @@
 ---
-- name: install urxvt and python-psutil (for dconf)
-  pacman:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - "rxvt-unicode-terminfo"
-    - "python-psutil"
-  become: yes
-
 - include_role:
     name: pacaur
     tasks_from: install
   vars:
-    pkg_name: rxvt-unicode-patched
+    pkg_name: "rxvt-unicode-patched"
 
-- name: create folder for urxvt icon
+- name: "create folder for urxvt icon"
   file:
     path: "{{ urxvt_icon_dest }}"
     state: directory
 
-- name: copy urxvt icon
+- name: "copy urxvt icon"
   copy:
     src: urxvt.png
     dest: "{{ urxvt_icon_dest }}"
     mode: 0644
 
-- name: create folder for urxvt extra configurations
+- name: "create folder for urxvt extra configurations"
   file:
     path: "{{ urxvt_directory }}"
     state: directory
 
-- name: copy urxvt extra configurations
+- name: "copy urxvt extra configurations"
   template:
     src: "{{ item.file }}.j2"
     dest: "{{ urxvt_directory }}/{{ item.file }}"
@@ -39,7 +30,13 @@
     - { file: "colorscheme", mode: "0600" }
     - { file: "urxvtopen", mode: "0700" }
 
-- name: set global shortcut for urxvt
+- name: "install python-psutil for dconf"
+  pacman:
+    name: "python-psutil"
+    state: present
+  become: yes
+
+- name: "set global shortcut for urxvt"
   dconf:
     key: "{{ urxvt_dconf_shortcut_base_key }}/{{ item.key }}"
     value: "{{ item.value }}"
@@ -49,8 +46,20 @@
     - { key: "command", value: "'gnome-terminal -- {{ urxvt_directory | regex_replace('~', ansible_env.HOME) }}/urxvtopen'" }
     - { key: "name", value: "{{ urxvt_shorcut_name }}" }
 
-- name: copy urxvt configuration
+- name: "copy urxvt configuration"
   template:
     src: "Xresources.j2"
     dest: "~/.Xresources"
     mode: 0600
+
+- name: "update urxvt application icon"
+  replace:
+    path: "{{ urxvt_desktop }}/{{ item }}.desktop"
+    regexp: "^Icon=.*"
+    replace: "Icon=urxvt"
+    backup: no
+  with_items:
+    - "urxvt"
+    - "urxvtc"
+    - "urxvt-tabbed"
+  become: yes
