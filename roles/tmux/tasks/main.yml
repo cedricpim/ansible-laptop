@@ -1,29 +1,29 @@
 ---
-- name: install tmux
+- name: "install tmux"
   pacman:
-    name: tmux
+    name: "tmux"
     state: present
   become: yes
 
-- name: copy tmux configuration
+- name: "copy tmux configuration"
   template:
-    src: "tmux/tmux.conf.j2"
+    src: "tmux.conf.j2"
     dest: "~/.tmux.conf"
     mode: 0600
 
-- name: install tmux plugin manager
+- name: "install tmux plugin manager"
   git:
     repo: "{{ tmux_plugin_repo }}"
     dest: "{{ tmux_plugin_dest }}"
     clone: yes
     update: yes
 
-- name: install plugins
+- name: "install plugins"
   command: "{{ tmux_plugin_dest }}/bin/install_plugins"
   register: tpm_install_result
   changed_when: tpm_install_result.stdout.find(tmux_plugin_installation_message) != -1
 
-- name: update tmux plugins
+- name: "update tmux plugins"
   command: "{{ tmux_plugin_dest }}/bin/update_plugins all"
   register: tpm_update_result
   failed_when: tpm_install_result.stderr != ""

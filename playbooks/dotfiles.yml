@@ -10,3 +10,4 @@
     - { role: "feeds", tags: "feeds" }
     - { role: "email", tags: "email" }
     - { role: "editor", tags: "editor" }
+    - { role: "tmux", tags: "tmux" }

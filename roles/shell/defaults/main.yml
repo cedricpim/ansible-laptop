@@ -1,7 +1,4 @@
 ---
 htop_directory: "~/.config/htop"
 
-tmux_plugin_dest: "~/.tmux/plugins/tpm"
-tmux_continuum: "on"
-
 neofetch_directory: "~/.config/neofetch"
