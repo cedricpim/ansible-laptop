@@ -1,48 +1,48 @@
 ---
-- name: install vim and neovim
+- name: "install vim and neovim"
   pacman:
     name: "{{ item }}"
     state: present
   with_items:
-    - vim
-    - neovim
-    - python2-neovim
-    - python-neovim
+    - "vim"
+    - "neovim"
+    - "python2-neovim"
+    - "python-neovim"
   become: yes
 
-- name: create folder for neovim configuration
+- name: "create folder for neovim configuration"
   file:
     path: "{{ neovim_directory }}"
     state: directory
 
-- name: copy neovim configuration file
+- name: "copy neovim configuration file"
   template:
-    src: "neovim/init.vim.j2"
+    src: "init.vim.j2"
     dest: "{{ neovim_directory }}/init.vim"
     mode: 0600
 
-- name: create folder for neovim dictionaries
+- name: "create folder for neovim dictionaries"
   file:
     path: "{{ neovim_spell_dest }}"
     state: directory
 
-- name: install neovim dictionaries
+- name: "install neovim dictionaries"
   get_url:
     url: "{{ neovim_spell_url }}/{{ item }}"
     dest: "{{ neovim_spell_dest }}"
   with_items: "{{ neovim_spell_dictionaries }}"
 
-- name: create folder for neovim plugin manager
+- name: "create folder for neovim plugin manager"
   file:
     path: "{{ neovim_plugin_dest }}"
     state: directory
 
-- name: install neovim plugin manager
+- name: "install neovim plugin manager"
   get_url:
     url: "{{ neovim_plugin_url }}"
     dest: "{{ neovim_plugin_dest }}"
 
-- name: install/update plugins defined on neovim configuration
+- name: "install/update plugins defined on neovim configuration"
   command: "nvim +'PlugUpdate --sync' +qa"
   register: neovim_plugin_install_result
   changed_when: neovim_plugin_install_result.stdout.find(neovim_plugin_installation_message) != -1

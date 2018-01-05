@@ -4,11 +4,4 @@ htop_directory: "~/.config/htop"
 tmux_plugin_dest: "~/.tmux/plugins/tpm"
 tmux_continuum: "on"
 
-neovim_directory: "~/.config/nvim"
-neovim_plugin_dest: '~/.local/share/nvim/site/autoload'
-neovim_spell_dest: '~/.local/share/nvim/site/spell'
-neovim_spell_dictionaries:
-  - en.utf-8.spl
-  - en.utf-8.sug
-
 neofetch_directory: "~/.config/neofetch"

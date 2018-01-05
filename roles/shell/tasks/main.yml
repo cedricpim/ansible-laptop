@@ -39,5 +39,4 @@
 - import_tasks: htop.yml
 - import_tasks: urlview.yml
 - import_tasks: tmux.yml
-- import_tasks: neovim.yml
 - import_tasks: neofetch.yml

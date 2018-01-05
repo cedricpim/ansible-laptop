@@ -19,6 +19,7 @@
     - { role: "calendar", tags: "calendar" }
     - { role: "feeds", tags: "feeds" }
     - { role: "email", tags: "email" }
+    - { role: "editor", tags: "editor" }
 
   post_tasks:
     - name: update packages
