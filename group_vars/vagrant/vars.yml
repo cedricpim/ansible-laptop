@@ -9,3 +9,8 @@ system_time_zone: 'UTC'
 system_hostname: 'vagrant'
 
 tmux_continuum: "off"
+
+newsboat_username: "vagrant"
+
+dav_server: "dav.vagrant"
+dav_username: "dav.vagrant-name"
