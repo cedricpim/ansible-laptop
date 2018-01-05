@@ -38,9 +38,9 @@
     - { file: "colorscheme", mode: "0600" }
     - { file: "urxvtopen", mode: "0700" }
 
-- name: Set global shortcut for urxvt
+- name: set global shortcut for urxvt
   dconf:
-    key: "{{ urxvt_dconf_shortcut_base_key }}{{ item.key }}"
+    key: "{{ urxvt_dconf_shortcut_base_key }}/{{ item.key }}"
     value: "{{ item.value }}"
     state: present
   with_items:

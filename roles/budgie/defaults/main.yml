@@ -1,5 +1,5 @@
 ---
-natural_scroll: 'false'
-click_method: "'fingers'"
+touchpad_natural_scroll: "false"
+touchpad_click_method: "'fingers'"
 
 autostart_dir: "~/.config/autostart"
