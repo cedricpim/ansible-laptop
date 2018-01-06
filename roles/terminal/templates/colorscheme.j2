@@ -1,4 +1,4 @@
-{{ ansible_managed | comment | regex_replace('#', '!') }}
+{{ ansible_managed | comment(decoration='! ') }}
 
 ! Use the specified colour to display underlined characters when the foreground colour is the default
 URxvt*colorUL:  yellow

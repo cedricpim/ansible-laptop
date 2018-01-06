@@ -1,4 +1,4 @@
-{{ ansible_managed | comment | regex_replace('#', '"') }}
+{{ ansible_managed | comment(decoration='" ') }}
 
 " File:        $HOME/.config/nvim/init.vim
 " Description: Neovim configuration file
