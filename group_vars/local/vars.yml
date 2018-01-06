@@ -31,3 +31,5 @@ neomutt_mailboxes: "{{ vault_neomutt_mailboxes }}"
 notmuch_full_name: "{{ vault_notmuch_full_name }}"
 notmuch_primary_email: "{{ vault_notmuch_primary_email }}"
 notmuch_other_emails: "{{ vault_notmuch_other_emails }}"
+
+ledger_personal_function: "{{ vault_ledger_personal_function }}"
