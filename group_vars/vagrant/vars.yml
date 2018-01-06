@@ -12,6 +12,9 @@ tmux_continuum: "off"
 
 newsboat_username: "vagrant"
 
+personal_server: "vagrant.localhost"
+personal_server_shortcut: "v-local"
+
 dav_server: "dav.localhost"
 dav_username: "dav-username"
 

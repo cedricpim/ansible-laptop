@@ -14,9 +14,9 @@ case $1 in
   photos)
     local_dir=`echo ~/Pictures/Photos/$2*`
     # Upload album to server
-    scp -r -C $local_dir $SERVER_HOST:/home/me/pictures
+    scp -r -C $local_dir {{ personal_server_shortcut }}:/home/me/pictures
     # Process uploaded photos
-    ssh -t $SERVER_HOST '~/scripts/process-photos'
+    ssh -t {{ personal_server_shortcut }} '~/scripts/process-photos'
     ;;
 
   *)

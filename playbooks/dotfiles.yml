@@ -11,3 +11,4 @@
     - { role: "email", tags: "email" }
     - { role: "editor", tags: "editor" }
     - { role: "tmux", tags: "tmux" }
+    - { role: "server", tags: "server" }

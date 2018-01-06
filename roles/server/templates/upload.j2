@@ -34,7 +34,7 @@ case $1 in
     touch "$base_dir/index"
     echo "$original_filename => $filename" | tee -a "$base_dir/index" > /dev/null
 
-    url="https://$SERVER/public/$filename"
+    url="https://{{ personal_server }}/public/$filename"
 
     # Check if file was been uploaded
     while [ "`curl -s -o /dev/null -I -w "%{http_code}" $url`" != "200" ]; do sleep 5; done

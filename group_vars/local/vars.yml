@@ -14,6 +14,9 @@ network_passphrase: "{{ vault_network_passphrase }}"
 
 newsboat_username: "{{ vault_newsboat_username }}"
 
+personal_server: "{{ vault_personal_server }}"
+personal_server_shortcut: "{{ vault_personal_server_shortcut }}"
+
 dav_server: "{{ vault_dav_server }}"
 dav_username: "{{ vault_dav_username }}"
 
