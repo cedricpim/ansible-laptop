@@ -1,0 +1,66 @@
+#
+## {{ ansible_managed }}
+#
+
+# Index Key Bindings ---------------------------------
+bind index,pager g  noop
+bind index,pager D  noop
+bind index,pager d  noop
+bind index,pager Q  noop
+bind index,pager 1  noop
+bind index,pager 2  noop
+bind index,pager R  group-reply
+bind index,pager A  create-alias
+bind index,pager F  forward-message
+bind index,pager S  save-message
+bind index,pager \\ vfolder-from-query
+bind index,pager + entire-thread
+
+bind index gg       first-entry
+bind index G        last-entry
+bind index <tab>    sync-mailbox
+bind index <space>  collapse-thread
+
+# Pager Key Bindings ---------------------------------
+bind pager k  previous-line
+bind pager j  next-line
+bind pager gg top
+bind pager G  bottom
+
+# Editor Key Bindings --------------------------------
+bind editor <Tab> complete-query
+bind editor ^T    complete
+
+# Macros ---------------------------------------------
+macro index,pager O   "<shell-escape>offlineimap -q<enter>"                         "run offlineimap to sync all mail"
+macro index,pager o   "<shell-escape>offlineimap -qf INBOX<enter>"                  "run offlineimap to sync inbox"
+macro index,pager C   "<copy-message>?<toggle-mailboxes>"                           "copy a message to a mailbox"
+macro index,pager M   "<save-message>?<toggle-mailboxes>"                           "move a message to a mail"
+macro index,pager i   "<save-message>+INBOX<enter><sync-mailbox>"                   "move message to INBOX"
+macro index,pager a   "<save-message>+Archive<enter><sync-mailbox>"                 "move message to archive"
+macro index,pager s   "<save-message>+Spam<enter><sync-mailbox>"                    "move message to spam"
+macro index,pager f   "<save-message>+Starred<enter><sync-mailbox>"                 "move message to starred"
+macro index,pager d   "<save-message>+Trash<enter><sync-mailbox>"                   "move message to trash"
+macro index,pager gi  "<change-folder>+INBOX<enter>"                                "go to INBOX"
+macro index,pager ga  "<change-folder>+Archive<enter>"                              "go to archive"
+macro index,pager gd  "<change-folder>+Drafts<enter>"                               "go to drafts"
+macro index,pager gs  "<change-folder>+Sent<enter>"                                 "go to sent"
+macro index,pager gf  "<change-folder>+Starred<enter>"                              "go to starred"
+macro pager \Cu       "|urlview<enter>"                                             "call urlview to open links"
+macro index,pager E   "<pipe-message>khard add-email<return>"                       "add the sender email address to khard"
+macro index,pager \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>"  "mark all messages as read"
+
+{% for account in neomutt_email_accounts %}
+macro index,pager {{ account.key }} "<sync-mailbox><enter-command>set folder={{ email_directory }}/{{ account.name }}; source {{ neomutt_directory }}/general<enter><change-folder>!<enter>"  "change to {{ account.name }} account"
+{% endfor %}
+
+# View attachments properly.
+bind attach <return> view-mailcap
+
+# --------------------------------------------------------------------------
+# Sidebar
+# --------------------------------------------------------------------------
+bind index,pager \Ck sidebar-prev           # Move the highlight to the previous mailbox
+bind index,pager \Cj sidebar-next           # Move the highlight to the next mailbox
+bind index,pager \Co sidebar-open           # Open the highlighted mailbox
+bind index,pager \cb sidebar-toggle-visible # Toggle the visibility of the Sidebar.

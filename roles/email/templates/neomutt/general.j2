@@ -1,0 +1,18 @@
+#
+## {{ ansible_managed }}
+#
+
+set spoolfile = +INBOX
+
+unmailboxes *
+mailboxes "+INBOX" \
+{% for mailbox in neomutt_mailboxes %}
+          "+{{ mailbox }}" \
+{% endfor %}
+
+set record="+Sent"
+set postponed="+Drafts"
+set mbox="+Archive"
+
+# How often to check for new mail (time in seconds).
+set mail_check = 60

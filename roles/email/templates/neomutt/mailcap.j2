@@ -1,0 +1,21 @@
+#
+## {{ ansible_managed }}
+#
+
+# Images
+image/jpg; feh %s
+image/jpeg; feh %s
+image/pjpeg; feh %s
+image/png; feh %s
+image/gif; feh %s
+image/tiff; feh %s
+
+# PDFs
+application/pdf; qpdfview %s
+
+# HTML
+text/html; firefox %s; test=test -n "$DISPLAY"; needsterminal;
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
+
+# Others
+text/plain; less %s

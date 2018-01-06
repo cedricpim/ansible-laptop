@@ -1,0 +1,58 @@
+#
+## {{ ansible_managed }}
+#
+
+# General options
+set editor = "$EDITOR"
+set beep_new             # bell on new mails
+set pipe_decode          # strip headers and eval mimes when piping
+set thorough_search      # strip headers and eval mimes before searching
+set delete               # don't ask, just do
+unset confirmappend      # don't ask, just do!
+set quit                 # don't ask, just do!!
+unset mark_old           # read/new is good enough for me
+
+# Header Options -------------------------------------
+ignore *                                # ignore all headers
+unignore from: to: cc: date: subject:   # show only these
+unhdr_order *                           # some distros order things by default
+hdr_order from: to: cc: date: subject:  # and in this order
+
+# Index View Options ---------------------------------
+set date_format  = "%m/%d"
+set index_format = "[%Z] %H {% raw %}%{%b %d}{% endraw %} %-15.15L %s"
+set sort         = threads
+set sort_aux     = last-date-received
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set uncollapse_jump # don't collapse on an unread message
+set sort_re         # thread based on regex
+
+# Status bar -----------------------------------------
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?─(%P)──"
+
+# Pager View Options ---------------------------------
+set pager_index_lines = 10 # number of index lines to show
+set pager_context = 3      # number of context lines to show
+set pager_stop             # don't go to next message automatically
+set menu_scroll            # scroll in menus
+set tilde                  # show tildes like in vim
+unset markers              # no ugly plus signs
+
+# Other Options
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+alternative_order text/plain text/enriched text/html
+auto_view text/html
+set query_command= "khard email --parsable %s"
+set nm_default_uri = "notmuch:///home/cedro/.cache/Mail"
+
+### Forgotten Attachment
+# Ask if the user wishes to abort sending if $attach_keyword is found in the
+# body, but no attachments have been added
+# It can be set to:
+#    "yes"     : always abort
+#    "ask-yes" : ask whether to abort
+#    "no"      : send the mail
+set abort_noattach = ask-yes
+# Search for the following regular expression in the body of the email
+# English: attach, attached, attachment, attachments
+set attach_keyword = "\\<attach(|ed|ments?)\\>"

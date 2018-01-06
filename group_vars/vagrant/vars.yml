@@ -1,12 +1,12 @@
 ---
-user_name: 'vagrant'
-user_password: 'vagrant'
+user_name: "vagrant"
+user_password: "vagrant"
 
-git_full_name: 'Vagrant'
-git_email: 'vagrant@localhost'
+git_full_name: "Vagrant"
+git_email: "vagrant@localhost"
 
-system_time_zone: 'UTC'
-system_hostname: 'vagrant'
+system_time_zone: "UTC"
+system_hostname: "vagrant"
 
 tmux_continuum: "off"
 
@@ -14,3 +14,19 @@ newsboat_username: "vagrant"
 
 dav_server: "dav.vagrant"
 dav_username: "dav.vagrant-name"
+
+neomutt_email_server: "example.com"
+neomutt_sender_full_name: "Vagrant"
+neomutt_email_accounts:
+  - { key: 1, name: "default" }
+  - { key: 2, name: "secondary" }
+neomutt_mailboxes:
+  - "Mailbox1"
+  - "Mailbox2"
+  - "Mailbox3"
+
+notmuch_full_name: "Vagrant"
+notmuch_primary_email: "first@localhost"
+notmuch_other_emails:
+  - "second@localhost"
+  - "third@localhost"

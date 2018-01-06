@@ -1,0 +1,22 @@
+#
+## {{ ansible_managed }}
+#
+
+# Paths ----------------------------------------------
+set folder           = {{ email_directory }}/{{ neomutt_email_accounts[0].name }} # Account Default
+set alias_file       = {{ neomutt_directory }}/alias                              # where to store aliases
+set header_cache     = {{ neomutt_directory }}/cache/headers                      # where to store headers
+set message_cachedir = {{ neomutt_directory }}/cache/bodies                       # where to store bodies
+set certificate_file = {{ neomutt_directory }}/certificates                       # where to store certs
+set mailcap_path     = {{ neomutt_directory }}/mailcap                            # entries for filetypes
+set tmpdir           = {{ neomutt_directory }}/temp                               # where to keep temp files
+set signature        = {{ neomutt_directory }}/sig                                # my signature file
+
+# Sourced files --------------------------------------
+source {{ neomutt_directory }}/sidebar     # sidebar settings
+source {{ neomutt_directory }}/bindings    # new bindings
+source {{ neomutt_directory }}/settings    # all type of settings
+source {{ neomutt_directory }}/colorscheme # colorscheme
+source {{ neomutt_directory }}/composer    # composer
+source {{ neomutt_directory }}/general     # account settings
+source {{ neomutt_directory }}/sender      # sender account
