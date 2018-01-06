@@ -1,0 +1,115 @@
+{{ ansible_managed | comment }}
+
+[general]
+# This variable specifies which accounts are defined. Separate them with commas.
+# Account names should be alphanumeric only. You will need to specify one
+# section per account below. You may not use "general" for an account name.
+#
+# Always use ASCII characters only.
+accounts = {{ offlineimap_email_accounts | map(attribute='name') | join(", ") }}
+
+# You can give a Python source filename here and all config file
+# python snippets will be evaluated in the context of that file.
+# This allows you to e.g. define helper functions in the Python
+# source file and call them from this config file.  You can find
+# an example of this in the manual.
+#
+# Tilde and environment variable expansions will be performed.
+pythonfile = {{ offlineimap_directory }}/helper.py
+
+
+[DEFAULT]
+# SSL CA Cert(s) to verify the server cert against (optional).
+# No SSL verification is done without this option. If it is
+# specified, the CA Cert(s) need to verify the Server cert AND
+# match the hostname (* wildcard allowed on the left hand side)
+# The certificate should be in PEM format.
+#
+# Tilde and environment variable expansions will be performed.
+#
+# Special value OS-DEFAULT makes Offlineimap to automatically
+# determine system-wide location of standard trusted CA roots file
+# for known OS distributions and use the first bundle encountered
+# (if any).  If no system-wide CA bundle is found, Offlineimap
+# will refuse to continue; this is done to prevent creation
+# of false security expectations ("I had configured CA bundle,
+# thou certificate verification shalt be present").
+#
+# You can also use fingerprint verification via cert_fingerprint.
+# See below for more verbose explanation.
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+# You can specify a pre and post sync hook to execute a external command.  In
+# this case a call to imapfilter to filter mail before the sync process starts
+# and a custom shell script after the sync completes.
+#
+# The pre sync script has to complete before a sync to the account will start.
+postsynchook = notmuch new
+
+
+[mbnames]
+# Offlineimap can record your mailbox names in a format you specify.
+# You can define the header, each mailbox item, the separator,
+# and the footer.  Here is an example for Mutt.
+# If enabled is yes, all settings except incremental must be specified, even if
+# they are just the empty string "".
+#
+# The header, peritem, sep, and footer are all Python expressions passed
+# through eval, so you can (and must) use Python quoting.
+#
+# The incremental setting controls whether the file is written after each
+# account completes or once all synced accounts are complete. This is useful if
+# an account is sightly slower than the other. It allows keeping the previous
+# file rather than having it partially written.
+# This works best with "no" if in one-shot mode started by cron or systemd
+# timers. Default: no.
+#
+# The following hash key are available to the expansion for 'peritem':
+# - accountname: the name of the corresponding account;
+# - foldername: the name of the folder;
+# - localfolders: path to the local directory hosting all Maildir
+#   folders for the account.
+#
+# Tilde and environment variable expansions will be performed
+# for "filename" knob.
+enabled = yes
+filename = {{ neomutt_directory }}/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
+
+{% for account in offlineimap_email_accounts %}
+[Account {{ account.name }}]
+# These settings specify the two folders that you will be syncing.
+# You'll need to have a "Repository ..." section for each one.
+localrepository = {{ account.name }}-Local
+remoterepository = {{ account.name }}-Remote
+
+
+[Repository {{ account.name }}-Local]
+# Each repository requires a "type" declaration. The types supported for
+# local repositories are Maildir, GmailMaildir and IMAP.
+type = Maildir
+
+# Specify local repository.  Your IMAP folders will be synchronized
+# to maildirs created under this path.  Offlineimap will create the
+# maildirs for you as needed.
+localfolders = {{ email_directory }}/{{ account.name }}
+
+
+[Repository {{ account.name }}-Remote]
+# The remote repository. We only support IMAP or Gmail here.
+type = IMAP
+
+# The following can fetch the account credentials via a python expression that
+# is parsed from the pythonfile parameter. For example, a function called
+# "getcredentials" that parses a file "filename" and returns the account
+# details for "hostname".
+remotehost = {{ offlineimap_email_server }}
+remoteuser = {{ account.name }}@{{ offlineimap_email_server }}
+remotepasseval = get_pass("{{ account.name }}")
+
+
+{% endfor %}

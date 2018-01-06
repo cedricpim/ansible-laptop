@@ -2,3 +2,5 @@
 neomutt_directory: "~/.config/neomutt"
 
 email_directory: "~/.cache/Mail"
+
+offlineimap_directory: "~/.config/offlineimap"

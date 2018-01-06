@@ -1,0 +1,41 @@
+---
+- name: "install neomutt and w3m to render emails"
+  pacman:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "neomutt"
+    - "w3m"
+  become: yes
+
+- name: "ensure urlview is installed"
+  include_role:
+    name: shell
+    tasks_from: urlview
+
+- name: "create folder for neomutt configuration"
+  file:
+    path: "{{ neomutt_directory }}"
+    state: directory
+
+- name: "copy neomutt configurations file"
+  template:
+    src: "neomutt/{{ item }}.j2"
+    dest: "{{ neomutt_directory }}/{{ item }}"
+    mode: 0600
+  with_items:
+    - "bindings"
+    - "colorscheme"
+    - "composer"
+    - "general"
+    - "mailcap"
+    - "neomuttrc"
+    - "sender"
+    - "settings"
+    - "sidebar"
+
+- name: "copy neomutt credentials"
+  copy:
+    src: "neomutt/pass.gpg"
+    dest: "{{ neomutt_directory }}/pass.gpg"
+    mode: 0600

@@ -17,9 +17,12 @@ newsboat_username: "{{ vault_newsboat_username }}"
 dav_server: "{{ vault_dav_server }}"
 dav_username: "{{ vault_dav_username }}"
 
+offlineimap_email_server: "{{ vault_offlineimap_email_server }}"
+offlineimap_email_accounts: "{{ vault_offlineimap_email_accounts }}"
+
 neomutt_email_server: "{{ vault_neomutt_email_server }}"
-neomutt_sender_full_name: "{{ vault_neomutt_sender_full_name }}"
 neomutt_email_accounts: "{{ vault_neomutt_email_accounts }}"
+neomutt_sender_full_name: "{{ vault_neomutt_sender_full_name }}"
 neomutt_mailboxes: "{{ vault_neomutt_mailboxes }}"
 
 notmuch_full_name: "{{ vault_notmuch_full_name }}"

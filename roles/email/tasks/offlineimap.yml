@@ -1,0 +1,40 @@
+---
+- name: "install offlineimap to sync emails and ca-certificates"
+  pacman:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "offlineimap"
+    - "ca-certificates"
+  become: yes
+
+- name: "create folder for offlineimap configuration and mail"
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ offlineimap_directory }}"
+    - "{{ email_directory }}"
+
+- name: "copy offlineimap configurations file"
+  template:
+    src: "offlineimap/{{ item }}.j2"
+    dest: "{{ offlineimap_directory }}/{{ item }}"
+    mode: 0600
+  with_items:
+    - "config"
+    - "helper.py"
+
+- name: "copy offlineimap credentials"
+  copy:
+    src: "offlineimap/pass-{{ item.key }}.gpg"
+    dest: "{{ offlineimap_directory }}/pass-{{ item.name }}.gpg"
+    mode: 0600
+  with_items: "{{ offlineimap_email_accounts }}"
+
+- name: "enable and start offlineimap timer"
+  systemd:
+    name: offlineimap-oneshot.timer
+    state: started
+    enabled: yes
+    user: yes
