@@ -2,9 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-#
-##  {{ ansible_managed }}
-#
+{{ ansible_managed | comment }}
 
 # Every hour, kill the khal interactive process,
 # in order to refresh the calendar

@@ -1,6 +1,4 @@
-#
-##  {{ ansible_managed }}
-#
+{{ ansible_managed | comment }}
 
 net.core.rmem_max = {{ sysctl_rmem_max }}
 net.core.wmem_max = {{ sysctl_wmem_max }}

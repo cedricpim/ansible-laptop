@@ -2,9 +2,7 @@
 set -eo pipefail
 IFS=$'\n\t'
 
-#
-##  {{ ansible_managed }}
-#
+{{ ansible_managed | comment }}
 
 move_dir=/home/cedro/Downloads
 

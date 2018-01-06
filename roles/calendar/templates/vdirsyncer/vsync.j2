@@ -2,9 +2,7 @@
 set -eo pipefail
 IFS=$'\n\t'
 
-#
-##  {{ ansible_managed }}
-#
+{{ ansible_managed | comment }}
 
 # Only run if internet connection exists
 if ! /sbin/ping -c 1 8.8.8.8 >> /dev/null 2>&1; then

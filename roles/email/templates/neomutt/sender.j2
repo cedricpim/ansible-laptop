@@ -1,6 +1,4 @@
-#
-## {{ ansible_managed }}
-#
+{{ ansible_managed | comment }}
 
 set my_login = "{{ neomutt_email_accounts[0].name }}@{{ neomutt_email_server }}"
 set from = $my_login

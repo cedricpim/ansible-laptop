@@ -1,6 +1,4 @@
-!
-!!  {{ ansible_managed }}
-!
+{{ ansible_managed | comment | regex_replace('#', '!') }}
 
 URxvt*font: xft:Fira\ Code:size=15,xft:DejaVuSansMono\ Nerd\ Font\ Mono:regular:size=15
 URxvt*boldFont: xft:Fira\ Code:bold:size=15,xft:DejaVuSansMono Nerd Font Mono:bold:size=15

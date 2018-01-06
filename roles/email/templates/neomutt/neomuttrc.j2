@@ -1,6 +1,4 @@
-#
-## {{ ansible_managed }}
-#
+{{ ansible_managed | comment }}
 
 # Paths ----------------------------------------------
 set folder           = {{ email_directory }}/{{ neomutt_email_accounts[0].name }} # Account Default

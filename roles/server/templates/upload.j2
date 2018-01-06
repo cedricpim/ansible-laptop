@@ -2,9 +2,7 @@
 set -eo pipefail
 IFS=$'\n\t'
 
-#
-##  {{ ansible_managed }}
-#
+{{ ansible_managed | comment }}
 
 base_dir="$HOME/Sync/public"
 
