@@ -1,0 +1,31 @@
+---
+- name: "get directory of gem binaries"
+  command: "gem env gempath"
+  register: gem_env
+  changed_when: false
+
+- name: "create folder for ledger configuration"
+  file:
+    path: "{{ ledger_directory }}"
+    state: directory
+
+- name: "copy ledger recurring script"
+  template:
+    src: "recurring.j2"
+    dest: "{{ ledger_directory }}/recurring"
+    mode: 0700
+
+- name: "create user folder for systemd"
+  file:
+    path: "{{ systemd_user_directory }}"
+    state: directory
+
+- name: "copy service and timer for ledger"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ systemd_user_directory }}/{{ item }}"
+    mode: 0600
+  with_items:
+    - "ledger.service"
+    - "ledger.timer"
+  notify: "updated ledger timer"

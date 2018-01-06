@@ -1,0 +1,7 @@
+---
+- name: "updated ledger timer"
+  systemd:
+    name: "ledger.timer"
+    state: restarted
+    daemon_reload: yes
+    user: yes

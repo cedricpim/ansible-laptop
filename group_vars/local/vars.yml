@@ -33,3 +33,4 @@ notmuch_primary_email: "{{ vault_notmuch_primary_email }}"
 notmuch_other_emails: "{{ vault_notmuch_other_emails }}"
 
 ledger_personal_function: "{{ vault_ledger_personal_function }}"
+ledger_personal_reoccurrences: "{{ vault_ledger_personal_reoccurrences }}"

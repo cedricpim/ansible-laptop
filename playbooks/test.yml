@@ -21,6 +21,7 @@
     - { role: "email", tags: "email" }
     - { role: "editor", tags: "editor" }
     - { role: "tmux", tags: "tmux" }
+    - { role: "ledger", tags: "ledger" }
 
   post_tasks:
     - name: update packages

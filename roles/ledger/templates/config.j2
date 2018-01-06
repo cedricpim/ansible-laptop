@@ -1,0 +1,209 @@
+{{ ansible_managed | comment }}
+
+# Location for the ledger file holding all the information
+:ledger: ~/Sync/files/money.csv
+
+# Fields that are present on the ledger as well as configurations for each field
+# Each field can contain the following:
+#   - default: "value" - Default value for the field when adding a transaction
+#   - presence: true/false - Value is required or not
+#   - values: List<"value"> - List of values available on TAB completion
+:fields:
+  :account:
+    :default: 'Main'
+    :presence: true
+  :date:
+    :default: "<%= Date.today.strftime('%d-%m-%Y') %>"
+    :presence: true
+  :category:
+    :default: ''
+    :presence: true
+    :values:
+      - Business
+      - Electronics
+      - Insurances
+      - Taxes
+      - Entertainment
+      - Rentals
+      - Restaurants
+      - Coffee
+      - Public Transport
+      - Groceries
+      - Taxi
+      - Fees & Charges
+      - Going Out
+      - Education
+      - Travel
+      - Personal Care
+      - Mobile Phone
+  :description:
+    :default: ''
+    :presence: false
+  :amount:
+    :default: ''
+    :presence: true
+  :currency:
+    :default: 'PLN'
+    :presence: true
+    :values:
+      - PLN
+      - EUR
+      - USD
+  :processed:
+    :default: 'yes'
+    :presence: true
+    :values:
+      - 'yes'
+      - 'no'
+  :travel:
+    :default: ''
+    :presence: false
+
+# Define the set of formats to be used across the application
+:format:
+  :output:
+    :default:
+      :money: '------'
+      :percentage: '-----'
+      :travel: '-----'
+    :color:
+      :header:
+        :color: :blue
+        :bold: true
+      :element:
+        :color: :white
+      :total:
+        :color: :yellow
+      :period:
+        :color: :magenta
+      :processed:
+        'yes':
+          :color: :white
+        'no':
+          :color: :black
+    :title:
+      :width: 70
+      :align: 'center'
+      :rule: true
+      :color: :cyan
+      :bold: true
+    :transaction:
+      :list:
+        :header:
+          - Date
+          - Category
+          - Amount
+          - (%)
+          - Trip
+        :options:
+          - :width: 15
+          - :width: 20
+          - :width: 15
+            :align: 'center'
+          - :width: 7
+            :align: 'center'
+          - :width: 15
+            :align: 'center'
+    :report:
+      :summary:
+        :header:
+          - Category
+          - Outflow
+          - (%)
+          - Inflow
+          - (%)
+        :options:
+          - :width: 20
+          - :width: 15
+            :align: 'center'
+          - :width: 7
+            :align: 'center'
+          - :width: 15
+            :align: 'center'
+          - :width: 7
+            :align: 'center'
+      :detailed:
+        :header:
+          - Date
+          - Category
+          - Amount
+          - (%)
+        :options:
+          - :width: 15
+          - :width: 20
+          - :width: 15
+            :align: 'center'
+          - :width: 7
+            :align: 'center'
+    :trip:
+      :summary:
+        :header:
+          - Category
+          - Amount
+          - (%)
+        :options:
+          - :width: 20
+          - :width: 20
+            :align: 'center'
+          - :width: 10
+            :align: 'center'
+      :detailed:
+        :header:
+          - Account
+          - Date
+          - Category
+          - Amount
+          - (%)
+        :options:
+          - :width: 10
+          - :width: 15
+          - :width: 20
+          - :width: 15
+            :align: 'center'
+          - :width: 7
+            :align: 'center'
+      :global:
+        :header:
+          - Trip
+          - Amount
+          - (%)
+        :options:
+          - :width: 20
+          - :width: 20
+            :align: 'center'
+          - :width: 10
+            :align: 'center'
+  :fields:
+    # For more information on the configuration values, please read:
+    # http://www.rubydoc.info/gems/money/Money/Formatting
+    :money:
+      # Format of the money when displaying it on the UI
+      :display:
+        :sign_positive: true
+        :decimal_mark: '.'
+        :symbol_after_without_space: true
+        :symbol_position: :after
+      # Format of the money when writing it to the ledger
+      :ledger:
+        :sign_positive: true
+        :decimal_mark: '.'
+        :symbol_after_without_space: true
+        :symbol_position: :after
+        :symbol: false
+        :thousands_separator: ''
+    # List of categories to be excluded by default on the general report
+    :excluded_categories:
+      - 'Exchange'
+
+# Values for configuring encryption on the ledger file
+:encryption:
+  # Enable or disable encryption
+  # The other settings are not required if enabled is set to false
+  :enabled: true
+  # Choose the algorithm encryption
+  # Options: `ruby -r openssl -e "puts OpenSSL::Cipher.ciphers.join('|')"`
+  :algorithm: AES-256-CBC
+  # Add credentials to encrypt the file. This is a shell command.
+  :credentials:
+    :password: gpg -q --for-your-eyes-only --no-tty -d {{ ledger_directory }}/pass.gpg
+    :salt: gpg -q --for-your-eyes-only --no-tty -d {{ ledger_directory }}/salt.gpg

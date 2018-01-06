@@ -1,0 +1,25 @@
+---
+- name: "download ledger repository"
+  git:
+    repo: "{{ ledger_repo }}"
+    dest: "{{ ledger_dest }}"
+    clone: yes
+    update: yes
+
+- name: "build ledger gem"
+  command: "gem build ledger.gemspec"
+  args:
+    chdir: "{{ ledger_dest }}"
+  changed_when: false
+  register: ledger_gem
+
+- gem:
+    name: "ledger"
+    gem_source: "{{ ledger_dest }}/{{ ledger_gem.stdout | regex_findall('File: (.*)') | first }}"
+    state: present
+  when: ledger_gem is defined
+
+- name: "cleanup ledger build directory"
+  file:
+    path: "{{ ledger_dest }}"
+    state: absent

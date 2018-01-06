@@ -1,0 +1,8 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Ledger recurring expenses
+
+[Service]
+ExecStart={{ ledger_directory | regex_replace('~', ansible_env.HOME) }}/recurring
+Type=oneshot

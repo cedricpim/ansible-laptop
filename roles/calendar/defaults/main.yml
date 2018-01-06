@@ -2,5 +2,3 @@
 vdirsyncer_directory: "~/.config/vdirsyncer"
 khal_directory: "~/.config/khal"
 khard_directory: "~/.config/khard"
-
-systemd_user_directory: "~/.config/systemd/user"

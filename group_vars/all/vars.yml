@@ -1,2 +1,4 @@
 ---
 scripts_directory: "~/.scripts"
+
+systemd_user_directory: "~/.config/systemd/user"

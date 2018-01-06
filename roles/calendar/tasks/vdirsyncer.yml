@@ -22,7 +22,7 @@
     dest: "{{ vdirsyncer_directory }}/config"
     mode: 0600
 
-- name: create folder for systemd
+- name: create user folder for systemd
   file:
     path: "{{ systemd_user_directory }}"
     state: directory

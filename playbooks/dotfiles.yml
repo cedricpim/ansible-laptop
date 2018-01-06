@@ -12,3 +12,4 @@
     - { role: "editor", tags: "editor" }
     - { role: "tmux", tags: "tmux" }
     - { role: "server", tags: "server" }
+    - { role: "ledger", tags: "ledger" }
