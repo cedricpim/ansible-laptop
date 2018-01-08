@@ -34,6 +34,7 @@
     state: directory
     owner: "transmission"
     group: "transmission"
+  become: yes
 
 - name: "copy transmission settings"
   template:
@@ -42,6 +43,7 @@
     owner: "transmission"
     group: "transmission"
     mode: "{{ item.mode }}"
+  become: yes
   with_items:
     - { filename: "settings.json", mode: "0600" }
     - { filename: "complete.sh", mode: "0700" }
@@ -73,7 +75,7 @@
 
 - name: "copy transmission scripts"
   template:
-    src: "{{ item }}.j2"
+    src: "transmission/{{ item }}.j2"
     dest: "{{ scripts_directory }}/{{ item }}"
     mode: 0700
   with_items:
