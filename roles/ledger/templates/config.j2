@@ -205,5 +205,5 @@
   :algorithm: AES-256-CBC
   # Add credentials to encrypt the file. This is a shell command.
   :credentials:
-    :password: gpg -q --for-your-eyes-only --no-tty -d {{ ledger_directory }}/pass.gpg
-    :salt: gpg -q --for-your-eyes-only --no-tty -d {{ ledger_directory }}/salt.gpg
+    :password: {{ ledger_personal_password }}
+    :salt: {{ ledger_personal_salt }}
