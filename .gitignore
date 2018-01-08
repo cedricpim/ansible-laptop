@@ -1,2 +1,3 @@
 playbook.retry
 .vagrant
+group_vars/local/vault.txt

@@ -2,7 +2,7 @@ PLAYBOOK ?= main
 VAGRANT_PLAYBOOK ?= test
 TAGS ?=
 VERBOSE ?=
-ANSIBLE_VAULT_PASSWORD_FILE = group_vars/local/vault.sh
+ANSIBLE_VAULT_PASSWORD_FILE = group_vars/local/vault.txt
 ANSIBLE_OPTS = --vault-password-file ${ANSIBLE_VAULT_PASSWORD_FILE}
 VAULT ?= group_vars/local/vault.yml
 
