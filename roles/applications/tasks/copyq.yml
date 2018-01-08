@@ -5,9 +5,13 @@
   vars:
     pkg_name: copyq
 
-- include_role:
-    name: dotfiles
-    tasks_from: symlink
-  vars:
-    src: "{{ copyq_directory }}"
-    create_directory: yes
+- name: create folder for copyq configuration
+  file:
+    path: "{{ copyq_directory }}"
+    state: directory
+
+- name: copy copyq configuration
+  template:
+    src: "copyq/copyq.conf.j2"
+    dest: "{{ copyq_directory }}/copyq.conf"
+    mode: 0600
