@@ -16,21 +16,11 @@
     - "{{ offlineimap_directory }}"
     - "{{ email_directory }}"
 
-- name: "copy offlineimap configurations file"
+- name: "copy offlineimap configuration file"
   template:
-    src: "offlineimap/{{ item }}.j2"
-    dest: "{{ offlineimap_directory }}/{{ item }}"
+    src: "offlineimap/config.j2"
+    dest: "{{ offlineimap_directory }}/config"
     mode: 0600
-  with_items:
-    - "config"
-    - "helper.py"
-
-- name: "copy offlineimap credentials"
-  copy:
-    src: "offlineimap/pass-{{ item.key }}.gpg"
-    dest: "{{ offlineimap_directory }}/pass-{{ item.name }}.gpg"
-    mode: 0600
-  with_items: "{{ offlineimap_email_accounts }}"
 
 - name: "enable and start offlineimap timer"
   systemd:

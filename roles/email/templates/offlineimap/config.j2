@@ -15,7 +15,7 @@ accounts = {{ offlineimap_email_accounts | map(attribute='name') | join(", ") }}
 # an example of this in the manual.
 #
 # Tilde and environment variable expansions will be performed.
-pythonfile = {{ offlineimap_directory }}/helper.py
+# pythonfile = helper.py
 
 
 [DEFAULT]
@@ -109,7 +109,7 @@ type = IMAP
 # details for "hostname".
 remotehost = {{ offlineimap_email_server }}
 remoteuser = {{ account.name }}@{{ offlineimap_email_server }}
-remotepasseval = get_pass("{{ account.name }}")
+remotepass = {{ account.password }}
 
 
 {% endfor %}

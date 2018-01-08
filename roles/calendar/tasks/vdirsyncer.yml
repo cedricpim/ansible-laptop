@@ -10,12 +10,6 @@
     path: "{{ vdirsyncer_directory }}"
     state: directory
 
-- name: copy vdirsyncer credentials
-  copy:
-    src: "vdirsyncer/pass.gpg"
-    dest: "{{ vdirsyncer_directory }}/pass.gpg"
-    mode: 0600
-
 - name: copy vdirsyncer configuration
   template:
     src: "vdirsyncer/config.j2"

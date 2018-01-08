@@ -23,7 +23,7 @@
   url = "https://{{ dav_server }}"
   auth = "basic"
   username = "{{ dav_username }}"
-  password.fetch = ["command", "sh", "-c", "gpg -q --for-your-eyes-only --no-tty -d {{ vdirsyncer_directory }}/pass.gpg"]
+  password = "{{ dav_password }}"
 
 #############################
 ######### Calendars #########
@@ -47,4 +47,4 @@
   url = "https://{{ dav_server }}"
   auth = "basic"
   username = "{{ dav_username }}"
-  password.fetch = ["command", "sh", "-c", "gpg -q --for-your-eyes-only --no-tty -d {{ vdirsyncer_directory }}/pass.gpg"]
+  password = "{{ dav_password }}"

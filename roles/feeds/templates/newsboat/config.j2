@@ -21,7 +21,8 @@ notify-format      "%d new articles (%n unread articles, %f unread feeds)"
 
 # File Configurations
 urls-source "newsblur"
-newsblur-login "{{ newsboat_username }}"
+newsblur-login "{{ newsblur_username }}"
+newsblur-password "{{ newsblur_password }}"
 newsblur-passwordeval "gpg -q --for-your-eyes-only --no-tty -d {{ newsboat_directory }}/pass.gpg"
 cookie-cache "{{ newsboat_directory }}/cookies.txt"
 error-log "{{ newsboat_directory }}/error.log"

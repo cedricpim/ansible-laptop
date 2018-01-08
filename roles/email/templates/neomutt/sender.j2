@@ -3,6 +3,5 @@
 set my_login = "{{ neomutt_email_accounts[0].name }}@{{ neomutt_email_server }}"
 set from = $my_login
 set use_from = yes
-set my_pass  = "`gpg -q --for-your-eyes-only --no-tty -d {{ neomutt_directory }}/pass.gpg`"
-set smtp_url="smtp://$my_login:$my_pass@{{ neomutt_email_server }}"
+set smtp_url="smtp://$my_login:{{ neomutt_email_accounts[0].password }}@{{ neomutt_email_server }}"
 set ssl_force_tls = yes

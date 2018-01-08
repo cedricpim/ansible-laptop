@@ -20,9 +20,3 @@
     src: "newsboat/config.j2"
     dest: "{{ newsboat_directory }}/config"
     mode: 0600
-
-- name: copy newsboat credentials
-  copy:
-    src: "newsboat/pass.gpg"
-    dest: "{{ newsboat_directory }}/pass.gpg"
-    mode: 0600

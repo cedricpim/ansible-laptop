@@ -12,13 +12,15 @@ network_interface: "{{ vault_network_interface }}"
 network_name: "{{ vault_network_name }}"
 network_passphrase: "{{ vault_network_passphrase }}"
 
-newsboat_username: "{{ vault_newsboat_username }}"
+newsblur_username: "{{ vault_newsblur_username }}"
+newsblur_password: "{{ vault_newsblur_password }}"
 
 personal_server: "{{ vault_personal_server }}"
 personal_server_shortcut: "{{ vault_personal_server_shortcut }}"
 
 dav_server: "{{ vault_dav_server }}"
 dav_username: "{{ vault_dav_username }}"
+dav_password: "{{ vault_dav_password }}"
 
 offlineimap_email_server: "{{ vault_offlineimap_email_server }}"
 offlineimap_email_accounts: "{{ vault_offlineimap_email_accounts }}"
@@ -32,5 +34,7 @@ notmuch_full_name: "{{ vault_notmuch_full_name }}"
 notmuch_primary_email: "{{ vault_notmuch_primary_email }}"
 notmuch_other_emails: "{{ vault_notmuch_other_emails }}"
 
+ledger_personal_salt: "{{ vault_ledger_personal_salt }}"
+ledger_personal_password: "{{ vault_ledger_personal_password }}"
 ledger_personal_function: "{{ vault_ledger_personal_function }}"
 ledger_personal_reoccurrences: "{{ vault_ledger_personal_reoccurrences }}"

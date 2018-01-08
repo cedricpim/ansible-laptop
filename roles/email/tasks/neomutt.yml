@@ -33,9 +33,3 @@
     - "sender"
     - "settings"
     - "sidebar"
-
-- name: "copy neomutt credentials"
-  copy:
-    src: "neomutt/pass.gpg"
-    dest: "{{ neomutt_directory }}/pass.gpg"
-    mode: 0600

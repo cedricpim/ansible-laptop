@@ -10,7 +10,8 @@ system_hostname: "vagrant"
 
 tmux_continuum: "off"
 
-newsboat_username: "vagrant"
+newsblur_username: "newsblur.username"
+newsblur_password: "newsblur.password"
 
 personal_server: "vagrant.localhost"
 personal_server_shortcut: "v-local"
@@ -20,8 +21,8 @@ dav_username: "dav-username"
 
 offlineimap_email_server: "example.localhost"
 offlineimap_email_accounts:
-  - { key: 1, name: "default" }
-  - { key: 2, name: "secondary" }
+  - { key: 1, name: "default", password: "password" }
+  - { key: 2, name: "secondary", password: "password" }
 
 neomutt_email_server: "example.localhost"
 neomutt_sender_full_name: "Vagrant"
@@ -38,3 +39,6 @@ notmuch_primary_email: "first@example.localhost"
 notmuch_other_emails:
   - "second@example.localhost"
   - "third@example.localhost"
+
+ledger_personal_salt: "salt"
+ledger_personal_password: "password"
