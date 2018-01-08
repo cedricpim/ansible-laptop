@@ -1,62 +1,81 @@
 ---
-- name: install transmission-cli
+- name: "install transmission-cli"
   pacman:
-    name: transmission-cli
+    name: "transmission-cli"
     state: present
   become: yes
 
-- name: create staff group
+- name: "create staff group"
   group:
-    name: staff
+    name: "staff"
     state: present
   become: yes
 
-- name: add user transmission to staff group
+- name: "add user transmission to staff group"
   user:
-    name: transmission
-    groups: staff
+    name: "transmission"
+    groups: "staff"
     append: yes
     state: present
   become: yes
 
-- name: create folder for torrents
+- name: "create folder for torrents"
   file:
-    path: /data/torrents
+    path: "{{ transmission_data_directory }}"
     state: directory
     mode: 0770
-    owner: transmission
-    group: staff
+    owner: "transmission"
+    group: "staff"
   become: yes
 
-- name: start and enable service for transmission-cli
+- name: "create folder for transmission settings"
+  file:
+    path: "{{ transmission_directory }}"
+    state: directory
+    owner: "transmission"
+    group: "transmission"
+
+- name: "copy transmission settings"
+  template:
+    src: "transmission/{{ item.filename }}.j2"
+    dest: "{{ transmission_directory }}/{{ item.filename }}"
+    owner: "transmission"
+    group: "transmission"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { filename: "settings.json", mode: "0600" }
+    - { filename: "complete.sh", mode: "0700" }
+  notify: "restart transmission"
+
+- name: "copy sysctl configuration to /etc/sysctl.conf"
+  template:
+    src: "sysctl.conf.j2"
+    dest: "/etc/sysctl.conf"
+    owner: "root"
+    group: "root"
+    mode: 0644
+  become: yes
+  notify:
+    - "sysctl configured"
+    - "restart transmission"
+
+- name: "start and enable service for transmission-cli"
   systemd:
-    name: transmission
+    name: "transmission"
     state: started
     enabled: yes
   become: yes
 
-- name: copy sysctl configuration to /etc/sysctl.conf
-  template:
-    src: sysctl.conf.j2
-    dest: /etc/sysctl.conf
-    owner: root
-    group: root
-    mode: 0644
-  become: yes
-  notify:
-    - sysctl configured
-    - restart transmission
-
-- name: create folder for transmission scripts
+- name: "create folder for transmission scripts"
   file:
     path: "{{ scripts_directory }}"
     state: directory
 
-- name: copy transmission scripts
+- name: "copy transmission scripts"
   template:
     src: "{{ item }}.j2"
     dest: "{{ scripts_directory }}/{{ item }}"
     mode: 0700
   with_items:
-    - magnet
-    - tmr
+    - "magnet"
+    - "tmr"
