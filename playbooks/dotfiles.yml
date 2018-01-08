@@ -2,14 +2,16 @@
 - hosts: local
 
   roles:
-    - { role: "zsh", tags: "zsh" }
+    - { role: "users", tags: "users" }
+    - { role: "pacaur", tags: "pacaur" }
+    - { role: "calendar", tags: "calendar" }
+    - { role: "editor", tags: "editor" }
+    - { role: "email", tags: "email" }
+    - { role: "feeds", tags: "feeds" }
+    - { role: "ledger", tags: "ledger" }
+    - { role: "server", tags: "server" }
     - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
-    - { role: "applications", tags: "applications" }
-    - { role: "calendar", tags: "calendar" }
-    - { role: "feeds", tags: "feeds" }
-    - { role: "email", tags: "email" }
-    - { role: "editor", tags: "editor" }
     - { role: "tmux", tags: "tmux" }
-    - { role: "server", tags: "server" }
-    - { role: "ledger", tags: "ledger" }
+    - { role: "zsh", tags: "zsh" }
+    - { role: "applications", tags: "applications" }

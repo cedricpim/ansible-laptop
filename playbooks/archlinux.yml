@@ -2,7 +2,30 @@
 - hosts: local
 
   roles:
+    - { role: "pacman", tags: "pacman" }
+    - { role: "nvidia", tags: "nvidia" }
+    - { role: "budgie", tags: "budgie" }
+    - { role: "ssd", tags: "ssd" }
+    - { role: "sudo", tags: "sudo" }
+    - { role: "users", tags: "users" }
+    - { role: "settings", tags: "settings" }
+    - { role: "fonts", tags: "fonts" }
+    - { role: "pacaur", tags: "pacaur" }
     - { role: "zsh", tags: "zsh" }
     - { role: "shell", tags: "shell" }
+    - { role: "tmux", tags: "tmux" }
     - { role: "terminal", tags: "terminal" }
     - { role: "applications", tags: "applications" }
+    - { role: "calendar", tags: "calendar" }
+    - { role: "editor", tags: "editor" }
+    - { role: "email", tags: "email" }
+    - { role: "feeds", tags: "feeds" }
+    - { role: "ledger", tags: "ledger" }
+    - { role: "openvpn", tags: "openvpn" }
+    - { role: "server", tags: "server" }
+
+  post_tasks:
+    - name: update packages
+      include_role:
+        name: pacaur
+        tasks_from: update

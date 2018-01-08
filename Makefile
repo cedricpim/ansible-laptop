@@ -1,4 +1,4 @@
-PLAYBOOK ?= main
+PLAYBOOK ?= archlinux
 VAGRANT_PLAYBOOK ?= test
 TAGS ?=
 VERBOSE ?=
