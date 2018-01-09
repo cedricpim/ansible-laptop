@@ -17,12 +17,10 @@
 - import_tasks: transmission.yml
 - import_tasks: copyq.yml
 - import_tasks: firefox.yml
+- import_tasks: todo.yml
 
 # - include_role:
 #     name: pacaur
 #     tasks_from: install
-#   with_items:
-#     - todotxt
-#     - spotify
-#   loop_control:
-#     loop_var: pkg_name
+#   vars:
+#     pkg_name: spotify

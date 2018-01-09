@@ -8,3 +8,8 @@ transmission_directory: "/var/lib/transmission/.config/transmission-daemon"
 transmission_data_directory: "/data/torrents"
 
 firefox_profiles: "~/.mozilla/firefox"
+
+todo_directory: "~/.config/todo"
+todo_main_directory: "~/.config/todo"
+todo_actions_repo: "git@gist.github.com:266ee4807ed81117f74812e60756dae6.git"
+todo_actions_dest: "~/.config/todo/todo.actions.d"
