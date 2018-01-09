@@ -7,7 +7,6 @@
 #     - calibre
 #     - feh
 #     - ffmpeg
-#     - firefox
 #     - keepassxc
 #     - qpdfview
 #     - syncthing
@@ -17,7 +16,7 @@
 
 - import_tasks: transmission.yml
 - import_tasks: copyq.yml
-# - import_tasks: firefox.yml
+- import_tasks: firefox.yml
 
 # - include_role:
 #     name: pacaur

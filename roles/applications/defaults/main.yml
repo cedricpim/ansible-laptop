@@ -6,3 +6,5 @@ copyq_directory: "~/.config/copyq"
 
 transmission_directory: "/var/lib/transmission/.config/transmission-daemon"
 transmission_data_directory: "/data/torrents"
+
+firefox_profiles: "~/.mozilla/firefox"
