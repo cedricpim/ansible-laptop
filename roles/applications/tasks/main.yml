@@ -1,26 +1,25 @@
 ---
-# - name: install applications
-#   pacman:
-#     name: "{{ item }}"
-#     state: present
-#   with_items:
-#     - calibre
-#     - feh
-#     - ffmpeg
-#     - keepassxc
-#     - qpdfview
-#     - syncthing
-#     - vlc
-#     - w3m
-#   become: yes
+- name: "install applications"
+  pacman:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "calibre"
+    - "feh"
+    - "ffmpeg"
+    - "keepassxc"
+    - "qpdfview"
+    - "syncthing"
+    - "vlc"
+  become: yes
 
-- import_tasks: transmission.yml
-- import_tasks: copyq.yml
-- import_tasks: firefox.yml
-- import_tasks: todo.yml
+- import_tasks: "transmission.yml"
+- import_tasks: "copyq.yml"
+- import_tasks: "todo.yml"
+- import_tasks: "firefox.yml"
 
-# - include_role:
-#     name: pacaur
-#     tasks_from: install
-#   vars:
-#     pkg_name: spotify
+- include_role:
+    name: "pacaur"
+    tasks_from: "install"
+  vars:
+    pkg_name: "spotify"
