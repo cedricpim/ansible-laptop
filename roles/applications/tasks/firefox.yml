@@ -14,12 +14,13 @@
   shell: "grep Path= {{ firefox_profiles }}/profiles.ini | sed -r 's/Path=(.+)/\\1/'"
   register: profile
   changed_when: false
-  when: st_profiles.stat.islnk is defined
+  when: st_profiles is defined and st_profiles.stat.islnk is defined
 
 - name: "check handlers.json"
   stat:
     path: "{{ firefox_profiles }}/{{ profile.stdout }}/handlers.json"
   register: st_handlers
+  when: profile is defined and not profile|skipped
 
 - name: "add magnet handler"
   lineinfile:
@@ -28,15 +29,13 @@
     line: '\1"schemes":{"magnet":{"action":2,"handlers":[{"name":"magnet","path":"{{ scripts_directory | regex_replace("~", ansible_env.HOME) }}/magnet"}]}}}'
     state: present
     backrefs: true
-  when:
-    - st_handlers.stat.islnk is defined
-    - profile is defined
-    - profile.stdout != ""
+  when: st_handlers is defined and not st_handlers|skipped and st_handlers.stat.islnk is defined
 
 - name: "check prefs.js"
   stat:
     path: "{{ firefox_profiles }}/{{ profile.stdout }}/prefs.js"
   register: st_prefs
+  when: profile is defined and not profile|skipped
 
 - name: "disable network.protocol-handler.expose.magnet"
   lineinfile:
@@ -44,10 +43,7 @@
     regexp: ".*network.protocol-handler.expose.magnet.*"
     line: "user_pref(\"network.protocol-handler.expose.magnet\", false);"
     state: present
-  when:
-    - st_prefs.stat.islnk is defined
-    - profile is defined
-    - profile.stdout != ""
+  when: st_prefs is defined and not st_prefs|skipped and st_prefs.stat.islnk is defined
 
 - name: "enable browser.tabs.loadDivertedInBackground"
   lineinfile:
@@ -55,7 +51,4 @@
     regexp: ".*browser.tabs.loadDivertedInBackground.*"
     line: "user_pref(\"browser.tabs.loadDivertedInBackground\", true);"
     state: present
-  when:
-    - st_prefs.stat.islnk is defined
-    - profile is defined
-    - profile.stdout != ""
+  when: st_prefs is defined and not st_prefs|skipped and st_prefs.stat.islnk is defined
