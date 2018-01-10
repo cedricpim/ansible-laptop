@@ -8,3 +8,10 @@
     name: "transmission"
     state: restarted
   become: yes
+
+- name: "restart syncthing"
+  systemd:
+    name: "syncthing"
+    state: restarted
+    enabled: yes
+    user: yes

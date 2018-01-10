@@ -9,9 +9,15 @@
     - "ffmpeg"
     - "keepassxc"
     - "qpdfview"
-    - "syncthing"
     - "vlc"
   become: yes
+
+- name: "install syncthing"
+  pacman:
+    name: "syncthing"
+    state: present
+  become: yes
+  notify: "restart syncthing"
 
 - import_tasks: "transmission.yml"
 - import_tasks: "copyq.yml"
