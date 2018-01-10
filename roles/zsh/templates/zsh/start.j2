@@ -7,7 +7,7 @@ if [ `command -v neofetch` ] && [ `whoami` != "vagrant" ]; then neofetch; fi
 # Start always on tmux existing session
 if [ -z "$TMUX" ]; then tmux attach > /dev/null 2>&1; fi
 
-if [ -n "$(pgrep -u $USER 'tmux ')" ]; then
+if [ -n "$(pgrep -u $USER 'tmux')" ]; then
   # Kill the first session created from tmux-resurrect
   # See: https://github.com/tmux-plugins/tmux-resurrect/issues/101
   if [ ! $(tmux list-sessions | wc -l) -eq 1 ] && $(tmux list-sessions | grep -q "^[0-9][0-9]*:"); then
