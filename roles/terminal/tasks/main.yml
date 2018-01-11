@@ -29,6 +29,7 @@
   with_items:
     - { file: "colorscheme", mode: "0600" }
     - { file: "urxvtopen", mode: "0700" }
+  notify: "load configuration"
 
 - name: "install python-psutil for dconf"
   pacman:
@@ -51,6 +52,7 @@
     src: "Xresources.j2"
     dest: "~/.Xresources"
     mode: 0600
+  notify: "load configuration"
 
 - name: "update urxvt application icon"
   replace:
