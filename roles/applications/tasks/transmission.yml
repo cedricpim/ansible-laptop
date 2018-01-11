@@ -36,18 +36,27 @@
     group: "transmission"
   become: yes
 
-- name: "copy transmission settings"
+- name: "copy transmission script"
   template:
-    src: "transmission/{{ item.filename }}.j2"
-    dest: "{{ transmission_directory }}/{{ item.filename }}"
+    src: "transmission/complete.sh.j2"
+    dest: "{{ transmission_directory }}/complete.sh"
     owner: "transmission"
     group: "transmission"
-    mode: "{{ item.mode }}"
+    mode: 0700
   become: yes
-  with_items:
-    - { filename: "settings.json", mode: "0600" }
-    - { filename: "complete.sh", mode: "0700" }
-  notify: "restart transmission"
+
+- name: "copy transmission settings"
+  template:
+    src: "transmission/settings.json.j2"
+    dest: "{{ transmission_directory }}/settings.json"
+    owner: "transmission"
+    group: "transmission"
+    mode: 0600
+  become: yes
+  notify:
+    - "stop transmission"
+    - "load transmission configuration"
+    - "restart transmission"
 
 - name: "copy sysctl configuration to /etc/sysctl.conf"
   template:
