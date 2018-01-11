@@ -13,6 +13,7 @@
     - ripgrep
     - powerline
     - cryptsetup
+    - mkpasswd
   become: yes
 
 - include_role:
