@@ -28,7 +28,7 @@
 
 - name: copy scripts files
   template:
-    src: "{{ item }}.j2"
+    src: "scripts/{{ item }}.j2"
     dest: "{{ scripts_directory }}/{{ item }}"
     mode: 0700
   with_items:
