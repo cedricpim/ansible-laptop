@@ -1,6 +1,6 @@
 {{ ansible_managed | comment(decoration='" ') }}
 
-" File:        $HOME/.config/nvim/init.vim
+" File:        {{ neovim_directory }}/nvim/init.vim
 " Description: Neovim configuration file
 
 call plug#begin('~/.local/share/nvim/plugged')
@@ -223,11 +223,6 @@ vnoremap <up>    <nop>
 vnoremap <down>  <nop>
 vnoremap <left>  <nop>
 vnoremap <right> <nop>
-" Allow arrow keys to be used for insert
-" inoremap <up>    <nop>
-" inoremap <down>  <nop>
-" inoremap <left>  <nop>
-" inoremap <right> <nop>
 
 " On insert mode, Shift-Tab to unindent
 inoremap <S-Tab> <C-D>
@@ -301,6 +296,6 @@ endif
 " Allow background color to be changed without changing the main NVIM
 " configuration. Useful for people changing background color according to the
 " time of day
-if filereadable(expand("~/.config/nvim/background_color"))
-  source ~/.config/nvim/background_color
+if filereadable(expand("{{ neovim_directory }}/background_color"))
+  source {{ neovim_directory }}/background_color
 endif
