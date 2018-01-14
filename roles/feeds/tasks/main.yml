@@ -17,6 +17,6 @@
 
 - name: copy newsboat configuration
   template:
-    src: "newsboat/config.j2"
+    src: "config.j2"
     dest: "{{ newsboat_directory }}/config"
     mode: 0600
