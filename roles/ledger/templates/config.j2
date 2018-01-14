@@ -19,23 +19,9 @@
     :default: ''
     :presence: true
     :values:
-      - Business
-      - Electronics
-      - Insurances
-      - Taxes
-      - Entertainment
-      - Rentals
-      - Restaurants
-      - Coffee
-      - Public Transport
-      - Groceries
-      - Taxi
-      - Fees & Charges
-      - Going Out
-      - Education
-      - Travel
-      - Personal Care
-      - Mobile Phone
+{% for category in ledger_personal_categories %}
+      - {{ category }}
+{% endfor %}
   :description:
     :default: ''
     :presence: false
@@ -43,12 +29,12 @@
     :default: ''
     :presence: true
   :currency:
-    :default: 'PLN'
+    :default: '{{ ledger_personal_currencies[0] }}'
     :presence: true
     :values:
-      - PLN
-      - EUR
-      - USD
+{% for currency in ledger_personal_currencies %}
+      - {{ currency }}
+{% endfor %}
   :processed:
     :default: 'yes'
     :presence: true

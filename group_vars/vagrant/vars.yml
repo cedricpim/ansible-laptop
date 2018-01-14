@@ -49,3 +49,10 @@ notmuch_other_emails:
 
 ledger_personal_salt: "salt"
 ledger_personal_password: "password"
+ledger_personal_categories:
+  - Category
+  - Category 1
+  - Category 2
+ledger_personal_currencies:
+  - USD
+  - EUR

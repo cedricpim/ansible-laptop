@@ -39,6 +39,8 @@ notmuch_other_emails: "{{ vault_notmuch_other_emails }}"
 
 ledger_personal_salt: "{{ vault_ledger_personal_salt }}"
 ledger_personal_password: "{{ vault_ledger_personal_password }}"
+ledger_personal_categories: "{{ vault_ledger_personal_categories }}"
+ledger_personal_currencies: "{{ vault_ledger_personal_currencies }}"
 ledger_personal_function: "{{ vault_ledger_personal_function }}"
 ledger_personal_reoccurrences: "{{ vault_ledger_personal_reoccurrences }}"
 
