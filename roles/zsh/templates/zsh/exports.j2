@@ -14,10 +14,6 @@ export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 # Good dates on ls
 export TIME_STYLE=long-iso
 
-# Prefer US English and use UTF-8
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-
 # Highlight section titles in manual pages
 export LESS_TERMCAP_md="${yellow}"
 
@@ -48,8 +44,3 @@ if [ `command -v python3` ]; then
     alias pip="pip3"
   fi
 fi
-
-# Avoid "Google API Keys are missing" warning message on Chromium
-export GOOGLE_API_KEY=""
-export GOOGLE_DEFAULT_CLIENT_ID=""
-export GOOGLE_DEFAULT_CLIENT_SECRET=""

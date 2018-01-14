@@ -32,7 +32,6 @@
     mode: 0600
   with_items:
     - zlogin
-    - zlogout
     - zshenv
     - zshrc
 

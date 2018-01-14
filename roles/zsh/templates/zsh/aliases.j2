@@ -1,36 +1,28 @@
 {{ ansible_managed | comment }}
 
 # Personal aliases
-alias projs="cd ~/Projects"
 alias travel="ikhal -a travel"
-alias dl="cd ~/Downloads"
 alias shared="vim ~/Sync/files/shared"
 
 # Ruby
 alias be="bundle exec"
-alias shotgun="be shotgun -o 0.0.0.0"
 alias rs="DISABLE_BULLET=true RAILS_LOG_LEVEL=unknown be rails s -b 0.0.0.0"
-alias rrs="be rescue rails s -b 0.0.0.0"
 alias rc="be rails c"
 alias rsp="be rspec"
 alias rrsp="be rescue rspec"
-alias spry="be pry -r ./app.rb"
-alias sirb="be irb -r ./app.rb"
 alias sk="be sidekiq -C config/sidekiq.yml"
-alias ssk="be sidekiq -C config/sidekiq.yml -r ./app.rb"
 alias cucumber="be cucumber"
 alias rake="be rake"
+alias rails="be rails"
 
 ## Application
 alias vim="nvim"
-alias g="git"
 alias rg="rg -uu -L"
 alias t="todo.sh -d ~/.config/todo/config" # Alias to todo-txt
 alias feh="feh -F"
 alias sudo="sudo " # Enable aliases to be sudo’ed
 
 ## Docker aliases
-alias dm="docker-machine"
 alias dlc="docker ps -l -q" # return the last-run container ID
 alias drm="docker ps -a | grep Exited | cut -d ' ' -f 1 | xargs docker rm" # remove all stopped containers
 alias drun="docker run -ti"
@@ -71,11 +63,6 @@ alias week='date +%V'
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
-# IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en0"
-alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
@@ -83,23 +70,11 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 # Canonical hex dump; some systems have this symlinked
 command -v hd > /dev/null || alias hd="hexdump -C"
 
-# JavaScriptCore REPL
-jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc";
-[ -e "${jscbin}" ] && alias jsc="${jscbin}";
-unset jscbin;
-
 # Trim new lines and copy to clipboard
-alias c="tr -d '\n' | pbcopy"
-
-# Recursively delete `.DS_Store` files
-alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+alias c="tr -d '\n' | xsel"
 
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
-
-# Merge PDF files
-# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
-alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
 
 # Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
 # (useful when executing time-consuming commands)
@@ -115,17 +90,11 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
   alias "$method"="lwp-request -m '$method'"
 done
 
-# Make Grunt print stack traces by default
-command -v grunt > /dev/null && alias grunt="grunt --stack"
-
 if [ ! -z "$ZSH_VERSION" ]; then
   alias reload!="source ~/.zshrc"
 elif [ ! -z "$BASH_VERSION" ]; then
   alias reload!="source ~/.bash_profile"
 fi
-
-# Faster npm for Europeans
-command -v npm > /dev/null && alias npme="npm --registry http://registry.npmjs.eu/"
 
 # Weather
 function weather() {
