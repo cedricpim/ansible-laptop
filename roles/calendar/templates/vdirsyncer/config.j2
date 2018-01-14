@@ -10,12 +10,12 @@
 [pair my_contacts]
   a = "my_contacts_local"
   b = "my_contacts_remote"
-  collections = ["contacts"]
+  collections = ["{{ dav_contacts | join('", "') }}"]
   conflict_resolution = "a wins"
 
 [storage my_contacts_local]
   type = "filesystem"
-  path = "{{ vdirsyncer_directory }}/contacts/cedricpim"
+  path = "{{ vdirsyncer_directory }}/contacts/{{ personal_server_name }}"
   fileext = ".vcf"
 
 [storage my_contacts_remote]
@@ -29,17 +29,16 @@
 ######### Calendars #########
 #############################
 
-#### Personal Calendar ####
 [pair my_calendar]
   a = "my_calendar_local"
   b = "my_calendar_remote"
-  collections = ["personal", "travel", "bills", "tv_maze", "sporting_cp", "real_madrid", "premier_league"]
+  collections = ["{{ dav_calendars | map(attribute="name") | join('", "') }}"]
   conflict_resolution = "a wins"
   metadata = ["color", "displayname"]
 
 [storage my_calendar_local]
   type = "filesystem"
-  path = "{{ vdirsyncer_directory }}/calendars/cedricpim"
+  path = "{{ vdirsyncer_directory }}/calendars/{{ personal_server_name }}"
   fileext = ".ics"
 
 [storage my_calendar_remote]

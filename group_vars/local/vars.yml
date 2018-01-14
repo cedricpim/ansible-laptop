@@ -16,11 +16,14 @@ newsblur_username: "{{ vault_newsblur_username }}"
 newsblur_password: "{{ vault_newsblur_password }}"
 
 personal_server: "{{ vault_personal_server }}"
+personal_server_name: "{{ vault_personal_server_name }}"
 personal_server_shortcut: "{{ vault_personal_server_shortcut }}"
 
 dav_server: "{{ vault_dav_server }}"
 dav_username: "{{ vault_dav_username }}"
 dav_password: "{{ vault_dav_password }}"
+dav_contacts: "{{ vault_dav_contacts }}"
+dav_calendars: "{{ vault_dav_calendars }}"
 
 offlineimap_email_server: "{{ vault_offlineimap_email_server }}"
 offlineimap_email_accounts: "{{ vault_offlineimap_email_accounts }}"

@@ -2,12 +2,12 @@
 
 [addressbooks]
 [[contacts]]
-path = {{ vdirsyncer_directory }}/contacts/cedricpim/contacts/
+path = {{ vdirsyncer_directory }}/contacts/{{ personal_server_name }}/{{ dav_contacts[0] }}/
 
 [general]
 debug          = no
 default_action = list
-editor         = nvim
+editor         = vim
 merge_editor   = vimdiff
 
 [contact table]

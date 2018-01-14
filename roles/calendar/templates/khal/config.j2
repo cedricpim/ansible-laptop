@@ -1,34 +1,15 @@
 {{ ansible_managed | comment }}
 
 [calendars]
-  [[personal]]
-    path = {{ vdirsyncer_directory }}/calendars/cedricpim/personal/
-    color = "#15FF00"
-  [[travels]]
-    path = {{ vdirsyncer_directory }}/calendars/cedricpim/travel/
-    color = "#0CA1FF"
-  [[bills]]
-    path = {{ vdirsyncer_directory }}/calendars/cedricpim/bills/
-    color = "#00FFFF"
-  [[sporting_cp]]
-    path = {{ vdirsyncer_directory }}/calendars/cedricpim/sporting_cp/
-    color = "#40A54C"
-    readonly = True
-  [[real_madrid]]
-    path = {{ vdirsyncer_directory }}/calendars/cedricpim/real_madrid/
-    color = "#649EAD"
-    readonly = True
-  [[premier_league]]
-    path = {{ vdirsyncer_directory }}/calendars/cedricpim/premier_league/
-    color = "#CC2B23"
-    readonly = True
-  [[tv_maze]]
-    path = {{ vdirsyncer_directory }}/calendars/cedricpim/tv_maze/
-    color = "#DFB656"
-    readonly = True
+{% for calendar in dav_calendars %}
+  [[{{ calendar.name }}]]
+    path = {{ vdirsyncer_directory }}/calendars/{{ personal_server_name }}/{{ calendar.name }}/
+    color = "{{ calendar.color }}"
+    readonly = {{ calendar.readonly }}
+{% endfor %}
 
 [default]
-  default_calendar = personal
+  default_calendar = {{ dav_calendars[0].name }}
   highlight_event_days = true
 
 [sqlite]

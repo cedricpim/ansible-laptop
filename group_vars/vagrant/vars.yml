@@ -14,10 +14,17 @@ newsblur_username: "newsblur.username"
 newsblur_password: "newsblur.password"
 
 personal_server: "vagrant.localhost"
+personal_server_name: "v-local"
 personal_server_shortcut: "v-local"
 
 dav_server: "dav.localhost"
 dav_username: "dav-username"
+dav_password: "dav-password"
+dav_contacts:
+  - "vagrant-contacts"
+dav_calendars:
+  - { name: "vagrant_calendar", color: "#FFFFFF", readonly: "False" }
+  - { name: "remote_calendar",  color: "#333333", readonly: "True" }
 
 offlineimap_email_server: "example.localhost"
 offlineimap_email_accounts:
