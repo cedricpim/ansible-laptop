@@ -2,3 +2,6 @@
 htop_directory: "~/.config/htop"
 
 neofetch_directory: "~/.config/neofetch"
+
+backup_mount_dir: "~/Content"
+backup_dir: "~/Downloads"

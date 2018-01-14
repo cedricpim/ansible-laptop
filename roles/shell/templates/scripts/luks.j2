@@ -5,28 +5,23 @@ set -o pipefail
 
 IFS=$'\n\t'
 
-if [ ! `command -v cryptsetup` ]; then
-  echo "Please install cryptsetup"
-  exit 1
-fi
-
 case $1 in
   mount)
     name=$(basename "$2" '.img')
-    mkdir -p ~/Content
+    mkdir -p {{ backup_mount_dir }}
     sudo cryptsetup luksOpen $2 $name
-    sudo mount /dev/mapper/$name ~/Content
+    sudo mount /dev/mapper/$name {{ backup_mount_dir }}
     ;;
 
   umount)
-    sudo umount ~/Content
+    sudo umount {{ backup_mount_dir }}
     sudo cryptsetup luksClose $2
-    if [ `ls ~/Content | wc -l` -eq 0 ]; then rm -r ~/Content; fi
+    if [ `ls {{ backup_mount_dir }} | wc -l` -eq 0 ]; then rm -r {{ backup_mount_dir }}; fi
     ;;
 
   backup)
     # Filepath to container
-    container="$HOME/Downloads/$2.img"
+    container="{{ backup_dir }}/$2.img"
     # Filepath to where volume will be mounted
     mount_dir="/mnt/$2"
     # Create empty file with size of container
