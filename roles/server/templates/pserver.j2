@@ -12,11 +12,11 @@ fi
 
 case $1 in
   photos)
-    local_dir=`echo ~/Pictures/Photos/$2*`
+    local_dir=`echo {{ personal_local_photos }}/$2*`
     # Upload album to server
-    scp -r -C $local_dir {{ personal_server_shortcut }}:/home/me/pictures
+    scp -r -C $local_dir {{ personal_server_shortcut }}:{{ personal_server_photos }}
     # Process uploaded photos
-    ssh -t {{ personal_server_shortcut }} '~/scripts/process-photos'
+    ssh -t {{ personal_server_shortcut }} "{{ process_photos_scripts }}"
     ;;
 
   *)
