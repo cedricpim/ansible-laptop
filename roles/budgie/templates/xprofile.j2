@@ -4,10 +4,9 @@
 xset r rate 200 25 # Faster input and repeat on key press
 setxkbmap -option compose:ralt # Use right Alt to compose special keys
 setxkbmap -option 'caps:ctrl_modifier' # Make Caps Lock behave like Ctrl
-if [ `command -v xcape` ]; then
-  xcape -e 'Caps_Lock=Escape;Shift_L=parenleft;Shift_R=parenright' # Caps Lock as Escape on click, and Shifts to Parentheses
+xcape -e 'Caps_Lock=Escape;Shift_L=parenleft;Shift_R=parenright' # Caps Lock as Escape on click, and Shifts to Parentheses
+
+if [ `command -v urxvtd` ]; then
+  urxvtd -q -f -o # Start URxvt daemon
+  xrdb ~/.Xresources > /dev/null 2>&1 # Load Xresources
 fi
-
-urxvtd -q -f -o # Start URxvt daemon
-
-xrdb ~/.Xresources > /dev/null 2>&1 # Load Xresources

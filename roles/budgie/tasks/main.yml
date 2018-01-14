@@ -10,6 +10,7 @@
     - "gnome-tweak-tool"
     - "gnome-keyring"
     - "ntfs-3g"
+    - "xcape"
   become: yes
 
 - name: "enable GDM"
