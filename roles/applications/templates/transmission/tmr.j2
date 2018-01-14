@@ -4,7 +4,7 @@ IFS=$'\n\t'
 
 {{ ansible_managed | comment }}
 
-move_dir=/home/cedro/Downloads
+move_dir={{ transmission_final_destination }}
 
 case $1 in
   list|l)

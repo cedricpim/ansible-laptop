@@ -14,7 +14,7 @@ export REPORT_FILE="$TODO_DIR/report.txt"
 export TODO_ACTIONS_DIR="{{ todo_actions_dest | regex_replace('~', ansible_env.HOME) }}"
 
 # Note file extension
-export TODO_NOTE_EXT=.md
+export TODO_NOTE_EXT={{ todo_note_extension }}
 
 # == EDIT FILE LOCATIONS ABOVE ===
 
