@@ -1,0 +1,4 @@
+---
+- name: "create grub configuration"
+  command: "grub-mkconfig -o {{ grub_configuration }}"
+  become: yes

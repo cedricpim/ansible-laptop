@@ -1,0 +1,6 @@
+---
+esp_mount: "/boot"
+
+grub_configuration: "/boot/grub/grub.cfg"
+
+default_grub_configuration: "/etc/default/grub"
