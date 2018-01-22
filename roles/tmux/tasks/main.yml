@@ -28,3 +28,17 @@
   register: tpm_update_result
   failed_when: tpm_install_result.stderr != ""
   changed_when: false
+
+- name: "create folder for systemd tmux"
+  file:
+    path: "{{ systemd_user_directory }}/tmux.service.d"
+    state: directory
+  when: tmux_continuum == 'on'
+
+- name: "copy tmux overriding configuration for systemd"
+  template:
+    src: "override.conf.j2"
+    dest: "{{ systemd_user_directory }}/tmux.service.d/override.conf"
+    mode: 0600
+  when: tmux_continuum == 'on'
+  notify: reload systemctl daemon

@@ -1,3 +1,4 @@
 ---
 tmux_plugin_dest: "~/.tmux/plugins/tpm"
 tmux_continuum: "on"
+tmux_initial_session: "utilities"
