@@ -4,3 +4,5 @@ neomutt_directory: "~/.config/neomutt"
 email_directory: "~/.cache/Mail"
 
 offlineimap_directory: "~/.config/offlineimap"
+
+neomutt_email_server_port: "587"

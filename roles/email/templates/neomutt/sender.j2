@@ -3,5 +3,5 @@
 set my_login = "{{ neomutt_email_accounts[0].name }}@{{ neomutt_email_server }}"
 set from = $my_login
 set use_from = yes
-set smtp_url="smtp://$my_login:{{ neomutt_email_accounts[0].password }}@{{ neomutt_email_server }}"
+set smtp_url="smtp://$my_login:{{ neomutt_email_accounts[0].password }}@{{ neomutt_email_server }}:{{ neomutt_email_server_port }}"
 set ssl_force_tls = yes
