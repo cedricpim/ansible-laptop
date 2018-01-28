@@ -3,5 +3,6 @@
   systemd:
     name: "ledger.timer"
     state: restarted
+    enabled: yes
     daemon_reload: yes
     user: yes
