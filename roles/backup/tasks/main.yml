@@ -1,0 +1,47 @@
+---
+- name: "install cryptsetup"
+  pacman:
+    name: "cryptsetup"
+    state: present
+  become: yes
+
+- name: "retrieve list of packages installed"
+  command: "pacaur -Qet"
+  register: packages_list
+  changed_when: false
+
+- name: "create temporary backup directory"
+  tempfile:
+    suffix: "backup"
+    state: directory
+  register: tempdir
+  notify: "cleanup backup tempdir"
+
+- name: "create empty file with size of container"
+  command: "fallocate -l {{ backup_size }} {{ tempdir.path }}/{{ backup_name }}.img"
+  when: tempdir is defined
+
+- name: "create backup"
+  block:
+    - shell: "echo -n '{{ backup_password }}' | cryptsetup luksFormat {{ tempdir.path }}/{{ backup_name }}.img -"
+    - shell: "echo -n '{{ backup_password }}' | cryptsetup luksOpen {{ tempdir.path }}/{{ backup_name }}.img {{ backup_name }}"
+    - command: "mkfs.ext4 /dev/mapper/{{ backup_name }}"
+    - mount: path="{{ backup_mount_dir }}" src="/dev/mapper/{{ backup_name }}" fstype=ext4 state=mounted
+    - copy: content="{{ packages_list.stdout }}" dest="{{ backup_mount_dir }}/packages"
+    - synchronize: src="{{ item }}" dest="{{ backup_mount_dir }}" archive=yes recursive=yes delete=yes rsync_opts="{{ backup_exclude_options }}"
+      delegate_to: "{{ inventory_hostname }}"
+      with_items: "{{ backup_dirs }}"
+  always:
+    - mount: path="{{ backup_mount_dir }}" state=absent
+    - command: "cryptsetup luksClose {{ backup_name }}"
+  become: yes
+  when:
+    - tempdir is defined
+    - packages_list is defined
+
+- name: "copy backup to HOME folder"
+  copy:
+    src: "{{ tempdir.path }}/{{ backup_name }}.img"
+    dest: "{{ backup_final_destination | regex_replace('~', ansible_env.HOME) }}/{{ backup_name }}.img"
+    remote_src: yes
+  when: tempdir is defined

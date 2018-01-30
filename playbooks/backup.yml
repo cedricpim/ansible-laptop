@@ -1,0 +1,5 @@
+---
+- hosts: local
+
+  roles:
+    - { role: "backup", tags: "backup" }

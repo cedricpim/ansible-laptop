@@ -19,44 +19,7 @@ case $1 in
     if [ `ls {{ backup_mount_dir }} | wc -l` -eq 0 ]; then rm -r {{ backup_mount_dir }}; fi
     ;;
 
-  backup)
-    # Filepath to container
-    container="{{ backup_dir }}/$2.img"
-    # Filepath to where volume will be mounted
-    mount_dir="/mnt/$2"
-    # Create empty file with size of container
-    fallocate -l $3 $container
-    # Encrypt disk image
-    sudo cryptsetup -y luksFormat $container
-    # Decrypt LUKS encrypted container
-    sudo cryptsetup luksOpen $container $2
-    # Create an ext4 filesystem on the decrypted LUKS container
-    sudo mkfs.ext4 /dev/mapper/$2
-    # Mount the container
-    sudo mkdir $mount_dir
-    sudo mount /dev/mapper/$2 $mount_dir
-    sudo chown -R $USER $mount_dir
-
-    # Include list of packages installed
-    pacaur -Qet | sudo tee $mount_dir/packages > /dev/null
-
-    # Important folders to include on a backup
-    sudo \rsync --info=progress2 -aAXL /boot $mount_dir
-    sudo \rsync --info=progress2 -aAXL /etc  $mount_dir
-    sudo \rsync --info=progress2 -aAXL /opt  $mount_dir
-    sudo \rsync --info=progress2 -aAXL                                   \
-      --exclude=/home/*/.local/share/Trash                               \
-      --exclude=/home/*/{Downloads,Games,Sync,.cache}                    \
-      --exclude=/home/*/.mozilla/firefox/*.default/storage               \
-      --exclude=/home/*/Projects/**/{public,node_modules,vendor,tmp,log} \
-      --exclude=/home/*/Projects/VMs                                     \
-      /home $mount_dir
-
-    # Unmount and encrypt back LUKS container
-    sudo umount $mount_dir && sudo cryptsetup luksClose $2 && sudo rm -r $mount_dir
-    ;;
-
   *)
-    echo $"Usage: $0 {mount|umount|backup} container-name"
+    echo $"Usage: $0 {mount|umount} container-name"
     exit 1
 esac
