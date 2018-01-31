@@ -67,8 +67,8 @@ set spell " set spell checker
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   syntax on
-  set background=dark
-  colorscheme PaperColor
+  colorscheme {{ neovim_colorscheme }}
+  set background={{ neovim_background_color }}
 endif
 
 if has("unix")
@@ -290,12 +290,4 @@ autocmd BufReadPost *
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
-endif
-
-
-" Allow background color to be changed without changing the main NVIM
-" configuration. Useful for people changing background color according to the
-" time of day
-if filereadable(expand("{{ neovim_directory }}/background_color"))
-  source {{ neovim_directory }}/background_color
 endif
