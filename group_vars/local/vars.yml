@@ -4,6 +4,7 @@ user_password: "{{ vault_user_password }}"
 
 git_full_name: "{{ vault_git_full_name }}"
 git_email: "{{ vault_git_email }}"
+git_signingkey: "{{ vault_git_signingkey }}"
 
 system_time_zone: "{{ vault_system_time_zone }}"
 system_hostname: "{{ vault_system_hostname }}"
