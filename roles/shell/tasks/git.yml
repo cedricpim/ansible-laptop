@@ -12,5 +12,4 @@
     mode: 0600
   with_items:
     - gitconfig
-    - gitdetails
     - gitignore
