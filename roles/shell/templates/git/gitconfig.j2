@@ -57,7 +57,7 @@
   co = checkout
   st = status
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  cm = commit
+  cm = commit -S
   rso = remote show origin
   g = grep --break --heading --line-number
   up = "!git remote update -p; git merge --ff-only @{u}"
