@@ -37,18 +37,14 @@
   register: st_prefs
   when: profile is defined and not profile|skipped
 
-- name: "disable network.protocol-handler.expose.magnet"
+- name: "define options for Firefox"
   lineinfile:
     path: "{{ firefox_profiles }}/{{ profile.stdout }}/prefs.js"
-    regexp: ".*network.protocol-handler.expose.magnet.*"
-    line: "user_pref(\"network.protocol-handler.expose.magnet\", false);"
+    regexp: ".*{{ item.option }}.*"
+    line: "user_pref(\"{{ item.option }}\", {{ item.value }});"
     state: present
-  when: st_prefs is defined and not st_prefs|skipped and st_prefs.stat.islnk is defined
-
-- name: "enable browser.tabs.loadDivertedInBackground"
-  lineinfile:
-    path: "{{ firefox_profiles }}/{{ profile.stdout }}/prefs.js"
-    regexp: ".*browser.tabs.loadDivertedInBackground.*"
-    line: "user_pref(\"browser.tabs.loadDivertedInBackground\", true);"
-    state: present
+  with_items:
+    - {option: "network.protocol-handler.expose.magnet", value: false}
+    - {option: "browser.tabs.loadDivertedInBackground", value: true}
+    - {option: "network.http.sendRefererHeader", value: 0}
   when: st_prefs is defined and not st_prefs|skipped and st_prefs.stat.islnk is defined
