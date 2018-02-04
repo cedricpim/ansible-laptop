@@ -75,7 +75,7 @@ Vagrant.configure("2") do |config|
     ansible.verbose = ENV['VAGRANT_VERBOSE']
     ansible.vault_password_file = ENV['VAGRANT_VAULT_FILE'] # required because of synchronize module on backup role
     ansible.inventory_path = 'inventory.ini'
-    ansible.playbook = "playbooks/#{ENV['VAGRANT_PLAYBOOK']}.yml"
+    ansible.playbook = "playbooks/#{ENV['VAGRANT_PLAYBOOK'].nil? || ENV['VAGRANT_PLAYBOOK'].empty? ? 'test' : ENV['VAGRANT_PLAYBOOK']}.yml"
     ansible.tags = ENV['VAGRANT_TAGS'].nil? || ENV['VAGRANT_TAGS'].empty? ? nil : ENV['VAGRANT_TAGS']
   end
 end
