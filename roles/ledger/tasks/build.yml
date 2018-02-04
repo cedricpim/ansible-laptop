@@ -13,10 +13,10 @@
   changed_when: false
   register: ledger_gem
 
-- gem:
-    name: "ledger"
-    gem_source: "{{ ledger_dest }}/{{ ledger_gem.stdout | regex_findall('File: (.*)') | first }}"
-    state: present
+- name: "install gem"
+  command: "gem install {{ ledger_gem.stdout | regex_findall('File: (.*)') | first }}"
+  args:
+    chdir: "{{ ledger_dest }}"
   when: ledger_gem is defined
 
 - name: "cleanup ledger build directory"
