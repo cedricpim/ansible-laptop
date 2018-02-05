@@ -1,23 +1,18 @@
 ---
+- import_tasks: main.yml
+
 - name: "ensure neovim is installed"
   pacman:
     name: "neovim"
     state: present
   become: yes
 
-- name: "check if pacaur is installed"
-  command: "pacman -Q pacaur"
-  register: pacaur_check
-  failed_when: false
-
-- import_tasks: main.yml
-  when: pacaur_check|changed
-
 - name: "check if {{ pkg_name }} is installed"
   command: "pacman -Q {{ pkg_name }}"
   register: aur_package_check
+  changed_when: false
   failed_when: false
 
 - name: "install {{ pkg_name }}"
   command: "pacaur -S {{ pkg_name }} --needed --noconfirm"
-  when: aur_package_check|changed
+  when: aur_package_check is defined and aur_package_check.rc != 0
