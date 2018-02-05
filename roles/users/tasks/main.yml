@@ -6,22 +6,24 @@
   with_items: "{{ users_groups }}"
   become: yes
 
-- name: "create user {{ user_name }}"
+- name: "create users"
   user:
-    name: "{{ user_name }}"
-    password: "{{ user_password }}"
+    name: "{{ item.user_name }}"
+    password: "{{ item.user_password }}"
     createhome: yes
     groups: "{{ users_groups }}"
     append: yes
     state: present
+  with_items: "{{ users }}"
   become: yes
 
-- name: "generate ssh key for {{ user_name }}"
+- name: "generate ssh keys"
   user:
-    name: "{{ user_name }}"
+    name: "{{ item.user_name }}"
     generate_ssh_key: yes
     ssh_key_bits: 4096
     ssh_key_file: ".ssh/id_rsa"
-    ssh_key_passphrase: "{{ user_ssh_key_passphrase }}"
-    ssh_key_comment: "{{ user_name }}"
+    ssh_key_passphrase: "{{ item.user_ssh_key_passphrase }}"
+    ssh_key_comment: "{{ item.user_name }}"
+  with_items: "{{ users }}"
   become: yes

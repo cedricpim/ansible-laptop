@@ -2,8 +2,8 @@
 - hosts: local
 
   vars_files:
-    - ../vaulted_vars/local/vault.yml
-    - ../vars/local.yml
+    - ../vaulted_vars/system/vault.yml
+    - ../vars/system.yml
 
   roles:
     - { role: "pacman", tags: "pacman" }
@@ -14,24 +14,4 @@
     - { role: "users", tags: "users" }
     - { role: "settings", tags: "settings" }
     - { role: "fonts", tags: "fonts" }
-    - { role: "pacaur", tags: "pacaur" }
-    - { role: "zsh", tags: "zsh" }
-    - { role: "shell", tags: "shell" }
-    - { role: "tmux", tags: "tmux" }
-    - { role: "terminal", tags: "terminal" }
-    - { role: "applications", tags: "applications" }
-    - { role: "calendar", tags: "calendar" }
-    - { role: "editor", tags: "editor" }
-    - { role: "email", tags: "email" }
-    - { role: "feeds", tags: "feeds" }
-    - { role: "ledger", tags: "ledger" }
     - { role: "openvpn", tags: "openvpn" }
-    - { role: "server", tags: "server" }
-    - { role: "todo", tags: "todo" }
-    - { role: "torrents", tags: "torrents" }
-
-  post_tasks:
-    - name: update packages
-      include_role:
-        name: pacaur
-        tasks_from: update
