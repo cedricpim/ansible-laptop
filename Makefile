@@ -19,7 +19,7 @@ deploy-local:
 backup:
 	ansible-playbook playbooks/backup.yml --diff --ask-become-pass ${ANSIBLE_OPTS}
 
-source-dotfiles:
+dotfiles:
 	ansible-playbook playbooks/dotfiles.yml --diff --ask-become-pass ${ANSIBLE_OPTS}
 
 deploy-vagrant:
