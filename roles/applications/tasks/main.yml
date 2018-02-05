@@ -19,7 +19,6 @@
   become: yes
   notify: "restart syncthing"
 
-- import_tasks: "transmission.yml"
 - import_tasks: "copyq.yml"
 - import_tasks: "firefox.yml"
 

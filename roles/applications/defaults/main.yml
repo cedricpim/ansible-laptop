@@ -1,11 +1,4 @@
 ---
-sysctl_rmem_max: 4194304
-sysctl_wmem_max: 1048576
-
 copyq_directory: "~/.config/copyq"
-
-transmission_directory: "/var/lib/transmission/.config/transmission-daemon"
-transmission_data_directory: "/data/torrents"
-transmission_final_destination: "~/Downloads"
 
 firefox_profiles: "~/.mozilla/firefox"

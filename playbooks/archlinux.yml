@@ -24,6 +24,7 @@
     - { role: "openvpn", tags: "openvpn" }
     - { role: "server", tags: "server" }
     - { role: "todo", tags: "todo" }
+    - { role: "torrents", tags: "torrents" }
 
   post_tasks:
     - name: update packages

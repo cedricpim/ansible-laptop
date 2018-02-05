@@ -23,6 +23,7 @@
     - { role: "tmux", tags: "tmux" }
     - { role: "ledger", tags: "ledger" }
     - { role: "todo", tags: "todo" }
+    - { role: "torrents", tags: "torrents" }
 
   post_tasks:
     - name: update packages
