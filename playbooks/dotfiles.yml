@@ -6,8 +6,6 @@
     - ../vars/local.yml
 
   roles:
-    - { role: "users", tags: "users" }
-    - { role: "pacaur", tags: "pacaur" }
     - { role: "calendar", tags: "calendar" }
     - { role: "editor", tags: "editor" }
     - { role: "email", tags: "email" }
@@ -21,3 +19,9 @@
     - { role: "torrents", tags: "torrents" }
     - { role: "zsh", tags: "zsh" }
     - { role: "applications", tags: "applications" }
+
+  post_tasks:
+    - name: update packages
+      include_role:
+        name: pacaur
+        tasks_from: update
