@@ -44,7 +44,7 @@
     line: "user_pref(\"{{ item.option }}\", {{ item.value }});"
     state: present
   with_items:
-    - {option: "network.protocol-handler.expose.magnet", value: false}
-    - {option: "browser.tabs.loadDivertedInBackground", value: true}
+    - {option: "network.protocol-handler.expose.magnet", value: "false"}
+    - {option: "browser.tabs.loadDivertedInBackground", value: "true"}
     - {option: "network.http.sendRefererHeader", value: 0}
   when: st_prefs is defined and not st_prefs|skipped and st_prefs.stat.islnk is defined
