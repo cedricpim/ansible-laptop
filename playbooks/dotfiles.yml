@@ -13,5 +13,6 @@
     - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
     - { role: "tmux", tags: "tmux" }
+    - { role: "todo", tags: "todo" }
     - { role: "zsh", tags: "zsh" }
     - { role: "applications", tags: "applications" }

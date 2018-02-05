@@ -22,7 +22,7 @@
     - { role: "editor", tags: "editor" }
     - { role: "tmux", tags: "tmux" }
     - { role: "ledger", tags: "ledger" }
-    - { role: "backup", tags: "backup" }
+    - { role: "todo", tags: "todo" }
 
   post_tasks:
     - name: update packages

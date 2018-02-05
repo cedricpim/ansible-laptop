@@ -21,7 +21,6 @@
 
 - import_tasks: "transmission.yml"
 - import_tasks: "copyq.yml"
-- import_tasks: "todo.yml"
 - import_tasks: "firefox.yml"
 
 - include_role:

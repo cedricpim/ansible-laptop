@@ -23,6 +23,7 @@
     - { role: "ledger", tags: "ledger" }
     - { role: "openvpn", tags: "openvpn" }
     - { role: "server", tags: "server" }
+    - { role: "todo", tags: "todo" }
 
   post_tasks:
     - name: update packages

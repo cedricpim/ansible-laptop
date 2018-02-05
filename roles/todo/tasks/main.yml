@@ -16,7 +16,7 @@
 
 - name: copy todo configuration
   template:
-    src: "todo/config.j2"
+    src: "config.j2"
     dest: "{{ todo_directory }}/config"
     mode: 0600
 
