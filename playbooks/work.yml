@@ -1,6 +1,9 @@
 ---
 - hosts: work
 
+  vars_files:
+    - ../vaulted_vars/work/vault.yml
+
   roles:
     - { role: "users", tags: "users" }
     - { role: "pacaur", tags: "pacaur" }

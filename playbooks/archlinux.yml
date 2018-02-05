@@ -1,6 +1,9 @@
 ---
 - hosts: local
 
+  vars_files:
+    - ../vaulted_vars/local/vault.yml
+
   roles:
     - { role: "pacman", tags: "pacman" }
     - { role: "nvidia", tags: "nvidia" }
