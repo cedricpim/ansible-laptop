@@ -14,7 +14,7 @@
   register: ledger_gem
 
 - name: "install gem"
-  command: "gem install {{ ledger_gem.stdout | regex_findall('File: (.*)') | first }}"
+  command: "gem install {{ ledger_gem.stdout | regex_findall('File: (.*)') | first }} --no-rdoc --no-ri"
   args:
     chdir: "{{ ledger_dest }}"
   when: ledger_gem is defined
