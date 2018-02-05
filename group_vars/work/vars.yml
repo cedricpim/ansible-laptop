@@ -1,0 +1,48 @@
+---
+user_name: "{{ vault_user_name }}"
+user_password: "{{ vault_user_password }}"
+
+git_full_name: "{{ vault_git_full_name }}"
+git_email: "{{ vault_git_email }}"
+git_signingkey: "{{ vault_git_signingkey }}"
+
+dav_server: "{{ vault_dav_server }}"
+dav_username: "{{ vault_dav_username }}"
+dav_password: "{{ vault_dav_password }}"
+dav_contacts: "{{ vault_dav_contacts }}"
+dav_calendars: "{{ vault_dav_calendars }}"
+
+offlineimap_email_server: "{{ vault_offlineimap_email_server }}"
+offlineimap_email_accounts: "{{ vault_offlineimap_email_accounts }}"
+
+neomutt_email_server: "{{ vault_neomutt_email_server }}"
+neomutt_email_accounts: "{{ vault_neomutt_email_accounts }}"
+neomutt_sender_full_name: "{{ vault_neomutt_sender_full_name }}"
+
+notmuch_full_name: "{{ vault_notmuch_full_name }}"
+notmuch_primary_email: "{{ vault_notmuch_primary_email }}"
+notmuch_other_emails: "{{ vault_notmuch_other_emails }}"
+
+todo_main_directory: "{{ vault_todo_main_directory }}"
+
+urxvt_color_ul: "#268bd2"
+urxvt_underline_color: "#268bd2"
+urxvt_foreground: "#586e75"
+urxvt_background: "#fdf6e3"
+urxvt_cursor_color: "#586e75"
+urxvt_color0: "#002b36"
+urxvt_color1: "#dc322f"
+urxvt_color2: "#859900"
+urxvt_color3: "#b58900"
+urxvt_color4: "#268bd2"
+urxvt_color5: "#6c71c4"
+urxvt_color6: "#2aa198"
+urxvt_color7: "#93a1a1"
+urxvt_color8: "#657b83"
+urxvt_color9: "#dc322f"
+urxvt_color10: "#859900"
+urxvt_color11: "#b58900"
+urxvt_color12: "#268bd2"
+urxvt_color13: "#6c71c4"
+urxvt_color14: "#2aa198"
+urxvt_color15: "#fdf6e3"
