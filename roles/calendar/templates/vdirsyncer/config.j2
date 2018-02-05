@@ -10,20 +10,20 @@
 [pair my_contacts]
   a = "my_contacts_local"
   b = "my_contacts_remote"
-  collections = ["{{ dav_contacts | join('", "') }}"]
+  collections = ["{{ calendar_contacts | join('", "') }}"]
   conflict_resolution = "a wins"
 
 [storage my_contacts_local]
   type = "filesystem"
-  path = "{{ vdirsyncer_directory }}/contacts/{{ personal_server_name }}"
+  path = "{{ vdirsyncer_directory }}/contacts/{{ calendar_host }}"
   fileext = ".vcf"
 
 [storage my_contacts_remote]
   type = "carddav"
-  url = "https://{{ dav_server }}"
+  url = "https://{{ calendar_server }}"
   auth = "basic"
-  username = "{{ dav_username }}"
-  password = "{{ dav_password }}"
+  username = "{{ calendar_username }}"
+  password = "{{ calendar_password }}"
 
 #############################
 ######### Calendars #########
@@ -32,18 +32,18 @@
 [pair my_calendar]
   a = "my_calendar_local"
   b = "my_calendar_remote"
-  collections = ["{{ dav_calendars | map(attribute="name") | join('", "') }}"]
+  collections = ["{{ calendar_calendars | map(attribute="name") | join('", "') }}"]
   conflict_resolution = "a wins"
   metadata = ["color", "displayname"]
 
 [storage my_calendar_local]
   type = "filesystem"
-  path = "{{ vdirsyncer_directory }}/calendars/{{ personal_server_name }}"
+  path = "{{ vdirsyncer_directory }}/calendars/{{ calendar_host }}"
   fileext = ".ics"
 
 [storage my_calendar_remote]
   type = "caldav"
-  url = "https://{{ dav_server }}"
+  url = "https://{{ calendar_server }}"
   auth = "basic"
-  username = "{{ dav_username }}"
-  password = "{{ dav_password }}"
+  username = "{{ calendar_username }}"
+  password = "{{ calendar_password }}"

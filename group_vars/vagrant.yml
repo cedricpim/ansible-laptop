@@ -14,18 +14,18 @@ newsblur_username: "newsblur.username"
 newsblur_password: "newsblur.password"
 
 personal_server: "vagrant.localhost"
-personal_server_name: "v-local"
 personal_server_shortcut: "v-local"
 personal_server_photos: "/home/vagrant/photos"
 personal_local_photos: "~/Pictures"
 personal_public_files: "~/Public"
 
-dav_server: "dav.localhost"
-dav_username: "dav-username"
-dav_password: "dav-password"
-dav_contacts:
+calendar_host: "v-local"
+calendar_server: "dav.localhost"
+calendar_username: "dav-username"
+calendar_password: "dav-password"
+calendar_contacts:
   - "vagrant-contacts"
-dav_calendars:
+calendar_calendars:
   - { name: "vagrant_calendar", color: "#FFFFFF", readonly: "False" }
   - { name: "remote_calendar",  color: "#333333", readonly: "True" }
 
