@@ -25,6 +25,8 @@ notmuch_other_emails: "{{ vault_notmuch_other_emails }}"
 
 todo_main_directory: "{{ vault_todo_main_directory }}"
 
+neovim_background_color: "light"
+
 urxvt_color_ul: "#268bd2"
 urxvt_underline_color: "#268bd2"
 urxvt_foreground: "#586e75"
