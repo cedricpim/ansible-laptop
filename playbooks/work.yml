@@ -6,6 +6,7 @@
     - ../vars/work.yml
 
   roles:
+    - { role: "settings", tags: "settings" }
     - { role: "calendar", tags: "calendar" }
     - { role: "editor", tags: "editor" }
     - { role: "email", tags: "email" }

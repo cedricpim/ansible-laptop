@@ -1,7 +1,6 @@
 ---
-user_name: "{{ vault_user_name }}"
-user_password: "{{ vault_user_password }}"
-user_ssh_key_passphrase: "{{ vault_user_ssh_key_passphrase }}"
+user: "{{ vault_user }}"
+wallpaper: "{{ vault_wallpaper }}"
 
 git_full_name: "{{ vault_git_full_name }}"
 git_email: "{{ vault_git_email }}"

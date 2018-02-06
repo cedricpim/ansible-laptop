@@ -1,0 +1,26 @@
+---
+- name: "copy startx configuration file"
+  template:
+    src: "xprofile.j2"
+    dest: "~/.xprofile"
+    mode: 0600
+
+- name: "create folder for autostart programs"
+  file:
+    path: "{{ autostart_dir }}"
+    state: "directory"
+
+- name: "copy xprofile to autostart"
+  template:
+    src: "xprofile.desktop.j2"
+    dest: "{{ autostart_dir }}/xprofile.desktop"
+    mode: 0644
+
+- name: "set mouse settings"
+  dconf:
+    key: "{{ dconf_touchpad_base_key }}/{{ item.key }}"
+    value: "{{ item.value }}"
+    state: "present"
+  with_items:
+    - { key: "click-method", value: "{{ touchpad_click_method }}" }
+    - { key: "natural-scroll", value: "{{ touchpad_natural_scroll }}" }
