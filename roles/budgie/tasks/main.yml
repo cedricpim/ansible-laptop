@@ -12,6 +12,7 @@
     - "ntfs-3g"
     - "xcape"
     - "watchdog"
+  become: yes
 
 - name: "enable system services"
   systemd:
@@ -22,3 +23,4 @@
     - "gdm"
     - "watchdog"
     - "fstrim.timer"
+  become: yes

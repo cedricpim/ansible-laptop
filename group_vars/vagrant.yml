@@ -1,5 +1,5 @@
 ---
-user_name: "vagrant"
+user: "vagrant"
 user_password: "$6$l5Zf21s2MJv1q$VjLWMNeqWO6JUZ9QctjwyVAIPo6KrSawEeZNMhU5YFdi0ExOSqcUbdTUYPsHyNfCsRY2xReBjg5Z4u4ZkSftI/"
 
 git_full_name: "Vagrant"

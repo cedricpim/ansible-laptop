@@ -3,11 +3,13 @@
   pacman:
     name: "sudo"
     state: present
+  become: yes
 
 - name: "ensure we have a 'wheel' group"
   group:
     name: "wheel"
     state: present
+  become: yes
 
 - name: "allow 'wheel' group to have passwordless sudo"
   lineinfile:
@@ -16,3 +18,4 @@
     line: "%wheel ALL=(ALL) ALL"
     validate: "visudo -cf %s"
     backup: yes
+  become: yes
