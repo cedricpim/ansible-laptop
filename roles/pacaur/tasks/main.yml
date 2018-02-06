@@ -16,9 +16,9 @@
   failed_when: false
   changed_when: false
 
-- name: "create {{ user_name }} user"
+- name: "ensure {{ user }} exists"
   user:
-    name: "{{ user_name }}"
+    name: "{{ user }}"
     append: true
     groups: "wheel"
     state: present

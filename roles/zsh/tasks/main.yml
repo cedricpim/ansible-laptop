@@ -1,20 +1,20 @@
 ---
-- name: install zsh
+- name: "install zsh"
   pacman:
     name: "{{ item }}"
-    state: present
+    state: "present"
   with_items:
-    - zsh
-    - zsh-completions
+    - "zsh"
+    - "zsh-completions"
   become: yes
 
-- name: change default shell to zsh
+- name: "change default shell to zsh"
   user:
-    name: "{{ user_name }}"
-    shell: /usr/bin/zsh
+    name: "{{ user }}"
+    shell: "/usr/bin/zsh"
   become: yes
 
-- name: copy dircolors configuration file
+- name: "copy dircolors configuration file"
   template:
     src: "dircolors.j2"
     dest: "~/.dircolors"
@@ -22,10 +22,10 @@
   when: ansible_system == "Linux"
 
 - include_role:
-    name: pacaur
-    tasks_from: install
+    name: "pacaur"
+    tasks_from: "install"
   vars:
-    pkg_name: zsh-autosuggestions
+    pkg_name: "zsh-autosuggestions"
 
 - import_tasks: configurations.yml
 - import_tasks: ripgrep.yml
