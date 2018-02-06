@@ -1,14 +1,15 @@
 ---
 user: "vagrant"
-user_password: "$6$l5Zf21s2MJv1q$VjLWMNeqWO6JUZ9QctjwyVAIPo6KrSawEeZNMhU5YFdi0ExOSqcUbdTUYPsHyNfCsRY2xReBjg5Z4u4ZkSftI/"
+wallpaper: "your-wallpaper.jpg"
 
-git_full_name: "Vagrant"
-git_email: "vagrant@localhost"
+users:
+  - { name: "vagrant", password: "$6$l5Zf21s2MJv1q$VjLWMNeqWO6JUZ9QctjwyVAIPo6KrSawEeZNMhU5YFdi0ExOSqcUbdTUYPsHyNfCsRY2xReBjg5Z4u4ZkSftI/", ssh_key_passphrase: "ssh_key_passphrase" }
 
 system_time_zone: "UTC"
 system_hostname: "vagrant"
 
-tmux_continuum: "off"
+git_full_name: "Vagrant"
+git_email: "vagrant@localhost"
 
 newsblur_username: "newsblur.username"
 newsblur_password: "newsblur.password"
@@ -37,8 +38,8 @@ offlineimap_email_accounts:
 neomutt_email_server: "example.localhost"
 neomutt_sender_full_name: "Vagrant"
 neomutt_email_accounts:
-  - { key: 1, name: "default" }
-  - { key: 2, name: "secondary" }
+  - { key: 1, name: "default", password: "default" }
+  - { key: 2, name: "secondary", password: "secondary" }
 neomutt_mailboxes:
   - "Mailbox1"
   - "Mailbox2"
@@ -59,3 +60,5 @@ ledger_personal_categories:
 ledger_personal_currencies:
   - USD
   - EUR
+
+tmux_continuum: "off"

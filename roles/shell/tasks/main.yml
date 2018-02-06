@@ -1,33 +1,35 @@
 ---
-- name: install shell utilities
+- name: "install shell utilities"
   pacman:
     name: "{{ item }}"
-    state: present
+    state: "present"
   with_items:
-    - openssh
-    - easy-rsa
-    - rsync
-    - xsel
-    - xdotool
-    - wmctrl
-    - ripgrep
-    - powerline
-    - cryptsetup
-    - mkpasswd
+    - "openssh"
+    - "easy-rsa"
+    - "rsync"
+    - "xsel"
+    - "xdotool"
+    - "wmctrl"
+    - "ripgrep"
+    - "powerline"
+    - "cryptsetup"
   become: yes
 
 - include_role:
-    name: pacaur
-    tasks_from: install
-  vars:
-    pkg_name: diff-so-fancy
+    name: "pacaur"
+    tasks_from: "install"
+  with_items:
+    - "diff-so-fancy"
+    - "mkpasswd"
+  loop_control:
+    loop_var: "pkg_name"
 
-- name: create folder for scripts
+- name: "create folder for scripts"
   file:
     path: "{{ scripts_directory }}"
-    state: directory
+    state: "directory"
 
-- name: copy scripts files
+- name: "copy scripts files"
   template:
     src: "scripts/{{ item }}.j2"
     dest: "{{ scripts_directory }}/{{ item }}"
