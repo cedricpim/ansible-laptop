@@ -21,6 +21,10 @@ dotfiles:
 	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/local/vault.txt)
 	ansible-playbook playbooks/dotfiles.yml --diff --ask-become-pass ${ANSIBLE_OPTS}
 
+work:
+	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/work/vault.txt)
+	ansible-playbook playbooks/work.yml --diff --ask-become-pass ${ANSIBLE_OPTS}
+
 deploy-vagrant:
 	 VAGRANT_VERBOSE=${VERBOSE} VAGRANT_TAGS=${TAGS} VAGRANT_PLAYBOOK=${VAGRANT_PLAYBOOK} vagrant provision
 
