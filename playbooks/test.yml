@@ -2,7 +2,6 @@
 - hosts: vagrant
 
   roles:
-    - { role: "network", tags: "network" }
     - { role: "pacman", tags: "pacman" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
@@ -10,11 +9,11 @@
     - { role: "nvidia", tags: "nvidia" }
     - { role: "budgie", tags: "budgie" }
     - { role: "fonts", tags: "fonts" }
+    - { role: "openvpn", tags: "openvpn" }
     - { role: "settings", tags: "settings" }
     - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
     - { role: "zsh", tags: "zsh" }
-    - { role: "openvpn", tags: "openvpn" }
     - { role: "applications", tags: "applications" }
     - { role: "calendar", tags: "calendar" }
     - { role: "feeds", tags: "feeds" }
