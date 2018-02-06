@@ -6,11 +6,11 @@
     - { role: "pacman", tags: "pacman" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
-    - { role: "settings", tags: "settings" }
+    - { role: "system", tags: "system" }
     - { role: "nvidia", tags: "nvidia" }
     - { role: "budgie", tags: "budgie" }
     - { role: "fonts", tags: "fonts" }
-    - { role: "ssd", tags: "ssd" }
+    - { role: "settings", tags: "settings" }
     - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
     - { role: "zsh", tags: "zsh" }
