@@ -3,26 +3,27 @@
 
   roles:
     - { role: "pacman", tags: "pacman" }
+    - { role: "nvidia", tags: "nvidia" }
+    - { role: "budgie", tags: "budgie" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
     - { role: "system", tags: "system" }
-    - { role: "nvidia", tags: "nvidia" }
-    - { role: "budgie", tags: "budgie" }
-    - { role: "fonts", tags: "fonts" }
     - { role: "openvpn", tags: "openvpn" }
+    - { role: "fonts", tags: "fonts" }
     - { role: "settings", tags: "settings" }
+    - { role: "calendar", tags: "calendar" }
+    - { role: "editor", tags: "editor" }
+    - { role: "email", tags: "email" }
+    - { role: "feeds", tags: "feeds" }
+    - { role: "ledger", tags: "ledger" }
+    - { role: "server", tags: "server" }
     - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
-    - { role: "zsh", tags: "zsh" }
-    - { role: "applications", tags: "applications" }
-    - { role: "calendar", tags: "calendar" }
-    - { role: "feeds", tags: "feeds" }
-    - { role: "email", tags: "email" }
-    - { role: "editor", tags: "editor" }
     - { role: "tmux", tags: "tmux" }
-    - { role: "ledger", tags: "ledger" }
     - { role: "todo", tags: "todo" }
     - { role: "torrents", tags: "torrents" }
+    - { role: "zsh", tags: "zsh" }
+    - { role: "applications", tags: "applications" }
 
   post_tasks:
     - name: update packages
