@@ -6,7 +6,6 @@
   with_items:
     - "ttf-dejavu"
     - "ttf-liberation"
-  become: yes
 
 - include_role:
     name: pacaur

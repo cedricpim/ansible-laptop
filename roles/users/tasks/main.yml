@@ -4,7 +4,6 @@
     name: "{{ item }}"
     state: present
   with_items: "{{ users_groups }}"
-  become: yes
 
 - name: "create users"
   user:
@@ -16,7 +15,6 @@
     state: present
   with_items: "{{ users }}"
   no_log: yes
-  become: yes
 
 - name: "generate ssh keys"
   user:
@@ -28,4 +26,3 @@
     ssh_key_comment: "{{ item.name }}"
   with_items: "{{ users }}"
   no_log: yes
-  become: yes

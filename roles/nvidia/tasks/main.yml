@@ -10,13 +10,11 @@
     - "xf86-video-intel"
     - "nvidia"
     - "bbswitch"
-  become: yes
 
 - name: "install bumblebee package"
   pacman:
     name: "bumblebee"
     state: present
-  become: yes
 
 - name: "add bumblebee group to users"
   user:
@@ -27,11 +25,9 @@
   with_items: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
-  become: yes
 
 - name: "start service for bumblebee"
   systemd:
     name: "bumblebeed"
     state: started
     enabled: yes
-  become: yes
