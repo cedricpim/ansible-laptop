@@ -20,13 +20,13 @@
 
 - name: "add bumblebee group to users"
   user:
-    name: "{{ item.user_name }}"
+    name: "{{ item.name }}"
     groups: "bumblebee"
     append: yes
     state: present
   with_items: "{{ users }}"
   loop_control:
-    label: "{{ item.user_name }}"
+    label: "{{ item.name }}"
   become: yes
 
 - name: "start service for bumblebee"

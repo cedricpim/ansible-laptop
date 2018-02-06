@@ -1,9 +1,9 @@
 ---
-- name: install openvpn
+- name: "install openvpn"
   pacman:
     name: "{{ item }}"
-    state: present
+    state: "present"
   with_items:
-    - openvpn
-    - networkmanager-openvpn
+    - "openvpn"
+    - "networkmanager-openvpn"
   become: yes

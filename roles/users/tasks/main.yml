@@ -8,8 +8,8 @@
 
 - name: "create users"
   user:
-    name: "{{ item.user_name }}"
-    password: "{{ item.user_password }}"
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
     createhome: yes
     groups: "{{ users_groups }}"
     append: yes
@@ -20,12 +20,12 @@
 
 - name: "generate ssh keys"
   user:
-    name: "{{ item.user_name }}"
+    name: "{{ item.name }}"
     generate_ssh_key: yes
     ssh_key_bits: 4096
     ssh_key_file: ".ssh/id_rsa"
-    ssh_key_passphrase: "{{ item.user_ssh_key_passphrase }}"
-    ssh_key_comment: "{{ item.user_name }}"
+    ssh_key_passphrase: "{{ item.ssh_key_passphrase }}"
+    ssh_key_comment: "{{ item.name }}"
   with_items: "{{ users }}"
   no_log: yes
   become: yes

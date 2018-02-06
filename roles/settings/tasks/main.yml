@@ -1,0 +1,59 @@
+---
+- name: "create Pictures folder"
+  file:
+    path: "~{{ item.name }}/Pictures"
+    state: directory
+  with_items: "{{ users }}"
+  no_log: yes
+  become: yes
+
+- name: "copy wallpaper to Pictures folder"
+  copy:
+    src: "{{ item.wallpaper }}"
+    dest: "~{{ item.name }}/Pictures/wallpaper.jpg"
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
+    mode: 0600
+  with_items: "{{ users }}"
+  no_log: yes
+  become: yes
+
+- name: "set wallpaper as background image"
+  dconf:
+    key: "{{ dconf_background_key }}"
+    value: "'file:///home/{{ item.name }}/Pictures/wallpaper.jpg'"
+    state: present
+  with_items: "{{ users }}"
+  become: "{{ item.name }}"
+
+- name: "copy startx configuration file"
+  template:
+    src: "xprofile.j2"
+    dest: "~/.xprofile"
+    mode: 0600
+
+- name: "create folder for autostart programs"
+  file:
+    path: "{{ autostart_dir }}"
+    state: directory
+
+- name: "copy xprofile to autostart"
+  template:
+    src: "xprofile.desktop.j2"
+    dest: "{{ autostart_dir }}/xprofile.desktop"
+    mode: 0644
+
+- name: "install python-psutil for dconf"
+  pacman:
+    name: "python-psutil"
+    state: present
+  become: yes
+
+- name: "set mouse settings"
+  dconf:
+    key: "{{ touchpad_dconf_base_key }}/{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items:
+    - { key: "natural-scroll", value: "{{ touchpad_natural_scroll }}" }
+    - { key: "click-method", value: "{{ touchpad_click_method }}" }
