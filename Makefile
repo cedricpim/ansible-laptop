@@ -30,5 +30,5 @@ deploy-vagrant:
 
 edit-vault:
 	$(eval VAULT = vaulted_vars/${ANSIBLE_USER}/vault.yml)
-	$(eval ANSIBLE_VAULT_PASSWORD_FILE = vaulted_vars/${ANSIBLE_USER}/vault.txt)
+	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/${ANSIBLE_USER}/vault.txt)
 	ansible-vault edit ${VAULT} ${ANSIBLE_OPTS}
