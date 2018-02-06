@@ -1,2 +1,9 @@
 ---
 users: "{{ vault_users }}"
+
+system_time_zone: "{{ vault_system_time_zone }}"
+system_hostname: "{{ vault_system_hostname }}"
+
+network_interface: "{{ vault_network_interface }}"
+network_name: "{{ vault_network_name }}"
+network_passphrase: "{{ vault_network_passphrase }}"

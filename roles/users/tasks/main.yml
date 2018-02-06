@@ -15,6 +15,7 @@
     append: yes
     state: present
   with_items: "{{ users }}"
+  no_log: yes
   become: yes
 
 - name: "generate ssh keys"
@@ -26,4 +27,5 @@
     ssh_key_passphrase: "{{ item.user_ssh_key_passphrase }}"
     ssh_key_comment: "{{ item.user_name }}"
   with_items: "{{ users }}"
+  no_log: yes
   become: yes

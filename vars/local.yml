@@ -6,13 +6,6 @@ git_full_name: "{{ vault_git_full_name }}"
 git_email: "{{ vault_git_email }}"
 git_signingkey: "{{ vault_git_signingkey }}"
 
-system_time_zone: "{{ vault_system_time_zone }}"
-system_hostname: "{{ vault_system_hostname }}"
-
-network_interface: "{{ vault_network_interface }}"
-network_name: "{{ vault_network_name }}"
-network_passphrase: "{{ vault_network_passphrase }}"
-
 newsblur_username: "{{ vault_newsblur_username }}"
 newsblur_password: "{{ vault_newsblur_password }}"
 
