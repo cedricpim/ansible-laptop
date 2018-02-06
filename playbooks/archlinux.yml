@@ -12,6 +12,6 @@
     - { role: "ssd", tags: "ssd" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
-    - { role: "settings", tags: "settings" }
+    - { role: "system", tags: "system" }
     - { role: "fonts", tags: "fonts" }
     - { role: "openvpn", tags: "openvpn" }
