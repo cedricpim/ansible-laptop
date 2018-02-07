@@ -13,14 +13,14 @@
     - { role: "calendar", tags: "calendar" }
     - { role: "editor", tags: "editor" }
     - { role: "email", tags: "email" }
-    - { role: "feeds", tags: "feeds" }
-    - { role: "ledger", tags: "ledger" }
-    - { role: "server", tags: "server" }
+    - { role: "feeds", tags: "feeds", when: feeds is defined and feeds }
+    - { role: "ledger", tags: "ledger", when: ledger is defined and ledger }
+    - { role: "server", tags: "server", when: server is defined and server }
     - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
     - { role: "tmux", tags: "tmux" }
     - { role: "todo", tags: "todo" }
-    - { role: "torrents", tags: "torrents" }
+    - { role: "torrents", tags: "torrents", when: torrents is defined and torrents }
     - { role: "zsh", tags: "zsh" }
     - { role: "applications", tags: "applications" }
 
