@@ -2,7 +2,7 @@
 - name: "create initial groups"
   group:
     name: "{{ item }}"
-    state: present
+    state: "present"
   with_items: "{{ users_groups }}"
   become: yes
 
@@ -13,7 +13,7 @@
     createhome: yes
     groups: "{{ users_groups }}"
     append: yes
-    state: present
+    state: "present"
   with_items: "{{ users }}"
   no_log: yes
   become: yes
@@ -29,3 +29,15 @@
   with_items: "{{ users }}"
   no_log: yes
   become: yes
+
+- name: "setup ansible laptop project"
+  block:
+    - file: path="{{ ansible_laptop_directory }}" state="directory"
+      with_items: "{{ users }}"
+    - git: repo="{{ ansible_laptop_repo }}" dest="{{ ansible_laptop_dest }}" clone=yes update=no
+      with_items: "{{ users }}"
+    - replace: path="{{ ansible_laptop_dest }}/.git/config" regexp="{{ github_https_base }}" replace="{{ github_ssh_base }}"
+      with_items: "{{ users }}"
+  no_log: yes
+  become: yes
+  become_user: "{{ item.name }}"
