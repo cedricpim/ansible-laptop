@@ -1,5 +1,4 @@
 VAGRANT_PLAYBOOK ?= test
-ANSIBLE_USER ?= local
 CHECK ?=
 VERBOSE ?=
 TAGS ?=
@@ -14,21 +13,17 @@ arch:
 	ansible-playbook playbooks/archlinux.yml --diff --ask-become-pass ${ANSIBLE_OPTS}
 
 backup:
-	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/local/vault.txt)
+	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/${USER}/vault.txt)
 	ansible-playbook playbooks/backup.yml --diff --ask-become-pass ${ANSIBLE_OPTS}
 
 dotfiles:
-	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/local/vault.txt)
+	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/${USER}/vault.txt)
 	ansible-playbook playbooks/dotfiles.yml --diff --ask-become-pass ${ANSIBLE_OPTS}
-
-work:
-	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/work/vault.txt)
-	ansible-playbook playbooks/work.yml --diff --ask-become-pass ${ANSIBLE_OPTS}
 
 deploy-vagrant:
 	 VAGRANT_VERBOSE=${VERBOSE} VAGRANT_TAGS=${TAGS} VAGRANT_PLAYBOOK=${VAGRANT_PLAYBOOK} vagrant provision
 
 edit-vault:
-	$(eval VAULT = vaulted_vars/${ANSIBLE_USER}/vault.yml)
-	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/${ANSIBLE_USER}/vault.txt)
+	$(eval VAULT = vaulted_vars/${USER}/vault.yml)
+	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/${USER}/vault.txt)
 	ansible-vault edit ${VAULT} ${ANSIBLE_OPTS}

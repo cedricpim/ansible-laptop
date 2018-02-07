@@ -1,5 +1,4 @@
 ---
-user: "{{ vault_user }}"
 wallpaper: "{{ vault_wallpaper }}"
 
 git_full_name: "{{ vault_git_full_name }}"
