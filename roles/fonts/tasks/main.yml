@@ -16,3 +16,5 @@
     - "nerd-fonts-complete"
   loop_control:
     loop_var: "pkg_name"
+  become: yes
+  become_user: "{{ users[0].name }}"

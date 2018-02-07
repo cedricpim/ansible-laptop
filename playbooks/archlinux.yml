@@ -12,4 +12,5 @@
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
     - { role: "system", tags: "system" }
+    - { role: "fonts", tags: "fonts" }
     - { role: "openvpn", tags: "openvpn" }

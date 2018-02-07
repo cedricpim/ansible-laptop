@@ -11,8 +11,15 @@
     - "gnome-keyring"
     - "ntfs-3g"
     - "xcape"
-    - "watchdog"
   become: yes
+
+- include_role:
+    name: "pacaur"
+    tasks_from: "install"
+  vars:
+    pkg_name: "watchdog"
+  become: yes
+  become_user: "{{ users[0].name }}"
 
 - name: "enable system services"
   systemd:
