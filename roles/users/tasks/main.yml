@@ -38,6 +38,8 @@
       with_items: "{{ users }}"
     - replace: path="{{ ansible_laptop_dest }}/.git/config" regexp="{{ github_https_base }}" replace="{{ github_ssh_base }}"
       with_items: "{{ users }}"
+    - copy: content="{{ item.vault }}" dest="{{ ansible_laptop_dest }}/vaulted_vars/{{ item.name }}/vault.txt"
+      with_items: "{{ users }}"
   no_log: yes
   become: yes
   become_user: "{{ item.name }}"
