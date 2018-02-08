@@ -62,6 +62,13 @@
         :color: :yellow
       :period:
         :color: :magenta
+      :money:
+        :negative:
+          :color: :red
+        :neutral:
+          :color: :black
+        :positive:
+          :color: :green
       :processed:
         'yes':
           :color: :white
@@ -73,6 +80,17 @@
       :rule: true
       :color: :cyan
       :bold: true
+    :balance:
+      :header:
+        - Account
+        - ''
+        - Amount
+      :options:
+        - :width: 25
+          :align: 'right'
+        - :width: 10
+        - :width: 25
+          :align: 'left'
     :transaction:
       :list:
         :header:
