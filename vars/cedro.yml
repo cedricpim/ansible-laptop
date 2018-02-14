@@ -47,6 +47,8 @@ backup_password: "{{ vault_backup_password }}"
 backup_dirs: "{{ vault_backup_dirs }}"
 backup_exclude_options: "{{ vault_backup_exclude_options }}"
 
+ssh_entries: "{{ vault_ssh_entries }}"
+
 feeds: yes
 server: yes
 ledger: yes

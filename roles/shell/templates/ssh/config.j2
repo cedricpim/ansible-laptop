@@ -1,0 +1,13 @@
+{{ ansible_managed | comment }}
+
+Host *
+  ServerAliveInterval 10
+  HashKnownHosts yes
+
+{% for ssh_entry in ssh_entries | default([]) %}
+
+Host {{ ssh_entry.host }}
+{% for ssh_option in ssh_entry.options %}
+  {{ ssh_option.key }} {{ ssh_option.value }}
+{% endfor %}
+{% endfor %}

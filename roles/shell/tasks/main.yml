@@ -33,10 +33,21 @@
   template:
     src: "scripts/{{ item }}.j2"
     dest: "{{ scripts_directory }}/{{ item }}"
-    mode: 0700
+    mode: "0700"
   with_items:
     - "luks"
     - "update-repos"
+
+- name: "create folder for SSH"
+  file:
+    path: "~/.ssh"
+    state: "directory"
+
+- name: "set SSH configuration"
+  template:
+    src: "ssh/config.j2"
+    dest: "~/.ssh/config"
+    mode: "0644"
 
 - import_tasks: git.yml
 - import_tasks: htop.yml
