@@ -6,4 +6,5 @@
   with_items:
     - "openvpn"
     - "networkmanager-openvpn"
+    - "openresolv"
   become: yes
