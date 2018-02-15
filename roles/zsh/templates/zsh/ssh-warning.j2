@@ -18,9 +18,7 @@ if [[ "$TERM" == "screen-256color" ]]; then
   }
 
   function reset-colors() {
-    if [[ -z "$WORK" ]] || [[ ! -n "$TMUX" ]]; then
-      change-color "$(original-color '*.background')" "$(original-color '*.foreground')"
-    fi
+    change-color "$(original-color '*.background')" "$(original-color '*.foreground')"
   }
 
   function colorssh() {
