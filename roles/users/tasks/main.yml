@@ -35,6 +35,8 @@
   block:
     - known_hosts: path="~{{ item.name }}/.ssh/known_hosts" name="github.com" key="{{ github_host }}"
       with_items: "{{ ssh_keys.results }}"
+    - file: path="~{{ item.name }}/.ssh/known_hosts" owner="{{ item.name }}" group="{{ item.name }}"
+      with_items: "{{ ssh_keys.results }}"
     - github_key: name="[{{ansible_product_name }}] {{ item.name }}" pubkey="{{ item.ssh_public_key }}" token="{{ github_access_token }}"
       with_items: "{{ ssh_keys.results }}"
   when: ssh_keys is defined
