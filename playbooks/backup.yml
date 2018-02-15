@@ -1,12 +1,9 @@
 ---
 - hosts: local
 
-  vars:
-    user: "{{ lookup('env', 'USER') }}"
-
   vars_files:
-    - "../vaulted_vars/{{ user }}/vault.yml"
-    - "../vars/{{ user }}.yml"
+    - "../vaulted_vars/system/vault.yml"
+    - "../vars/system.yml"
 
   roles:
     - { role: "backup", tags: "backup" }

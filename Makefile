@@ -13,7 +13,7 @@ arch:
 	ansible-playbook playbooks/archlinux.yml --diff --ask-become-pass ${ANSIBLE_OPTS}
 
 backup:
-	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/${USER}/vault.txt)
+	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/system/vault.txt)
 	ansible-playbook playbooks/backup.yml --diff --ask-become-pass ${ANSIBLE_OPTS}
 
 dotfiles:

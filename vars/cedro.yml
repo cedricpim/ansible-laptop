@@ -42,11 +42,6 @@ ledger_personal_reoccurrences: "{{ vault_ledger_personal_reoccurrences }}"
 
 todo_main_directory: "{{ vault_todo_main_directory }}"
 
-backup_size: "{{ vault_backup_size }}"
-backup_password: "{{ vault_backup_password }}"
-backup_dirs: "{{ vault_backup_dirs }}"
-backup_exclude_options: "{{ vault_backup_exclude_options }}"
-
 ssh_entries: "{{ vault_ssh_entries }}"
 
 feeds: yes
