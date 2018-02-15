@@ -2,7 +2,7 @@
 - name: "install offlineimap to sync emails and ca-certificates"
   pacman:
     name: "{{ item }}"
-    state: present
+    state: "present"
   with_items:
     - "offlineimap"
     - "ca-certificates"
@@ -11,7 +11,7 @@
 - name: "create folder for offlineimap configuration and mail"
   file:
     path: "{{ item }}"
-    state: directory
+    state: "directory"
   with_items:
     - "{{ offlineimap_directory }}"
     - "{{ email_directory }}"
@@ -20,11 +20,11 @@
   template:
     src: "offlineimap/config.j2"
     dest: "{{ offlineimap_directory }}/config"
-    mode: 0600
+    mode: "0600"
 
 - name: "enable and start offlineimap timer"
   systemd:
-    name: offlineimap-oneshot.timer
-    state: started
+    name: "offlineimap-oneshot.timer"
+    state: "started"
     enabled: yes
     user: yes

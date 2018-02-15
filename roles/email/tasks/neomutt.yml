@@ -2,7 +2,7 @@
 - name: "install neomutt and w3m to render emails"
   pacman:
     name: "{{ item }}"
-    state: present
+    state: "present"
   with_items:
     - "neomutt"
     - "w3m"
@@ -10,19 +10,19 @@
 
 - name: "ensure urlview is installed"
   include_role:
-    name: shell
-    tasks_from: urlview
+    name: "shell"
+    tasks_from: "urlview"
 
 - name: "create folder for neomutt configuration"
   file:
     path: "{{ neomutt_directory }}"
-    state: directory
+    state: "directory"
 
 - name: "copy neomutt configurations file"
   template:
     src: "neomutt/{{ item }}.j2"
     dest: "{{ neomutt_directory }}/{{ item }}"
-    mode: 0600
+    mode: "0600"
   with_items:
     - "bindings"
     - "colorscheme"

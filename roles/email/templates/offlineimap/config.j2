@@ -101,14 +101,16 @@ localfolders = {{ email_directory }}/{{ account.name }}
 
 [Repository {{ account.name }}-Remote]
 # The remote repository. We only support IMAP or Gmail here.
-type = IMAP
+type = {{ account.type }}
 
 # The following can fetch the account credentials via a python expression that
 # is parsed from the pythonfile parameter. For example, a function called
 # "getcredentials" that parses a file "filename" and returns the account
 # details for "hostname".
-remotehost = {{ offlineimap_email_server }}
-remoteuser = {{ account.name }}@{{ offlineimap_email_server }}
+{% if account.type != "Gmail" %}
+remotehost = {{ account.user.split("@") | last }}
+{% endif %}
+remoteuser = {{ account.user }}
 remotepass = {{ account.password }}
 
 
