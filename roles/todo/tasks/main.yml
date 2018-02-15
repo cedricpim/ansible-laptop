@@ -1,29 +1,26 @@
 ---
 - include_role:
-    name: pacaur
-    tasks_from: install
+    name: "pacaur"
+    tasks_from: "install"
   vars:
-    pkg_name: todotxt
+    pkg_name: "todotxt"
 
-- name: create folders for todo configuration and files
+- name: "create folders for todo configuration and files"
   file:
     path: "{{ item }}"
-    state: directory
+    state: "directory"
   with_items:
     - "{{ todo_main_directory }}"
     - "{{ todo_directory }}"
-    - "{{ todo_actions_dest }}"
 
-- name: copy todo configuration
+- name: "copy todo configuration"
   template:
     src: "config.j2"
     dest: "{{ todo_directory }}/config"
-    mode: 0600
+    mode: "0600"
 
 - name: "download todo.actions.d repository"
-  git:
-    repo: "{{ todo_actions_repo }}"
-    dest: "{{ todo_actions_dest }}"
-    clone: yes
-    update: yes
-    accept_hostkey: yes
+  block:
+    - file: path="{{ todo_actions_dest }}" state="directory"
+    - git: repo="{{ todo_actions_repo }}" dest="{{ todo_actions_dest }}" clone=yes update=yes
+    - replace: path="{{ todo_actions_dest }}/.git/config" regexp="{{ gist_github_https_base }}" replace="{{ gist_github_ssh_base }}"
