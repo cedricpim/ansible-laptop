@@ -15,15 +15,13 @@
 
 [storage my_contacts_local]
   type = "filesystem"
-  path = "{{ vdirsyncer_directory }}/contacts/{{ calendar_host }}"
+  path = "{{ vdirsyncer_directory }}/contacts/{{ calendar_user }}"
   fileext = ".vcf"
 
 [storage my_contacts_remote]
-  type = "carddav"
-  url = "https://{{ calendar_server }}"
-  auth = "basic"
-  username = "{{ calendar_username }}"
-  password = "{{ calendar_password }}"
+{% for contact_option in calendar_contact_options %}
+  {{ contact_option.key }} = "{{ contact_option.value }}"
+{% endfor %}
 
 #############################
 ######### Calendars #########
@@ -38,12 +36,10 @@
 
 [storage my_calendar_local]
   type = "filesystem"
-  path = "{{ vdirsyncer_directory }}/calendars/{{ calendar_host }}"
+  path = "{{ vdirsyncer_directory }}/calendars/{{ calendar_user }}"
   fileext = ".ics"
 
 [storage my_calendar_remote]
-  type = "caldav"
-  url = "https://{{ calendar_server }}"
-  auth = "basic"
-  username = "{{ calendar_username }}"
-  password = "{{ calendar_password }}"
+{% for calendar_option in calendar_calendar_options %}
+  {{ calendar_option.key }} = "{{ calendar_option.value }}"
+{% endfor %}

@@ -1,55 +1,61 @@
 ---
 - include_role:
-    name: pacaur
-    tasks_from: install
-  vars:
-    pkg_name: vdirsyncer
+    name: "pacaur"
+    tasks_from: "install"
+  with_items:
+    - "vdirsyncer"
+    - "python-pip"
+  loop_control:
+    loop_var: "pkg_name"
 
-- name: create folder for vdirsyncer configuration
+- name: "install extra dependencies"
+  command: "pip install vdirsyncer[google]"
+
+- name: "create folder for vdirsyncer configuration"
   file:
     path: "{{ vdirsyncer_directory }}"
-    state: directory
+    state: "directory"
 
-- name: copy vdirsyncer configuration
+- name: "copy vdirsyncer configuration"
   template:
     src: "vdirsyncer/config.j2"
     dest: "{{ vdirsyncer_directory }}/config"
-    mode: 0600
+    mode: "0600"
 
-- name: create user folder for systemd
+- name: "create user folder for systemd"
   file:
     path: "{{ systemd_user_directory }}"
-    state: directory
+    state: "directory"
 
-- name: symlink service and timer for vdirsyncer
+- name: "symlink service and timer for vdirsyncer"
   file:
     src: "{{ vdirsyncer_aur_systemd }}/{{ item }}"
     dest: "{{ systemd_user_directory }}/{{ item }}"
-    state: link
+    state: "link"
   with_items:
-    - vdirsyncer.service
-    - vdirsyncer.timer
-  notify: updated vdirsyncer timer
+    - "vdirsyncer.service"
+    - "vdirsyncer.timer"
+  notify: "updated vdirsyncer timer"
 
-- name: create folder for systemd vdirsyncer
+- name: "create folder for systemd vdirsyncer"
   file:
     path: "{{ systemd_user_directory }}/vdirsyncer.service.d"
-    state: directory
+    state: "directory"
 
-- name: copy vdirsyncer overriding configuration for systemd
+- name: "copy vdirsyncer overriding configuration for systemd"
   template:
     src: "vdirsyncer/override.conf.j2"
     dest: "{{ systemd_user_directory }}/vdirsyncer.service.d/override.conf"
-    mode: 0600
-  notify: updated vdirsyncer timer
+    mode: "0600"
+  notify: "updated vdirsyncer timer"
 
-- name: create folder for scripts
+- name: "create folder for scripts"
   file:
     path: "{{ scripts_directory }}"
-    state: directory
+    state: "directory"
 
-- name: copy vdirsyncer custom script
+- name: "copy vdirsyncer custom script"
   template:
     src: "vdirsyncer/vsync.j2"
     dest: "{{ scripts_directory }}/vsync"
-    mode: 0700
+    mode: "0700"

@@ -2,7 +2,7 @@
 
 [addressbooks]
 [[contacts]]
-path = {{ vdirsyncer_directory }}/contacts/{{ calendar_host }}/{{ calendar_contacts[0] }}/
+path = {{ vdirsyncer_directory }}/contacts/{{ calendar_user }}/{{ calendar_contacts | first }}/
 
 [general]
 debug = no

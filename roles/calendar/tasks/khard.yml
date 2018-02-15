@@ -1,20 +1,20 @@
 ---
 - include_role:
-    name: pacaur
-    tasks_from: install
+    name: "pacaur"
+    tasks_from: "install"
   vars:
-    pkg_name: khard
+    pkg_name: "khard"
 
-- name: create folder for khard configuration
+- name: "create folder for khard configuration"
   file:
     path: "{{ khard_directory }}"
-    state: directory
+    state: "directory"
 
-- name: copy khard configuration
+- name: "copy khard configuration"
   template:
     src: "khard/{{ item }}.j2"
     dest: "{{ khard_directory }}/{{ item }}"
-    mode: 0600
+    mode: "0600"
   with_items:
-    - contact.yml
-    - khard.conf
+    - "contact.yml"
+    - "khard.conf"

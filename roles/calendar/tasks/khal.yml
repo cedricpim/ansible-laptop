@@ -1,28 +1,28 @@
 ---
 - include_role:
-    name: pacaur
-    tasks_from: install
+    name: "pacaur"
+    tasks_from: "install"
   vars:
-    pkg_name: khal
+    pkg_name: "khal"
 
-- name: create folder for khal configuration
+- name: "create folder for khal configuration"
   file:
     path: "{{ khal_directory }}"
-    state: directory
+    state: "directory"
 
-- name: copy khal configuration
+- name: "copy khal configuration"
   template:
     src: "khal/config.j2"
     dest: "{{ khal_directory }}/config"
-    mode: 0600
+    mode: "0600"
 
-- name: create folder for scripts
+- name: "create folder for scripts"
   file:
     path: "{{ scripts_directory }}"
-    state: directory
+    state: "directory"
 
-- name: copy khal custom script
+- name: "copy khal custom script"
   template:
     src: "khal/rikhal.j2"
     dest: "{{ scripts_directory }}/rikhal"
-    mode: 0700
+    mode: "0700"

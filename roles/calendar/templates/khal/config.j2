@@ -3,7 +3,7 @@
 [calendars]
 {% for calendar in calendar_calendars %}
   [[{{ calendar.name }}]]
-    path = {{ vdirsyncer_directory }}/calendars/{{ calendar_host }}/{{ calendar.name }}/
+    path = {{ vdirsyncer_directory }}/calendars/{{ calendar_user }}/{{ calendar.name }}/
     color = "{{ calendar.color }}"
     readonly = {{ calendar.readonly }}
 {% endfor %}
