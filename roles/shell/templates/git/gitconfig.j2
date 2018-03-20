@@ -24,9 +24,9 @@
   branches = branch -a
   remotes = remote -v
   # Amend the currently staged files to the latest commit
-  amend = commit --amend --reuse-message=HEAD
+  amend = commit -S --amend --reuse-message=HEAD
   # Credit an author on the latest commit
-  credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+  credit = "!f() { git commit -S --amend --author \"$1 <$2>\" -C HEAD; }; f"
   # Interactive rebase with the given number of latest commits
   reb = "!r() { git rebase -i HEAD~$1; }; r"
   # Find branches containing commit
@@ -50,7 +50,7 @@
       git checkout master && \
       git merge pr/$1 && \
       git branch -D pr/$1 && \
-      git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
+      git commit -S --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
     fi \
   }; f"
   # Other aliases
@@ -65,9 +65,9 @@
   # Log with Graph
   graph = log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   # Fixup commit instead of full commit
-  fixup = commit --fixup
+  fixup = commit -S --fixup
   # Squash commit instead of full commit
-  squash = commit --squash
+  squash = commit -S --squash
   # Push with lease (better than simply force push)
   pf = push --force-with-lease
   # Just push
@@ -82,7 +82,7 @@
   # Wipe all local branches apart from master
   wipe = !git branch | grep -v master | xargs -n 1 git branch -D
   # Ammend using previous message
-  ca = commit --amend --no-edit
+  ca = commit -S --amend --no-edit
   # Check commits per author
   authors = "!r() { git shortlog -sn --since=\"$1 weeks\"; }; r"
 
