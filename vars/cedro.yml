@@ -37,12 +37,12 @@ neomutt_mailbox_mbox: "{{ vault_neomutt_mailbox_mbox }}"
 neomutt_email_server_port: "{{ vault_neomutt_email_server_port }}"
 neomutt_smtp_protocol: "{{ vault_neomutt_smtp_protocol }}"
 
-ledger_personal_salt: "{{ vault_ledger_personal_salt }}"
-ledger_personal_password: "{{ vault_ledger_personal_password }}"
-ledger_personal_categories: "{{ vault_ledger_personal_categories }}"
-ledger_personal_currencies: "{{ vault_ledger_personal_currencies }}"
-ledger_personal_function: "{{ vault_ledger_personal_function }}"
-ledger_personal_reoccurrences: "{{ vault_ledger_personal_reoccurrences }}"
+ledger_salt: "{{ vault_ledger_salt }}"
+ledger_password: "{{ vault_ledger_password }}"
+ledger_categories: "{{ vault_ledger_categories }}"
+ledger_currencies: "{{ vault_ledger_currencies }}"
+ledger_function: "{{ vault_ledger_function }}"
+ledger_reoccurrences: "{{ vault_ledger_reoccurrences }}"
 
 todo_main_directory: "{{ vault_todo_main_directory }}"
 

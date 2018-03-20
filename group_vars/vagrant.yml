@@ -63,13 +63,13 @@ neomutt_mailbox_mbox: "Mailbox3"
 neomutt_email_server_port: "465"
 neomutt_smtp_protocol: "smtps"
 
-ledger_personal_salt: "salt"
-ledger_personal_password: "password"
-ledger_personal_categories:
+ledger_salt: "salt"
+ledger_password: "password"
+ledger_categories:
   - Category
   - Category 1
   - Category 2
-ledger_personal_currencies:
+ledger_currencies:
   - USD
   - EUR
 

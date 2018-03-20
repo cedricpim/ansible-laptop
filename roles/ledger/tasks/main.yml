@@ -11,4 +11,4 @@
 - import_tasks: build.yml
 - import_tasks: configuration.yml
 - import_tasks: recurring.yml
-  when: ledger_personal_reoccurrences is defined
+  when: ledger_reoccurrences is defined

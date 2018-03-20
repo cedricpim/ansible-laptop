@@ -19,7 +19,7 @@
     :default: ''
     :presence: true
     :values:
-{% for category in ledger_personal_categories %}
+{% for category in ledger_categories %}
       - {{ category }}
 {% endfor %}
   :description:
@@ -29,10 +29,10 @@
     :default: ''
     :presence: true
   :currency:
-    :default: '{{ ledger_personal_currencies[0] }}'
+    :default: '{{ ledger_currencies[0] }}'
     :presence: true
     :values:
-{% for currency in ledger_personal_currencies %}
+{% for currency in ledger_currencies %}
       - {{ currency }}
 {% endfor %}
   :processed:
@@ -209,5 +209,5 @@
   :algorithm: AES-256-CBC
   # Add credentials to encrypt the file. This is a shell command.
   :credentials:
-    :password: {{ ledger_personal_password }}
-    :salt: {{ ledger_personal_salt }}
+    :password: {{ ledger_password }}
+    :salt: {{ ledger_salt }}
