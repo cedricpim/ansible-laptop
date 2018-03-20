@@ -65,3 +65,8 @@ fi
 [ -f ~/.config/fzf/shell/completion.zsh ] && source ~/.config/fzf/shell/completion.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [ `command -v chruby` ]; then
+  source /usr/share/chruby/chruby.sh
+  source /usr/share/chruby/auto.sh
+fi
