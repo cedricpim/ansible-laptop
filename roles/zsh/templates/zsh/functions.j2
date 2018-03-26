@@ -119,4 +119,9 @@ function codepoint() {
   fi;
 }
 
+# Maximum compression
+function compress() {
+  tar -cf - $1 | xz -9 -c - > $2.tar.xz
+}
+
 {{ ledger_function | default("") }}
