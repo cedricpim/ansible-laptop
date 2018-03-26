@@ -37,7 +37,10 @@ case $1 in
     url="https://{{ personal_server }}/public/$filename"
 
     # Check if file was been uploaded
-    while [ "`curl -s -o /dev/null -I -w "%{http_code}" $url`" != "200" ]; do sleep 5; done
+    while [ "`curl -s -o /dev/null -I -w "%{http_code}" $url`" != "200" ]; do
+      echo -n "."
+      sleep 2
+    done
 
     # Print out link to the file on the server
     echo $url
