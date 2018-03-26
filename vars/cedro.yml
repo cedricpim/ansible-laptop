@@ -39,6 +39,7 @@ neomutt_smtp_protocol: "{{ vault_neomutt_smtp_protocol }}"
 
 ledger_salt: "{{ vault_ledger_salt }}"
 ledger_password: "{{ vault_ledger_password }}"
+ledger_exchange_api_key: "{{ vault_ledger_exchange_api_key }}"
 ledger_categories: "{{ vault_ledger_categories }}"
 ledger_currencies: "{{ vault_ledger_currencies }}"
 ledger_function: "{{ vault_ledger_function }}"

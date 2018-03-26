@@ -3,6 +3,13 @@
 # Location for the ledger file holding all the information
 :ledger: ~/Sync/files/money.csv
 
+# Settings to be used by the gem that handles the exchange rates
+# For more information, see https://github.com/spk/money-open-exchange-rates#usage
+:exchange:
+  :api_key: '{{ ledger_exchange_api_key }}'
+  :cache_file: '/tmp/exchange-cache.json'
+  :ttl: 86400 # set the seconds after than the current rates are automatically expired
+
 # Fields that are present on the ledger as well as configurations for each field
 # Each field can contain the following:
 #   - default: "value" - Default value for the field when adding a transaction
