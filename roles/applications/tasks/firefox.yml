@@ -20,7 +20,7 @@
   stat:
     path: "{{ firefox_profiles }}/{{ profile.stdout }}/handlers.json"
   register: st_handlers
-  when: profile is defined and not profile|skipped
+  when: profile is defined and not profile is skipped
 
 - name: "add magnet handler"
   lineinfile:
@@ -29,13 +29,13 @@
     line: '\1"schemes":{"magnet":{"action":2,"handlers":[{"name":"magnet","path":"{{ scripts_directory | regex_replace("~", ansible_env.HOME) }}/magnet"}]}}}'
     state: present
     backrefs: true
-  when: st_handlers is defined and not st_handlers|skipped and st_handlers.stat.islnk is defined
+  when: st_handlers is defined and not st_handlers is skipped and st_handlers.stat.islnk is defined
 
 - name: "check prefs.js"
   stat:
     path: "{{ firefox_profiles }}/{{ profile.stdout }}/prefs.js"
   register: st_prefs
-  when: profile is defined and not profile|skipped
+  when: profile is defined and not profile is skipped
 
 - name: "define options for Firefox"
   lineinfile:
@@ -44,4 +44,4 @@
     line: "user_pref(\"{{ item.option }}\", {{ item.value }});"
     state: present
   with_items: "{{ firefox_options }}"
-  when: st_prefs is defined and not st_prefs|skipped and st_prefs.stat.islnk is defined
+  when: st_prefs is defined and not st_prefs is skipped and st_prefs.stat.islnk is defined
