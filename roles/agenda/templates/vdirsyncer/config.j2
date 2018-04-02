@@ -3,43 +3,27 @@
 [general]
   status_path = "{{ vdirsyncer_directory }}/status/"
 
-############################
-######### Contacts #########
-############################
-
-[pair my_contacts]
-  a = "my_contacts_local"
-  b = "my_contacts_remote"
-  collections = ["{{ calendar_contacts | join('", "') }}"]
-  conflict_resolution = "a wins"
-
-[storage my_contacts_local]
-  type = "filesystem"
-  path = "{{ vdirsyncer_directory }}/contacts/{{ calendar_user }}"
-  fileext = ".vcf"
-
-[storage my_contacts_remote]
-{% for contact_option in calendar_contact_options %}
-  {{ contact_option.key }} = "{{ contact_option.value }}"
-{% endfor %}
-
-#############################
-######### Calendars #########
-#############################
-
-[pair my_calendar]
-  a = "my_calendar_local"
-  b = "my_calendar_remote"
-  collections = ["{{ calendar_calendars | map(attribute="name") | join('", "') }}"]
+{% for account in agenda_vdirsyncer %}
+[pair {{ account.name }}]
+  a = "{{ account.name }}_local"
+  b = "{{ account.name }}_remote"
+{% if account.collections is defined %}
+  collections = ["{{ account.collections | join('", "') }}"]
+{% else %}
+  collections = null
+{% endif %}
   conflict_resolution = "a wins"
   metadata = ["color", "displayname"]
 
-[storage my_calendar_local]
+[storage {{ account.name }}_local]
   type = "filesystem"
-  path = "{{ vdirsyncer_directory }}/calendars/{{ calendar_user }}"
-  fileext = ".ics"
+  path = "{{ account.path }}"
+  fileext = "{{ account.fileext }}"
 
-[storage my_calendar_remote]
-{% for calendar_option in calendar_calendar_options %}
-  {{ calendar_option.key }} = "{{ calendar_option.value }}"
+[storage {{ account.name }}_remote]
+{% for option in account.options %}
+  {{ option.key }} = "{{ option.value }}"
+{% endfor %}
+
+
 {% endfor %}
