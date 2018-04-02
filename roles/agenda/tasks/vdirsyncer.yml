@@ -21,6 +21,18 @@
     src: "vdirsyncer/config.j2"
     dest: "{{ vdirsyncer_directory }}/config"
     mode: "0600"
+  notify: "updated vdirsyncer configuration"
+
+- name: "create folder for scripts"
+  file:
+    path: "{{ scripts_directory }}"
+    state: "directory"
+
+- name: "copy vdirsyncer custom script"
+  template:
+    src: "vdirsyncer/vsync.j2"
+    dest: "{{ scripts_directory }}/vsync"
+    mode: "0700"
 
 - name: "create user folder for systemd"
   file:
@@ -48,14 +60,3 @@
     dest: "{{ systemd_user_directory }}/vdirsyncer.service.d/override.conf"
     mode: "0600"
   notify: "updated vdirsyncer timer"
-
-- name: "create folder for scripts"
-  file:
-    path: "{{ scripts_directory }}"
-    state: "directory"
-
-- name: "copy vdirsyncer custom script"
-  template:
-    src: "vdirsyncer/vsync.j2"
-    dest: "{{ scripts_directory }}/vsync"
-    mode: "0700"
