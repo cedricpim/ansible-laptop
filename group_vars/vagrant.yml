@@ -20,24 +20,38 @@ personal_server_photos: "/home/vagrant/photos"
 personal_local_photos: "~/Pictures"
 personal_public_files: "~/Public"
 
-calendar_user: "v-local"
-calendar_contacts:
-  - "vagrant-contacts"
-calendar_contact_options:
-  - { key: "type",     value: "carddav" }
-  - { key: "url",      value: "https://dav.localhost" }
-  - { key: "auth",     value: "basic" }
-  - { key: "username", value: "dav-username" }
-  - { key: "password", value: "dav-password" }
-calendar_calendars:
-  - { name: "vagrant_calendar", color: "#FFFFFF", readonly: "False" }
-  - { name: "remote_calendar",  color: "#333333", readonly: "True" }
-calendar_calendar_options:
-  - { key: "type",     value: "caldav" }
-  - { key: "url",      value: "https://dav.localhost" }
-  - { key: "auth",     value: "basic" }
-  - { key: "username", value: "dav-username" }
-  - { key: "password", value: "dav-password" }
+vault_agenda_khal:
+  main: "my_calendar"
+  calendars:
+    - { name: "my_calendar",     color: "#FFFFFF", readonly: "False", path: "{{ vdirsyncer_directory }}/calendars/vagrant/my_calendar/"     }
+    - { name: "remote_calendar", color: "#333333", readonly: "True",  path: "{{ vdirsyncer_directory }}/calendars/vagrant/remote_calendar/" }
+
+vault_agenda_khard:
+  contacts: "{{ vdirsyncer_directory }}/contacts/vagrant/contacts/"
+
+vault_agenda_vdirsyncer:
+  - name: "my_contacts"
+    path: "{{ vdirsyncer_directory }}/contacts/vagrant"
+    fileext: ".vcf"
+    collections:
+      - "contacts"
+    options:
+      - { key: "type",     value: "carddav" }
+      - { key: "url",      value: "https://dav.localhost" }
+      - { key: "auth",     value: "basic" }
+      - { key: "username", value: "dav-username" }
+      - { key: "password", value: "dav-password" }
+  - name: "my_calendar"
+    path: "{{ vdirsyncer_directory }}/calendars/vagrant"
+    fileext: ".ics"
+    collections:
+      - "my_calendar"
+      - "remote_calendar"
+    options:
+      - { key: "type",          value: "google_contacts" }
+      - { key: "token_file",    value: "{{ vdirsyncer_directory }}/calendars/token" }
+      - { key: "client_id",     value: "client-id" }
+      - { key: "client_secret", value: "client-secret" }
 
 notmuch_full_name: "Vagrant"
 notmuch_primary_email: "first@example.localhost"
