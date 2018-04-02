@@ -3,7 +3,7 @@
 [calendars]
 {% for calendar in agenda_khal.calendars %}
   [[{{ calendar.name }}]]
-    path = {{ calendar.path }}/
+    path = {{ calendar.path }}
     color = "{{ calendar.color }}"
     readonly = {{ calendar.readonly }}
 {% endfor %}
