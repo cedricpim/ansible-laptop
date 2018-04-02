@@ -50,3 +50,7 @@ urxvt_color12: "#01a0e4"
 urxvt_color13: "#a16a94"
 urxvt_color14: "#b5e4f4"
 urxvt_color15: "#f7f7f7"
+
+firefox_options:
+  - {option: "network.protocol-handler.expose.magnet", value: "false"}
+  - {option: "browser.tabs.loadDivertedInBackground", value: "true"}

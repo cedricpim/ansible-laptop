@@ -2,3 +2,8 @@
 copyq_directory: "~/.config/copyq"
 
 firefox_profiles: "~/.mozilla/firefox"
+
+firefox_options:
+  - {option: "network.protocol-handler.expose.magnet", value: "false"}
+  - {option: "browser.tabs.loadDivertedInBackground", value: "true"}
+  - {option: "network.http.sendRefererHeader", value: 0}
