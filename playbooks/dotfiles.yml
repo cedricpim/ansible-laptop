@@ -10,7 +10,7 @@
 
   roles:
     - { role: "settings", tags: "settings" }
-    - { role: "calendar", tags: "calendar" }
+    - { role: "agenda", tags: "agenda" }
     - { role: "editor", tags: "editor" }
     - { role: "email", tags: "email" }
     - { role: "feeds", tags: "feeds", when: feeds is defined and feeds }
