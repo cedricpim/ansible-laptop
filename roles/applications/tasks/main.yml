@@ -21,6 +21,7 @@
 
 - import_tasks: "copyq.yml"
 - import_tasks: "firefox.yml"
+- import_tasks: "flameshot.yml"
 
 - include_role:
     name: "pacaur"

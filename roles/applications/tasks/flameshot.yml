@@ -1,0 +1,16 @@
+---
+- include_role:
+    name: "pacaur"
+    tasks_from: "install"
+  vars:
+    pkg_name: "flameshot"
+
+- name: "set global shortcut for flameshot"
+  dconf:
+    key: "{{ flameshot_dconf_shortcut_base_key }}/{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  with_items:
+    - { key: "binding", value: "{{ flameshot_shorcut_keys }}" }
+    - { key: "command", value: "'flameshot gui'" }
+    - { key: "name", value: "'Flameshot'" }
