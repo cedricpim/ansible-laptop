@@ -23,9 +23,4 @@
     - { role: "torrents", tags: "torrents", when: torrents is defined and torrents }
     - { role: "zsh", tags: "zsh" }
     - { role: "applications", tags: "applications" }
-
-  post_tasks:
-    - name: update packages
-      include_role:
-        name: pacaur
-        tasks_from: update
+    - { role: "docker", tags: "docker" }

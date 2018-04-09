@@ -1,0 +1,21 @@
+---
+- name: "install docker"
+  pacman:
+    name: "docker"
+    state: "present"
+  become: yes
+
+- name: "start service for docker"
+  systemd:
+    name: "docker"
+    state: started
+    enabled: yes
+  become: yes
+
+- name: "add docker group to {{ user }}"
+  user:
+    name: "{{ user }}"
+    groups: "docker"
+    append: yes
+    state: present
+  become: yes

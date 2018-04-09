@@ -24,6 +24,7 @@
     - { role: "torrents", tags: "torrents" }
     - { role: "zsh", tags: "zsh" }
     - { role: "applications", tags: "applications" }
+    - { role: "docker", tags: "docker" }
 
   post_tasks:
     - name: update packages
