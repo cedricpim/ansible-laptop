@@ -12,6 +12,15 @@
     - "vlc"
   become: yes
 
+- name: "install developer utilities"
+    name: "pacaur"
+    tasks_from: "install"
+  with_items:
+    - "insomnia"
+    - "peek"
+  loop_control:
+    loop_var: "pkg_name"
+
 - name: "install syncthing"
   pacman:
     name: "syncthing"
