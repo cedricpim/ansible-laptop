@@ -1,0 +1,10 @@
+---
+- name: "updated NetworkManager configuration"
+  systemd:
+    name: "NetworkManager"
+    state: "reloaded"
+  become: yes
+
+- name: "updated resolvconf configuration"
+  command: "resolvconf -u"
+  become: yes

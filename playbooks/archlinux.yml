@@ -7,6 +7,7 @@
 
   roles:
     - { role: "pacman", tags: "pacman" }
+    - { role: "network", tags: "network" }
     - { role: "nvidia", tags: "nvidia" }
     - { role: "budgie", tags: "budgie" }
     - { role: "sudo", tags: "sudo" }

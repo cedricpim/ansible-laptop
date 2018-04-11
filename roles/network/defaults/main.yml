@@ -1,0 +1,6 @@
+---
+network_manager_directory: "/etc/NetworkManager/conf.d"
+
+name_servers:
+  - "1.1.1.1"
+  - "1.0.0.1"

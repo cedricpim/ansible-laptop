@@ -8,7 +8,31 @@
     - "wpa_supplicant"
     - "networkmanager"
     - "ntp"
+    - "openresolv"
   become: yes
+
+- name: "copy resolvconf configuration"
+  template:
+    src: "resolvconf/resolvconf.conf.j2"
+    dest: "/etc/resolvconf.conf"
+    mode: "0644"
+  become: yes
+  notify: "updated resolvconf configuration"
+
+- name: "create folder for NetworkManager configuration"
+  file:
+    path: "{{ network_manager_directory }}"
+    state: "directory"
+    mode: "0755"
+  become: yes
+
+- name: "copy NetworkManager configuration"
+  template:
+    src: "NetworkManager/01-config-dns.conf.j2"
+    dest: "{{ network_manager_directory }}/01-config-dns.conf"
+    mode: "0644"
+  become: yes
+  notify: "updated NetworkManager configuration"
 
 - name: "start service for NTP"
   systemd:
