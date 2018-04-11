@@ -2,8 +2,8 @@
 - hosts: local
 
   vars_files:
-    - ../vaulted_vars/system/vault.yml
-    - ../vars/system.yml
+    - "../vaulted_vars/system.yml"
+    - "../vars/system.yml"
 
   roles:
     - { role: "pacman", tags: "pacman" }

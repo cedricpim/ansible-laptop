@@ -5,8 +5,8 @@
     user: "{{ lookup('env', 'USER') }}"
 
   vars_files:
-    - "../vaulted_vars/{{ user }}/vault.yml"
-    - "../vars/{{ user }}.yml"
+    - "../vaulted_vars/{{ user }}.yml"
+    - "../vars/user.yml"
 
   roles:
     - { role: "settings", tags: "settings" }
@@ -20,7 +20,7 @@
     - { role: "terminal", tags: "terminal" }
     - { role: "tmux", tags: "tmux" }
     - { role: "todo", tags: "todo" }
-    - { role: "torrents", tags: "torrents", when: torrents is defined and torrents }
+    - { role: "torrents", tags: "torrents" }
     - { role: "zsh", tags: "zsh" }
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }

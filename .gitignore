@@ -1,3 +1,3 @@
 playbook.retry
 .vagrant
-vaulted_vars/*/vault.txt
+vaulted_vars/*.txt
