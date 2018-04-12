@@ -1,6 +1,6 @@
 ---
 - name: add gpg key for cower
-  command: "gpg --recv-keys --keyserver {{ key_server }} {{ cower_gpg_key }}"
+  command: "gpg --recv-keys {{ cower_gpg_key }}"
 
 - name: create temporary folder for cower
   file:
