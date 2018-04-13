@@ -1,8 +1,13 @@
 ---
-- name: "copy startx configuration file"
+- name: "create folder for configurations"
+  file:
+    path: "{{ config_dir }}"
+    state: "directory"
+
+- name: "copy session configuration file"
   template:
-    src: "xprofile.j2"
-    dest: "~/.xprofile"
+    src: "session.j2"
+    dest: "{{ config_dir }}/session"
     mode: 0600
 
 - name: "create folder for autostart programs"
@@ -10,10 +15,10 @@
     path: "{{ autostart_dir }}"
     state: "directory"
 
-- name: "copy xprofile to autostart"
+- name: "copy session to autostart"
   template:
-    src: "xprofile.desktop.j2"
-    dest: "{{ autostart_dir }}/xprofile.desktop"
+    src: "session.desktop.j2"
+    dest: "{{ autostart_dir }}/session.desktop"
     mode: 0644
 
 - name: "set mouse settings"

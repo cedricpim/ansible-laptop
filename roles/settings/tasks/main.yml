@@ -6,4 +6,4 @@
   become: yes
 
 - import_tasks: wallpaper.yml
-- import_tasks: xstart.yml
+- import_tasks: session.yml

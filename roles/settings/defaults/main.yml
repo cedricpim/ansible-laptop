@@ -5,3 +5,5 @@ touchpad_natural_scroll: "false"
 touchpad_click_method: "'fingers'"
 
 autostart_dir: "~/.config/autostart"
+
+config_dir: "~/.config"
