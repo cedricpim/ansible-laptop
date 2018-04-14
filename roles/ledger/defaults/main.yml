@@ -3,3 +3,5 @@ ledger_repo: "https://github.com/cedricpim/ledger.git"
 ledger_dest: "~/ledger.tmp"
 
 ledger_directory: "~/.config/ledger"
+
+ledger_file: "~/.config/ledger.csv"

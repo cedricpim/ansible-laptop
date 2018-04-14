@@ -11,6 +11,7 @@ git_full_name: "{{ vault_git_full_name }}"
 git_email: "{{ vault_git_email }}"
 git_signingkey: "{{ vault_git_signingkey }}"
 
+ledger_file: "{{ vault_ledger_file }}"
 ledger_password: "{{ vault_ledger_password }}"
 ledger_salt: "{{ vault_ledger_salt }}"
 ledger_exchange_api_key: "{{ vault_ledger_exchange_api_key }}"

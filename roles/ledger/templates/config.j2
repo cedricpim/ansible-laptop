@@ -1,7 +1,7 @@
 {{ ansible_managed | comment }}
 
 # Location for the ledger file holding all the information
-:ledger: ~/Sync/files/money.csv
+:ledger: {{ ledger_file }}
 
 # Settings to be used by the gem that handles the exchange rates
 # For more information, see https://github.com/spk/money-open-exchange-rates#usage
