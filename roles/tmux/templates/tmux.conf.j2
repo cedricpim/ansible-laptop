@@ -70,11 +70,12 @@ bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
 
 # Configuration of plugins
+set -g @resurrect-processes ':all:'
+set -g @resurrect-capture-pane-contents 'on'
 set -g @resurrect-strategy-nvim 'session'
 set -g @continuum-save-interval '15'
 set -g @continuum-boot '{{ tmux_continuum }}'
 set -g @continuum-restore '{{ tmux_continuum }}'
-set -g @resurrect-processes ':all:'
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
