@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 set -eo pipefail
 IFS=$'\n\t'
 
@@ -11,7 +11,7 @@ if ! /sbin/ping -c 1 8.8.8.8 >> /dev/null 2>&1; then
 fi
 
 # While python module has problems with format DATE-TIME, we need to scrap all its references before syncing
-if [ `command -v sed` ] && [ -f "~/.config/vdirsyncer/calendars/**/*.ics" ]; then
+if [ `command -v sed` ] && ls ~/.config/vdirsyncer/calendars/**/*.ics > /dev/null 2>&1; then
   sed -E -i 's/(^DT.*);VALUE=DATE-TIME/\1/' {{ vdirsyncer_directory }}/calendars/**/*.ics
 fi
 
