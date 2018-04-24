@@ -1,0 +1,58 @@
+---
+- name: "install power management tools"
+  pacman:
+    name: "{{ item }}"
+    state: "present"
+  with_items:
+    - "powertop"
+    - "tlp"
+  become: yes
+
+- name: "add Nvidia driver to blacklist"
+  lineinfile:
+    path: "/etc/default/tlp"
+    regexp: "RUNTIME_PM_BLACKLIST"
+    line: 'RUNTIME_PM_BLACKLIST="{{ gpu_address }}"'
+    state: "present"
+  become: yes
+
+- name: "disable Btrfs optimization"
+  lineinfile:
+    path: "/etc/default/tlp"
+    regexp: "SATA_LINKPWR_ON_BAT"
+    line: 'SATA_LINKPWR_ON_BAT="max_performance"'
+    state: "present"
+  become: yes
+
+- name: "start and enable TLP services"
+  service:
+    name: "{{ item }}"
+    enabled: yes
+  with_items:
+    - "tlp"
+    - "tlp-sleep"
+  become: yes
+
+- name: "stop and mask services conflicting with TLP"
+  service:
+    name: "{{ item }}"
+    state: "stopped"
+    masked: yes
+  with_items:
+    - "systemd-rfkill"
+    - "systemd-rfkill.socket"
+  become: yes
+
+- name: "Add instructions related to powertop"
+  lineinfile:
+    path: "~{{ users[0].name }}/todo"
+    regexp: "{{ item }}"
+    line: "{{ item }}"
+    state: "present"
+    create: yes
+    owner: "{{ users[0].name }}"
+    group: "{{ users[0].name }}"
+  with_items:
+    - "sudo powertop --calibrate"
+    - "sudo powertop --auto-tune"
+  become: yes

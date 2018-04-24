@@ -2,3 +2,4 @@
 - import_tasks: locale.yml
 - import_tasks: time_zone.yml
 - import_tasks: hostname.yml
+- import_tasks: power.yml
