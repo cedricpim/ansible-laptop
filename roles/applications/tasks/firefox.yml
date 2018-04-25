@@ -5,6 +5,12 @@
     state: present
   become: yes
 
+- include_role:
+    name: "pacaur"
+    tasks_from: "install"
+  vars:
+    pkg_name: "firefox-developer-edition"
+
 - name: "check profiles.ini"
   stat:
     path: "{{ firefox_profiles }}/profiles.ini"
