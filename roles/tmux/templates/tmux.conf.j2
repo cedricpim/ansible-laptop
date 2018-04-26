@@ -10,6 +10,9 @@ bind C-a send-prefix
 # for example
 set -sg repeat-time 600
 
+# Remove small delay of escape
+set -s escape-time 0
+
 # Mouse
 set -g mouse on
 bind -n WheelUpPane   select-pane -t= \; copy-mode -e \; send-keys -M
