@@ -46,7 +46,6 @@ alias -- -="cd -"
 # Shortcuts
 alias h="history"
 alias j="jobs"
-alias v="vagrant"
 
 # Always use color output for `ls` and group directories
 alias ls="ls --color=auto --group-directories-first"
@@ -59,9 +58,6 @@ alias la="ls -la"
 
 # List only directories
 alias lsd="ls -lF | grep '^d'"
-
-# Get week number
-alias week='date +%V'
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
@@ -79,25 +75,27 @@ alias c="tr -d '\n' | xsel"
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
-# Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
-# (useful when executing time-consuming commands)
-alias badge="tput bel"
-
 # Intuitive map function
 # For example, to list all directories that contain a certain file:
 # find . -name .gitattributes | map dirname
 alias map="xargs -n1"
-
-# One of @janmoesen’s ProTip™s
-for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-  alias "$method"="lwp-request -m '$method'"
-done
 
 if [ ! -z "$ZSH_VERSION" ]; then
   alias reload!="source ~/.zshrc"
 elif [ ! -z "$BASH_VERSION" ]; then
   alias reload!="source ~/.bash_profile"
 fi
+
+# Vim/Nvim
+function tvim() {
+  if test $# -gt 0; then
+    env vim "$@"
+  elif test -f Session.vim; then
+    env vim -S
+  else
+    env vim -c Obsession
+  fi
+}
 
 # Weather
 function weather() {
