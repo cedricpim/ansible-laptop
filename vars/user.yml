@@ -20,6 +20,7 @@ ledger_currencies: "{{ vault_ledger_currencies }}"
 ledger_function: "{{ vault_ledger_function }}"
 ledger_reoccurrences: "{{ vault_ledger_reoccurrences }}"
 
+neomutt_browser: "{{ vault_neomutt_browser }}"
 neomutt_email_server: "{{ vault_neomutt_email_server }}"
 neomutt_email_accounts: "{{ vault_neomutt_email_accounts }}"
 neomutt_sender_full_name: "{{ vault_neomutt_sender_full_name }}"

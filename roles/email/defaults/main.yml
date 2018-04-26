@@ -1,5 +1,6 @@
 ---
 neomutt_directory: "~/.config/neomutt"
+neomutt_browser: "firefox"
 
 email_directory: "~/.cache/Mail"
 
