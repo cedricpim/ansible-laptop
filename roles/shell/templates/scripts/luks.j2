@@ -1,9 +1,8 @@
 #!/usr/bin/env sh
 set -o pipefail
+IFS=$'\n\t'
 
 {{ ansible_managed | comment }}
-
-IFS=$'\n\t'
 
 case $1 in
   mount)
