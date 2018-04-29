@@ -1,14 +1,14 @@
 ---
-- name: create folder for scripts
+- name: "create folder for scripts"
   file:
     path: "{{ scripts_directory }}"
-    state: directory
+    state: "directory"
 
-- name: copy server custom scripts
+- name: "copy server custom scripts"
   template:
     src: "{{ item }}.j2"
     dest: "{{ scripts_directory }}/{{ item }}"
-    mode: 0700
+    mode: "0700"
   with_items:
     - "pserver-stats"
     - "pserver"
