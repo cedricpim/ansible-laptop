@@ -1,4 +1,10 @@
 ---
-- name: process time zone
+- name: "process time zone"
   command: "hwclock --systohc"
+  become: yes
+
+- name: "updated journal-triggerd configuration"
+  systemd:
+    name: "journal-triggerd"
+    state: "restarted"
   become: yes

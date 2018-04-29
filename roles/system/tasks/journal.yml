@@ -1,0 +1,43 @@
+---
+- include_role:
+    name: "pacaur"
+    tasks_from: "install"
+  vars:
+    pkg_name: "journal-triggerd"
+  become: yes
+  become_user: "{{ users[0].name }}"
+
+- name: "copy journal error logger"
+  template:
+    src: "journal-triggerd/journal-logger.j2"
+    dest: "/usr/bin/journal-logger"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+  become: yes
+
+- name: "ensure log file exists"
+  file:
+    path: "{{ journal_triggerd_log }}"
+    state: "touch"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  become: yes
+
+- name: "copy journal-triggerd configuration"
+  template:
+    src: "journal-triggerd/failed.rule.j2"
+    dest: "{{ journal_triggerd_directory }}/failed.rule"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  become: yes
+  notify: "updated journal-triggerd configuration"
+
+- name: "enable/start journal-triggerd service"
+  systemd:
+    name: "journal-triggerd"
+    state: "started"
+    enabled: yes
+  become: yes

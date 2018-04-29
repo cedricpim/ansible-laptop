@@ -1,0 +1,15 @@
+{{ ansible_managed | comment }}
+
+[Rule]
+trigger = /usr/bin/journal-logger "$MESSAGE"
+filter = failed_downcase OR failed_upcase
+
+[failed_downcase]
+MESSAGE ?= *failed*
+
+[failed_upcase]
+MESSAGE ?= *Failed*
+
+# Required since journal-triggerd will always look for a "Filter" entry
+[Filter]
+PLACEHOLDER = ""
