@@ -2,13 +2,13 @@
 - name: "install transmission-cli"
   pacman:
     name: "transmission-cli"
-    state: present
+    state: "present"
   become: yes
 
 - name: "create staff group"
   group:
     name: "staff"
-    state: present
+    state: "present"
   become: yes
 
 - name: "add user transmission to staff group"
@@ -16,14 +16,14 @@
     name: "transmission"
     groups: "staff"
     append: yes
-    state: present
+    state: "present"
   become: yes
 
 - name: "create folder for torrents"
   file:
     path: "{{ transmission_data_directory }}"
-    state: directory
-    mode: 0770
+    state: "directory"
+    mode: "0770"
     owner: "transmission"
     group: "staff"
   become: yes
@@ -31,7 +31,7 @@
 - name: "create folder for transmission settings"
   file:
     path: "{{ transmission_directory }}"
-    state: directory
+    state: "directory"
     owner: "transmission"
     group: "transmission"
   become: yes
@@ -42,7 +42,7 @@
     dest: "{{ transmission_directory }}/complete.sh"
     owner: "transmission"
     group: "transmission"
-    mode: 0700
+    mode: "0700"
   become: yes
 
 - name: "copy transmission settings"
@@ -51,7 +51,7 @@
     dest: "{{ transmission_directory }}/settings.json"
     owner: "transmission"
     group: "transmission"
-    mode: 0600
+    mode: "0600"
   become: yes
   notify:
     - "stop transmission"
@@ -67,26 +67,26 @@
     mode: 0644
   become: yes
   notify:
-    - "sysctl configured"
+    - "rebuild sysctl"
     - "restart transmission"
 
 - name: "start and enable service for transmission-cli"
   systemd:
     name: "transmission"
-    state: started
+    state: "started"
     enabled: yes
   become: yes
 
 - name: "create folder for transmission scripts"
   file:
     path: "{{ scripts_directory }}"
-    state: directory
+    state: "directory"
 
 - name: "copy transmission scripts"
   template:
     src: "transmission/{{ item }}.j2"
     dest: "{{ scripts_directory }}/{{ item }}"
-    mode: 0700
+    mode: "0700"
   with_items:
     - "magnet"
     - "tmr"

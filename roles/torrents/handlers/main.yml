@@ -1,18 +1,18 @@
 ---
-- name: "sysctl configured"
+- name: "rebuild sysctl"
   command: "sysctl -p"
   become: yes
 
 - name: "stop transmission"
   systemd:
     name: "transmission"
-    state: stopped
+    state: "stopped"
   become: yes
 
 - name: "restart transmission"
   systemd:
     name: "transmission"
-    state: restarted
+    state: "restarted"
   become: yes
 
 - name: "load transmission configuration"
@@ -21,5 +21,5 @@
     dest: "{{ transmission_directory }}/settings.json"
     owner: "transmission"
     group: "transmission"
-    mode: 0600
+    mode: "0600"
   become: yes

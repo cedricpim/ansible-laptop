@@ -1,10 +1,10 @@
 ---
-- name: cleanup cower build directory
+- name: "cleanup cower build directory"
   file:
     path: "{{ cower_folder }}"
-    state: absent
+    state: "absent"
 
-- name: cleanup pacaur build directory
+- name: "cleanup pacaur build directory"
   file:
     path: "{{ pacaur_folder }}"
-    state: absent
+    state: "absent"

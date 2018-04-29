@@ -21,7 +21,7 @@
     src: "vdirsyncer/config.j2"
     dest: "{{ vdirsyncer_directory }}/config"
     mode: "0600"
-  notify: "updated vdirsyncer configuration"
+  notify: "discover vdirsyncer"
 
 - name: "create folder for scripts"
   file:
@@ -47,7 +47,7 @@
   with_items:
     - "vdirsyncer.service"
     - "vdirsyncer.timer"
-  notify: "updated vdirsyncer timer"
+  notify: "restart vdirsyncer timer"
 
 - name: "create folder for systemd vdirsyncer"
   file:
@@ -59,7 +59,7 @@
     src: "vdirsyncer/override.conf.j2"
     dest: "{{ systemd_user_directory }}/vdirsyncer.service.d/override.conf"
     mode: "0600"
-  notify: "updated vdirsyncer timer"
+  notify: "restart vdirsyncer timer"
 
 - name: "enable/start vdirsyncer timer"
   systemd:

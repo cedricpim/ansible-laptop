@@ -17,7 +17,7 @@
     dest: "/etc/resolvconf.conf"
     mode: "0644"
   become: yes
-  notify: "updated resolvconf configuration"
+  notify: "rebuild resolvconf configuration"
 
 - name: "create folder for NetworkManager configuration"
   file:
@@ -32,7 +32,7 @@
     dest: "{{ network_manager_directory }}/01-config-dns.conf"
     mode: "0644"
   become: yes
-  notify: "updated NetworkManager configuration"
+  notify: "reload NetworkManager configuration"
 
 - name: "enable/start service for NTP"
   systemd:

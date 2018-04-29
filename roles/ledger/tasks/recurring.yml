@@ -28,7 +28,7 @@
   with_items:
     - "ledger.service"
     - "ledger.timer"
-  notify: "updated ledger timer"
+  notify: "restart ledger timer"
 
 - name: "enable/start ledger timer"
   systemd:

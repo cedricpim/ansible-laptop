@@ -3,4 +3,4 @@
   timezone:
     name: "{{ system_time_zone }}"
   become: yes
-  notify: "process time zone"
+  notify: "synchronize clock"

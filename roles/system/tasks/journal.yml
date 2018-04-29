@@ -33,7 +33,7 @@
     group: "root"
     mode: "0644"
   become: yes
-  notify: "updated journal-triggerd configuration"
+  notify: "restart journal-triggerd configuration"
 
 - name: "enable/start journal-triggerd service"
   systemd:

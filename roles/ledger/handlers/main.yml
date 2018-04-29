@@ -1,5 +1,5 @@
 ---
-- name: "updated ledger timer"
+- name: "restart ledger timer"
   systemd:
     name: "ledger.timer"
     state: "restarted"

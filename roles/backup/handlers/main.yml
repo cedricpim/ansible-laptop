@@ -2,5 +2,5 @@
 - name: "cleanup backup tempdir"
   file:
     path: "{{ tempdir.path }}"
-    state: absent
+    state: "absent"
   when: tempdir is defined

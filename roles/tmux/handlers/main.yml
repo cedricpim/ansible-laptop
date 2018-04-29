@@ -1,5 +1,5 @@
 ---
-- name: reload systemctl daemon
+- name: "reload systemctl daemon"
   systemd:
     daemon_reload: yes
     user: yes

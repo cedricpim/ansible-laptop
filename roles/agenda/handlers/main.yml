@@ -1,10 +1,10 @@
 ---
-- name: "updated vdirsyncer timer"
+- name: "restart vdirsyncer timer"
   systemd:
     name: "vdirsyncer.timer"
     state: "restarted"
     daemon_reload: yes
     user: yes
 
-- name: "updated vdirsyncer configuration"
+- name: "discover vdirsyncer"
   shell: "yes | vdirsyncer discover"
