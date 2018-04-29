@@ -39,13 +39,35 @@
 
 - name: "set global shortcut for urxvt"
   dconf:
-    key: "{{ urxvt_dconf_shortcut_base_key }}/{{ item.key }}"
-    value: "{{ item.value }}"
-    state: present
-  with_items:
-    - { key: "binding", value: "{{ urxvt_shorcut_keys }}" }
-    - { key: "command", value: "'gnome-terminal -- {{ urxvt_directory | regex_replace('~', ansible_env.HOME) }}/urxvtopen'" }
-    - { key: "name", value: "{{ urxvt_shorcut_name }}" }
+    key: "{{ dconf_custom_keybindings }}/{{ urxvt_shortcut_custom }}/{{ item.key }}"
+    value: "{{ item.value | regex_replace('~', ansible_env.HOME) }}"
+    state: "present"
+  with_items: "{{ urxvt_shortcut_configuration }}"
+
+- name: "read current keybindings"
+  dconf:
+    key: "{{ dconf_custom_keybindings }}"
+    state: "read"
+  register: custom_urxvt
+
+- name: "create list with new keybinding"
+  dconf:
+    key: "{{ dconf_custom_keybindings }}"
+    value: "[{{ dconf_urxvt_custom_key }}]"
+    state: "present"
+  when:
+    - custom_urxvt is defined
+    - custom_urxvt.value is none
+
+- name: "add new keybinding to existing list"
+  dconf:
+    key: "{{ dconf_custom_keybindings }}"
+    value: "[{{ custom_urxvt.value | regex_findall('\\[(.*)\\]') | first }}, {{ dconf_urxvt_custom_key }}]"
+    state: "present"
+  when:
+    - custom_urxvt is defined
+    - custom_urxvt.value is not none
+    - urxvt_shortcut_custom not in custom_urxvt.value
 
 - name: "copy urxvt configuration"
   template:

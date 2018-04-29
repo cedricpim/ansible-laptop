@@ -5,12 +5,40 @@
   vars:
     pkg_name: "flameshot"
 
+- name: "disable default shortcut for screenshot"
+  dconf:
+    key: "{{ dconf_screenshot_key }}"
+    value: "'false'"
+    state: "present"
+
 - name: "set global shortcut for flameshot"
   dconf:
-    key: "{{ flameshot_dconf_shortcut_base_key }}/{{ item.key }}"
+    key: "{{ dconf_custom_keybindings }}/{{ flameshot_shortcut_custom }}/{{ item.key }}"
     value: "{{ item.value }}"
-    state: present
-  with_items:
-    - { key: "binding", value: "{{ flameshot_shorcut_keys }}" }
-    - { key: "command", value: "'flameshot gui'" }
-    - { key: "name", value: "'Flameshot'" }
+    state: "present"
+  with_items: "{{ flameshot_shortcut_configuration }}"
+
+- name: "read current keybindings"
+  dconf:
+    key: "{{ dconf_custom_keybindings }}"
+    state: "read"
+  register: custom_flameshot
+
+- name: "create list with new keybinding"
+  dconf:
+    key: "{{ dconf_custom_keybindings }}"
+    value: "[{{ dconf_flameshot_custom_key }}]"
+    state: "present"
+  when:
+    - custom_flameshot is defined
+    - custom_flameshot.value is none
+
+- name: "add new keybinding to existing list"
+  dconf:
+    key: "{{ dconf_custom_keybindings }}"
+    value: "[{{ custom_flameshot.value | regex_findall('\\[(.*)\\]') | first }}, {{ dconf_flameshot_custom_key }}]"
+    state: "present"
+  when:
+    - custom_flameshot is defined
+    - custom_flameshot.value is not none
+    - flameshot_shortcut_custom not in custom_flameshot.value

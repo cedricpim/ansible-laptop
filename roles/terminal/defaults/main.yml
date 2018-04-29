@@ -2,8 +2,12 @@
 urxvt_directory: "~/.config/Xresources.d"
 urxvt_icon_dest: "~/.local/share/icons/hicolor/128x128/apps"
 
-urxvt_shorcut_keys: "'<Super>space'"
-urxvt_shorcut_name: "'urxvtopen'"
+urxvt_shortcut_custom: "custom0"
+dconf_urxvt_custom_key: "'{{ dconf_custom_keybindings }}/{{ urxvt_shortcut_custom }}/'"
+urxvt_shortcut_configuration:
+    - { key: "binding", value: "'<Super>space'" }
+    - { key: "command", value: "'gnome-terminal -- {{ urxvt_directory }}/urxvtopen'" }
+    - { key: "name", value: "'urxvtopen'" }
 
 urxvt_desktop: "/usr/share/applications"
 

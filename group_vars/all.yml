@@ -2,3 +2,5 @@
 scripts_directory: "~/.scripts"
 
 systemd_user_directory: "~/.config/systemd/user"
+
+dconf_custom_keybindings: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
