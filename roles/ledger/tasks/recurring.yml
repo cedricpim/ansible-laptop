@@ -29,3 +29,11 @@
     - "ledger.service"
     - "ledger.timer"
   notify: "updated ledger timer"
+
+- name: "enable/start ledger timer"
+  systemd:
+    name: "ledger.timer"
+    state: "started"
+    enabled: yes
+    daemon_reload: yes
+    user: yes

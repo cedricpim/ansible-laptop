@@ -17,7 +17,13 @@
     name: "syncthing"
     state: present
   become: yes
-  notify: "restart syncthing"
+
+- name: "enable/start syncthing"
+  systemd:
+    name: "syncthing"
+    state: "started"
+    enabled: yes
+    user: yes
 
 - import_tasks: "copyq.yml"
 - import_tasks: "firefox.yml"

@@ -22,7 +22,7 @@
     dest: "{{ offlineimap_directory }}/config"
     mode: "0600"
 
-- name: "enable and start offlineimap timer"
+- name: "enable/start offlineimap timer"
   systemd:
     name: "offlineimap-oneshot.timer"
     state: "started"

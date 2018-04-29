@@ -60,3 +60,11 @@
     dest: "{{ systemd_user_directory }}/vdirsyncer.service.d/override.conf"
     mode: "0600"
   notify: "updated vdirsyncer timer"
+
+- name: "enable/start vdirsyncer timer"
+  systemd:
+    name: "vdirsyncer.timer"
+    state: "started"
+    enabled: yes
+    daemon_reload: yes
+    user: yes
