@@ -2,7 +2,7 @@
 - name: "ensure ruby is installed"
   pacman:
     name: "{{ item }}"
-    state: present
+    state: "present"
   with_items:
     - "git"
     - "ruby"

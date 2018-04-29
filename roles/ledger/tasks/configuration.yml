@@ -2,10 +2,10 @@
 - name: "create folder for ledger configuration"
   file:
     path: "{{ ledger_directory }}"
-    state: directory
+    state: "directory"
 
 - name: "copy ledger configuration"
   template:
     src: "config.j2"
     dest: "{{ ledger_directory }}/config"
-    mode: 0600
+    mode: "0600"

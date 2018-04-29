@@ -22,4 +22,4 @@
 - name: "cleanup ledger build directory"
   file:
     path: "{{ ledger_dest }}"
-    state: absent
+    state: "absent"
