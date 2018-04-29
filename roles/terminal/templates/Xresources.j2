@@ -17,12 +17,17 @@ URxvt*fading: 30
 URxvt*visualBell: false
 URxvt*saveLines: 12000
 URxvt.urlLauncher: firefox
-URxvt.perl-ext-common:
+URxvt.perl-ext-common: font-size
 Xft.dpi: 96
 Xft.antialias: true
 Xft.hinting: true
 
 URxvt*dynamicColors: on
+
+! Support zoom controls
+URxvt.keysym.Control-equal: font-size:increase
+URxvt.keysym.Control-minus: font-size:decrease
+URxvt.keysym.Control-0:     font-size:reset
 
 ! Support Ctrl+arrows for word jumping
 URxvt.keysym.Control-Up:    \033[1;5A

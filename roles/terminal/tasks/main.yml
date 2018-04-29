@@ -1,25 +1,28 @@
 ---
 - include_role:
-    name: pacaur
-    tasks_from: install
-  vars:
-    pkg_name: "rxvt-unicode-patched"
+    name: "pacaur"
+    tasks_from: "install"
+  with_items:
+    - "rxvt-unicode-patched"
+    - "urxvt-font-size-git"
+  loop_control:
+    loop_var: "pkg_name"
 
 - name: "create folder for urxvt icon"
   file:
     path: "{{ urxvt_icon_dest }}"
-    state: directory
+    state: "directory"
 
 - name: "copy urxvt icon"
   copy:
-    src: urxvt.png
+    src: "urxvt.png"
     dest: "{{ urxvt_icon_dest }}"
-    mode: 0644
+    mode: "0644"
 
 - name: "create folder for urxvt extra configurations"
   file:
     path: "{{ urxvt_directory }}"
-    state: directory
+    state: "directory"
 
 - name: "copy urxvt extra configurations"
   template:
@@ -34,7 +37,7 @@
 - name: "install python-psutil for dconf"
   pacman:
     name: "python-psutil"
-    state: present
+    state: "present"
   become: yes
 
 - name: "set global shortcut for urxvt"
@@ -73,7 +76,7 @@
   template:
     src: "Xresources.j2"
     dest: "~/.Xresources"
-    mode: 0600
+    mode: "0600"
   notify: "load configuration"
 
 - name: "update urxvt application icon"
