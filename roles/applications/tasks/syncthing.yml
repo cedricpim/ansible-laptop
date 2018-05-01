@@ -1,0 +1,21 @@
+---
+- name: "install syncthing"
+  pacman:
+    name: "syncthing"
+    state: present
+  become: yes
+
+- name: "enable/start syncthing"
+  systemd:
+    name: "syncthing"
+    state: "started"
+    enabled: yes
+    user: yes
+
+- name: "define syncthing port"
+  lineinfile:
+    path: "~/.config/syncthing/config.xml"
+    regexp: '^(\s+)<address>127\.0\.0\.1'
+    line: '\1<address>127.0.0.1:{{ syncthing_port }}</address>'
+    backrefs: yes
+  notify: "restart syncthing"

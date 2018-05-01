@@ -15,3 +15,5 @@ flameshot_shortcut_configuration:
     - { key: "binding", value: "'Print'" }
     - { key: "command", value: "'flameshot gui'" }
     - { key: "name", value: "'Flameshot'" }
+
+syncthing_port: "8384"

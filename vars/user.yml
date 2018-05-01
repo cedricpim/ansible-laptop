@@ -51,6 +51,8 @@ personal_public_files: "{{ vault_personal_public_files }}"
 
 ssh_entries: "{{ vault_ssh_entries }}"
 
+syncthing_port: "{{ vault_syncthing_port }}"
+
 todo_main_directory: "{{ vault_todo_main_directory }}"
 
 wallpaper: "{{ vault_wallpaper }}"

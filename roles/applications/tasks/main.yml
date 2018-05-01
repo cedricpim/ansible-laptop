@@ -12,19 +12,7 @@
     - "vlc"
   become: yes
 
-- name: "install syncthing"
-  pacman:
-    name: "syncthing"
-    state: present
-  become: yes
-
-- name: "enable/start syncthing"
-  systemd:
-    name: "syncthing"
-    state: "started"
-    enabled: yes
-    user: yes
-
+- import_tasks: "syncthing.yml"
 - import_tasks: "copyq.yml"
 - import_tasks: "firefox.yml"
 - import_tasks: "flameshot.yml"

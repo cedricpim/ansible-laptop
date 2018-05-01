@@ -1,0 +1,6 @@
+---
+- name: "restart syncthing"
+  systemd:
+    name: "syncthing"
+    state: "restarted"
+    user: yes
