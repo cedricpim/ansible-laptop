@@ -1,9 +1,6 @@
 ---
 todo_directory: "~/.config/todo"
 todo_main_directory: "~/.config/todo"
-todo_actions_repo: "https://gist.github.com/266ee4807ed81117f74812e60756dae6.git"
+todo_actions_repo: "git@gist.github.com:266ee4807ed81117f74812e60756dae6.git"
 todo_actions_dest: "~/.config/todo/todo.actions.d"
 todo_note_extension: ".md"
-
-gist_github_https_base: "https://gist.github.com/"
-gist_github_ssh_base: "git@gist.github.com:"

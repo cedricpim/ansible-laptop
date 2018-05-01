@@ -9,6 +9,8 @@
   file:
     path: "{{ item }}"
     state: "directory"
+    owner: "{{ user }}"
+    group: "{{ user }}"
   with_items:
     - "{{ todo_main_directory }}"
     - "{{ todo_directory }}"
@@ -17,10 +19,13 @@
   template:
     src: "config.j2"
     dest: "{{ todo_directory }}/config"
+    owner: "{{ user }}"
+    group: "{{ user }}"
     mode: "0600"
 
-- name: "download todo.actions.d repository"
-  block:
-    - file: path="{{ todo_actions_dest }}" state="directory"
-    - git: repo="{{ todo_actions_repo }}" dest="{{ todo_actions_dest }}" clone=yes update=yes
-    - replace: path="{{ todo_actions_dest }}/.git/config" regexp="{{ gist_github_https_base }}" replace="{{ gist_github_ssh_base }}"
+- name: "clone todo.actions.d repository"
+  git:
+    repo: "{{ todo_actions_repo }}"
+    dest: "{{ todo_actions_dest }}"
+    clone: yes
+    update: yes
