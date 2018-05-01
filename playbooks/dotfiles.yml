@@ -20,7 +20,6 @@
     - { role: "terminal", tags: "terminal" }
     - { role: "tmux", tags: "tmux" }
     - { role: "todo", tags: "todo" }
-    - { role: "torrents", tags: "torrents" }
     - { role: "zsh", tags: "zsh" }
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }
