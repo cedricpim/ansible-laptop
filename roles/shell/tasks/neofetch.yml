@@ -1,17 +1,23 @@
 ---
 - include_role:
-    name: pacaur
-    tasks_from: install
+    name: "pacaur"
+    tasks_from: "install"
   vars:
-    pkg_name: neofetch
+    pkg_name: "neofetch"
 
-- name: create folder for neofetch configuration
+- name: "install xorg-xrandr package"
+  pacman:
+    name: "xorg-xrandr"
+    state: "present"
+  become: yes
+
+- name: "create folder for neofetch configuration"
   file:
     path: "{{ neofetch_directory }}"
-    state: directory
+    state: "directory"
 
-- name: copy neofetch configuration file
+- name: "copy neofetch configuration file"
   template:
     src: "neofetch/config.j2"
     dest: "{{ neofetch_directory }}/config"
-    mode: 0600
+    mode: "0600"
