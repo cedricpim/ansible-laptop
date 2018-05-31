@@ -28,7 +28,7 @@
   # Credit an author on the latest commit
   credit = "!f() { git commit -S --amend --author \"$1 <$2>\" -C HEAD; }; f"
   # Interactive rebase with the given number of latest commits
-  reb = "!r() { git rebase -i HEAD~$1; }; r"
+  reb = "!f() { git rebase -i HEAD~$1; }; f"
   # Find branches containing commit
   fb = "!f() { git branch -a --contains $1; }; f"
   # Find tags containing commit
@@ -37,6 +37,8 @@
   fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
   # Find commits by commit message
   fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+  # Rebase current branch with master
+  rebup = "!f() { git co master; git pull; git co -; git rebase master; }; f"
   # Remove branches that have already been merged with master
   # a.k.a. ‘delete merged’
   mop = !git branch --merged master | grep -v master | xargs -n 1 git branch -D
