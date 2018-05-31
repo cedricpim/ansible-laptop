@@ -190,13 +190,13 @@ endfunction
 
 " Open the Rg command and place the cursor into the quotes
 " grep for string provided
-nmap <Leader>rg :Rg --hidden --sort-files ""<Left>
+nmap <Leader>rg :Rg --hidden --sort-files -g '!.git' ""<Left>
 " grep visual selection
-vnoremap <Leader>a :<C-U>execute "Rg --hidden --sort-files " . GetVisual()<CR>
+vnoremap <Leader>a :<C-U>execute "Rg --hidden --sort-files -g '!.git' " . GetVisual()<CR>
 " grep the current word using ,k (mnemonic Kurrent)
-nnoremap <silent> <Leader>a :Rg --hidden --sort-files <cword><CR>
+nnoremap <silent> <Leader>a :Rg --hidden --sort-files -g '!.git' <cword><CR>
 " grep for 'def foo'
-nnoremap <silent> <Leader>ad :Rg --hidden --sort-files 'def <cword>'<CR>
+nnoremap <silent> <Leader>ad :Rg --hidden --sort-files -g '!.git' 'def <cword>'<CR>
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
