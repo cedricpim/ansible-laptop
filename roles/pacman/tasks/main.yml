@@ -1,4 +1,11 @@
 ---
+- name: "turn on color for pacman"
+  lineinfile:
+    path: "/etc/pacman.conf"
+    regexp: 'Color'
+    line: 'Color'
+  become: yes
+
 - name: "update packages ('pacman -Syu')"
   pacman:
     update_cache: yes
