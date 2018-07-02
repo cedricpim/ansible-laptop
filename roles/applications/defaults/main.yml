@@ -1,7 +1,9 @@
 ---
 copyq_directory: "~/.config/copyq"
 
-firefox_profiles: "~/.mozilla/firefox"
+firefox_profiles_file: "~/.mozilla/firefox"
+
+firefox_profile: "Path=[a-z1-9]{8}.default"
 
 firefox_options:
   - { option: "network.protocol-handler.expose.magnet", value: "false" }

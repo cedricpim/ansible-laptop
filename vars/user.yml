@@ -9,6 +9,8 @@ agenda_vdirsyncer: "{{ vault_agenda_vdirsyncer }}"
 
 default_browser: "{{ vault_default_browser }}"
 
+firefox_profile: "{{ vault_firefox_profile }}"
+
 git_full_name: "{{ vault_git_full_name }}"
 git_email: "{{ vault_git_email }}"
 git_signingkey: "{{ vault_git_signingkey }}"
