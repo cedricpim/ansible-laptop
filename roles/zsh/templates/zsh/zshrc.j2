@@ -20,11 +20,12 @@ for file in `find -L ~/.zsh -maxdepth 1 -type f`; do
   [ -r $file ] && [ -f $file ] && source $file
 done
 
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
 # Set the list of directories that Zsh searches for programs.
 path=( $path )
+fpath=(~/.zsh.d/ $fpath)
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
 
 #
 # Temporary Files
