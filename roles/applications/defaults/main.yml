@@ -19,7 +19,7 @@ firefox_options:
   - { option: "network.dns.disablePrefetch", value: "true" }
   - { option: "network.prefetch-next", value: "false" }
   - { option: "webgl.disabled", value: "true" }
-  - { option: "network.cookie.lifetimePolicy", value: "2" }
+  - { option: "network.cookie.lifetimePolicy", value: "1" }
 
 dconf_screenshot_key: "/org/gnome/settings-daemon/plugins/media-keys/screenshot"
 
