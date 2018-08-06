@@ -16,8 +16,11 @@
 - include_role:
     name: "pacaur"
     tasks_from: "install"
-  vars:
-    pkg_name: "watchdog"
+  with_items:
+    - "watchdog"
+    - "gnome-software-packagekit-plugin"
+  loop_control:
+    loop_var: "pkg_name"
   become: yes
   become_user: "{{ users[0].name }}"
 
