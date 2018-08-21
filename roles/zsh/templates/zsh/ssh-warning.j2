@@ -26,6 +26,8 @@ if [[ "$TERM" == "screen-256color" ]]; then
       if [[ "$*" =~ "web*|jobs*|db*|production|ec2-.*compute-1" ]]; then
         change-color '#804235' '#ffffff'
       fi
+    elif [[ "$1" =~ "^cx ssh " ]]; then
+      change-color '#804235' '#ffffff'
     else
       reset-colors
     fi
