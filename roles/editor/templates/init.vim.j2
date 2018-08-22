@@ -98,7 +98,7 @@ nnoremap <silent> ,tl :call neoterm#clear()<cr>
 " kills the current job (send a <c-c>)
 nnoremap <silent> ,tc :call neoterm#kill()<cr>
 " Toggle terminal
-nnoremap <silent> <leader>tt :Ttoggle<CR>
+nnoremap <silent> <Leader>tt :Ttoggle<CR>
 
 nnoremap cc :cclose<CR>
 
@@ -107,11 +107,11 @@ nnoremap cc :cclose<CR>
 
 " Vim-test
 let test#strategy = "neoterm"
-nnoremap <leader>tn :TestNearest<CR>
-nnoremap <leader>tf :TestFile<CR>
-nnoremap <leader>ts :TestSuite<CR>
-nnoremap <leader>tl :TestLast<CR>
-nnoremap <leader>tv :TestVisit<CR>
+nnoremap <Leader>tn :TestNearest<CR>
+nnoremap <Leader>tf :TestFile<CR>
+nnoremap <Leader>ts :TestSuite<CR>
+nnoremap <Leader>tl :TestLast<CR>
+nnoremap <Leader>tv :TestVisit<CR>
 
 " Nerdtree configs
 map <C-b> <plug>NERDTreeTabsToggle<CR>
@@ -229,16 +229,20 @@ vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 " Tabs control
 nnoremap <C-t> :tabe<CR>
-nnoremap <C-l> :tabn<CR>
 nnoremap <C-h> :tabp<CR>
+nnoremap <C-l> :tabn<CR>
 nnoremap <C-j> 20j<CR>
 nnoremap <C-k> 20k<CR>
+nnoremap <S-h> :10winc <CR>
+nnoremap <S-l> :10winc <<CR>
+nnoremap <Leader>\ :vsplit<CR>
+nnoremap <Leader>- :split<CR>
 
 " Yank full file path (also with current line)
-nnoremap <leader>fp :let @+=expand("%:p")<CR>
-nnoremap <leader>rp :let @+=expand("%")<CR>
-nnoremap <leader>lfp :let @+=expand("%:p") . ':' . line(".")<CR>
-nnoremap <leader>rfp :let @+=expand("%") . ':' . line(".")<CR>
+nnoremap <Leader>fp :let @+=expand("%:p")<CR>
+nnoremap <Leader>rp :let @+=expand("%")<CR>
+nnoremap <Leader>lfp :let @+=expand("%:p") . ':' . line(".")<CR>
+nnoremap <Leader>rfp :let @+=expand("%") . ':' . line(".")<CR>
 
 " Switch between dark and ligh background
 map <Leader>tD :set background=dark<CR>
