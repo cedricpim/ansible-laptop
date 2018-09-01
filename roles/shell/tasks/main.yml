@@ -13,6 +13,11 @@
     - "ripgrep"
     - "powerline"
     - "cryptsetup"
+    - "bat"
+    - "fd"
+    - "tldr"
+    - "jq"
+    - "ncdu"
   become: yes
 
 - include_role:
@@ -21,6 +26,7 @@
   with_items:
     - "diff-so-fancy"
     - "mkpasswd"
+    - "prettyping"
   loop_control:
     loop_var: "pkg_name"
 

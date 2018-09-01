@@ -31,9 +31,16 @@ alias drm="docker ps -a | grep Exited | cut -d ' ' -f 1 | xargs docker rm" # rem
 alias drun="docker run -ti"
 
 # Tmux
-alias tma='tmux attach'
-alias tml='tmux list-sessions'
-alias tmk='tmux kill-session -t'
+alias tma="tmux attach"
+alias tml="tmux list-sessions"
+alias tmk="tmux kill-session -t"
+
+# Override default applications
+alias ping="prettyping --nolegend"
+alias find="fd"
+alias help="tldr"
+alias cat="bat"
+alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
