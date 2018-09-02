@@ -41,3 +41,12 @@
     state: "started"
     enabled: yes
   become: yes
+
+- name: "set maximum size for journal logs"
+  lineinfile:
+    path: "/etc/systemd/journald.conf"
+    regexp: "SystemMaxUse="
+    line: "SystemMaxUse={{ journald_system_max_use }}"
+    state: "present"
+  become: yes
+  notify: "restart systemd-journal"

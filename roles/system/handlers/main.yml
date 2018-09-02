@@ -8,3 +8,9 @@
     name: "journal-triggerd"
     state: "restarted"
   become: yes
+
+- name: "restart systemd-journal"
+  systemd:
+    name: "systemd-journald"
+    state: "restarted"
+  become: yes
