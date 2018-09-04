@@ -21,7 +21,6 @@
 - include_role:
     name: "pacaur"
     tasks_from: "install"
-  vars:
   with_items:
     - "spotify"
     - "postman"
