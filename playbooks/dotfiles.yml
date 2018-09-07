@@ -8,6 +8,12 @@
     - "../vaulted_vars/{{ user }}.yml"
     - "../vars/user.yml"
 
+  post_tasks:
+    - name: "Restart Systemon"
+      systemd:
+        name: "systemon"
+        state: "restarted"
+
   roles:
     - { role: "settings", tags: "settings" }
     - { role: "agenda", tags: "agenda" }

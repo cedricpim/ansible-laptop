@@ -1,0 +1,10 @@
+---
+systemon_exim_config_directory: "/etc/mail"
+
+systemon_directory: "/opt"
+systemon_config_directory: "/etc/default"
+systemon_python_egg_cache: "/tmp/python-eggs"
+
+systemon_smtp_subject: "Systemon service notification"
+systemon_smtp_host: "localhost"
+systemon_smtp_port: "25"

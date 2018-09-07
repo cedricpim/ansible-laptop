@@ -1,0 +1,60 @@
+---
+- name: "Install Python2, Git and dependencies"
+  pacman:
+    name: "{{ item }}"
+    state: "present"
+  with_items:
+    - "python"
+    - "git"
+    - "libsystemd"
+    - "libffi"
+    - "openssl"
+  become: yes
+
+- include_role:
+    name: "pacaur"
+    tasks_from: "install"
+  vars:
+    pkg_name: "python-pip"
+
+- name: "Download Systemon"
+  git:
+    repo: "https://github.com/cedricpim/systemon.git"
+    dest: "{{ systemon_directory }}/systemon"
+    update: yes
+  become: yes
+  register: systemon_repo
+
+- name: "Install Systemon"
+  command: "python2 setup.py install"
+  args:
+    chdir: "{{ systemon_directory }}/systemon"
+  notify: "Restart Systemon"
+  become: yes
+  when: systemon_repo is defined and systemon_repo is changed
+
+- name: "Copy Systemon settings"
+  template:
+    src: "systemon.j2"
+    dest: "{{ systemon_config_directory }}/systemon"
+    mode: "0644"
+  notify: "Restart Systemon"
+  become: yes
+
+- name: "Copy Systemon systemd"
+  template:
+    src: "systemon.service.j2"
+    dest: "/etc/systemd/system/systemon.service"
+    mode: "0755"
+  notify:
+    - "Reload daemon"
+    - "Restart Systemon"
+  become: yes
+
+- name: "Start/Enable Systemon"
+  systemd:
+    name: "systemon"
+    state: "started"
+    enabled: yes
+    daemon_reload: yes
+  become: yes

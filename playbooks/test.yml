@@ -1,6 +1,12 @@
 ---
 - hosts: vagrant
 
+  post_tasks:
+    - name: "Restart Systemon"
+      systemd:
+        name: "systemon"
+        state: "restarted"
+
   roles:
     - { role: "pacman", tags: "pacman" }
     - { role: "nvidia", tags: "nvidia" }
@@ -25,6 +31,7 @@
     - { role: "zsh", tags: "zsh" }
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }
+    - { role: "systemon", tags: "systemon" }
 
   post_tasks:
     - name: update packages

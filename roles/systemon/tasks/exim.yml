@@ -1,0 +1,21 @@
+---
+- name: "Install Exim"
+  pacman:
+    name: "exim"
+    state: "present"
+  become: yes
+
+- name: "Copy Exim settings"
+  template:
+    src: "exim/exim.conf.j2"
+    dest: "{{ systemon_exim_config_directory }}/exim.conf"
+    mode: "0644"
+  notify: "Restart Exim"
+  become: yes
+
+- name: "Enable/Start Exim"
+  systemd:
+    name: "exim"
+    state: "started"
+    enabled: yes
+  become: yes
