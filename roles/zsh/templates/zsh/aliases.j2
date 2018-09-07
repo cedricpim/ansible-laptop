@@ -87,11 +87,7 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 # find . -name .gitattributes | map dirname
 alias map="xargs -n1"
 
-if [ ! -z "$ZSH_VERSION" ]; then
-  alias reload!="source ~/.zshrc"
-elif [ ! -z "$BASH_VERSION" ]; then
-  alias reload!="source ~/.bash_profile"
-fi
+alias reload!="source ~/.zshrc"
 
 # Vim/Nvim
 function tvim() {
@@ -114,6 +110,12 @@ function weather() {
 # Pacaur
 function remove-orphanaged() {
   pacaur -Rns $(pacaur -Qtdq)
+}
+
+# Log in as user
+function loggo() {
+  cd /tmp
+  sudo -u $1 zsh
 }
 
 # Use MyTraceRoute to check internet conditions
