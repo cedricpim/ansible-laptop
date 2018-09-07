@@ -12,7 +12,7 @@ if [[ "$TERM" == "screen-256color" ]]; then
     fi
   }
   function original-color() {
-    if [ -n "$DISPLAY" ]; then
+    if [ -n "$DISPLAY" ] && xrdb -query &>/dev/null; then
       xrdb -query | grep $1 | sed -r 's/.*:\s*(.+)/\1/'
     fi
   }
