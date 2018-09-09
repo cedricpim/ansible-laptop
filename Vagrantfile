@@ -72,6 +72,7 @@ Vagrant.configure("2") do |config|
   SHELL
 
   config.vm.provision "ansible" do |ansible|
+    ansible.raw_arguments = ["--diff"]
     ansible.verbose = ENV['VAGRANT_VERBOSE']
     ansible.vault_password_file = ENV['VAGRANT_VAULT_FILE'] # required because of synchronize module on backup role
     ansible.inventory_path = 'inventory.ini'
