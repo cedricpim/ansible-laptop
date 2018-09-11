@@ -12,6 +12,11 @@
     enabled: yes
     user: yes
 
+- name: "wait until the file ~/.config/syncthing/config.xml is present"
+  wait_for:
+    path: "~/.config/syncthing/config.xml"
+    state: "present"
+
 - name: "define syncthing port"
   lineinfile:
     path: "~/.config/syncthing/config.xml"
