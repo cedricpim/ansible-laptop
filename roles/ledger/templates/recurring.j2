@@ -11,7 +11,7 @@ export PATH={{ gem_env.stdout.split(':') | first }}/bin:$PATH
 CURRENT_DATE="$(date +'%d-%m-%Y')"
 
 {% for rec in ledger_reoccurrences %}
-expected_date {{ rec.day | quote }} && ledger a -t -- {{ rec.account }} $CURRENT_DATE {{ rec.category | quote }} {{ rec.description | quote }} {{ rec.venue | quote }} {{ rec.amount }} {{ rec.currency }} yes ""
+expected_date {{ rec.day | quote }} && ledger book -t -- {{ rec.account }} $CURRENT_DATE {{ rec.category | quote }} {{ rec.description | quote }} {{ rec.venue | quote }} {{ rec.amount }} {{ rec.currency }} yes ""
 {% endfor %}
 
 exit 0
