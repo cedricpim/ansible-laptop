@@ -212,6 +212,7 @@ endfunction
 """"""""""""
 " Mappings "
 """"""""""""
+
 " Disable arrow keys
 nnoremap <up>    <nop>
 nnoremap <down>  <nop>
@@ -221,6 +222,12 @@ vnoremap <up>    <nop>
 vnoremap <down>  <nop>
 vnoremap <left>  <nop>
 vnoremap <right> <nop>
+
+" Regular cutting and pasting (without copying)
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+nnoremap <leader>p "_dP
+vnoremap <leader>p "_dP
 
 " On insert mode, Shift-Tab to unindent
 inoremap <S-Tab> <C-D>
