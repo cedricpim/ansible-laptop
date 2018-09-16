@@ -5,12 +5,6 @@
     - "../vaulted_vars/system.yml"
     - "../vars/system.yml"
 
-  post_tasks:
-    - name: "Restart Systemon"
-      systemd:
-        name: "systemon"
-        state: "restarted"
-
   roles:
     - { role: "pacman", tags: "pacman" }
     - { role: "network", tags: "network" }
@@ -23,3 +17,10 @@
     - { role: "openvpn", tags: "openvpn" }
     - { role: "torrents", tags: "torrents" }
     - { role: "systemon", tags: "systemon" }
+
+  post_tasks:
+    - name: "restart Systemon"
+      systemd:
+        name: "systemon"
+        state: "restarted"
+      tag: "always"

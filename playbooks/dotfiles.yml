@@ -8,12 +8,6 @@
     - "../vaulted_vars/{{ user }}.yml"
     - "../vars/user.yml"
 
-  post_tasks:
-    - name: "Restart Systemon"
-      systemd:
-        name: "systemon"
-        state: "restarted"
-
   roles:
     - { role: "settings", tags: "settings" }
     - { role: "zsh", tags: "zsh" }
@@ -28,3 +22,10 @@
     - { role: "todo", tags: "todo" }
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }
+
+  post_tasks:
+    - name: "restart Systemon"
+      systemd:
+        name: "systemon"
+        state: "restarted"
+      tag: "always"
