@@ -16,7 +16,7 @@ case $1 in
     # Upload album to server
     scp -r -C $local_dir {{ personal_server_shortcut }}:{{ personal_server_photos }}
     # Process uploaded photos
-    ssh -t {{ personal_server_shortcut }} "{{ process_photos_scripts }}"
+    ssh -t {{ personal_server_shortcut }} process-photos
     ;;
 
   *)

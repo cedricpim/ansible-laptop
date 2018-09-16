@@ -27,5 +27,13 @@
   vars:
     pkg_name: "zsh-autosuggestions"
 
-- import_tasks: configurations.yml
-- import_tasks: ripgrep.yml
+- import_tasks: "configurations.yml"
+- import_tasks: "ripgrep.yml"
+
+- include_tasks: "scripts.yml"
+  with_items:
+    - "pserver-stats"
+    - "pserver"
+    - "upload"
+  loop_control:
+    loop_var: "script"

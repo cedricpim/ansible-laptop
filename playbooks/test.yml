@@ -22,7 +22,6 @@
     - { role: "email", tags: "email" }
     - { role: "feeds", tags: "feeds" }
     - { role: "ledger", tags: "ledger" }
-    - { role: "server", tags: "server" }
     - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
     - { role: "tmux", tags: "tmux" }

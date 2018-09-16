@@ -2,4 +2,4 @@
 
 [Service]
 ExecStart=
-ExecStart={{ scripts_directory | regex_replace('~', ansible_env.HOME) }}/vsync sync
+ExecStart={{ scripts_directory }}/vsync sync

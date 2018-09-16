@@ -32,7 +32,7 @@
   lineinfile:
     path: "{{ firefox_profiles_file }}/{{ profile.stdout }}/handlers.json"
     regexp: "(.*)\"schemes.*"
-    line: '\1"schemes":{"magnet":{"action":2,"handlers":[{"name":"magnet","path":"{{ scripts_directory | regex_replace("~", ansible_env.HOME) }}/magnet"}]}}}'
+    line: '\1"schemes":{"magnet":{"action":2,"handlers":[{"name":"magnet","path":"{{ scripts_directory }}/magnet"}]}}}'
     state: present
     backrefs: true
   when: st_handlers is defined and not st_handlers is skipped and st_handlers.stat.islnk is defined

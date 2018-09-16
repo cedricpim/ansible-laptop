@@ -16,16 +16,15 @@
 
   roles:
     - { role: "settings", tags: "settings" }
+    - { role: "zsh", tags: "zsh" }
     - { role: "agenda", tags: "agenda" }
     - { role: "editor", tags: "editor" }
     - { role: "email", tags: "email" }
     - { role: "feeds", tags: "feeds", when: feeds is defined and feeds }
     - { role: "ledger", tags: "ledger", when: ledger is defined and ledger }
-    - { role: "server", tags: "server", when: server is defined and server }
     - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
     - { role: "tmux", tags: "tmux" }
     - { role: "todo", tags: "todo" }
-    - { role: "zsh", tags: "zsh" }
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }

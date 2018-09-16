@@ -23,16 +23,11 @@
     mode: "0600"
   notify: "discover vdirsyncer"
 
-- name: "create folder for scripts"
-  file:
-    path: "{{ scripts_directory }}"
-    state: "directory"
-
-- name: "copy vdirsyncer custom script"
-  template:
-    src: "vdirsyncer/vsync.j2"
-    dest: "{{ scripts_directory }}/vsync"
-    mode: "0700"
+- include_role:
+    name: "zsh"
+    tasks_from: "scripts"
+  vars:
+    script: "vsync"
 
 - name: "create user folder for systemd"
   file:

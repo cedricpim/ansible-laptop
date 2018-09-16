@@ -30,20 +30,6 @@
   loop_control:
     loop_var: "pkg_name"
 
-- name: "create folder for scripts"
-  file:
-    path: "{{ scripts_directory }}"
-    state: "directory"
-
-- name: "copy scripts files"
-  template:
-    src: "scripts/{{ item }}.j2"
-    dest: "{{ scripts_directory }}/{{ item }}"
-    mode: "0700"
-  with_items:
-    - "luks"
-    - "update-repos"
-
 - name: "create folder for SSH"
   file:
     path: "~/.ssh"
@@ -55,7 +41,16 @@
     dest: "~/.ssh/config"
     mode: "0644"
 
-- import_tasks: git.yml
-- import_tasks: htop.yml
-- import_tasks: urlview.yml
-- import_tasks: neofetch.yml
+- include_role:
+    name: "zsh"
+    tasks_from: "scripts"
+  with_items:
+    - "luks"
+    - "update-repos"
+  loop_control:
+    loop_var: "script"
+
+- import_tasks: "git.yml"
+- import_tasks: "htop.yml"
+- import_tasks: "urlview.yml"
+- import_tasks: "neofetch.yml"

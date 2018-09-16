@@ -1,5 +1,5 @@
 ---
-scripts_directory: "~/.scripts"
+scripts_directory: "/usr/local/bin"
 
 systemd_user_directory: "~/.config/systemd/user"
 

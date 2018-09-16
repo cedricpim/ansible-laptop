@@ -77,14 +77,11 @@
     enabled: yes
   become: yes
 
-- name: "create folder for transmission scripts"
-  block:
-    - file: path="{{ scripts_directory }}" state="directory" owner="{{ item.name }}" group="{{ item.name }}"
-      with_items: "{{ users }}"
-    - template: src="transmission/magnet.j2" dest="{{ scripts_directory }}/magnet" mode="0700" owner="{{ item.name }}" group="{{ item.name }}"
-      with_items: "{{ users }}"
-    - template: src="transmission/tmr.j2" dest="{{ scripts_directory }}/tmr" mode="0700" owner="{{ item.name }}" group="{{ item.name }}"
-      with_items: "{{ users }}"
-  no_log: yes
-  become: yes
-  become_user: "{{ item.name }}"
+- include_role:
+    name: "zsh"
+    tasks_from: "scripts"
+  with_items:
+    - "magnet"
+    - "tmr"
+  loop_control:
+    loop_var: "script"
