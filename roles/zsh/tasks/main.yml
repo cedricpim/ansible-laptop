@@ -37,3 +37,4 @@
     - "upload"
   loop_control:
     loop_var: "script"
+  when: server

@@ -121,4 +121,6 @@ function loggo() {
 # Use MyTraceRoute to check internet conditions
 alias internet-report="sudo mtr 8.8.8.8"
 
-{{ ledger_aliases | default("") }}
+{% if ledger_aliases is defined %}
+{{ ledger_aliases }}
+{% endif %}
