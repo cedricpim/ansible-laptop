@@ -1,0 +1,8 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Ledger backup
+
+[Service]
+ExecStart={{ scripts_directory }}/bledger
+Type=oneshot

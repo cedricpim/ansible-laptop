@@ -5,3 +5,5 @@ ledger_dest: "~/ledger.tmp"
 ledger_directory: "~/.config/ledger"
 
 ledger_file: "~/.config/ledger.csv"
+ledger_backup_directory: "~/Documents/backups/ledger"
+ledger_keep_days: "7"

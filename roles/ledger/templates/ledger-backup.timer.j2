@@ -1,0 +1,10 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Add backup ledger file
+
+[Timer]
+OnCalendar=0/6:00:00
+
+[Install]
+WantedBy=timers.target

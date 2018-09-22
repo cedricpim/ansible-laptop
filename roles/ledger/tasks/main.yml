@@ -12,3 +12,35 @@
 - import_tasks: configuration.yml
 - import_tasks: recurring.yml
   when: ledger_reoccurrences is defined
+
+- include_role:
+    name: "zsh"
+    tasks_from: "scripts"
+  vars:
+    script: "bledger"
+
+- name: "create user folder for systemd and for backups"
+  file:
+    path: "{{ item }}"
+    state: "directory"
+  with_items:
+    - "{{ ledger_backup_directory }}"
+    - "{{ systemd_user_directory }}"
+
+- name: "copy service and timer for ledger-backup"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ systemd_user_directory }}/{{ item }}"
+    mode: "0600"
+  with_items:
+    - "ledger-backup.service"
+    - "ledger-backup.timer"
+  notify: "restart ledger-backup timer"
+
+- name: "enable/start ledger-backup timer"
+  systemd:
+    name: "ledger-backup.timer"
+    state: "started"
+    enabled: yes
+    daemon_reload: yes
+    user: yes

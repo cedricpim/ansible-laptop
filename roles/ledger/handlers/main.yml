@@ -5,3 +5,10 @@
     state: "restarted"
     daemon_reload: yes
     user: yes
+
+- name: "restart ledger-backup timer"
+  systemd:
+    name: "ledger-backup.timer"
+    state: "restarted"
+    daemon_reload: yes
+    user: yes
