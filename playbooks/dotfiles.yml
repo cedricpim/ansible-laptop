@@ -28,4 +28,5 @@
       systemd:
         name: "systemon"
         state: "restarted"
-      tag: "always"
+      tags: "always"
+      become: yes

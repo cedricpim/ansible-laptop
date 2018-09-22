@@ -31,9 +31,10 @@
       include_role:
         name: "pacaur"
         tasks_from: "update"
+      tags: "always"
 
     - name: "restart Systemon"
       systemd:
         name: "systemon"
         state: "restarted"
-      tag: "always"
+      tags: "always"
