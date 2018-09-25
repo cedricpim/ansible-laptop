@@ -87,16 +87,8 @@ let g:mapleader=','
 
 nnoremap <C-p> :FZF<CR>
 
-let g:neoterm_position = 'horizontal'
-let g:neoterm_automap_keys = ',tt'
-
-" Useful maps
-" hide/close terminal
-nnoremap <silent> ,th :call neoterm#close()<cr>
-" clear terminal
-nnoremap <silent> ,tl :call neoterm#clear()<cr>
-" kills the current job (send a <c-c>)
-nnoremap <silent> ,tc :call neoterm#kill()<cr>
+let g:neoterm_autoinsert = 1
+let g:neoterm_default_mod = 'rightbelow'
 " Toggle terminal
 nnoremap <silent> <Leader>tt :Ttoggle<CR>
 
