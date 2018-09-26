@@ -8,6 +8,14 @@
     - "../vaulted_vars/{{ user }}.yml"
     - "../vars/user.yml"
 
+  pre_tasks:
+    - name: "get list of services before running roles"
+      command: "systemctl list-unit-files"
+      changed_when: no
+      register: pre_systemd_services
+      become: yes
+      tags: "always"
+
   roles:
     - { role: "settings", tags: "settings" }
     - { role: "zsh", tags: "zsh" }
@@ -28,5 +36,12 @@
       systemd:
         name: "systemon"
         state: "restarted"
-      tags: "always"
+      register: systemon_service
+      failed_when:
+        - systemon_service.failed
+        - not "Could not find the requested service" in systemon_service.msg
+      when:
+        - pre_systemd_services is defined and post_systemd_services is defined
+        - pre_systemd_services.stdout_lines != post_systemd_services.stdout_lines
       become: yes
+      tags: "always"

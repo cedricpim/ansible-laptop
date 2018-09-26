@@ -1,6 +1,19 @@
 ---
 - hosts: vagrant
 
+  pre_tasks:
+    - name: "update packages"
+      include_role:
+        name: "pacaur"
+        tasks_from: "update"
+      tags: "always"
+
+    - name: "get list of services before running roles"
+      command: "systemctl list-unit-files"
+      changed_when: no
+      register: pre_systemd_services
+      tags: "always"
+
   roles:
     - { role: "pacman", tags: "pacman" }
     - { role: "nvidia", tags: "nvidia" }
@@ -27,14 +40,15 @@
     - { role: "systemon", tags: "systemon" }
 
   post_tasks:
-    - name: "update packages"
-      include_role:
-        name: "pacaur"
-        tasks_from: "update"
-      tags: "always"
-
     - name: "restart Systemon"
       systemd:
         name: "systemon"
         state: "restarted"
+      register: systemon_service
+      failed_when:
+        - systemon_service.failed
+        - not "Could not find the requested service" in systemon_service.msg
+      when:
+        - pre_systemd_services is defined and post_systemd_services is defined
+        - pre_systemd_services.stdout_lines != post_systemd_services.stdout_lines
       tags: "always"
