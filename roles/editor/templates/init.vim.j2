@@ -26,7 +26,6 @@ Plug 'chaoren/vim-wordmotion' " Better word moving
 Plug 'tpope/vim-rails' " Rails helpers
 Plug 'vim-ruby/vim-ruby' " Configurations for ruby
 Plug 'iamcco/markdown-preview.vim' " Add markdown viewer
-Plug 'jremmen/vim-ripgrep' " Ripgrep on nvim
 Plug 'bogado/file-line' " Open file on a given line
 Plug 'tpope/vim-abolish' " Renaming strings
 Plug 'flazz/vim-colorschemes' " Moar colorschemes
@@ -78,49 +77,67 @@ if has("unix")
   set clipboard=unnamed,unnamedplus " Clipboard to work with X
 endif
 
-" Set my leader to the comma key.
-let g:mapleader=','
-map <Space> <Leader>
+
+"""""""""""""
+" Functions "
+"""""""""""""
+
+function! GetVisual()
+  let reg_save = getreg('"')
+  let regtype_save = getregtype('"')
+  let cb_save = &clipboard
+  set clipboard&
+  normal! ""gvy
+  let selection = getreg('"')
+  call setreg('"', reg_save, regtype_save)
+  let &clipboard = cb_save
+  return selection
+endfunction
+
+" Disable deoplete when using multiple cursors
+function g:Multiple_cursors_before()
+  let g:deoplete#disable_auto_complete = 1
+endfunction
+
+function g:Multiple_cursors_after()
+  let g:deoplete#disable_auto_complete = 0
+endfunction
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
+endif
+
+" Have a preview when searching for files
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+" Use ripgrep
+command! -bang -nargs=* RRg
+  \ call fzf#vim#grep(
+  \   'rg --hidden --column --sort-files --line-number --no-heading --color=always --smart-case -g "!.git" '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \ <bang>0)
 
 
 """"""""""""""""""
 " Configurations "
 """"""""""""""""""
 
-nnoremap <C-p> :Files<CR>
-nnoremap <C-s> :RRg!<Space>
+" Set my leader to the comma key.
+let g:mapleader=','
 
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-command! -bang -nargs=* RRg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \ <bang>0)
-
+" Neoterm configs
 let g:neoterm_autoinsert = 1
 let g:neoterm_default_mod = 'rightbelow'
-" Toggle terminal
-nnoremap <silent> <Leader>tt :Ttoggle<CR>
 
-nnoremap cc :cclose<CR>
-
-" Map moving out of insert mode in terminal
-:tnoremap <ESC> <C-\><C-n>
-
-" Vim-test
+" Test configs
 let test#strategy = "neoterm"
-nnoremap <Leader>tn :TestNearest<CR>
-nnoremap <Leader>tf :TestFile<CR>
-nnoremap <Leader>ts :TestSuite<CR>
-nnoremap <Leader>tl :TestLast<CR>
-nnoremap <Leader>tv :TestVisit<CR>
 
 " Nerdtree configs
-map <C-b> <plug>NERDTreeTabsToggle<CR>
-map <C-f> :NERDTreeFind<CR>
 let g:nerdtree_tabs_autofind=1
 let g:nerdtree_tabs_open_on_gui_startup=0
 
@@ -134,7 +151,6 @@ endif
 let g:airline_symbols.linenr = '¶'
 
 " Tagbar configs
-nmap <F9> :TagbarToggle<CR>
 let g:tagbar_autoclose = 1
 let g:tagbar_type_ruby = {
   \ 'kinds' : [
@@ -165,10 +181,6 @@ let g:rails_projections = {
 
 " Markdown
 let g:mkdp_path_to_chrome = "firefox"
-nmap <silent> <Leader>m <Plug>MarkdownPreview<CR>     " for normal mode
-imap <silent> <Leader>m <Plug>MarkdownPreview<CR>     " for insert mode
-nmap <silent> <Leader>d <Plug>StopMarkdownPreview<CR> " for normal mode
-imap <silent> <Leader>d <Plug>StopMarkdownPreview<CR> " for insert mode
 
 " Define maximization settings
 let g:maximizer_set_mapping_with_bang = 1
@@ -178,46 +190,19 @@ let g:maximizer_default_mapping_key = '<C-o>'
 let g:notes_suffix = '.md'
 let g:notes_smart_quotes = 0
 
-" Ripgrep configs
-" Use RipGrep for lightning fast Gsearch command
-set grepprg=rg\ --vimgrep\ --no-heading\ --sort-files
-set grepformat=%f:%l:%c:%m,%f:%l:%m
-
-function! GetVisual()
-  let reg_save = getreg('"')
-  let regtype_save = getregtype('"')
-  let cb_save = &clipboard
-  set clipboard&
-  normal! ""gvy
-  let selection = getreg('"')
-  call setreg('"', reg_save, regtype_save)
-  let &clipboard = cb_save
-  return selection
-endfunction
-
-" Open the Rg command and place the cursor into the quotes
-" grep for string provided
-nmap <Leader>rg :Rg --hidden --sort-files -g '!.git' ""<Left>
-" grep visual selection
-vnoremap <Leader>a :<C-U>execute "Rg --hidden --sort-files -g '!.git' " . GetVisual()<CR>
-" grep the current word using ,k (mnemonic Kurrent)
-nnoremap <silent> <Leader>a :Rg --hidden --sort-files -g '!.git' <cword><CR>
-" grep for 'def foo'
-nnoremap <silent> <Leader>ad :Rg --hidden --sort-files -g '!.git' 'def <cword>'<CR>
-
 " Deoplete
 let g:deoplete#enable_at_startup = 1
-" Disable deoplete when using multiple cursors
-function g:Multiple_cursors_before()
-  let g:deoplete#disable_auto_complete = 1
-endfunction
-function g:Multiple_cursors_after()
-  let g:deoplete#disable_auto_complete = 0
-endfunction
 
 """"""""""""
 " Mappings "
 """"""""""""
+
+" Map moving out of insert mode in terminal
+:tnoremap <ESC> <C-\><C-n>
+
+map <Space> <Leader>
+
+cmap w!! w !sudo tee > /dev/null %
 
 " Disable arrow keys
 nnoremap <up>    <nop>
@@ -240,7 +225,6 @@ inoremap <S-Tab> <C-D>
 " On visual mode, use tab and shift tab to indent the current selected text
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
-" Tabs control
 nnoremap <C-t> :tabe<CR>
 nnoremap <C-h> :tabp<CR>
 nnoremap <C-l> :tabn<CR>
@@ -257,12 +241,31 @@ nnoremap <Leader>rp :let @+=expand("%")<CR>
 nnoremap <Leader>lfp :let @+=expand("%:p") . ':' . line(".")<CR>
 nnoremap <Leader>rfp :let @+=expand("%") . ':' . line(".")<CR>
 
-" Switch between dark and ligh background
-map <Leader>tD :set background=dark<CR>
-map <Leader>tL :set background=light<CR>
+" General mappings
+nnoremap <C-p> :Files<CR>
+nnoremap cc :cclose<CR>
+
+" Toggle terminal on neoterm
+nnoremap <silent> <Leader>tt :Ttoggle<CR>
+
+nnoremap <Leader>ss :RRg!<Space>
+nnoremap <silent> <Leader>sk :<C-U>execute "RRg! " . expand('<cword>')<CR>
+nnoremap <silent> <Leader>sd :<C-U>execute "RRg! def " . expand('<cword>')<CR>
+vnoremap <Leader>sv :<C-U>execute "RRg! " . GetVisual()<CR>
+
+" Nerdtree mappings
+map <C-b> <plug>NERDTreeTabsToggle<CR>
+map <C-f> :NERDTreeFind<CR>
+
+" Mappings for tests
+nnoremap <Leader>tn :TestNearest<CR>
+nnoremap <Leader>tf :TestFile<CR>
+nnoremap <Leader>ts :TestSuite<CR>
+nnoremap <Leader>tl :TestLast<CR>
+nnoremap <Leader>tv :TestVisit<CR>
 
 " Notes related mappings
-noremap <Leader>n  :tabedit note:
+noremap <Leader>nn :tabedit note:
 noremap <Leader>nd :DeleteNote<CR>
 noremap <Leader>ns :SearchNote<space>
 noremap <Leader>nl :RecentNotes<CR>
@@ -277,8 +280,14 @@ noremap <Leader>gk :Gcommit -S %<CR>
 noremap <Leader>gp :Gpush<CR>
 noremap <Leader>gb :Gbrowse<CR>
 
-" Save with sudo
-cmap w!! w !sudo tee > /dev/null %
+" Mappings for MarkdownPreview
+nmap <silent> <Leader>m <Plug>MarkdownPreview<CR>     " for normal mode
+imap <silent> <Leader>m <Plug>MarkdownPreview<CR>     " for insert mode
+nmap <silent> <Leader>d <Plug>StopMarkdownPreview<CR> " for normal mode
+imap <silent> <Leader>d <Plug>StopMarkdownPreview<CR> " for insert mode
+
+" Mapping for ctags
+nmap <F9> :TagbarToggle<CR>
 
 
 """""""""""
@@ -300,10 +309,3 @@ autocmd BufReadPost *
   \ if line("'\"") > 1 && line("'\"") <= line("$") |
   \   exe "normal! g`\"" |
   \ endif
-
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis
-endif
