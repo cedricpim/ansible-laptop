@@ -123,86 +123,20 @@ command! -bang -nargs=* RRg
   \ <bang>0)
 
 
-""""""""""""""""""
-" Configurations "
-""""""""""""""""""
+""""""""""""""""""""
+" General Mappings "
+""""""""""""""""""""
 
 " Set my leader to the comma key.
 let g:mapleader=','
-
-" Neoterm configs
-let g:neoterm_autoinsert = 1
-let g:neoterm_default_mod = 'rightbelow'
-
-" Test configs
-let test#strategy = "neoterm"
-
-" Nerdtree configs
-let g:nerdtree_tabs_autofind=1
-let g:nerdtree_tabs_open_on_gui_startup=0
-
-" Airline configs
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'papercolor'
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-" This is required since current system cannot display the default symbol
-let g:airline_symbols.linenr = '¶'
-
-" Tagbar configs
-let g:tagbar_autoclose = 1
-let g:tagbar_type_ruby = {
-  \ 'kinds' : [
-    \ 'm:modules',
-    \ 'c:classes',
-    \ 'd:describes',
-    \ 'C:contexts',
-    \ 'f:methods',
-    \ 'F:singleton methods'
-  \ ]
-\ }
-
-" Rails (rails-vim)
-" Projections to other folders
-let g:rails_projections = {
-  \ "apq/*.rb": {
-    \ "test": [
-      \ "test/apq/{}_test.rb",
-      \ "spec/apq/{}_spec.rb"
-    \ ]
-  \ },
-  \ "spec/apq/*_spec.rb": {
-    \ "alternate": [
-      \ "apq/{}.rb"
-    \ ]
-  \ }
-\ }
-
-" Markdown
-let g:mkdp_path_to_chrome = "firefox"
-
-" Define maximization settings
-let g:maximizer_set_mapping_with_bang = 1
-let g:maximizer_default_mapping_key = '<C-o>'
-
-" Notes configs
-let g:notes_suffix = '.md'
-let g:notes_smart_quotes = 0
-
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-
-""""""""""""
-" Mappings "
-""""""""""""
+map <Space> <Leader>
 
 " Map moving out of insert mode in terminal
 :tnoremap <ESC> <C-\><C-n>
 
-map <Space> <Leader>
-
 cmap w!! w !sudo tee > /dev/null %
+
+nnoremap cc :cclose<CR>
 
 " Disable arrow keys
 nnoremap <up>    <nop>
@@ -241,37 +175,100 @@ nnoremap <Leader>rp :let @+=expand("%")<CR>
 nnoremap <Leader>lfp :let @+=expand("%:p") . ':' . line(".")<CR>
 nnoremap <Leader>rfp :let @+=expand("%") . ':' . line(".")<CR>
 
-" General mappings
+
+""""""""""""""""""
+" Configurations "
+""""""""""""""""""
+
+" Fzf configs
 nnoremap <C-p> :Files<CR>
-nnoremap cc :cclose<CR>
-
-" Toggle terminal on neoterm
-nnoremap <silent> <Leader>tt :Ttoggle<CR>
-
 nnoremap <Leader>ss :RRg!<Space>
 nnoremap <silent> <Leader>sk :<C-U>execute "RRg! " . expand('<cword>')<CR>
 nnoremap <silent> <Leader>sd :<C-U>execute "RRg! def " . expand('<cword>')<CR>
 vnoremap <Leader>sv :<C-U>execute "RRg! " . GetVisual()<CR>
 
-" Nerdtree mappings
+" Neoterm configs
+let g:neoterm_autoinsert = 1
+let g:neoterm_default_mod = 'rightbelow'
+nnoremap <silent> <Leader>tt :Ttoggle<CR>
+
+" Nerdtree configs
+let g:nerdtree_tabs_autofind=1
+let g:nerdtree_tabs_open_on_gui_startup=0
 map <C-b> <plug>NERDTreeTabsToggle<CR>
 map <C-f> :NERDTreeFind<CR>
 
-" Mappings for tests
+" Test configs
+let test#strategy = "neoterm"
 nnoremap <Leader>tn :TestNearest<CR>
 nnoremap <Leader>tf :TestFile<CR>
 nnoremap <Leader>ts :TestSuite<CR>
 nnoremap <Leader>tl :TestLast<CR>
 nnoremap <Leader>tv :TestVisit<CR>
 
-" Notes related mappings
+" Airline configs
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'papercolor'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+" This is required since current system cannot display the default symbol
+let g:airline_symbols.linenr = '¶'
+
+" Tagbar configs
+let g:tagbar_autoclose = 1
+let g:tagbar_type_ruby = {
+  \ 'kinds' : [
+    \ 'm:modules',
+    \ 'c:classes',
+    \ 'd:describes',
+    \ 'C:contexts',
+    \ 'f:methods',
+    \ 'F:singleton methods'
+  \ ]
+\ }
+
+" Rails (rails-vim)
+" Projections to other folders
+let g:rails_projections = {
+  \ "apq/*.rb": {
+    \ "test": [
+      \ "test/apq/{}_test.rb",
+      \ "spec/apq/{}_spec.rb"
+    \ ]
+  \ },
+  \ "spec/apq/*_spec.rb": {
+    \ "alternate": [
+      \ "apq/{}.rb"
+    \ ]
+  \ }
+\ }
+nmap <F9> :TagbarToggle<CR>
+
+" Markdown
+let g:mkdp_path_to_chrome = "firefox"
+nmap <silent> <Leader>m <Plug>MarkdownPreview<CR>     " for normal mode
+imap <silent> <Leader>m <Plug>MarkdownPreview<CR>     " for insert mode
+nmap <silent> <Leader>d <Plug>StopMarkdownPreview<CR> " for normal mode
+imap <silent> <Leader>d <Plug>StopMarkdownPreview<CR> " for insert mode
+
+" Define maximization settings
+let g:maximizer_set_mapping_with_bang = 1
+let g:maximizer_default_mapping_key = '<C-o>'
+
+" Notes configs
+let g:notes_suffix = '.md'
+let g:notes_smart_quotes = 0
 noremap <Leader>nn :tabedit note:
 noremap <Leader>nd :DeleteNote<CR>
 noremap <Leader>ns :SearchNote<space>
 noremap <Leader>nl :RecentNotes<CR>
 noremap <Leader>nt :ShowTaggedNotes<CR>
 
-" Vim-fugitive mappings
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+
+" Vim-fugitive configs
 noremap <Leader>gd :Gdiff<CR>
 noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gs :Gstatus<CR>
@@ -279,15 +276,6 @@ noremap <Leader>gc :Gcommit -S<CR>
 noremap <Leader>gk :Gcommit -S %<CR>
 noremap <Leader>gp :Gpush<CR>
 noremap <Leader>gb :Gbrowse<CR>
-
-" Mappings for MarkdownPreview
-nmap <silent> <Leader>m <Plug>MarkdownPreview<CR>     " for normal mode
-imap <silent> <Leader>m <Plug>MarkdownPreview<CR>     " for insert mode
-nmap <silent> <Leader>d <Plug>StopMarkdownPreview<CR> " for normal mode
-imap <silent> <Leader>d <Plug>StopMarkdownPreview<CR> " for insert mode
-
-" Mapping for ctags
-nmap <F9> :TagbarToggle<CR>
 
 
 """""""""""
