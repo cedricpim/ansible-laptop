@@ -30,6 +30,7 @@ bind editor <Tab> complete-query
 bind editor ^T    complete
 
 # Macros ---------------------------------------------
+macro attach      s   "<save-entry><bol>~/Downloads/<eol>"                          "save attachment to Downloads folder
 macro index,pager O   "<shell-escape>offlineimap -q<enter>"                         "run offlineimap to sync all mail"
 macro index,pager o   "<shell-escape>offlineimap -qf INBOX<enter>"                  "run offlineimap to sync inbox"
 macro index,pager C   "<copy-message>?<toggle-mailboxes>"                           "copy a message to a mailbox"
