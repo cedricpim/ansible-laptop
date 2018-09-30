@@ -26,6 +26,7 @@ Plug 'chaoren/vim-wordmotion' " Better word moving
 Plug 'tpope/vim-rails' " Rails helpers
 Plug 'vim-ruby/vim-ruby' " Configurations for ruby
 Plug 'iamcco/markdown-preview.vim' " Add markdown viewer
+Plug 'jremmen/vim-ripgrep' " Ripgrep on nvim
 Plug 'bogado/file-line' " Open file on a given line
 Plug 'tpope/vim-abolish' " Renaming strings
 Plug 'flazz/vim-colorschemes' " Moar colorschemes
@@ -276,6 +277,13 @@ noremap <Leader>gc :Gcommit -S<CR>
 noremap <Leader>gk :Gcommit -S %<CR>
 noremap <Leader>gp :Gpush<CR>
 noremap <Leader>gb :Gbrowse<CR>
+
+" Ripgrep configs
+" Use RipGrep for lightning fast Gsearch command
+set grepprg=rg\ --vimgrep\ --no-heading\ --sort-files
+set grepformat=%f:%l:%c:%m,%f:%l:%m
+nmap <Leader>rg :Rg --hidden --sort-files -g '!.git' ""<Left>
+nnoremap <silent> <Leader>ra :Rg --hidden --sort-files -g '!.git' <cword><CR>
 
 
 """""""""""
