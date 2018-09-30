@@ -3,7 +3,10 @@ user: "vagrant"
 wallpaper: "your-wallpaper.jpg"
 
 users:
-  - { name: "vagrant", password: "$6$l5Zf21s2MJv1q$VjLWMNeqWO6JUZ9QctjwyVAIPo6KrSawEeZNMhU5YFdi0ExOSqcUbdTUYPsHyNfCsRY2xReBjg5Z4u4ZkSftI/", ssh_key_passphrase: "ssh_key_passphrase" }
+  - { name: "vagrant", password: "$6$l5Zf21s2MJv1q$VjLWMNeqWO6JUZ9QctjwyVAIPo6KrSawEeZNMhU5YFdi0ExOSqcUbdTUYPsHyNfCsRY2xReBjg5Z4u4ZkSftI/" }
+
+ssh_keys:
+  - { owner: "vagrant", service: "github", passphrase: "ssh_key_passphrase" }
 
 system_time_zone: "UTC"
 system_hostname: "vagrant"

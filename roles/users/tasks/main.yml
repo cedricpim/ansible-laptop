@@ -18,30 +18,29 @@
   no_log: yes
   become: yes
 
-- name: "generate ssh keys"
+- name: "generate SSH keys"
   user:
-    name: "{{ item.name }}"
+    name: "{{ item.owner }}"
     generate_ssh_key: yes
     ssh_key_bits: 4096
-    ssh_key_file: ".ssh/id_rsa"
-    ssh_key_passphrase: "{{ item.ssh_key_passphrase }}"
-    ssh_key_comment: "{{ item.name }}"
-  with_items: "{{ users }}"
+    ssh_key_file: ".ssh/{{ item.service }}_id_rsa"
+    ssh_key_passphrase: "{{ item.passphrase }}"
+    ssh_key_comment: "{{ item.owner }}"
+  with_items: "{{ ssh_keys }}"
   no_log: yes
   become: yes
-  register: ssh_keys
+  register: ssh_keys_created
 
-- name: "setup Github with SSH keys"
+- name: "setup Github with SSH key"
   block:
-    - known_hosts: path="~{{ item.name }}/.ssh/known_hosts" name="github.com" key="{{ github_host }}"
-      with_items: "{{ ssh_keys.results }}"
-    - file: path="~{{ item.name }}/.ssh/known_hosts" owner="{{ item.name }}" group="{{ item.name }}"
-      with_items: "{{ ssh_keys.results }}"
-    - github_key: name="[{{ansible_product_name }}] {{ item.name }}" pubkey="{{ item.ssh_public_key }}" token="{{ github_access_token }}"
-      with_items: "{{ ssh_keys.results }}"
-  when: ssh_keys is defined
+    - known_hosts: path="~/.ssh/known_hosts" name="github.com" key="{{ github_host }}"
+      with_items: "{{ ssh_keys_created.results | selectattr('ssh_key_file', 'search', 'github_id_rsa$') | list }}"
+    - github_key: name="[{{ ansible_product_name }}] {{ item.name }}" pubkey="{{ item.ssh_public_key }}" token="{{ github_access_token }}"
+      with_items: "{{ ssh_keys_created.results | selectattr('ssh_key_file', 'search', 'github_id_rsa$') | list }}"
+  when: ssh_keys_created is defined
   no_log: yes
   become: yes
+  become_user: "{{ item.name }}"
 
 - name: "setup ansible laptop project"
   block:
@@ -51,7 +50,7 @@
       with_items: "{{ users }}"
     - replace: path="{{ ansible_laptop_dest }}/.git/config" regexp="{{ github_https_base }}" replace="{{ github_ssh_base }}"
       with_items: "{{ users }}"
-    - copy: content="{{ item.vault }}" dest="{{ ansible_laptop_dest }}/vaulted_vars/{{ item.name }}/vault.txt"
+    - copy: content="{{ item.vault }}" dest="{{ ansible_laptop_dest }}/vaulted_vars/{{ item.name }}.txt"
       with_items: "{{ users }}"
   no_log: yes
   become: yes
