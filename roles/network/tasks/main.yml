@@ -9,7 +9,16 @@
     - "networkmanager"
     - "ntp"
     - "openresolv"
+    - "wireguard-dkms"
+    - "wireguard-tools"
+    - "linux-headers"
   become: yes
+
+- include_role:
+    name: "zsh"
+    tasks_from: "scripts"
+  vars:
+    script: "wgq"
 
 - name: "copy resolvconf configuration"
   template:
