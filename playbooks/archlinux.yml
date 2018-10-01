@@ -22,7 +22,6 @@
     - { role: "users", tags: "users" }
     - { role: "system", tags: "system" }
     - { role: "fonts", tags: "fonts" }
-    - { role: "openvpn", tags: "openvpn" }
     - { role: "torrents", tags: "torrents" }
     - { role: "systemon", tags: "systemon" }
 

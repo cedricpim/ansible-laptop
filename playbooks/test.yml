@@ -22,7 +22,6 @@
     - { role: "users", tags: "users" }
     - { role: "system", tags: "system" }
     - { role: "fonts", tags: "fonts" }
-    - { role: "openvpn", tags: "openvpn" }
     - { role: "settings", tags: "settings" }
     - { role: "agenda", tags: "agenda" }
     - { role: "editor", tags: "editor" }
