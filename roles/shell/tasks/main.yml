@@ -44,11 +44,8 @@
 - include_role:
     name: "zsh"
     tasks_from: "scripts"
-  with_items:
-    - "luks"
-    - "update-repos"
-  loop_control:
-    loop_var: "script"
+  vars:
+    script: "luks"
 
 - import_tasks: "git.yml"
 - import_tasks: "htop.yml"
