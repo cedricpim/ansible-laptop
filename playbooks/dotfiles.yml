@@ -27,7 +27,6 @@
     - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
     - { role: "tmux", tags: "tmux" }
-    - { role: "todo", tags: "todo" }
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }
 
