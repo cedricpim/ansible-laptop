@@ -1,0 +1,8 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Store networth calculation
+
+[Service]
+ExecStart={{ gem_env.stdout.split(':') | first }}/bin/ledger networth -s
+Type=oneshot

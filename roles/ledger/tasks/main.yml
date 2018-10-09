@@ -35,12 +35,19 @@
   with_items:
     - "ledger-backup.service"
     - "ledger-backup.timer"
-  notify: "restart ledger-backup timer"
+    - "ledger-networth.service"
+    - "ledger-networth.timer"
+  notify:
+    - "restart ledger-backup timer"
+    - "restart ledger-networth timer"
 
 - name: "enable/start ledger-backup timer"
   systemd:
-    name: "ledger-backup.timer"
+    name: "{{ item }}"
     state: "started"
     enabled: yes
     daemon_reload: yes
     user: yes
+  with_items:
+    - "ledger-backup.timer"
+    - "ledger-networth.timer"

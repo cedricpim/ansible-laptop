@@ -12,3 +12,10 @@
     state: "restarted"
     daemon_reload: yes
     user: yes
+
+- name: "restart ledger-networth timer"
+  systemd:
+    name: "ledger-networth.timer"
+    state: "restarted"
+    daemon_reload: yes
+    user: yes
