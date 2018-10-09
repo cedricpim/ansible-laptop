@@ -3,6 +3,14 @@
 # Location for the ledger file holding all the information
 :ledger: {{ ledger_file }}
 
+# Networth related options
+:networth:
+  :file: {{ ledger_networth }}
+  :investments:
+{% for investment_category in ledger_investment_categories %}
+    - {{ investment_category }}
+{% endfor %}
+
 # Settings to be used by the gem that handles the exchange rates
 # For more information, see https://github.com/spk/money-open-exchange-rates#usage
 :exchange:
@@ -20,7 +28,7 @@
     :default: 'Main'
     :presence: true
   :date:
-    :default: "<%= Date.today.strftime('%d-%m-%Y') %>"
+    :default: "<%= Date.today %>"
     :presence: true
   :category:
     :default: ''
@@ -153,6 +161,17 @@
           :align: 'center'
         - :width: 10
           :align: 'center'
+    :networth:
+      :header:
+        - Description
+        - Amount
+        - (%)
+      :options:
+        - :width: 30
+        - :width: 20
+          :align: 'center'
+        - :width: 10
+          :align: 'center'
     :totals:
       :income:
         :width: 17
@@ -183,16 +202,15 @@
       :display:
         :sign_positive: true
         :decimal_mark: '.'
-        :symbol_after_without_space: true
-        :symbol_position: :after
+        :thousands_separator: ','
+        :format: '%n%u'
       # Format of the money when writing it to the ledger
       :ledger:
         :sign_positive: true
         :decimal_mark: '.'
-        :symbol_after_without_space: true
-        :symbol_position: :after
-        :symbol: false
         :thousands_separator: ''
+        :format: '%n%u'
+        :symbol: false
 
 # Values for configuring encryption on the ledger file
 :encryption:
