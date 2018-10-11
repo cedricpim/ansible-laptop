@@ -1,9 +1,7 @@
 {{ ansible_managed | comment }}
 
-# Location for the ledger file holding all the information
 :ledger: {{ ledger_file }}
 
-# Networth related options
 :networth:
   :file: {{ ledger_networth }}
   :investments:
@@ -11,70 +9,51 @@
     - {{ investment_category }}
 {% endfor %}
 
-# Settings to be used by the gem that handles the exchange rates
-# For more information, see https://github.com/spk/money-open-exchange-rates#usage
 :exchange:
-  :api_key: '{{ ledger_exchange_api_key }}'
-  :cache_file: '/tmp/exchange-cache.json'
+  :api_key: "{{ ledger_exchange_api_key }}"
+  :cache_file: "/tmp/exchange-cache.json"
   :ttl: 86400 # set the seconds after than the current rates are automatically expired
 
-# Fields that are present on the ledger as well as configurations for each field
-# Each field can contain the following:
-#   - default: "value" - Default value for the field when adding a transaction
-#   - presence: true/false - Value is required or not
-#   - values: List<"value"> - List of values available on TAB completion
 :fields:
   :account:
-    :default: 'Main'
+    :default: "Main"
     :presence: true
   :date:
     :default: "<%= Date.today %>"
     :presence: true
   :category:
-    :default: ''
+    :default: ""
     :presence: true
-    :values:
-{% for category in ledger_categories %}
-      - {{ category }}
-{% endfor %}
   :description:
-    :default: ''
+    :default: ""
     :presence: false
   :venue:
-    :default: ''
+    :default: ""
     :presence: false
   :amount:
-    :default: ''
+    :default: ""
     :presence: true
   :currency:
-    :default: '{{ ledger_currencies[0] }}'
+    :default: "{{ ledger_currency }}"
     :presence: true
-    :values:
-{% for currency in ledger_currencies %}
-      - {{ currency }}
-{% endfor %}
   :processed:
-    :default: 'yes'
+    :default: "yes"
     :presence: true
-    :values:
-      - 'yes'
-      - 'no'
   :travel:
-    :default: ''
+    :default: ""
     :presence: false
 
-# Configure values to be always excluded from reports
 :report:
   :exclude:
     :categories:
-      - 'Exchange'
-      - 'Investment'
+{% for excluded_category in ledger_excluded_categories %}
+      - {{ excluded_category }}
+{% endfor %}
 
-# Define the set of formats to be used across the application
 :format:
   :output:
     :show_totals: yes
-    :default: '------'
+    :default: "------"
     :color:
       :header:
         :color: :blue
@@ -93,13 +72,13 @@
         :positive:
           :color: :green
       :processed:
-        'yes':
+        "yes":
           :color: :white
-        'no':
+        "no":
           :color: :black
     :title:
       :width: 80
-      :align: 'center'
+      :align: "center"
       :rule: true
       :color: :cyan
       :bold: true
@@ -109,10 +88,10 @@
         - Amount
       :options:
         - :width: 40
-          :align: 'right'
+          :align: "right"
           :padding: 5
         - :width: 40
-          :align: 'left'
+          :align: "left"
           :padding: 5
     :report:
       :header:
@@ -122,9 +101,9 @@
       :options:
         - :width: 25
         - :width: 20
-          :align: 'center'
+          :align: "center"
         - :width: 15
-          :align: 'center'
+          :align: "center"
     :analysis:
       :header:
           - Item
@@ -134,11 +113,11 @@
       :options:
           - :width: 35
           - :width: 15
-            :align: 'center'
+            :align: "center"
           - :width: 12
-            :align: 'center'
+            :align: "center"
           - :width: 12
-            :align: 'center'
+            :align: "center"
     :trip:
       :header:
         - Category
@@ -147,9 +126,9 @@
       :options:
         - :width: 25
         - :width: 20
-          :align: 'center'
+          :align: "center"
         - :width: 10
-          :align: 'center'
+          :align: "center"
     :globaltrip:
       :header:
         - Trip
@@ -158,9 +137,9 @@
       :options:
         - :width: 20
         - :width: 20
-          :align: 'center'
+          :align: "center"
         - :width: 10
-          :align: 'center'
+          :align: "center"
     :networth:
       :header:
         - Description
@@ -169,58 +148,48 @@
       :options:
         - :width: 30
         - :width: 20
-          :align: 'center'
+          :align: "center"
         - :width: 10
-          :align: 'center'
+          :align: "center"
     :totals:
       :income:
         :width: 17
-        :align: 'right'
+        :align: "right"
       :expense:
         :width: 17
-        :align: 'left'
+        :align: "left"
       :total0:
         :width: 15
-        :align: 'center'
+        :align: "center"
         :span: 2
       :total1:
         :width: 11
-        :align: 'right'
+        :align: "right"
         :span: 2
       :percentage:
         :period:
           :width: 8
-          :align: 'right'
+          :align: "right"
         :total:
           :width: 8
-          :align: 'right'
+          :align: "right"
   :fields:
-    # For more information on the configuration values, please read:
-    # http://www.rubydoc.info/gems/money/Money/Formatting
     :money:
-      # Format of the money when displaying it on the UI
       :display:
         :sign_positive: true
-        :decimal_mark: '.'
-        :thousands_separator: ','
-        :format: '%n%u'
-      # Format of the money when writing it to the ledger
+        :decimal_mark: "."
+        :thousands_separator: ","
+        :format: "%n%u"
       :ledger:
         :sign_positive: true
-        :decimal_mark: '.'
-        :thousands_separator: ''
-        :format: '%n%u'
+        :decimal_mark: "."
+        :thousands_separator: ""
+        :format: "%n%u"
         :symbol: false
 
-# Values for configuring encryption on the ledger file
 :encryption:
-  # Enable or disable encryption
-  # The other settings are not required if enabled is set to false
   :enabled: true
-  # Choose the algorithm encryption
-  # Options: `ruby -r openssl -e "puts OpenSSL::Cipher.ciphers.join('|')"`
   :algorithm: AES-256-CBC
-  # Add credentials to encrypt the file. This is a shell command.
   :credentials:
     :password: {{ ledger_password }}
     :salt: {{ ledger_salt }}

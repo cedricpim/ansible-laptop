@@ -1,9 +1,8 @@
 ---
 ledger_repo: "https://github.com/cedricpim/ledger.git"
-ledger_dest: "~/ledger.tmp"
+ledger_directory: "~/.ledger"
 
-ledger_directory: "~/.config/ledger"
+ledger_config_directory: "~/.config/ledger"
 
 ledger_file: "~/.config/ledger.csv"
-ledger_backup_directory: "~/Documents/backups/ledger"
-ledger_keep_days: "7"
+ledger_networth: "~/.config/networth.csv"
