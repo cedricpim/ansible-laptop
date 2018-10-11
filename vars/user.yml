@@ -1,5 +1,4 @@
 ---
-feeds: "{{ vault_feeds }}"
 server: "{{ vault_server }}"
 
 agenda_khal: "{{ vault_agenda_khal }}"

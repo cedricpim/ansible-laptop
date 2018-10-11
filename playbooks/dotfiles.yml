@@ -22,7 +22,7 @@
     - { role: "agenda", tags: "agenda" }
     - { role: "editor", tags: "editor" }
     - { role: "email", tags: "email" }
-    - { role: "feeds", tags: "feeds", when: feeds is defined and feeds }
+    - { role: "feeds", tags: "feeds" }
     - { role: "ledger", tags: "ledger" }
     - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
