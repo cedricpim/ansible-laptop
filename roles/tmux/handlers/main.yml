@@ -1,5 +1,5 @@
 ---
 - name: "reload systemctl daemon"
   systemd:
+    scope: "user"
     daemon_reload: yes
-    user: yes

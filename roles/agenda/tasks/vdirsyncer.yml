@@ -61,6 +61,6 @@
   systemd:
     name: "vdirsyncer.timer"
     state: "started"
+    scope: "user"
     enabled: yes
     daemon_reload: yes
-    user: yes

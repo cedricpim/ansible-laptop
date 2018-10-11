@@ -25,5 +25,5 @@
   systemd:
     name: "offlineimap-oneshot.timer"
     state: "started"
+    scope: "user"
     enabled: yes
-    user: yes

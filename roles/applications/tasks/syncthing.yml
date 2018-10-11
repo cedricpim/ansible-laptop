@@ -9,8 +9,8 @@
   systemd:
     name: "syncthing"
     state: "started"
+    scope: "user"
     enabled: yes
-    user: yes
 
 - name: "wait until the file ~/.config/syncthing/config.xml is present"
   wait_for:

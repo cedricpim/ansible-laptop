@@ -3,8 +3,8 @@
   systemd:
     name: "vdirsyncer.timer"
     state: "restarted"
+    scope: "user"
     daemon_reload: yes
-    user: yes
 
 - name: "discover vdirsyncer"
   shell: "yes | vdirsyncer discover"
