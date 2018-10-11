@@ -2,12 +2,6 @@
 - hosts: vagrant
 
   pre_tasks:
-    - name: "update packages"
-      include_role:
-        name: "pacaur"
-        tasks_from: "update"
-      tags: "always"
-
     - name: "get list of services before running roles"
       command: "systemctl list-unit-files"
       changed_when: no

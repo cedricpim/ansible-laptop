@@ -10,6 +10,7 @@
 
 - name: "install extra dependencies"
   command: "pip install vdirsyncer[google]"
+  become: yes
 
 - name: "create folder for vdirsyncer configuration"
   file:

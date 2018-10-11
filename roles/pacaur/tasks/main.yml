@@ -1,13 +1,12 @@
 ---
 - name: "install pacaur dependencies"
   pacman:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - "expac"
-    - "yajl"
-    - "sudo"
-    - "git"
+    name:
+      - "expac"
+      - "yajl"
+      - "sudo"
+      - "git"
+    state: "present"
   become: yes
 
 - name: "check if pacaur is installed"
@@ -19,14 +18,14 @@
 - name: "ensure {{ user }} exists"
   user:
     name: "{{ user }}"
-    append: true
+    append: yes
     groups: "wheel"
-    state: present
+    state: "present"
   become: yes
-  when: aur_package_check is defined and aur_pacaur_check.rc != 0
+  when: aur_pacaur_check is defined and aur_pacaur_check.rc != 0
 
 - import_tasks: cower.yml
-  when: aur_package_check is defined and aur_pacaur_check.rc != 0
+  when: aur_pacaur_check is defined and aur_pacaur_check.rc != 0
 
 - import_tasks: pacaur.yml
-  when: aur_package_check is defined and aur_pacaur_check.rc != 0
+  when: aur_pacaur_check is defined and aur_pacaur_check.rc != 0

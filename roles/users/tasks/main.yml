@@ -37,6 +37,7 @@
       with_items: "{{ ssh_keys_created.results | selectattr('ssh_key_file', 'search', 'github_id_rsa$') | list }}"
     - github_key: name="[{{ ansible_product_name }}] {{ item.name }}" pubkey="{{ item.ssh_public_key }}" token="{{ github_access_token }}"
       with_items: "{{ ssh_keys_created.results | selectattr('ssh_key_file', 'search', 'github_id_rsa$') | list }}"
+      when: group_names[0] != "vagrant"
   when: ssh_keys_created is defined
   no_log: yes
   become: yes
@@ -52,6 +53,7 @@
       with_items: "{{ users }}"
     - copy: content="{{ item.vault }}" dest="{{ ansible_laptop_dest }}/vaulted_vars/{{ item.name }}.txt"
       with_items: "{{ users }}"
+      when: group_names[0] != "vagrant"
   no_log: yes
   become: yes
   become_user: "{{ item.name }}"

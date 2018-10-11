@@ -4,7 +4,7 @@
 - name: "ensure neovim is installed"
   pacman:
     name: "neovim"
-    state: present
+    state: "present"
   become: yes
 
 - name: "check if {{ pkg_name }} is installed"

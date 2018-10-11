@@ -23,16 +23,16 @@ personal_server_photos: "/home/vagrant/photos"
 personal_local_photos: "~/Pictures"
 personal_public_files: "~/Public"
 
-vault_agenda_khal:
+agenda_khal:
   main: "my_calendar"
   calendars:
     - { name: "my_calendar",     color: "#FFFFFF", readonly: "False", path: "{{ vdirsyncer_directory }}/calendars/vagrant/my_calendar/"     }
     - { name: "remote_calendar", color: "#333333", readonly: "True",  path: "{{ vdirsyncer_directory }}/calendars/vagrant/remote_calendar/" }
 
-vault_agenda_khard:
+agenda_khard:
   contacts: "{{ vdirsyncer_directory }}/contacts/vagrant/contacts/"
 
-vault_agenda_vdirsyncer:
+agenda_vdirsyncer:
   - name: "my_contacts"
     path: "{{ vdirsyncer_directory }}/contacts/vagrant"
     fileext: ".vcf"
