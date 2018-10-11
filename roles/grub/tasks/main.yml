@@ -1,11 +1,10 @@
 ---
 - name: "install grub and efibootmgr"
   pacman:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - "grub"
-    - "efibootmgr"
+    name:
+      - "grub"
+      - "efibootmgr"
+    state: "present"
   become: yes
 
 - name: "run grub installation"

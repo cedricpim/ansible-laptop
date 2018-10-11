@@ -1,17 +1,16 @@
 ---
 - name: "install network tools"
   pacman:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - "iw"
-    - "wpa_supplicant"
-    - "networkmanager"
-    - "ntp"
-    - "openresolv"
-    - "wireguard-dkms"
-    - "wireguard-tools"
-    - "linux-headers"
+    name:
+      - "iw"
+      - "wpa_supplicant"
+      - "networkmanager"
+      - "ntp"
+      - "openresolv"
+      - "wireguard-dkms"
+      - "wireguard-tools"
+      - "linux-headers"
+    state: "present"
   become: yes
 
 - include_role:

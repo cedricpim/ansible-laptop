@@ -2,13 +2,13 @@
 - name: "install sudo package"
   pacman:
     name: "sudo"
-    state: present
+    state: "present"
   become: yes
 
 - name: "ensure we have a 'wheel' group"
   group:
     name: "wheel"
-    state: present
+    state: "present"
   become: yes
 
 - name: "allow 'wheel' group to have passwordless sudo"

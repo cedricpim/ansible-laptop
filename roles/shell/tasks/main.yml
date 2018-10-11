@@ -1,23 +1,22 @@
 ---
 - name: "install shell utilities"
   pacman:
-    name: "{{ item }}"
+    name:
+      - "openssh"
+      - "easy-rsa"
+      - "rsync"
+      - "xsel"
+      - "xdotool"
+      - "wmctrl"
+      - "ripgrep"
+      - "powerline"
+      - "cryptsetup"
+      - "bat"
+      - "fd"
+      - "tldr"
+      - "jq"
+      - "ncdu"
     state: "present"
-  with_items:
-    - "openssh"
-    - "easy-rsa"
-    - "rsync"
-    - "xsel"
-    - "xdotool"
-    - "wmctrl"
-    - "ripgrep"
-    - "powerline"
-    - "cryptsetup"
-    - "bat"
-    - "fd"
-    - "tldr"
-    - "jq"
-    - "ncdu"
   become: yes
 
 - include_role:

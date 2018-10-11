@@ -1,21 +1,20 @@
 ---
 - name: "install graphic's related packages"
   pacman:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - "xorg-xinit"
-    - "xorg-setxkbmap"
-    - "mesa"
-    - "xf86-video-intel"
-    - "nvidia"
-    - "bbswitch"
+    name:
+      - "xorg-xinit"
+      - "xorg-setxkbmap"
+      - "mesa"
+      - "xf86-video-intel"
+      - "nvidia"
+      - "bbswitch"
+    state: "present"
   become: yes
 
 - name: "install bumblebee package"
   pacman:
     name: "bumblebee"
-    state: present
+    state: "present"
   become: yes
 
 - name: "add bumblebee group to users"
@@ -23,7 +22,7 @@
     name: "{{ item.name }}"
     groups: "bumblebee"
     append: yes
-    state: present
+    state: "present"
   with_items: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"

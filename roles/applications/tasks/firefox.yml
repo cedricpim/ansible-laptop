@@ -2,7 +2,7 @@
 - name: "install firefox"
   pacman:
     name: "firefox"
-    state: present
+    state: "present"
   become: yes
 
 - include_role:

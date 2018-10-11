@@ -1,11 +1,11 @@
 ---
-- name: install  ripgrep
+- name: "install ripgrep"
   pacman:
-    name: ripgrep
-    state: present
+    name: "ripgrep"
+    state: "present"
   become: yes
 
-- name: setup ripgrep autocomplete for zsh
+- name: "setup ripgrep autocomplete for zsh"
   get_url:
     url: "{{ ripgrep_autocomplete_url }}"
     dest: "{{ ripgrep_autocomplete_dest }}"

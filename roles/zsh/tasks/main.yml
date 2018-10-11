@@ -1,11 +1,10 @@
 ---
 - name: "install zsh"
   pacman:
-    name: "{{ item }}"
+    name:
+      - "zsh"
+      - "zsh-completions"
     state: "present"
-  with_items:
-    - "zsh"
-    - "zsh-completions"
   become: yes
 
 - name: "change default shell to zsh"
@@ -18,7 +17,7 @@
   template:
     src: "dircolors.j2"
     dest: "~/.dircolors"
-    mode: 0600
+    mode: "0600"
   when: ansible_system == "Linux"
 
 - include_role:

@@ -1,11 +1,10 @@
 ---
 - name: "install offlineimap to sync emails and ca-certificates"
   pacman:
-    name: "{{ item }}"
+    name:
+      - "offlineimap"
+      - "ca-certificates"
     state: "present"
-  with_items:
-    - "offlineimap"
-    - "ca-certificates"
   become: yes
 
 - name: "create folder for offlineimap configuration and mail"

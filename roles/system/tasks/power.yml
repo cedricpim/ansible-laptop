@@ -1,11 +1,10 @@
 ---
 - name: "install power management tools"
   pacman:
-    name: "{{ item }}"
+    name:
+      - "powertop"
+      - "tlp"
     state: "present"
-  with_items:
-    - "powertop"
-    - "tlp"
   become: yes
 
 - name: "add Nvidia driver to blacklist"

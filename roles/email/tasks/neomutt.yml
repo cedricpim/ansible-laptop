@@ -1,11 +1,10 @@
 ---
 - name: "install neomutt and w3m to render emails"
   pacman:
-    name: "{{ item }}"
+    name:
+      - "neomutt"
+      - "w3m"
     state: "present"
-  with_items:
-    - "neomutt"
-    - "w3m"
   become: yes
 
 - name: "ensure urlview is installed"

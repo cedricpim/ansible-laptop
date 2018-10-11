@@ -1,15 +1,14 @@
 ---
 - name: "install applications"
   pacman:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - "calibre"
-    - "feh"
-    - "ffmpeg"
-    - "keepassxc"
-    - "qpdfview"
-    - "vlc"
+    name:
+      - "calibre"
+      - "feh"
+      - "ffmpeg"
+      - "keepassxc"
+      - "qpdfview"
+      - "vlc"
+    state: "present"
   become: yes
 
 - import_tasks: "syncthing.yml"
@@ -22,7 +21,6 @@
     name: "pacaur"
     tasks_from: "install"
   with_items:
-    - "spotify"
     - "postman"
     - "peek"
     - "youtube-dl"

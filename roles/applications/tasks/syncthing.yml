@@ -2,7 +2,7 @@
 - name: "install syncthing"
   pacman:
     name: "syncthing"
-    state: present
+    state: "present"
   become: yes
 
 - name: "enable/start syncthing"

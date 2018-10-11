@@ -1,14 +1,13 @@
 ---
 - name: "Install Python2, Git and dependencies"
   pacman:
-    name: "{{ item }}"
+    name:
+      - "python"
+      - "git"
+      - "libsystemd"
+      - "libffi"
+      - "openssl"
     state: "present"
-  with_items:
-    - "python"
-    - "git"
-    - "libsystemd"
-    - "libffi"
-    - "openssl"
   become: yes
 
 - include_role:
