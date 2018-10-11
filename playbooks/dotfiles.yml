@@ -23,7 +23,7 @@
     - { role: "editor", tags: "editor" }
     - { role: "email", tags: "email" }
     - { role: "feeds", tags: "feeds", when: feeds is defined and feeds }
-    - { role: "ledger", tags: "ledger", when: ledger is defined and ledger }
+    - { role: "ledger", tags: "ledger" }
     - { role: "shell", tags: "shell" }
     - { role: "terminal", tags: "terminal" }
     - { role: "tmux", tags: "tmux" }

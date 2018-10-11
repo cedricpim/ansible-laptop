@@ -124,6 +124,4 @@ function compress() {
   tar -cf - $1 | xz -9 -c - > $2.tar.xz
 }
 
-{% if ledger %}
 {{ ledger_functions }}
-{% endif %}

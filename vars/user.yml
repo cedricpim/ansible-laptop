@@ -1,6 +1,5 @@
 ---
 feeds: "{{ vault_feeds }}"
-ledger: "{{ vault_ledger }}"
 server: "{{ vault_server }}"
 
 agenda_khal: "{{ vault_agenda_khal }}"
