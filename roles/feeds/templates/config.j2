@@ -1,7 +1,7 @@
 {{ ansible_managed | comment }}
 
 # General configurations
-browser "firefox %u"
+browser "{{ default_browser }} %u"
 article-sort-order date-asc
 download-full-page yes
 download-retries 3

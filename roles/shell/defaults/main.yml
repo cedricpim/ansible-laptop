@@ -7,5 +7,3 @@ backup_mount_dir: "~/Content"
 backup_dir: "~/Downloads"
 
 git_signingkey: "example"
-
-default_browser: "firefox"

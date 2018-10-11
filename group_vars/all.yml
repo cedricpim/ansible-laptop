@@ -4,3 +4,5 @@ scripts_directory: "/usr/local/bin"
 systemd_user_directory: "~/.config/systemd/user"
 
 dconf_custom_keybindings: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+
+default_browser: "firefox"
