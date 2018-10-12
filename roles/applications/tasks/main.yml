@@ -1,5 +1,5 @@
 ---
-- name: "install applications"
+- name: "Install applications"
   pacman:
     name:
       - "calibre"

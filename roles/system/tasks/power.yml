@@ -1,5 +1,5 @@
 ---
-- name: "install power management tools"
+- name: "Install power management tools"
   pacman:
     name:
       - "powertop"
@@ -7,7 +7,7 @@
     state: "present"
   become: yes
 
-- name: "add Nvidia driver to blacklist"
+- name: "Add Nvidia driver to blacklist"
   lineinfile:
     path: "/etc/default/tlp"
     regexp: "RUNTIME_PM_BLACKLIST"
@@ -15,7 +15,7 @@
     state: "present"
   become: yes
 
-- name: "disable BTRFS optimization"
+- name: "Disable BTRFS optimization"
   lineinfile:
     path: "/etc/default/tlp"
     regexp: "SATA_LINKPWR_ON_BAT"
@@ -23,7 +23,7 @@
     state: "present"
   become: yes
 
-- name: "start and enable TLP services"
+- name: "Start and enable TLP services"
   service:
     name: "{{ item }}"
     enabled: yes
@@ -32,7 +32,7 @@
     - "tlp-sleep"
   become: yes
 
-- name: "stop and mask services conflicting with TLP"
+- name: "Stop and mask services conflicting with TLP"
   service:
     name: "{{ item }}"
     state: "stopped"

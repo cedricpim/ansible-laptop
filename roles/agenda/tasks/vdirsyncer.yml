@@ -9,22 +9,22 @@
     loop_var: "pkg_name"
   register: vdirsyncer_install
 
-- name: "install extra dependencies"
+- name: "Install extra dependencies"
   command: "pip install vdirsyncer[google]"
   become: yes
   when: vdirsyncer_install is defined and vdirsyncer_install.changed
 
-- name: "create folder for vdirsyncer configuration"
+- name: "Create folder for vdirsyncer configuration"
   file:
     path: "{{ vdirsyncer_directory }}"
     state: "directory"
 
-- name: "copy vdirsyncer configuration"
+- name: "Copy vdirsyncer configuration"
   template:
     src: "vdirsyncer/config.j2"
     dest: "{{ vdirsyncer_directory }}/config"
     mode: "0600"
-  notify: "discover vdirsyncer"
+  notify: "Discover vdirsyncer"
 
 - include_role:
     name: "zsh"
@@ -32,12 +32,12 @@
   vars:
     script: "vsync"
 
-- name: "create user folder for systemd"
+- name: "Create user folder for systemd"
   file:
     path: "{{ systemd_user_directory }}"
     state: "directory"
 
-- name: "symlink service and timer for vdirsyncer"
+- name: "Symlink service and timer for vdirsyncer"
   file:
     src: "{{ vdirsyncer_aur_systemd }}/{{ item }}"
     dest: "{{ systemd_user_directory }}/{{ item }}"
@@ -45,21 +45,21 @@
   with_items:
     - "vdirsyncer.service"
     - "vdirsyncer.timer"
-  notify: "restart vdirsyncer timer"
+  notify: "Restart vdirsyncer timer"
 
-- name: "create folder for systemd vdirsyncer"
+- name: "Create folder for systemd vdirsyncer"
   file:
     path: "{{ systemd_user_directory }}/vdirsyncer.service.d"
     state: "directory"
 
-- name: "copy vdirsyncer overriding configuration for systemd"
+- name: "Copy vdirsyncer overriding configuration for systemd"
   template:
     src: "vdirsyncer/override.conf.j2"
     dest: "{{ systemd_user_directory }}/vdirsyncer.service.d/override.conf"
     mode: "0600"
-  notify: "restart vdirsyncer timer"
+  notify: "Restart vdirsyncer timer"
 
-- name: "enable/start vdirsyncer timer"
+- name: "Enable/start vdirsyncer timer"
   systemd:
     name: "vdirsyncer.timer"
     state: "started"

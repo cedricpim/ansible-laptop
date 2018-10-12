@@ -1,21 +1,21 @@
 ---
-- name: "rebuild sysctl"
+- name: "Rebuild sysctl"
   command: "sysctl -p"
   become: yes
 
-- name: "stop transmission"
+- name: "Stop transmission"
   systemd:
     name: "transmission"
     state: "stopped"
   become: yes
 
-- name: "restart transmission"
+- name: "Restart transmission"
   systemd:
     name: "transmission"
     state: "restarted"
   become: yes
 
-- name: "load transmission configuration"
+- name: "Load transmission configuration"
   template:
     src: "transmission/settings.json.j2"
     dest: "{{ transmission_directory }}/settings.json"

@@ -1,11 +1,11 @@
 ---
-- name: "install git"
+- name: "Install git"
   pacman:
     name: "git"
     state: "present"
   become: yes
 
-- name: "copy git configuration files"
+- name: "Copy git configuration files"
   template:
     src: "git/{{ item }}.j2"
     dest: "~/.{{ item }}"

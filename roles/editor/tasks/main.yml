@@ -1,5 +1,5 @@
 ---
-- name: "install vim and neovim"
+- name: "Install vim and neovim"
   pacman:
     name:
       - "vim"
@@ -9,44 +9,44 @@
     state: "present"
   become: yes
 
-- name: "create folder for neovim configuration"
+- name: "Create folder for neovim configuration"
   file:
     path: "{{ neovim_directory }}"
     state: "directory"
 
-- name: "copy neovim configuration file"
+- name: "Copy neovim configuration file"
   template:
     src: "init.vim.j2"
     dest: "{{ neovim_directory }}/init.vim"
     mode: "0600"
 
-- name: "create folder for neovim dictionaries"
+- name: "Create folder for neovim dictionaries"
   file:
     path: "{{ neovim_spell_dest }}"
     state: "directory"
 
-- name: "install neovim dictionaries"
+- name: "Install neovim dictionaries"
   get_url:
     url: "{{ neovim_spell_url }}/{{ item }}"
     dest: "{{ neovim_spell_dest }}"
   with_items: "{{ neovim_spell_dictionaries }}"
 
-- name: "create folder for neovim plugin manager"
+- name: "Create folder for neovim plugin manager"
   file:
     path: "{{ neovim_plugin_dest }}"
     state: "directory"
 
-- name: "install neovim plugin manager"
+- name: "Install neovim plugin manager"
   get_url:
     url: "{{ neovim_plugin_url }}"
     dest: "{{ neovim_plugin_dest }}"
 
-- name: "install/update plugins defined on neovim configuration"
+- name: "Install/update plugins defined on neovim configuration"
   command: "nvim +'PlugUpdate --sync' +qa"
   register: neovim_plugin_install_result
   changed_when: neovim_plugin_install_result.stdout.find(neovim_plugin_installation_message) != -1
 
-- name: "create folder for neovim notes"
+- name: "Create folder for neovim notes"
   file:
     path: "{{ neovim_notes }}"
     state: "directory"

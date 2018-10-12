@@ -2,7 +2,7 @@
 - hosts: vagrant
 
   pre_tasks:
-    - name: "get list of services before running roles"
+    - name: "Get list of services before running roles"
       command: "systemctl list-unit-files"
       changed_when: no
       register: pre_systemd_services
@@ -32,7 +32,7 @@
     - { role: "systemon", tags: "systemon" }
 
   post_tasks:
-    - name: "restart Systemon"
+    - name: "Restart Systemon"
       systemd:
         name: "systemon"
         state: "restarted"

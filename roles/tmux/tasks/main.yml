@@ -1,44 +1,44 @@
 ---
-- name: "install tmux"
+- name: "Install tmux"
   pacman:
     name: "tmux"
     state: "present"
   become: yes
 
-- name: "copy tmux configuration"
+- name: "Copy tmux configuration"
   template:
     src: "tmux.conf.j2"
     dest: "~/.tmux.conf"
     mode: "0600"
 
-- name: "install tmux plugin manager"
+- name: "Install tmux plugin manager"
   git:
     repo: "{{ tmux_plugin_repo }}"
     dest: "{{ tmux_plugin_dest }}"
     clone: yes
     update: yes
 
-- name: "install plugins"
+- name: "Install plugins"
   command: "{{ tmux_plugin_dest }}/bin/install_plugins"
-  register: tpm_install_result
   changed_when: tpm_install_result.stdout.find(tmux_plugin_installation_message) != -1
+  register: tpm_install_result
 
-- name: "update tmux plugins"
+- name: "Update tmux plugins"
   command: "{{ tmux_plugin_dest }}/bin/update_plugins all"
-  register: tpm_update_result
   failed_when: tpm_install_result.stderr != ""
   changed_when: false
+  register: tpm_update_result
 
-- name: "create folder for systemd tmux"
+- name: "Create folder for systemd tmux"
   file:
     path: "{{ systemd_user_directory }}/tmux.service.d"
-    state: directory
+    state: "directory"
   when: tmux_continuum == 'on'
 
-- name: "copy tmux overriding configuration for systemd"
+- name: "Copy tmux overriding configuration for systemd"
   template:
     src: "override.conf.j2"
     dest: "{{ systemd_user_directory }}/tmux.service.d/override.conf"
-    mode: 0600
+    mode: "0600"
   when: tmux_continuum == 'on'
-  notify: reload systemctl daemon
+  notify: "Reload systemctl daemon"

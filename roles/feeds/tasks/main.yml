@@ -1,21 +1,21 @@
 ---
-- name: "install newsboat feed reader"
+- name: "Install newsboat feed reader"
   pacman:
     name: "newsboat"
     state: "present"
   become: yes
 
-- name: "ensure urlview is installed"
+- name: "Ensure urlview is installed"
   include_role:
     name: "shell"
     tasks_from: "urlview"
 
-- name: "create folder for newsboat configuration"
+- name: "Create folder for newsboat configuration"
   file:
     path: "{{ newsboat_directory }}"
     state: "directory"
 
-- name: "copy newsboat configuration"
+- name: "Copy newsboat configuration"
   template:
     src: "config.j2"
     dest: "{{ newsboat_directory }}/config"

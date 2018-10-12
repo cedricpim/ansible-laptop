@@ -1,21 +1,21 @@
 ---
-- name: "install intel-ucode"
+- name: "Install intel-ucode"
   pacman:
     name: "intel-ucode"
     state: "present"
   become: yes
 
-- name: "install systemd-boot"
+- name: "Install systemd-boot"
   command: "bootctl --path={{ esp_mount }} install"
   become: yes
 
-- name: "create folder for loader entries"
+- name: "Create folder for loader entries"
   file:
     path: "{{ esp_mount}}/loader/entries"
     state: "directory"
   become: yes
 
-- name: "copy entry for arch"
+- name: "Copy entry for arch"
   template:
     src: "arch.conf.j2"
     dest: "{{ esp_mount}}/loader/entries/arch.conf"

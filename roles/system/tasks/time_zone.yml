@@ -1,6 +1,6 @@
 ---
-- name: "set timezone to {{ system_time_zone }}"
+- name: "Set timezone to {{ system_time_zone }}"
   timezone:
     name: "{{ system_time_zone }}"
   become: yes
-  notify: "synchronize clock"
+  notify: "Synchronize clock"

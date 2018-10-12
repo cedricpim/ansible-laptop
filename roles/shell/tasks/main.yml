@@ -1,5 +1,5 @@
 ---
-- name: "install shell utilities"
+- name: "Install shell utilities"
   pacman:
     name:
       - "openssh"
@@ -29,12 +29,12 @@
   loop_control:
     loop_var: "pkg_name"
 
-- name: "create folder for SSH"
+- name: "Create folder for SSH"
   file:
     path: "~/.ssh"
     state: "directory"
 
-- name: "set SSH configuration"
+- name: "Set SSH configuration"
   template:
     src: "ssh/config.j2"
     dest: "~/.ssh/config"

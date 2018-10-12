@@ -1,17 +1,17 @@
 ---
-- name: "install sudo package"
+- name: "Install sudo package"
   pacman:
     name: "sudo"
     state: "present"
   become: yes
 
-- name: "ensure we have a 'wheel' group"
+- name: "Ensure we have a 'wheel' group"
   group:
     name: "wheel"
     state: "present"
   become: yes
 
-- name: "allow 'wheel' group to have passwordless sudo"
+- name: "Allow 'wheel' group to have passwordless sudo"
   lineinfile:
     path: "/etc/sudoers"
     regexp: '%wheel ALL=\(ALL\) ALL'

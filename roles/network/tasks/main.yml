@@ -1,5 +1,5 @@
 ---
-- name: "install network tools"
+- name: "Install network tools"
   pacman:
     name:
       - "iw"
@@ -19,37 +19,37 @@
   vars:
     script: "wgq"
 
-- name: "copy resolvconf configuration"
+- name: "Copy resolvconf configuration"
   template:
     src: "resolvconf/resolvconf.conf.j2"
     dest: "/etc/resolvconf.conf"
     mode: "0644"
   become: yes
-  notify: "rebuild resolvconf configuration"
+  notify: "Rebuild resolvconf configuration"
 
-- name: "create folder for NetworkManager configuration"
+- name: "Create folder for NetworkManager configuration"
   file:
     path: "{{ network_manager_directory }}"
     state: "directory"
     mode: "0755"
   become: yes
 
-- name: "copy NetworkManager configuration"
+- name: "Copy NetworkManager configuration"
   template:
     src: "NetworkManager/01-config-dns.conf.j2"
     dest: "{{ network_manager_directory }}/01-config-dns.conf"
     mode: "0644"
   become: yes
-  notify: "reload NetworkManager configuration"
+  notify: "Reload NetworkManager configuration"
 
-- name: "enable/start service for NTP"
+- name: "Enable/start service for NTP"
   systemd:
     name: "ntpd"
     state: "started"
     enabled: yes
   become: yes
 
-- name: "connect to WI-FI"
+- name: "Connect to WI-FI"
   block:
     - command: "ip link set {{ network_interface }} up"
     - command: "wpa_supplicant -B -i {{ network_interface }} -C <(wpa_passphrase {{ network_name }} {{ network_passphrase }})"

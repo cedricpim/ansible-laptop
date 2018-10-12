@@ -1,12 +1,12 @@
 ---
-- name: "enable the defined locales"
+- name: "Enable the defined locales"
   locale_gen:
     name: "{{ item }}"
     state: "present"
   with_items: "{{ locales }}"
   become: yes
 
-- name: "copy locale configuration to /etc/locale.conf"
+- name: "Copy locale configuration to /etc/locale.conf"
   template:
     src: "locale.conf.j2"
     dest: "/etc/locale.conf"

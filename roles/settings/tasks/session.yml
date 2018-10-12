@@ -1,27 +1,27 @@
 ---
-- name: "create folder for configurations"
+- name: "Create folder for configurations"
   file:
     path: "{{ config_dir }}"
     state: "directory"
 
-- name: "copy session configuration file"
+- name: "Copy session configuration file"
   template:
     src: "session.j2"
     dest: "{{ config_dir }}/session"
     mode: 0600
 
-- name: "create folder for autostart programs"
+- name: "Create folder for autostart programs"
   file:
     path: "{{ autostart_dir }}"
     state: "directory"
 
-- name: "copy session to autostart"
+- name: "Copy session to autostart"
   template:
     src: "session.desktop.j2"
     dest: "{{ autostart_dir }}/session.desktop"
     mode: 0644
 
-- name: "set mouse settings"
+- name: "Set mouse settings"
   dconf:
     key: "{{ dconf_touchpad_base_key }}/{{ item.key }}"
     value: "{{ item.value }}"

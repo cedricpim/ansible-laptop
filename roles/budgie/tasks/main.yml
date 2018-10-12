@@ -1,5 +1,5 @@
 ---
-- name: "install Budgie"
+- name: "Install Budgie"
   pacman:
     name:
       - "budgie-desktop"
@@ -23,7 +23,7 @@
   become: yes
   become_user: "{{ users[0].name }}"
 
-- name: "enable system services"
+- name: "Enable system services"
   systemd:
     name: "{{ item }}"
     enabled: yes

@@ -1,12 +1,12 @@
 ---
-- name: "create initial groups"
+- name: "Create initial groups"
   group:
     name: "{{ item }}"
     state: "present"
   with_items: "{{ users_groups }}"
   become: yes
 
-- name: "create users"
+- name: "Create users"
   user:
     name: "{{ item.name }}"
     password: "{{ item.password }}"
@@ -18,7 +18,7 @@
   no_log: yes
   become: yes
 
-- name: "generate SSH keys"
+- name: "Generate SSH keys"
   user:
     name: "{{ item.owner }}"
     generate_ssh_key: yes
@@ -31,7 +31,7 @@
   become: yes
   register: ssh_keys_created
 
-- name: "setup Github with SSH key"
+- name: "Setup Github with SSH key"
   block:
     - known_hosts: path="~/.ssh/known_hosts" name="github.com" key="{{ github_host }}"
       with_items: "{{ ssh_keys_created.results | selectattr('ssh_key_file', 'search', 'github_id_rsa$') | list }}"
@@ -43,7 +43,7 @@
   become: yes
   become_user: "{{ item.name }}"
 
-- name: "setup ansible laptop project"
+- name: "Setup ansible laptop project"
   block:
     - file: path="{{ ansible_laptop_directory }}" state="directory"
       with_items: "{{ users }}"

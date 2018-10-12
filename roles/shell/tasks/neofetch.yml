@@ -5,18 +5,18 @@
   vars:
     pkg_name: "neofetch"
 
-- name: "install xorg-xrandr package"
+- name: "Install xorg-xrandr package"
   pacman:
     name: "xorg-xrandr"
     state: "present"
   become: yes
 
-- name: "create folder for neofetch configuration"
+- name: "Create folder for neofetch configuration"
   file:
     path: "{{ neofetch_directory }}"
     state: "directory"
 
-- name: "copy neofetch configuration file"
+- name: "Copy neofetch configuration file"
   template:
     src: "neofetch/config.j2"
     dest: "{{ neofetch_directory }}/config"

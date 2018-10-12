@@ -15,4 +15,4 @@
     chdir: "{{ pacaur_folder }}"
   environment:
     PATH: '{{ ansible_env.PATH }}:/usr/bin/core_perl'
-  notify: cleanup pacaur build directory
+  notify: "Cleanup pacaur build directory"

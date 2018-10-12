@@ -1,17 +1,17 @@
 ---
-- name: "install transmission-cli"
+- name: "Install transmission-cli"
   pacman:
     name: "transmission-cli"
     state: "present"
   become: yes
 
-- name: "create staff group"
+- name: "Create staff group"
   group:
     name: "staff"
     state: "present"
   become: yes
 
-- name: "add user transmission to staff group"
+- name: "Add user transmission to staff group"
   user:
     name: "transmission"
     groups: "staff"
@@ -19,7 +19,7 @@
     state: "present"
   become: yes
 
-- name: "create folder for torrents"
+- name: "Create folder for torrents"
   file:
     path: "{{ transmission_data_directory }}"
     state: "directory"
@@ -28,7 +28,7 @@
     group: "staff"
   become: yes
 
-- name: "create folder for transmission settings"
+- name: "Create folder for transmission settings"
   file:
     path: "{{ transmission_directory }}"
     state: "directory"
@@ -36,7 +36,7 @@
     group: "transmission"
   become: yes
 
-- name: "copy transmission script"
+- name: "Copy transmission script"
   template:
     src: "transmission/complete.sh.j2"
     dest: "{{ transmission_directory }}/complete.sh"
@@ -45,7 +45,7 @@
     mode: "0700"
   become: yes
 
-- name: "copy transmission settings"
+- name: "Copy transmission settings"
   template:
     src: "transmission/settings.json.j2"
     dest: "{{ transmission_directory }}/settings.json"
@@ -58,7 +58,7 @@
     - "load transmission configuration"
     - "restart transmission"
 
-- name: "copy sysctl configuration to /etc/sysctl.conf"
+- name: "Copy sysctl configuration to /etc/sysctl.conf"
   template:
     src: "sysctl.conf.j2"
     dest: "/etc/sysctl.conf"
@@ -67,10 +67,10 @@
     mode: "0644"
   become: yes
   notify:
-    - "rebuild sysctl"
-    - "restart transmission"
+    - "Rebuild sysctl"
+    - "Restart transmission"
 
-- name: "start and enable service for transmission-cli"
+- name: "Start and enable service for transmission-cli"
   systemd:
     name: "transmission"
     state: "started"

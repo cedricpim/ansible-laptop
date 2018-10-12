@@ -5,12 +5,12 @@
   vars:
     pkg_name: "cht.sh"
 
-- name: "create folder for cht autocomplete"
+- name: "Create folder for cht autocomplete"
   file:
     path: "{{ cht_autocomplete_directory }}"
     state: "directory"
 
-- name: "setup cht.sh autocomplete for zsh"
+- name: "Setup cht.sh autocomplete for zsh"
   get_url:
     url: "{{ cht_autocomplete_url }}"
     dest: "{{ cht_autocomplete_dest }}"

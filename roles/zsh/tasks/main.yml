@@ -1,5 +1,5 @@
 ---
-- name: "install zsh"
+- name: "Install zsh"
   pacman:
     name:
       - "zsh"
@@ -7,13 +7,13 @@
     state: "present"
   become: yes
 
-- name: "change default shell to zsh"
+- name: "Change default shell to zsh"
   user:
     name: "{{ user }}"
     shell: "/usr/bin/zsh"
   become: yes
 
-- name: "copy dircolors configuration file"
+- name: "Copy dircolors configuration file"
   template:
     src: "dircolors.j2"
     dest: "~/.dircolors"

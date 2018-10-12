@@ -1,15 +1,15 @@
 ---
-- name: "synchronize clock"
+- name: "Synchronize clock"
   command: "hwclock --systohc"
   become: yes
 
-- name: "restart journal-triggerd configuration"
+- name: "Restart journal-triggerd configuration"
   systemd:
     name: "journal-triggerd"
     state: "restarted"
   become: yes
 
-- name: "restart systemd-journal"
+- name: "Restart systemd-journal"
   systemd:
     name: "systemd-journald"
     state: "restarted"

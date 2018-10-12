@@ -1,5 +1,5 @@
 ---
-- name: "restart syncthing"
+- name: "Restart syncthing"
   systemd:
     name: "syncthing"
     state: "restarted"

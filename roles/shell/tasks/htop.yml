@@ -1,16 +1,16 @@
 ---
-- name: "install htop"
+- name: "Install htop"
   pacman:
     name: "htop"
     state: "present"
   become: yes
 
-- name: "create folder for htop configuration"
+- name: "Create folder for htop configuration"
   file:
     path: "{{ htop_directory }}"
     state: "directory"
 
-- name: "copy htop configuration file"
+- name: "Copy htop configuration file"
   template:
     src: "htop/htoprc.j2"
     dest: "{{ htop_directory }}/htoprc"

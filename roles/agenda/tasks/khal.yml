@@ -5,12 +5,12 @@
   vars:
     pkg_name: "khal"
 
-- name: "create folder for khal configuration"
+- name: "Create folder for khal configuration"
   file:
     path: "{{ khal_directory }}"
     state: "directory"
 
-- name: "copy khal configuration"
+- name: "Copy khal configuration"
   template:
     src: "khal/config.j2"
     dest: "{{ khal_directory }}/config"

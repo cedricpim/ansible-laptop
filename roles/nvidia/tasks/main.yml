@@ -1,5 +1,5 @@
 ---
-- name: "install graphic's related packages"
+- name: "Install graphic's related packages"
   pacman:
     name:
       - "xorg-xinit"
@@ -11,13 +11,13 @@
     state: "present"
   become: yes
 
-- name: "install bumblebee package"
+- name: "Install bumblebee package"
   pacman:
     name: "bumblebee"
     state: "present"
   become: yes
 
-- name: "add bumblebee group to users"
+- name: "Add bumblebee group to users"
   user:
     name: "{{ item.name }}"
     groups: "bumblebee"
@@ -28,7 +28,7 @@
     label: "{{ item.name }}"
   become: yes
 
-- name: "start service for bumblebee"
+- name: "Start service for bumblebee"
   systemd:
     name: "bumblebeed"
     state: started

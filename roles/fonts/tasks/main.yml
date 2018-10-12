@@ -1,5 +1,5 @@
 ---
-- name: "install fonts"
+- name: "Install fonts"
   pacman:
     name:
       - "ttf-dejavu"

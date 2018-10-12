@@ -1,5 +1,5 @@
 ---
-- name: "install neomutt and w3m to render emails"
+- name: "Install neomutt and w3m to render emails"
   pacman:
     name:
       - "neomutt"
@@ -7,17 +7,17 @@
     state: "present"
   become: yes
 
-- name: "ensure urlview is installed"
+- name: "Ensure urlview is installed"
   include_role:
     name: "shell"
     tasks_from: "urlview"
 
-- name: "create folder for neomutt configuration"
+- name: "Create folder for neomutt configuration"
   file:
     path: "{{ neomutt_directory }}"
     state: "directory"
 
-- name: "copy neomutt configurations file"
+- name: "Copy neomutt configurations file"
   template:
     src: "neomutt/{{ item }}.j2"
     dest: "{{ neomutt_directory }}/{{ item }}"

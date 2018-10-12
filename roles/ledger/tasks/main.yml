@@ -1,5 +1,5 @@
 ---
-- name: "ensure ruby is installed"
+- name: "Ensure ruby is installed"
   pacman:
     name:
       - "git"
@@ -7,7 +7,7 @@
     state: "present"
   become: yes
 
-- name: "download ledger repository"
+- name: "Download ledger repository"
   git:
     repo: "{{ ledger_repo }}"
     dest: "{{ ledger_directory }}"
@@ -15,7 +15,7 @@
     update: yes
   register: ledger_repo
 
-- name: "install ledger"
+- name: "Install ledger"
   block:
     - command: "gem build ledger.gemspec"
       args:
@@ -28,12 +28,12 @@
     - file: path="{{ ledger_directory }}" state="absent"
   when: ledger_repo is defined and ledger_repo is changed
 
-- name: "create folder for ledger configuration"
+- name: "Create folder for ledger configuration"
   file:
     path: "{{ ledger_config_directory }}"
     state: "directory"
 
-- name: "copy ledger configuration"
+- name: "Copy ledger configuration"
   template:
     src: "config.j2"
     dest: "{{ ledger_config_directory }}/config"

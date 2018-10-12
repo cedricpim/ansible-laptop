@@ -1,12 +1,12 @@
 ---
-- name: "create directory for scripts"
+- name: "Create directory for scripts"
   file:
     path: "{{ scripts_directory }}"
     mode: "02775"
     state: "directory"
   become: yes
 
-- name: "copy {{ script }}"
+- name: "Copy {{ script }}"
   template:
     src: "scripts/{{ script }}.j2"
     dest: "{{ scripts_directory }}/{{ script }}"

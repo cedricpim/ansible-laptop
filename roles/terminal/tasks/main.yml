@@ -8,23 +8,23 @@
   loop_control:
     loop_var: "pkg_name"
 
-- name: "create folder for urxvt icon"
+- name: "Create folder for urxvt icon"
   file:
     path: "{{ urxvt_icon_dest }}"
     state: "directory"
 
-- name: "copy urxvt icon"
+- name: "Copy urxvt icon"
   copy:
     src: "urxvt.png"
     dest: "{{ urxvt_icon_dest }}"
     mode: "0644"
 
-- name: "create folder for urxvt extra configurations"
+- name: "Create folder for urxvt extra configurations"
   file:
     path: "{{ urxvt_directory }}"
     state: "directory"
 
-- name: "copy urxvt extra configurations"
+- name: "Copy urxvt extra configurations"
   template:
     src: "{{ item.file }}.j2"
     dest: "{{ urxvt_directory }}/{{ item.file }}"
@@ -32,28 +32,28 @@
   with_items:
     - { file: "colorscheme", mode: "0600" }
     - { file: "urxvtopen", mode: "0700" }
-  notify: "load configuration"
+  notify: "Load configuration"
 
-- name: "install python-psutil for dconf"
+- name: "Install python-psutil for dconf"
   pacman:
     name: "python-psutil"
     state: "present"
   become: yes
 
-- name: "set global shortcut for urxvt"
+- name: "Set global shortcut for urxvt"
   dconf:
     key: "{{ dconf_custom_keybindings }}/{{ urxvt_shortcut_custom }}/{{ item.key }}"
     value: "{{ item.value | regex_replace('~', ansible_env.HOME) }}"
     state: "present"
   with_items: "{{ urxvt_shortcut_configuration }}"
 
-- name: "read current keybindings"
+- name: "Read current keybindings"
   dconf:
     key: "{{ dconf_custom_keybindings }}"
     state: "read"
   register: custom_urxvt
 
-- name: "create list with new keybinding"
+- name: "Create list with new keybinding"
   dconf:
     key: "{{ dconf_custom_keybindings }}"
     value: "[{{ dconf_urxvt_custom_key }}]"
@@ -62,7 +62,7 @@
     - custom_urxvt is defined
     - custom_urxvt.value is none
 
-- name: "add new keybinding to existing list"
+- name: "Add new keybinding to existing list"
   dconf:
     key: "{{ dconf_custom_keybindings }}"
     value: "[{{ custom_urxvt.value | regex_findall('\\[(.*)\\]') | first }}, {{ dconf_urxvt_custom_key }}]"
@@ -72,14 +72,14 @@
     - custom_urxvt.value is not none
     - urxvt_shortcut_custom not in custom_urxvt.value
 
-- name: "copy urxvt configuration"
+- name: "Copy urxvt configuration"
   template:
     src: "Xresources.j2"
     dest: "~/.Xresources"
     mode: "0600"
-  notify: "load configuration"
+  notify: "Load configuration"
 
-- name: "update urxvt application icon"
+- name: "Update urxvt application icon"
   replace:
     path: "{{ urxvt_desktop }}/{{ item }}.desktop"
     regexp: "^Icon=.*"

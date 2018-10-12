@@ -1,5 +1,5 @@
 ---
-- name: "install python-psutil for dconf"
+- name: "Install python-psutil for dconf"
   pacman:
     name: "python-psutil"
     state: "present"

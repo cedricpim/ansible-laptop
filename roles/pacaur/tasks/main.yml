@@ -1,5 +1,5 @@
 ---
-- name: "install pacaur dependencies"
+- name: "Install pacaur dependencies"
   pacman:
     name:
       - "expac"
@@ -9,13 +9,13 @@
     state: "present"
   become: yes
 
-- name: "check if pacaur is installed"
+- name: "Check if pacaur is installed"
   command: "pacman -Q pacaur"
   register: aur_pacaur_check
   failed_when: false
   changed_when: false
 
-- name: "ensure {{ user }} exists"
+- name: "Ensure {{ user }} exists"
   user:
     name: "{{ user }}"
     append: yes

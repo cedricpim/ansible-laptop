@@ -1,5 +1,5 @@
 ---
-- name: "install grub and efibootmgr"
+- name: "Install grub and efibootmgr"
   pacman:
     name:
       - "grub"
@@ -7,23 +7,23 @@
     state: "present"
   become: yes
 
-- name: "run grub installation"
+- name: "Run grub installation"
   command: "grub-install --target=x86_64-efi --efi-directory={{ esp_mount }} --bootloader-id=grub"
   become: yes
-  notify: "create grub configuration"
+  notify: "Create grub configuration"
 
-- name: "hide grub"
+- name: "Hide grub"
   lineinfile:
     path: "{{ default_grub_configuration }}"
     regexp: '^GRUB_FORCE_HIDDEN_MENU='
     line: 'GRUB_FORCE_HIDDEN_MENU="true"'
   become: yes
-  notify: "create grub configuration"
+  notify: "Create grub configuration"
 
-- name: "download grub script for SHIFT key"
+- name: "Download grub script for SHIFT key"
   get_url:
     url: "{{ grub_shift_script }}"
     dest: "/etc/grub.d/31_hold_shift"
     mode: 0744
   become: yes
-  notify: "create grub configuration"
+  notify: "Create grub configuration"

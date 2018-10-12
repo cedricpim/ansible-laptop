@@ -1,11 +1,11 @@
 ---
-- name: "install notmuch to index emails"
+- name: "Install notmuch to index emails"
   pacman:
     name: "notmuch"
     state: "present"
   become: yes
 
-- name: "copy notmuch configuration"
+- name: "Copy notmuch configuration"
   template:
     src: "notmuch/notmuch-config.j2"
     dest: "~/.notmuch-config"

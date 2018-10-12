@@ -1,5 +1,5 @@
 ---
-- name: "install firefox"
+- name: "Install firefox"
   pacman:
     name: "firefox"
     state: "present"
@@ -11,24 +11,24 @@
   vars:
     pkg_name: "firefox-developer-edition"
 
-- name: "check profiles.ini"
+- name: "Check profiles.ini"
   stat:
     path: "{{ firefox_profiles_file }}/profiles.ini"
   register: st_profiles
 
-- name: "find identifier of profile"
+- name: "Find identifier of profile"
   shell: "grep -E {{ firefox_profile }} {{ firefox_profiles_file }}/profiles.ini | sed -r 's/Path=(.+)/\\1/'"
   register: profile
   changed_when: false
   when: st_profiles is defined and st_profiles.stat.islnk is defined
 
-- name: "check handlers.json"
+- name: "Check handlers.json"
   stat:
     path: "{{ firefox_profiles_file }}/{{ profile.stdout }}/handlers.json"
   register: st_handlers
   when: profile is defined and not profile is skipped
 
-- name: "add magnet handler"
+- name: "Add magnet handler"
   lineinfile:
     path: "{{ firefox_profiles_file }}/{{ profile.stdout }}/handlers.json"
     regexp: "(.*)\"schemes.*"
@@ -37,13 +37,13 @@
     backrefs: true
   when: st_handlers is defined and not st_handlers is skipped and st_handlers.stat.islnk is defined
 
-- name: "check prefs.js"
+- name: "Check prefs.js"
   stat:
     path: "{{ firefox_profiles_file }}/{{ profile.stdout }}/prefs.js"
   register: st_prefs
   when: profile is defined and not profile is skipped
 
-- name: "define options for Firefox"
+- name: "Define options for Firefox"
   lineinfile:
     path: "{{ firefox_profiles_file }}/{{ profile.stdout }}/prefs.js"
     regexp: ".*{{ item.option }}.*"
