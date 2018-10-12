@@ -3,6 +3,7 @@ CHECK ?=
 VERBOSE ?=
 TAGS ?=
 ANSIBLE_OPTS ?=
+NETWORK ?=
 
 $(if ${CHECK},   $(eval ANSIBLE_OPTS += --check))
 $(if ${VERBOSE}, $(eval ANSIBLE_OPTS += -${VERBOSE}))
@@ -10,6 +11,7 @@ $(if ${TAGS},    $(eval ANSIBLE_OPTS += --tags ${TAGS}))
 
 arch:
 	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/system.txt)
+	$(if ${NETWORK}, $(eval ANSIBLE_OPTS += --extra-vars "network=true"))
 	ansible-playbook playbooks/archlinux.yml --diff --ask-become-pass ${ANSIBLE_OPTS}
 
 backup:
