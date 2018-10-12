@@ -16,14 +16,21 @@
     mode: "0755"
   become: yes
 
+- name: "check log file status"
+  stat:
+    path: "{{ journal_triggerd_log }}"
+  register: journal_log_stat
+  become: yes
+
 - name: "ensure log file exists"
   file:
     path: "{{ journal_triggerd_log }}"
-    state: "touch"
     owner: "root"
     group: "root"
     mode: "0644"
+    state: "touch"
   become: yes
+  when: journal_log_stat is defined and journal_log_stat.stat.islnk is not defined
 
 - name: "copy journal-triggerd configuration"
   template:

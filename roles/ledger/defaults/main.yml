@@ -6,3 +6,6 @@ ledger_config_directory: "~/.config/ledger"
 
 ledger_file: "~/.config/ledger.csv"
 ledger_networth: "~/.config/networth.csv"
+
+ledger_aliases: ""
+ledger_functions: ""

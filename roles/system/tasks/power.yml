@@ -15,7 +15,7 @@
     state: "present"
   become: yes
 
-- name: "disable Btrfs optimization"
+- name: "disable BTRFS optimization"
   lineinfile:
     path: "/etc/default/tlp"
     regexp: "SATA_LINKPWR_ON_BAT"

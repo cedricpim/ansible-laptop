@@ -7,10 +7,12 @@
     - "python-pip"
   loop_control:
     loop_var: "pkg_name"
+  register: vdirsyncer_install
 
 - name: "install extra dependencies"
   command: "pip install vdirsyncer[google]"
   become: yes
+  when: vdirsyncer_install is defined and vdirsyncer_install.changed
 
 - name: "create folder for vdirsyncer configuration"
   file:

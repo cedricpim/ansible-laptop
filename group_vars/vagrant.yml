@@ -66,14 +66,22 @@ offlineimap_email_accounts:
   - { name: "default",   type: "Maildir", user: "default@example.localhost",   password: "default"   }
   - { name: "secondary", type: "Maildir", user: "secondary@example.localhost", password: "secondary" }
 
-neomutt_sender_full_name: "Vagrant"
+neomutt_browser: "firefox"
+neomutt_email_server: "example.localhost"
 neomutt_email_accounts:
   - { name: "default",   key: 1, user: "default@example.localhost",   password: "default" }
   - { name: "secondary", key: 2, user: "secondary@example.localhost", password: "secondary" }
+neomutt_sender_full_name: "Vagrant"
 neomutt_mailboxes:
   - "Mailbox1"
   - "Mailbox2"
   - "Mailbox3"
+neomutt_bindings:
+  - { key: "A", mailbox: "INBOX" }
+  - { key: "B", mailbox: "Archive" }
+  - { key: "C", mailbox: "Trash" }
+  - { key: "D", mailbox: "Starred" }
+  - { key: "E", mailbox: "Spam" }
 neomutt_mailbox_record: "Mailbox1"
 neomutt_mailbox_postponed: "Mailbox2"
 neomutt_mailbox_mbox: "Mailbox3"

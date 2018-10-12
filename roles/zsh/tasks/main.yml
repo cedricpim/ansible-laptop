@@ -18,7 +18,6 @@
     src: "dircolors.j2"
     dest: "~/.dircolors"
     mode: "0600"
-  when: ansible_system == "Linux"
 
 - include_role:
     name: "pacaur"
@@ -36,4 +35,4 @@
     - "upload"
   loop_control:
     loop_var: "script"
-  when: server
+  when: server is defined and server

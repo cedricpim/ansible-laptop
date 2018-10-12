@@ -70,7 +70,7 @@ set timeoutlen=1000 ttimeoutlen=0 " reduce delay with key presses (for ESC mostl
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   syntax on
-  colorscheme {{ neovim_colorscheme }}
+  silent! colorscheme {{ neovim_colorscheme }}
   set background={{ neovim_background_color }}
 endif
 

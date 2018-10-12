@@ -1,4 +1,4 @@
 ---
-- import_tasks: khal.yml
-- import_tasks: khard.yml
-- import_tasks: vdirsyncer.yml
+- import_tasks: "khal.yml"
+- import_tasks: "khard.yml"
+- import_tasks: "vdirsyncer.yml"

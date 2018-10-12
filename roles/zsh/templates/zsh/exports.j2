@@ -42,5 +42,6 @@ if [ `command -v python3` ]; then
   alias python="python3"
   if [ `command -v pip3` ]; then
     alias pip="pip3"
+    alias pip-update="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U --user"
   fi
 fi

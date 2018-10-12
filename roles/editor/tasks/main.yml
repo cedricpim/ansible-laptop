@@ -12,18 +12,18 @@
 - name: "create folder for neovim configuration"
   file:
     path: "{{ neovim_directory }}"
-    state: directory
+    state: "directory"
 
 - name: "copy neovim configuration file"
   template:
     src: "init.vim.j2"
     dest: "{{ neovim_directory }}/init.vim"
-    mode: 0600
+    mode: "0600"
 
 - name: "create folder for neovim dictionaries"
   file:
     path: "{{ neovim_spell_dest }}"
-    state: directory
+    state: "directory"
 
 - name: "install neovim dictionaries"
   get_url:
@@ -34,7 +34,7 @@
 - name: "create folder for neovim plugin manager"
   file:
     path: "{{ neovim_plugin_dest }}"
-    state: directory
+    state: "directory"
 
 - name: "install neovim plugin manager"
   get_url:
@@ -45,3 +45,8 @@
   command: "nvim +'PlugUpdate --sync' +qa"
   register: neovim_plugin_install_result
   changed_when: neovim_plugin_install_result.stdout.find(neovim_plugin_installation_message) != -1
+
+- name: "create folder for neovim notes"
+  file:
+    path: "{{ neovim_notes }}"
+    state: "directory"
