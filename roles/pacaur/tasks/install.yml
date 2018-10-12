@@ -9,9 +9,9 @@
 
 - name: "Check if {{ pkg_name }} is installed"
   command: "pacman -Q {{ pkg_name }}"
-  register: aur_package_check
   changed_when: false
   failed_when: false
+  register: aur_package_check
 
 - name: "Install {{ pkg_name }}"
   command: "pacaur -S {{ pkg_name }} --needed --noconfirm"
