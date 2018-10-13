@@ -14,5 +14,5 @@
   register: aur_package_check
 
 - name: "Install {{ pkg_name }}"
-  command: "pacaur -S {{ pkg_name }} --needed --noconfirm"
+  command: "pacaur -S {{ pkg_name }} --noedit --needed --noconfirm"
   when: aur_package_check is defined and aur_package_check.rc != 0
