@@ -54,9 +54,9 @@
     mode: "0600"
   become: yes
   notify:
-    - "stop transmission"
-    - "load transmission configuration"
-    - "restart transmission"
+    - "Stop transmission"
+    - "Load transmission configuration"
+    - "Restart transmission"
 
 - name: "Copy sysctl configuration to /etc/sysctl.conf"
   template:
