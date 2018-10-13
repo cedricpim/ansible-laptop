@@ -11,6 +11,7 @@
     state: started
     enabled: yes
   become: yes
+  when: group_names[0] != "vagrant"
 
 - name: "Add docker group to {{ user }}"
   user:
