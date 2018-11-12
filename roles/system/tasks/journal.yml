@@ -1,11 +1,8 @@
 ---
 - include_role:
-    name: "pacaur"
-    tasks_from: "install"
+    name: "yay"
   vars:
     pkg_name: "journal-triggerd"
-  become: yes
-  become_user: "{{ users[0].name }}"
 
 - name: "Copy journal error logger"
   template:

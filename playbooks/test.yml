@@ -1,6 +1,9 @@
 ---
 - hosts: vagrant
 
+  vars:
+    user: "vagrant"
+
   pre_tasks:
     - name: "Get list of services before running roles"
       command: "systemctl list-unit-files"

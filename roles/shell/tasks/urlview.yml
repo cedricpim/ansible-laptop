@@ -1,11 +1,10 @@
 ---
 - include_role:
-    name: pacaur
-    tasks_from: install
+    name: "yay"
   vars:
     pkg_name: urlview
 
-- name: copy urlview configuration file
+- name: "Copy urlview configuration file"
   template:
     src: "urlview/urlview.j2"
     dest: "~/.urlview"

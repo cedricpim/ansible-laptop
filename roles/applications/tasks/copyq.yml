@@ -1,7 +1,6 @@
 ---
 - include_role:
-    name: pacaur
-    tasks_from: install
+    name: "yay"
   vars:
     pkg_name: copyq
 

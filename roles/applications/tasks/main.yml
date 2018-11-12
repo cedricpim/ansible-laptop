@@ -18,8 +18,7 @@
 - import_tasks: "cheat.yml"
 
 - include_role:
-    name: "pacaur"
-    tasks_from: "install"
+    name: "yay"
   with_items:
     - "postman"
     - "peek"

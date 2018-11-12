@@ -1,0 +1,40 @@
+---
+- name: "Install Yay dependencies"
+  pacman:
+    name: "git"
+    state: "present"
+  become: yes
+
+- name: "Check if Yay is installed"
+  command: "pacman -Q yay"
+  register: aur_yay_check
+  failed_when: false
+  changed_when: false
+
+- name: "Check if {{ pkg_name }} is installed"
+  command: "pacman -Q {{ pkg_name }}"
+  register: aur_package_check
+  changed_when: false
+  failed_when: false
+  when: pkg_name is defined
+
+- name: "Ensure yay exists"
+  user:
+    name: "yay"
+    append: yes
+    groups: "wheel"
+    state: "present"
+  become: yes
+  notify: "Delete yay user"
+  when: (aur_yay_check is defined and aur_yay_check.rc != 0) or (pkg_name is defined and aur_package_check is defined and aur_package_check.rc != 0)
+
+- import_tasks: install.yml
+  when: aur_yay_check is defined and aur_yay_check.rc != 0
+
+- name: "Install {{ pkg_name }}"
+  command: "yay -Sy {{ pkg_name }} --needed --noconfirm"
+  become: yes
+  become_user: "yay"
+  when:
+    - pkg_name is defined
+    - aur_package_check is defined and aur_package_check.rc != 0

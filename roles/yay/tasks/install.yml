@@ -1,0 +1,27 @@
+---
+- name: "Create Ansible tmp directory for yay user"
+  file:
+    path: "~yay/.ansible/tmp"
+    owner: "yay"
+    group: "yay"
+    state: "directory"
+  become: yes
+
+- name: "Create temporary Yay directory"
+  tempfile:
+    suffix: "yay"
+    state: "directory"
+  become: yes
+  become_user: "yay"
+  register: yay_tempdir
+
+- name: "Install Yay"
+  block:
+    - git: repo="{{ yay_repo }}" dest="{{ yay_tempdir.path }}" clone=yes update=yes
+    - command: "makepkg -si --noconfirm"
+      args:
+        chdir: "{{ yay_tempdir.path }}"
+    - file: path="{{ yay_tempdir.path }}" state="absent"
+  become: yes
+  become_user: "yay"
+  when: yay_tempdir is defined

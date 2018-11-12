@@ -6,7 +6,7 @@
   become: yes
 
 - name: "Retrieve list of packages installed"
-  command: "pacaur -Qet"
+  command: "yay -Qet"
   register: packages_list
   changed_when: false
 

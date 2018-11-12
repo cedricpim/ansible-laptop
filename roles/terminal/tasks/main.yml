@@ -1,7 +1,6 @@
 ---
 - include_role:
-    name: "pacaur"
-    tasks_from: "install"
+    name: "yay"
   with_items:
     - "rxvt-unicode-patched"
     - "urxvt-font-size-git"
