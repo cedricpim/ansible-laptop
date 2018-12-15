@@ -1,8 +1,7 @@
 ---
-- name: "Install Budgie"
+- name: "Install Gnome"
   pacman:
     name:
-      - "budgie-desktop"
       - "gnome"
       - "seahorse"
       - "gnome-tweak-tool"

@@ -17,7 +17,7 @@
     - { role: "pacman", tags: "pacman" }
     - { role: "network", tags: "network" }
     - { role: "nvidia", tags: "nvidia" }
-    - { role: "budgie", tags: "budgie" }
+    - { role: "gnome", tags: "gnome" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
     - { role: "system", tags: "system" }
