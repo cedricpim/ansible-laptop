@@ -20,7 +20,7 @@
 - include_role:
     name: "yay"
   with_items:
-    - "postman"
+    - "postman-bin"
     - "peek"
     - "youtube-dl"
   loop_control:
