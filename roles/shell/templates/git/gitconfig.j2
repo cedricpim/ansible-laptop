@@ -41,7 +41,9 @@
   # Find commits by commit message
   fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
   # Remove branches that have already been merged with master a.k.a. ‘delete merged’
-  mop = !git branch --merged master | grep -v master | xargs -n 1 git branch -D
+  mop = "!f() { git co master && git remote prune origin && git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -d; }; f"
+  # Like mop but do not do any destructive action, printing the branches that would be deleted instead
+  dry-mop = "!f() { git remote prune origin && git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs -r0 -n1 echo; }; f"
   # Run bundled rubocop on the files that have changes from current branch to master
   cop = !git diff --name-only $(git merge-base master HEAD) --diff-filter=AM -- '*.rb' '*.rake' | grep -v schema.rb$ | xargs bundle exec rubocop
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
