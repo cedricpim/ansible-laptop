@@ -73,8 +73,8 @@
 
 - name: "Copy urxvt configuration"
   template:
-    src: "Xresources.j2"
-    dest: "~/.Xresources"
+    src: "Xdefaults.j2"
+    dest: "~/.Xdefaults"
     mode: "0600"
   notify: "Load configuration"
 
