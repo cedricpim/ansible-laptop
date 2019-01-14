@@ -6,8 +6,6 @@
       - "seahorse"
       - "gnome-tweak-tool"
       - "gnome-keyring"
-      - "ntfs-3g"
-      - "xcape"
     state: "present"
   become: yes
 

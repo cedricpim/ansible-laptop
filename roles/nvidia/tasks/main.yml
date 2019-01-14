@@ -8,6 +8,8 @@
       - "xf86-video-intel"
       - "nvidia"
       - "bbswitch"
+      - "xcape"
+      - "ntfs-3g"
     state: "present"
   become: yes
 
