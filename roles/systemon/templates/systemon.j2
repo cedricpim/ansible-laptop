@@ -1,8 +1,0 @@
-{{ ansible_managed | comment }}
-
-SYSTEMON_ARGS="--all-units --notifier smtp \
---smtp-to {{ users[0].name }}@localhost \
---smtp-from {{ users[0].name }}@localhost \
---smtp-host {{ systemon_smtp_host }} \
---smtp-port {{ systemon_smtp_port }} \
---smtp-subject {{ systemon_smtp_subject | quote }}"
