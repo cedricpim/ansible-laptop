@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -eo pipefail
+IFS=$'\n\t'
+
+{{ ansible_managed | comment }}
+
+$EDITOR -n {{ agenda_todo }}
