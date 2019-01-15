@@ -4,6 +4,7 @@
     name:
       - "xorg-xinit"
       - "xorg-setxkbmap"
+      - "xorg-xrandr"
       - "mesa"
       - "xf86-video-intel"
       - "nvidia"
