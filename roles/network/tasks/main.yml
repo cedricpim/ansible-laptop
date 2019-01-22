@@ -3,8 +3,10 @@
   pacman:
     name:
       - "iw"
+      - "iwd"
       - "wpa_supplicant"
-      - "networkmanager"
+      - "bluez"
+      - "connman"
       - "ntp"
       - "openresolv"
       - "wireguard-dkms"
@@ -27,20 +29,27 @@
   become: yes
   notify: "Rebuild resolvconf configuration"
 
-- name: "Create folder for NetworkManager configuration"
+- name: "Create folder for systemd ConnMan"
   file:
-    path: "{{ network_manager_directory }}"
+    path: "{{ systemd_directory }}/connman.service.d"
     state: "directory"
     mode: "0755"
   become: yes
 
-- name: "Copy NetworkManager configuration"
+- name: "Copy ConnMan overriding configuration for systemd"
   template:
-    src: "NetworkManager/01-config-dns.conf.j2"
-    dest: "{{ network_manager_directory }}/01-config-dns.conf"
+    src: "connman/override.conf.j2"
+    dest: "{{ systemd_directory }}/connman.service.d/override.conf"
     mode: "0644"
   become: yes
-  notify: "Reload NetworkManager configuration"
+
+- name: "Enable/start service for ConnMan"
+  systemd:
+    name: "connman"
+    state: "started"
+    enabled: yes
+    daemon_reload: yes
+  become: yes
 
 - name: "Enable/start service for NTP"
   systemd:

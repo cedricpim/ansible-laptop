@@ -1,0 +1,14 @@
+{{ ansible_managed | comment }}
+
+# FIX: Disabled due to issue with IWD:
+#   * https://01.org/jira/browse/CM-693
+#   * https://kernel.googlesource.com/pub/scm/network/connman/connman/ (wait for new version)
+
+# [Unit]
+# After=
+# After=dbus.service network-pre.target systemd-sysusers.service iwd.service
+# Requires=iwd.service
+
+# [Service]
+# ExecStart=
+# ExecStart=/usr/bin/connmand --wifi=iwd_agent -n
