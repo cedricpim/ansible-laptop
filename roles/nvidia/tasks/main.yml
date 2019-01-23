@@ -9,9 +9,25 @@
       - "xf86-video-intel"
       - "nvidia"
       - "bbswitch"
-      - "xcape"
       - "ntfs-3g"
     state: "present"
+  become: yes
+
+- name: "Install acpilight package"
+  pacman:
+    name: "acpilight"
+    state: "present"
+  become: yes
+
+- name: "Add video group to users"
+  user:
+    name: "{{ item.name }}"
+    groups: "video"
+    append: yes
+    state: "present"
+  with_items: "{{ users }}"
+  loop_control:
+    label: "{{ item.name }}"
   become: yes
 
 - name: "Install bumblebee package"
