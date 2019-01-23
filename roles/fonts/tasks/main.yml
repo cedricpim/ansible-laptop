@@ -4,6 +4,7 @@
     name:
       - "ttf-dejavu"
       - "ttf-liberation"
+      - "ttf-hack"
     state: "present"
   become: yes
 
@@ -12,5 +13,6 @@
   with_items:
     - "ttf-fira-code"
     - "nerd-fonts-complete"
+    - "ttf-font-awesome"
   loop_control:
     loop_var: "pkg_name"
