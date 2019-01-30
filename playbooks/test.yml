@@ -13,22 +13,19 @@
 
   roles:
     - { role: "pacman", tags: "pacman" }
-    - { role: "nvidia", tags: "nvidia" }
-    - { role: "gnome", tags: "gnome" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
     - { role: "system", tags: "system" }
-    - { role: "fonts", tags: "fonts" }
-    - { role: "settings", tags: "settings" }
+    - { role: "display", tags: "display" }
+    - { role: "session", tags: "session" }
     - { role: "agenda", tags: "agenda" }
     - { role: "editor", tags: "editor" }
     - { role: "email", tags: "email" }
     - { role: "feeds", tags: "feeds" }
     - { role: "ledger", tags: "ledger" }
     - { role: "shell", tags: "shell" }
-    - { role: "terminal", tags: "terminal" }
-    - { role: "tmux", tags: "tmux" }
     - { role: "torrents", tags: "torrents" }
+    - { role: "desktop", tags: "desktop" }
     - { role: "zsh", tags: "zsh" }
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }

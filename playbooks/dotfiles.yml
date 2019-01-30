@@ -17,7 +17,7 @@
       tags: "always"
 
   roles:
-    - { role: "settings", tags: "settings" }
+    - { role: "desktop", tags: "desktop" }
     - { role: "zsh", tags: "zsh" }
     - { role: "agenda", tags: "agenda" }
     - { role: "editor", tags: "editor" }
@@ -25,7 +25,5 @@
     - { role: "feeds", tags: "feeds" }
     - { role: "ledger", tags: "ledger" }
     - { role: "shell", tags: "shell" }
-    - { role: "terminal", tags: "terminal" }
-    - { role: "tmux", tags: "tmux" }
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }

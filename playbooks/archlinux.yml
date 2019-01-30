@@ -16,10 +16,9 @@
   roles:
     - { role: "pacman", tags: "pacman" }
     - { role: "network", tags: "network" }
-    - { role: "nvidia", tags: "nvidia" }
-    - { role: "gnome", tags: "gnome" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
     - { role: "system", tags: "system" }
-    - { role: "fonts", tags: "fonts" }
     - { role: "torrents", tags: "torrents" }
+    - { role: "display", tags: "display" }
+    - { role: "session", tags: "session" }
