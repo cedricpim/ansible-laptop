@@ -1,0 +1,3 @@
+---
+xorg_directory: "/etc/X11/xorg.conf.d"
+geoclue_directory: "/etc/geoclue"

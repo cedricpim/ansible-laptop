@@ -1,0 +1,26 @@
+---
+- name: "Install Xorg related packages"
+  pacman:
+    name:
+      - "xorg-xinit"
+      - "xorg-setxkbmap"
+      - "xorg-xrandr"
+    state: "present"
+  become: yes
+
+- name: "Create folder for Xorg configuration"
+  file:
+    path: "{{ xorg_directory }}"
+    state: "directory"
+    mode: "0755"
+  become: yes
+
+- name: "Copy Xorg configuration"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ xorg_directory }}/{{ item }}"
+    mode: "0644"
+  with_items:
+    - "00-keyboard.conf"
+    - "30-touchpad.conf"
+  become: yes
