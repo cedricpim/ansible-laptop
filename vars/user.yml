@@ -1,4 +1,5 @@
 ---
+main: "{{ vault_main }}"
 server: "{{ vault_server }}"
 
 agenda_todo: "{{ vault_agenda_todo }}"

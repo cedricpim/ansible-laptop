@@ -5,6 +5,7 @@
     mode: "02775"
     state: "directory"
   become: yes
+  when: main is defined and main
 
 - name: "Copy {{ script }}"
   template:
@@ -14,3 +15,4 @@
     group: "root"
     mode: "0755"
   become: yes
+  when: main is defined and main
