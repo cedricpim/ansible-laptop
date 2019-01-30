@@ -5,9 +5,3 @@
     regexp: 'Color'
     line: 'Color'
   become: yes
-
-- name: "Update packages ('pacman -Syu')"
-  pacman:
-    update_cache: yes
-    upgrade: yes
-  become: yes
