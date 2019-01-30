@@ -1,9 +1,0 @@
----
-- name: "Install python-psutil for dconf"
-  pacman:
-    name: "python-psutil"
-    state: "present"
-  become: yes
-
-- import_tasks: wallpaper.yml
-- import_tasks: session.yml
