@@ -16,6 +16,7 @@
       - "tldr"
       - "jq"
       - "ncdu"
+      - "tmux"
     state: "present"
   become: yes
 
