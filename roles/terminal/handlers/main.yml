@@ -1,3 +1,0 @@
----
-- name: "Load configuration"
-  command: "xrdb ~/.Xdefaults"
