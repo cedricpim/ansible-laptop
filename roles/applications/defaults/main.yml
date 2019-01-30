@@ -21,13 +21,4 @@ firefox_options:
   - { option: "webgl.disabled", value: "true" }
   - { option: "network.cookie.lifetimePolicy", value: "1" }
 
-dconf_screenshot_key: "/org/gnome/settings-daemon/plugins/media-keys/screenshot"
-
-flameshot_shortcut_custom: "custom1"
-dconf_flameshot_custom_key: "'{{ dconf_custom_keybindings }}/{{ flameshot_shortcut_custom }}/'"
-flameshot_shortcut_configuration:
-    - { key: "binding", value: "'Print'" }
-    - { key: "command", value: "'flameshot gui'" }
-    - { key: "name", value: "'Flameshot'" }
-
 syncthing_port: "8384"
