@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+{{ ansible_managed | comment }}
+
+# Export values to connect with Gnome Keyring
+eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
+export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
+
+# Export general variables to be used at the start
+export TERMINAL=termite
+export EDITOR=nvim

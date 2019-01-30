@@ -1,0 +1,25 @@
+---
+- name: "Install redshift package"
+  pacman:
+    name: "redshift"
+    state: "present"
+  become: yes
+
+- name: "Create folder for Redshift"
+  file:
+    path: "{{ redshift_directory }}"
+    state: "directory"
+    mode: "0700"
+
+- name: "Copy Redshift configuration"
+  template:
+    src: "redshift/redshift.conf.j2"
+    dest: "{{ redshift_directory }}/redshift.conf"
+    mode: "0600"
+
+- name: "Start service for redshift"
+  systemd:
+    name: "redshift-gtk"
+    state: "started"
+    scope: "user"
+    enabled: yes

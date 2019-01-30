@@ -1,0 +1,39 @@
+---
+- name: "Install display related packages"
+  pacman:
+    name:
+      - "xcape"
+      - "arandr"
+      - "autorandr"
+    state: "present"
+  become: yes
+
+- name: "Create folder for AutoRandr configuration"
+  file:
+    path: "{{ autorandr_directory }}"
+    state: "directory"
+    mode: "0700"
+
+- name: "Copy AutoRandr configuration"
+  template:
+    src: "autorandr/postswitch.j2"
+    dest: "{{ autorandr_directory }}/postswitch"
+    mode: "0755"
+
+- name: "Copy AutoRandr profiles"
+  block:
+    - file: path="{{ autorandr_directory }}/{{ item }}" state="directory" mode="0755"
+      with_items:
+        - "internal"
+        - "multiple"
+        - "external"
+    - copy: src="autorandr/{{ item }}/config" dest="{{ autorandr_directory }}/{{ item }}/config" mode="0644"
+      with_items:
+        - "internal"
+        - "multiple"
+        - "external"
+    - copy: src="autorandr/{{ item }}/setup" dest="{{ autorandr_directory }}/{{ item }}/setup" mode="0644"
+      with_items:
+        - "internal"
+        - "multiple"
+        - "external"

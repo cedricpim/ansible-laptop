@@ -1,0 +1,49 @@
+---
+- name: "Install File Manager related packages"
+  pacman:
+    name:
+      - "i3-gaps"
+      - "rofi"
+      - "polybar"
+      - "xcb-util-xrm"
+    state: "present"
+  become: yes
+
+- name: "Create folder for i3 configuration"
+  file:
+    path: "{{ i3_directory }}"
+    state: "directory"
+    mode: "0700"
+
+- name: "Copy i3 configuration"
+  template:
+    src: "i3/config.j2"
+    dest: "{{ i3_directory }}/config"
+    mode: "0600"
+
+- name: "Create folder for rofi configuration"
+  file:
+    path: "{{ rofi_directory }}"
+    state: "directory"
+    mode: "0700"
+
+- name: "Copy rofi configuration"
+  template:
+    src: "rofi/config.rasi.j2"
+    dest: "{{ rofi_directory }}/config.rasi"
+    mode: "0600"
+
+- name: "Create folder for polybar configuration"
+  file:
+    path: "{{ polybar_directory }}"
+    state: "directory"
+    mode: "0700"
+
+- name: "Copy polybar configuration"
+  template:
+    src: "polybar/{{ item.name }}.j2"
+    dest: "{{ polybar_directory }}/{{ item.name }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { name: "config", mode: "0600" }
+    - { name: "launcher.sh", mode: "0700" }

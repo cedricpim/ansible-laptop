@@ -1,0 +1,249 @@
+{{ ansible_managed | comment }}
+
+# Polybar Config
+
+
+[colors]
+background = {{ colorscheme.background }}
+foreground = {{ colorscheme.foreground }}
+
+{% for color in colorscheme.colors %}
+{{ color.name }} = {{ color.value }}
+{% endfor %}
+
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+
+[settings]
+screenchange-reload = true
+
+
+[bar/bar]
+monitor = ${env:MONITOR}
+width = 100%
+height = 27
+radius = 6.0
+fixed-center = false
+
+font-0 = Fira Code:style=Regular:size=14
+font-1 = "Font Awesome 5 Free:style=Solid:size=14;0"
+font-2 = "Font Awesome 5 Free:style=Regular:size=14;0"
+font-3 = "Font Awesome 5 Brands:size=14;0"
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+background-solid = ${colors.background}
+
+focus-primary-color = ${colors.darkblue}
+focus-secondary-color = ${colors.blue}
+
+line-size = 3
+line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+modules-left = vpn wlan battery volume backlight
+modules-center = i3
+modules-right = temperature memory cpu datetime
+
+tray-position = right
+tray-padding = 2
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = true
+enable-scroll = false
+
+label-unfocused-foreground = ${colors.darkwhite}
+label-focused-foreground = ${root.focus-primary-color}
+label-urgent-foreground = ${colors.red}
+
+
+[module/vpn]
+type = custom/script
+exec = echo ""
+exec-if = pgrep mullvad
+interval = 5
+label-foreground = ${colors.darkcyan}
+
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 5
+
+format-disconnected = <label-disconnected>
+label-disconnected = 
+label-disconnected-foreground = ${colors.darkblack}
+
+format-connected = <ramp-signal> <label-connected>
+label-connected = %essid%
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-0-foreground = ${colors.red}
+ramp-signal-1-foreground = ${colors.yellow}
+ramp-signal-2-foreground = ${colors.blue}
+ramp-signal-3-foreground = ${colors.green}
+ramp-signal-foreground = ${root.focus-secondary-color}
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+poll-interval = 5
+full-at = 99
+time-format = %H:%M
+
+format-full = <label-full>
+label-full = 
+label-full-foreground = ${colors.darkblack}
+
+format-charging = <animation-charging> <label-charging>
+label-charging = %percentage%%
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+animation-charging-foreground = ${colors.cyan}
+
+format-discharging = <ramp-capacity> <label-discharging>
+label-discharging = %percentage%% (%time%)
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-0-foreground = ${colors.red}
+ramp-capacity-1-foreground = ${colors.yellow}
+ramp-capacity-2-foreground = ${colors.blue}
+ramp-capacity-3-foreground = ${colors.blue}
+ramp-capacity-4-foreground = ${colors.green}
+ramp-capacity-foreground = ${root.focus-secondary-color}
+
+
+[module/volume]
+type = internal/pulseaudio
+use-ui-max = false
+
+label-muted = 
+label-muted-foreground = ${colors.darkblack}
+
+format-volume = <ramp-volume> <label-volume>
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-foreground = ${root.focus-secondary-color}
+
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+
+format =<ramp> <label>
+label = %percentage%%
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-0-foreground = ${colors.darkblack}
+ramp-1-foreground = ${colors.black}
+ramp-2-foreground = ${colors.yellow}
+ramp-foreground = ${root.focus-secondary-color}
+
+
+[module/temperature]
+type = internal/temperature
+interval = 2
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+label = %temperature-c%
+format-warn = <label-warn>
+label-warn = 
+label-warn-foreground = ${colors.darkred}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-5 = 
+ramp-0-foreground = ${colors.darkblue}
+ramp-1-foreground = ${colors.darkblue}
+ramp-2-foreground = ${colors.darkblue}
+ramp-3-foreground = ${colors.yellow}
+ramp-4-foreground = ${colors.yellow}
+ramp-5-foreground = ${colors.red}
+ramp-foreground = ${root.focus-secondary-color}
+
+
+[module/memory]
+type = internal/memory
+interval = 2
+
+format =<bar-used> <label>
+label = %percentage_used:2%%
+bar-used-indicator =
+bar-used-width = 5
+bar-used-foreground-0 = ${colors.green}
+bar-used-foreground-1 = ${colors.blue}
+bar-used-foreground-2 = ${colors.yellow}
+bar-used-foreground-3 = ${colors.red}
+bar-used-foreground = ${root.focus-secondary-color}
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = ${colors.black}
+
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+
+format =<ramp-load><label>
+label = %percentage:2%%
+ramp-load-0 = ▁
+ramp-load-1 = ▂
+ramp-load-2 = ▃
+ramp-load-3 = ▄
+ramp-load-4 = ▅
+ramp-load-5 = ▆
+ramp-load-6 = ▇
+ramp-load-0-foreground = ${colors.green}
+ramp-load-1-foreground = ${colors.green}
+ramp-load-2-foreground = ${colors.blue}
+ramp-load-3-foreground = ${colors.blue}
+ramp-load-4-foreground = ${colors.yellow}
+ramp-load-5-foreground = ${colors.yellow}
+ramp-load-6-foreground = ${colors.red}
+ramp-load-foreground = ${root.focus-secondary-color}
+
+
+[module/datetime]
+type = internal/date
+interval = 2
+
+format =<label>
+format-foreground = ${root.foreground}
+label = %date%  %time%
+time =  %H:%M
+date =  %a, %b %e

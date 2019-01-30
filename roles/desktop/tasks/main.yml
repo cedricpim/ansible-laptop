@@ -1,0 +1,45 @@
+---
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "flameshot"
+
+- name: "Install feh"
+  pacman:
+    name: "feh"
+    state: "present"
+  become: yes
+
+- name: "Create {{ wallpaper_directory }}"
+  file:
+    path: "{{ wallpaper_directory }}"
+    state: "directory"
+
+- name: "Copy wallpaper to {{ wallpaper_directory }}"
+  copy:
+    src: "{{ wallpaper }}"
+    dest: "{{ wallpaper_directory }}/wallpaper{{ wallpaper | splitext | last }}"
+    mode: "0600"
+
+- name: "Copy Xprofile configuration"
+  template:
+    src: "xprofile.j2"
+    dest: "~/.xprofile"
+    mode: "0600"
+
+- name: "Install Media Player related packages"
+  pacman:
+    name:
+      - "mps-youtube"
+      - "mpv"
+      - "playerctl"
+    state: "present"
+  become: yes
+
+- import_tasks: "display.yml"
+- import_tasks: "redshift.yml"
+- import_tasks: "fonts.yml"
+- import_tasks: "file.yml"
+- import_tasks: "notifications.yml"
+- import_tasks: "terminal.yml"
+- import_tasks: "window.yml"
