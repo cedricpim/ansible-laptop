@@ -21,8 +21,8 @@
 
 - name: "Copy LightDM configuration"
   template:
-    src: "lighdm/lightdm.conf.j2"
-    dest: "{{ lighdm_directory }}/lighdm.conf"
+    src: "lightdm/lightdm.conf.j2"
+    dest: "{{ lightdm_directory }}/lighdm.conf"
     mode: "0644"
   become: yes
 
