@@ -1,0 +1,33 @@
+---
+- name: "Install LightDM"
+  pacman:
+    name:
+      - "lightdm"
+      - "light-locker"
+    state: "present"
+  become: yes
+
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "lightdm-slick-greeter"
+
+- name: "Create folder for LightDM configuration"
+  file:
+    path: "{{ lightdm_directory }}"
+    state: "directory"
+    mode: "0755"
+  become: yes
+
+- name: "Copy LightDM configuration"
+  template:
+    src: "lighdm/lightdm.conf.j2"
+    dest: "{{ lighdm_directory }}/lighdm.conf"
+    mode: "0644"
+  become: yes
+
+- name: "Enable service for LightDM"
+  systemd:
+    name: "lightdm"
+    enabled: yes
+  become: yes

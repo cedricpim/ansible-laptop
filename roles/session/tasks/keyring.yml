@@ -1,0 +1,25 @@
+---
+- name: "Install Keyring related packages"
+  pacman:
+    name:
+      - "gnome-keyring"
+      - "libsecret"
+    state: "present"
+  become: yes
+
+- name: "Create folder for PAM configuration"
+  file:
+    path: "{{ pam_directory }}"
+    state: "directory"
+    mode: "0755"
+  become: yes
+
+- name: "Copy PAM configuration"
+  template:
+    src: "keyring/{{ item }}.j2"
+    dest: "{{ pam_directory }}/{{ item }}"
+    mode: "0644"
+  with_items:
+    - "login"
+    - "passwd"
+  become: yes

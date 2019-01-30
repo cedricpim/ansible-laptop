@@ -1,0 +1,3 @@
+---
+- import_tasks: "lightdm.yml"
+- import_tasks: "keyring.yml"
