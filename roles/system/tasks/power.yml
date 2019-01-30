@@ -4,8 +4,19 @@
     name:
       - "powertop"
       - "tlp"
+      - "polkit"
+      - "xautolock"
+      - "xss-lock"
     state: "present"
   become: yes
+
+- include_role:
+    name: "yay"
+  with_items:
+    - "i3lock-blur"
+    - "watchdog"
+  loop_control:
+    loop_var: "pkg_name"
 
 - name: "Add Nvidia driver to blacklist"
   lineinfile:
@@ -54,4 +65,28 @@
   with_items:
     - "sudo powertop --calibrate"
     - "sudo powertop --auto-tune"
+  become: yes
+
+- name: "Enable system services"
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+    state: "started"
+  with_items:
+    - "watchdog"
+    - "fstrim.timer"
+  become: yes
+
+- name: "Create folder for systemd configuration"
+  file:
+    path: "{{ systemd_directory }}"
+    state: "directory"
+    mode: "0755"
+  become: yes
+
+- name: "Copy systemd login configuration"
+  template:
+    src: "logind.conf.j2"
+    dest: "{{ systemd_directory }}/logind.conf"
+    mode: "0644"
   become: yes
