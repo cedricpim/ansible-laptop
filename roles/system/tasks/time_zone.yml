@@ -4,3 +4,15 @@
     name: "{{ system_time_zone }}"
   become: yes
   notify: "Synchronize clock"
+
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "localtime"
+
+- name: "Enable Localtime service"
+  systemd:
+    name: "localtime"
+    state: "started"
+    enabled: yes
+  become: yes
