@@ -7,9 +7,8 @@ polybar_directory: "~/.config/polybar"
 dunst_directory: "~/.config/dunst"
 termite_directory: "~/.config/termite"
 ranger_directory: "~/.config/ranger"
-ranger_icons_repo: "https://github.com/alexanderjeurissen/ranger_devicon"
-ranger_colorscheme: "dark"
 redshift_directory: "~/.config/redshift"
+ranger_colorscheme: "dark"
 
 dunst_colorscheme:
   frame_color: "#070F1D"

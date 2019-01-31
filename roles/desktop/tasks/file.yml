@@ -18,12 +18,12 @@
 
 - name: "Download & install ranger_icons repository"
   block:
-    - tempfile: suffix="backup" state="directory"
+    - tempfile: suffix="ranger" state="directory"
       register: tempdir
     - git: repo="{{ ranger_icons_repo }}" dest="{{ tempdir.path }}" clone=yes
     - command: "make install"
       args:
-        chdir: "{{ tempdir.path }}/ranger_devicon"
+        chdir: "{{ tempdir.path }}"
   always:
     - file: path="{{ tempdir.path }}" state="absent"
   when:
