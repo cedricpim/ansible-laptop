@@ -27,6 +27,9 @@ ledger_excluded_categories: "{{ vault_ledger_excluded_categories }}"
 ledger_functions: "{{ vault_ledger_functions }}"
 ledger_aliases: "{{ vault_ledger_aliases }}"
 
+keepassxc_database_directory: "{{ vault_keepassxc_database_directory }}"
+keepassxc_database_name: "{{ vault_keepassxc_database_name }}"
+
 neomutt_browser: "{{ vault_neomutt_browser }}"
 neomutt_email_server: "{{ vault_neomutt_email_server }}"
 neomutt_email_accounts: "{{ vault_neomutt_email_accounts }}"

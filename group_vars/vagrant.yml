@@ -14,6 +14,9 @@ system_hostname: "vagrant"
 git_full_name: "Vagrant"
 git_email: "vagrant@localhost"
 
+keepassxc_database_directory: "/home/vagrant"
+keepassxc_database_name: "db.kdbx"
+
 newsblur_username: "newsblur.username"
 newsblur_password: "newsblur.password"
 
