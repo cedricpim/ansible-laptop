@@ -1,11 +1,11 @@
 ---
-- include_role:
-    name: "yay"
-  with_items:
-    - "vdirsyncer"
-    - "python-pip"
-  loop_control:
-    loop_var: "pkg_name"
+- name: "Install vdirsyncer and dependencies"
+  pacman:
+    name:
+      - "vdirsyncer"
+      - "python-pip"
+    state: "present"
+  become: yes
   register: vdirsyncer_install
 
 - name: "Install extra dependencies"
@@ -25,43 +25,9 @@
     mode: "0600"
   notify: "Discover vdirsyncer"
 
-- include_role:
-    name: "zsh"
-    tasks_from: "scripts"
-  vars:
-    script: "vsync"
-
-- name: "Create user folder for systemd"
-  file:
-    path: "{{ systemd_user_directory }}"
-    state: "directory"
-
-- name: "Symlink service and timer for vdirsyncer"
-  file:
-    src: "{{ vdirsyncer_aur_systemd }}/{{ item }}"
-    dest: "{{ systemd_user_directory }}/{{ item }}"
-    state: "link"
-  with_items:
-    - "vdirsyncer.service"
-    - "vdirsyncer.timer"
-  notify: "Restart vdirsyncer timer"
-
-- name: "Create folder for systemd vdirsyncer"
-  file:
-    path: "{{ systemd_user_directory }}/vdirsyncer.service.d"
-    state: "directory"
-
-- name: "Copy vdirsyncer overriding configuration for systemd"
-  template:
-    src: "vdirsyncer/override.conf.j2"
-    dest: "{{ systemd_user_directory }}/vdirsyncer.service.d/override.conf"
-    mode: "0600"
-  notify: "Restart vdirsyncer timer"
-
 - name: "Enable/start vdirsyncer timer"
   systemd:
     name: "vdirsyncer.timer"
     state: "started"
     scope: "user"
     enabled: yes
-    daemon_reload: yes
