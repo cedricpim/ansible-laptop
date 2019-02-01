@@ -77,7 +77,7 @@ label-urgent-foreground = ${colors.red}
 [module/vpn]
 type = custom/script
 exec = echo ""
-exec-if = pgrep mullvad
+exec-if = "wg show interfaces | grep mullvad"
 interval = 5
 label-foreground = ${colors.darkcyan}
 
