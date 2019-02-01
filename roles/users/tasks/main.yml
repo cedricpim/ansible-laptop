@@ -31,6 +31,12 @@
   become: yes
   register: ssh_keys_created
 
+- name: "Install git"
+  pacman:
+    name: "git"
+    state: "present"
+  become: yes
+
 - name: "Setup Github with SSH key"
   block:
     - known_hosts: path="~/.ssh/known_hosts" name="github.com" key="{{ github_host }}"
