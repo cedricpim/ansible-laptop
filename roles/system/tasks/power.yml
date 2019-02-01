@@ -12,11 +12,8 @@
 
 - include_role:
     name: "yay"
-  with_items:
-    - "i3lock-blur"
-    - "watchdog"
-  loop_control:
-    loop_var: "pkg_name"
+  vars:
+    pkg_name: "watchdog"
 
 - name: "Add Nvidia driver to blacklist"
   lineinfile:

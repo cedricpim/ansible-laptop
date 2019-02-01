@@ -230,15 +230,16 @@ bindsym $mod+Shift+m mode "$mode_display"
 
 # `sleep 1` adds a small delay to prevent possible race conditions with suspend.
 # The `-i` argument for systemctl poweroff causes a shutdown even if other users are logged-in.
-set $locker i3lock -n --fuzzy && sleep 1
-set $mode_system System (l) lock, (o) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $locker light-locker-command -l && sleep 1
+set $mode_system System (l) lock, (o) logout, (g) greeter, (s) suspend, (h) hibernate, (r) reboot, (Shift+p) poweroff
 mode "$mode_system" {
   bindsym l exec --no-startup-id $locker, mode "default"
   bindsym o exec --no-startup-id i3-msg exit, mode "default"
+  bindsym g exec --no-startup-id dm-tool switch-to-greeter, mode "default"
   bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
   bindsym h exec --no-startup-id $locker && systemctl hibernate, mode "default"
   bindsym r exec --no-startup-id systemctl reboot, mode "default"
-  bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+  bindsym Shift+p exec --no-startup-id systemctl poweroff -i, mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
