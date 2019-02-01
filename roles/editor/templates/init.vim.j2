@@ -296,6 +296,7 @@ autocmd BufWritePre * :%s/\s\+$//e " Trim whitespaces
 autocmd FileType crontab setlocal nobackup nowritebackup " Edit crontab files
 autocmd FileType gitcommit setlocal spell textwidth=72 " Helps Git commit messages
 autocmd BufRead,BufNewFile *.md setlocal textwidth=80 " Apply 80 characters limit to Markdown
+autocmd VimLeave * call system("xsel -ib", getreg('+'))
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler

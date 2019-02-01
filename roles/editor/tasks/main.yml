@@ -6,6 +6,7 @@
       - "neovim"
       - "python2-neovim"
       - "python-neovim"
+      - "xsel"
     state: "present"
   become: yes
 
