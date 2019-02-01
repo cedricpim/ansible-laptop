@@ -4,10 +4,14 @@
     name:
       - "i3-gaps"
       - "rofi"
-      - "polybar"
       - "xcb-util-xrm"
     state: "present"
   become: yes
+
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "polybar"
 
 - name: "Create folder for i3 configuration"
   file:
