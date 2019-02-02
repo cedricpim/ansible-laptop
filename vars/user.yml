@@ -8,7 +8,6 @@ agenda_khard: "{{ vault_agenda_khard }}"
 agenda_vdirsyncer: "{{ vault_agenda_vdirsyncer }}"
 
 default_browser: "{{ vault_default_browser }}"
-default_browser_name: "{{ vault_default_browser_name }}"
 
 firefox_profile: "{{ vault_firefox_profile }}"
 
@@ -30,7 +29,6 @@ ledger_aliases: "{{ vault_ledger_aliases }}"
 keepassxc_database_directory: "{{ vault_keepassxc_database_directory }}"
 keepassxc_database_name: "{{ vault_keepassxc_database_name }}"
 
-neomutt_browser: "{{ vault_neomutt_browser }}"
 neomutt_email_server: "{{ vault_neomutt_email_server }}"
 neomutt_email_accounts: "{{ vault_neomutt_email_accounts }}"
 neomutt_sender_full_name: "{{ vault_neomutt_sender_full_name }}"

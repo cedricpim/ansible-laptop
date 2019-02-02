@@ -70,7 +70,6 @@ offlineimap_email_accounts:
   - { name: "default",   type: "Maildir", user: "default@example.localhost",   password: "default"   }
   - { name: "secondary", type: "Maildir", user: "secondary@example.localhost", password: "secondary" }
 
-neomutt_browser: "firefox"
 neomutt_email_server: "example.localhost"
 neomutt_email_accounts:
   - { name: "default",   key: 1, user: "default@example.localhost",   password: "default" }

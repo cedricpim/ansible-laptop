@@ -4,4 +4,3 @@ scripts_directory: "/usr/local/bin"
 systemd_directory: "/etc/systemd"
 
 default_browser: "firefox"
-default_browser_name: "Firefox"

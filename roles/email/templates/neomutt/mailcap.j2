@@ -12,7 +12,7 @@ image/tiff; feh %s
 application/pdf; qpdfview %s
 
 # HTML
-text/html; {{ neomutt_browser }} %s; test=test -n "$DISPLAY"; needsterminal;
+text/html; {{ default_browser }} %s; test=test -n "$DISPLAY"; needsterminal;
 text/html; w3m -I %{charset} -T text/html; copiousoutput;
 
 # Others
