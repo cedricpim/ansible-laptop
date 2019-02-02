@@ -64,3 +64,7 @@ syncthing_port: "{{ vault_syncthing_port }}"
 wallpaper: "{{ vault_wallpaper }}"
 
 zsh_extra: "{{ vault_zsh_extra }}"
+
+workspaces: "{{ vault_workspaces }}"
+startup_applications: "{{ vault_startup_applications }}"
+scratchpad_applications: "{{ vault_scratchpad_applications }}"

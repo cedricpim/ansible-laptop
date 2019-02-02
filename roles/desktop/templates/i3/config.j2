@@ -130,67 +130,24 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
-set $ws6 "6:"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+{% for workspace in workspaces %}
+set {{ workspace.key }} "{{ workspace.name }}"
+bindsym $mod+{{ workspace.keybinding }} workspace {{ workspace.key }}
+bindsym $mod+Shift+{{ workspace.keybinding }} move container to workspace {{ workspace.key }}
+{% if workspace.assigned is defined %}
+assign [class="{{ workspace.assigned }}"] → number {{ workspace.key }}
+{% endif %}
+{% endfor %}
 
-# switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+{% for application in startup_applications %}
+exec --no-startup-id {{ application }}
+{% endfor %}
 
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
-
-# Default applications per workspace
-assign [class="Slack"] → number $ws1
-assign [class="{{ default_browser_name }}"] → number $ws2
-for_window [workspace=$ws4] layout tabbed
-assign [instance="todo"] → number $ws4
-assign [instance="rikhal"] → number $ws4
-assign [instance="neomutt"] → number $ws4
-assign [instance="newsboat"] → number $ws4
-assign [instance="ranger"] → number $ws5
-assign [instance="mpsyt"] → number $ws6
-
-exec --no-startup-id keepassxc
-exec --no-startup-id copyq
-exec --no-startup-id dunst
-exec --no-startup-id slack
-exec --no-startup-id {{ default_browser }}
-exec --no-startup-id light-locker
-
-exec i3-sensible-terminal --title "todo" --name "todo" -e "todo"
-exec i3-sensible-terminal --title "rikhal" --name "rikhal" -e "rikhal"
-exec i3-sensible-terminal --title "neomutt" --name "neomutt" -e "neomutt"
-exec i3-sensible-terminal --title "newsboat" --name "newsboat" -e "newsboat"
-exec i3-sensible-terminal --name "ranger" -e "ranger"
-exec i3-sensible-terminal --name "mpsyt" -e "mpsyt"
-
-bindsym $mod+t [instance="todo"] focus
+{% for application in scratchpad_applications %}
+for_window [instance="{{ application.name }}"] move scratchpad
+exec i3-sensible-terminal --title "{{ application.name }}" --name "{{ application.name }}" -e "{{ application.name }}"
+bindsym $mod+{{ application.keybinding }} [instance="{{ application.name }}"] scratchpad show
+{% endfor %}
 
 # reload the configuration file
 bindsym $mod+r reload
@@ -259,5 +216,5 @@ exec --no-startup-id "xset r rate 200 25"
 exec --no-startup-id "xcape -e 'Caps_Lock=Escape;Shift_L=parenleft;Shift_R=parenright'"
 exec --no-startup-id "feh --bg-scale {{ wallpaper_directory }}/wallpaper{{ wallpaper | splitext | last }}"
 
-exec_always --no-startup-id xautolock -time 5 -locker "$locker" -notify 20 -notifier "xset dpms force off"
+exec_always --no-startup-id xautolock -time 5 -locker "$locker" -notify 45 -notifier "xset dpms force off"
 exec --no-startup-id xss-lock -- $locker

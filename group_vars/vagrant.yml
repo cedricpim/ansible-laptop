@@ -106,56 +106,51 @@ tmux_continuum: "off"
 
 neovim_background_color: "dark"
 
+vault_workspaces:
+  - { key: "$ws1",  keybinding: "1",  name: "1:", assigned: "Slack" }
+  - { key: "$ws2",  keybinding: "2",  name: "2:", assigned: "Firefox" }
+  - { key: "$ws3",  keybinding: "3",  name: "3:" }
+  - { key: "$ws4",  keybinding: "4",  name: "4" }
+  - { key: "$ws5",  keybinding: "5",  name: "5" }
+  - { key: "$ws6",  keybinding: "6",  name: "6" }
+  - { key: "$ws7",  keybinding: "7",  name: "7" }
+  - { key: "$ws8",  keybinding: "8",  name: "8" }
+  - { key: "$ws9",  keybinding: "9",  name: "9" }
+  - { key: "$ws10", keybinding: "10", name: "10" }
+
+vault_startup_applications:
+  - "keepassxc"
+  - "copyq"
+  - "dunst"
+  - "slack"
+  - "firefox"
+  - "light-locker"
+
+vault_scratchpad_applications:
+  - { name: "todo",     keybinding: "t" }
+  - { name: "mpsyt",    keybinding: "m" }
+  - { name: "rikhal",   keybinding: "c" }
+  - { name: "neomutt",  keybinding: "e" }
+  - { name: "newsboat", keybinding: "n" }
+
 colorscheme:
   foreground: "#FFFFFF"
   background: "#000000"
   cursor_color: "#FFFFFF"
   colors:
-    - key:   "color0"
-      name:  "darkblack"
-      value: "#393939"
-    - key:   "color1"
-      name:  "darkred"
-      value: "#DA4939"
-    - key:   "color2"
-      name:  "darkgreen"
-      value: "#9ACC79"
-    - key:   "color3"
-      name:  "darkyellow"
-      value: "#D0D26B"
-    - key:   "color4"
-      name:  "darkblue"
-      value: "#6D9CBE"
-    - key:   "color5"
-      name:  "darkmagenta"
-      value: "#9F5079"
-    - key:   "color6"
-      name:  "darkcyan"
-      value: "#435D75"
-    - key:   "color7"
-      name:  "darkwhite"
-      value: "#C2C2C2"
-    - key:   "color8"
-      name:  "black"
-      value: "#474747"
-    - key:   "color9"
-      name:  "red"
-      value: "#FF6C5C"
-    - key:   "color10"
-      name:  "green"
-      value: "#8FB676"
-    - key:   "color11"
-      name:  "yellow"
-      value: "#C8BC45"
-    - key:   "color12"
-      name:  "blue"
-      value: "#D0D0FF"
-    - key:   "color13"
-      name:  "magenta"
-      value: "#A761C2"
-    - key:   "color14"
-      name:  "cyan"
-      value: "#6E98A4"
-    - key:   "color15"
-      name:  "white"
-      value: "#C2C2C2"
+    - { key: "color0",  name: "darkblack",   value: "#393939" }
+    - { key: "color1",  name: "darkred",     value: "#DA4939" }
+    - { key: "color2",  name: "darkgreen",   value: "#9ACC79" }
+    - { key: "color3",  name: "darkyellow",  value: "#D0D26B" }
+    - { key: "color4",  name: "darkblue",    value: "#6D9CBE" }
+    - { key: "color5",  name: "darkmagenta", value: "#9F5079" }
+    - { key: "color6",  name: "darkcyan",    value: "#435D75" }
+    - { key: "color7",  name: "darkwhite",   value: "#C2C2C2" }
+    - { key: "color8",  name: "black",       value: "#474747" }
+    - { key: "color9",  name: "red",         value: "#FF6C5C" }
+    - { key: "color10", name: "green",       value: "#8FB676" }
+    - { key: "color11", name: "yellow",      value: "#C8BC45" }
+    - { key: "color12", name: "blue",        value: "#D0D0FF" }
+    - { key: "color13", name: "magenta",     value: "#A761C2" }
+    - { key: "color14", name: "cyan",        value: "#6E98A4" }
+    - { key: "color15", name: "white",       value: "#C2C2C2" }
