@@ -149,6 +149,10 @@ exec i3-sensible-terminal --title "{{ application.name }}" --name "{{ applicatio
 bindsym $mod+{{ application.keybinding }} [instance="{{ application.name }}"] scratchpad show
 {% endfor %}
 
+{% if i3_extra is defined %}
+{{ i3_extra }}
+{% endif %}
+
 # reload the configuration file
 bindsym $mod+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
