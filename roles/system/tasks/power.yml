@@ -73,17 +73,3 @@
     - "watchdog"
     - "fstrim.timer"
   become: yes
-
-- name: "Create folder for systemd configuration"
-  file:
-    path: "{{ systemd_directory }}"
-    state: "directory"
-    mode: "0755"
-  become: yes
-
-- name: "Copy systemd login configuration"
-  template:
-    src: "logind.conf.j2"
-    dest: "{{ systemd_directory }}/logind.conf"
-    mode: "0644"
-  become: yes
