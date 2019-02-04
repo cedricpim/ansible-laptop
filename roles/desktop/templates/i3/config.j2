@@ -161,7 +161,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
-mode "resize" {
+set $mode_resize Resize: (h) shrink W, (j) grow H, (k) shrink H, (l) grow W
+mode "$mode_resize" {
   bindsym h resize shrink width 10 px or 10 ppt
   bindsym j resize grow height 10 px or 10 ppt
   bindsym k resize shrink height 10 px or 10 ppt
@@ -175,11 +176,11 @@ mode "resize" {
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
-bindsym $mod+Shift+s mode "resize"
+bindsym $mod+Shift+s mode "$mode_resize"
 
 # Displays management
-set $mode_display Monitors (e) external screen, (i) internal screen, (m) multiple screens
-mode "$mode_display" {
+set $mode_monitors Monitors: (e) external screen, (i) internal screen, (m) multiple screens
+mode "$mode_monitors" {
   bindsym i exec --no-startup-id autorandr internal, mode "default"
   bindsym e exec --no-startup-id autorandr external, mode "default"
   bindsym m exec --no-startup-id autorandr multiple, mode "default"
@@ -187,9 +188,9 @@ mode "$mode_display" {
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
-bindsym $mod+Shift+m mode "$mode_display"
+bindsym $mod+Shift+m mode "$mode_monitors"
 
-set $mode_system System (l) lock, (o) logout, (g) greeter, (s) suspend, (r) reboot, (Shift+p) poweroff
+set $mode_system System: (l) lock, (o) logout, (g) greeter, (s) suspend, (r) reboot, (Shift+p) poweroff
 mode "$mode_system" {
   bindsym l exec --no-startup-id light-locker-command -l, mode "default"
   bindsym o exec --no-startup-id i3-msg exit, mode "default"
