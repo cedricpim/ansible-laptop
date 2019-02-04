@@ -1,4 +1,5 @@
 ---
+main: "{{ vault_main }}"
 users: "{{ vault_users }}"
 
 ssh_keys: "{{ vault_ssh_keys }}"
