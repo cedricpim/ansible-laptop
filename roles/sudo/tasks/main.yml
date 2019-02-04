@@ -1,7 +1,9 @@
 ---
-- name: "Install sudo package"
+- name: "Install permissions management packages"
   pacman:
-    name: "sudo"
+    name:
+      - "sudo"
+      - "polkit"
     state: "present"
   become: yes
 
