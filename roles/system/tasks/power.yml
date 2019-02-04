@@ -4,9 +4,6 @@
     name:
       - "powertop"
       - "tlp"
-      - "polkit"
-      - "xautolock"
-      - "xss-lock"
     state: "present"
   become: yes
 
