@@ -146,7 +146,8 @@ exec --no-startup-id {{ application }}
 {% for application in scratchpad_applications %}
 for_window [instance="{{ application.name }}"] move scratchpad
 exec i3-sensible-terminal --title "{{ application.name }}" --name "{{ application.name }}" -e "{{ application.name }}"
-bindsym $mod+{{ application.keybinding }} [instance="{{ application.name }}"] scratchpad show
+bindsym $mod+{{ application.keybinding }} [instance="{{ application.name }}"] scratchpad show{% if application.custom is defined %}{{ application.custom }}{% endif %}
+
 {% endfor %}
 
 {% if i3_extra is defined %}
