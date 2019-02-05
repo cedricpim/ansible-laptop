@@ -135,7 +135,7 @@ set {{ workspace.key }} "{{ workspace.name }}"
 bindsym $mod+{{ workspace.keybinding }} workspace {{ workspace.key }}
 bindsym $mod+Shift+{{ workspace.keybinding }} move container to workspace {{ workspace.key }}
 {% if workspace.assigned is defined %}
-assign [class="{{ workspace.assigned }}"] → number {{ workspace.key }}
+assign [class={{ workspace.assigned | to_json }}] → number {{ workspace.key }}
 {% endif %}
 {% endfor %}
 
@@ -144,10 +144,8 @@ exec --no-startup-id {{ application }}
 {% endfor %}
 
 {% for application in scratchpad_applications %}
-for_window [instance="{{ application.name }}"] move scratchpad
-exec i3-sensible-terminal --title "{{ application.name }}" --name "{{ application.name }}" -e "{{ application.name }}"
-bindsym $mod+{{ application.keybinding }} [instance="{{ application.name }}"] scratchpad show{% if application.custom is defined %}{{ application.custom }}{% endif %}
-
+for_window [instance={{ application.name | to_json }}] move scratchpad
+bindsym $mod+{{ application.keybinding }} exec {{ i3_directory }}/scratchpad-launcher.sh {{ application.name | to_json}} {{ application.custom | default("") | to_json }}
 {% endfor %}
 
 {% if i3_extra is defined %}
