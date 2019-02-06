@@ -8,6 +8,7 @@
       - "mediainfo"
       - "ffmpegthumbnailer"
       - "w3m"
+      - "udiskie"
     state: "present"
   become: yes
 
