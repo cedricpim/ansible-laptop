@@ -39,15 +39,15 @@
 
 - name: "Copy ranger configuration"
   template:
-    src: "ranger/{{ item }}.j2"
-    dest: "{{ ranger_directory }}/{{ item }}"
-    mode: "0600"
+    src: "ranger/{{ item.name }}.j2"
+    dest: "{{ ranger_directory }}/{{ item.name }}"
+    mode: "{{ item.mode }}"
   with_items:
-    - "commands.py"
-    - "commands_full.py"
-    - "rc.conf"
-    - "rifle.conf"
-    - "scope.sh"
+    - { name: "commands.py",      mode: "0600" }
+    - { name: "commands_full.py", mode: "0600" }
+    - { name: "rc.conf",          mode: "0600" }
+    - { name: "rifle.conf",       mode: "0600" }
+    - { name: "scope.sh",         mode: "0700" }
 
 - name: "Create folder for ranger colorschemes"
   file:
