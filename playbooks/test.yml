@@ -25,6 +25,7 @@
     - { role: "ledger", tags: "ledger" }
     - { role: "shell", tags: "shell" }
     - { role: "torrents", tags: "torrents" }
+    - { role: "sound", tags: "sound" }
     - { role: "desktop", tags: "desktop" }
     - { role: "zsh", tags: "zsh" }
     - { role: "applications", tags: "applications" }

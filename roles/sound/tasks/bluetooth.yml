@@ -1,0 +1,16 @@
+---
+- name: "Install Bluetooth related packages"
+  pacman:
+    name:
+      - "bluez"
+      - "bluez-utils"
+      - "bluez-libs"
+      - "bluez-hid2hci"
+      - "pulseaudio-bluetooth"
+    state: "present"
+  become: yes
+
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "blueman"

@@ -17,6 +17,7 @@
       tags: "always"
 
   roles:
+    - { role: "sound", tags: "sound" }
     - { role: "desktop", tags: "desktop" }
     - { role: "zsh", tags: "zsh" }
     - { role: "agenda", tags: "agenda" }

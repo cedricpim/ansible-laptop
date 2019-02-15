@@ -1,0 +1,28 @@
+---
+- import_tasks: "bluetooth.yml"
+
+- name: "Install PulseAudio related packages"
+  pacman:
+    name:
+      - "pulseaudio"
+      - "pulseaudio-alsa"
+    state: "present"
+  become: yes
+
+- name: "Create folder for PulseAudio configuration"
+  file:
+    path: "{{ pulseaudio_directory }}"
+    state: "directory"
+    mode: "0700"
+
+- name: "Copy PulseAudio configuration"
+  template:
+    src: "default.pa.j2"
+    dest: "{{ pulseaudio_directory }}/default.pa"
+    mode: "0600"
+
+- include_role:
+    name: "zsh"
+    tasks_from: "scripts"
+  vars:
+    script: "bb"
