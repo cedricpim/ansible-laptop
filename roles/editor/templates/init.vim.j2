@@ -138,7 +138,8 @@ map <Space> <Leader>
 
 cmap w!! w !sudo tee > /dev/null %
 
-nnoremap cc :cclose<CR>
+nnoremap <Leader>cc :cclose<CR>
+nnoremap <Leader>ca :tabonly<CR>
 
 " Disable arrow keys
 nnoremap <up>    <nop>
@@ -151,10 +152,10 @@ vnoremap <left>  <nop>
 vnoremap <right> <nop>
 
 " Regular cutting and pasting (without copying)
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-nnoremap <leader>p "_dP
-vnoremap <leader>p "_dP
+nnoremap <Leader>d "_d
+vnoremap <Leader>d "_d
+nnoremap <Leader>p "_dP
+vnoremap <Leader>p "_dP
 
 " On insert mode, Shift-Tab to unindent
 inoremap <S-Tab> <C-D>
