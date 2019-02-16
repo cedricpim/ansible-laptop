@@ -14,9 +14,3 @@
     src: "khal/config.j2"
     dest: "{{ khal_directory }}/config"
     mode: "0600"
-
-- include_role:
-    name: "zsh"
-    tasks_from: "scripts"
-  vars:
-    script: "rikhal"
