@@ -97,13 +97,20 @@ function! GetVisual()
 endfunction
 
 " Disable deoplete when using multiple cursors
-function g:Multiple_cursors_before()
-  let g:deoplete#disable_auto_complete = 1
-endfunction
+func! Multiple_cursors_before()
+  if deoplete#is_enabled()
+    call deoplete#disable()
+    let g:deoplete_is_enable_before_multi_cursors = 1
+  else
+    let g:deoplete_is_enable_before_multi_cursors = 0
+  endif
+endfunc
 
-function g:Multiple_cursors_after()
-  let g:deoplete#disable_auto_complete = 0
-endfunction
+func! Multiple_cursors_after()
+  if g:deoplete_is_enable_before_multi_cursors
+    call deoplete#enable()
+  endif
+endfunc
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
