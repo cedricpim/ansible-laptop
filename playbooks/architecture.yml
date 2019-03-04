@@ -2,4 +2,4 @@
 - hosts: system
 
   roles:
-    - { role: "boot", tags: "boot" }
+    - { role: "partition", tags: "partition" }
