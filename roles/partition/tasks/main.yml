@@ -1,28 +1,79 @@
 ---
-- name: "Install intel-ucode"
-  pacman:
-    name: "intel-ucode"
+- name: "Parted 1"
+  parted:
+    name: "EFI System"
+    device: "/dev/sdb"
+    number: "1"
+    flags: [ boot, esp ]
     state: "present"
-  become: yes
+    part_end: "550MiB"
 
-- name: "Install systemd-boot"
-  command: "bootctl --path={{ esp_mount }} install"
-  become: yes
+- name: "Parted 2"
+  parted:
+    name: "Linux filesystem"
+    device: "/dev/sdb"
+    number: "2"
+    state: "present"
+    part_start: "550MiB"
 
-- name: "Create folder for loader entries"
-  file:
-    path: "{{ esp_mount}}/loader/entries"
-    state: "directory"
-  become: yes
+- name: "Create a ext4 filesystem on /dev/sdb1"
+  filesystem:
+    fstype: "ext4"
+    dev: "/dev/sdb1"
 
-- name: "Copy entry for arch"
-  template:
-    src: "arch.conf.j2"
-    dest: "{{ esp_mount}}/loader/entries/arch.conf"
-    mode: "0744"
-  become: yes
+- name: "Encrypt"
+  block:
+    - shell: "echo -n '{{ disk_password }}' | cryptsetup luksFormat --type luks2 /dev/sdb2"
+    - shell: "echo -n '{{ disk_password }}' | cryptsetup open /dev/sdb2 cryptolvm"
 
-- include_role:
-    name: "yay"
-  vars:
-    pkg_name: "systemd-boot-pacman-hook"
+- name: "Create a volume group on top of /dev/mapper/cryptolvm"
+  lvg:
+    vg: "MyVol"
+    pvs: "/dev/mapper/cryptolvm"
+
+- name: "Create a logical volume the size of"
+  lvol:
+    vg: "MyVol"
+    lv: "root"
+    size: "8g"
+
+- name: "Create a logical volume the size of"
+  lvol:
+    vg: "MyVol"
+    lv: "home"
+    size: "100%FREE"
+
+# - name: "Create a ext4 filesystem on /dev/MyVol"
+#   filesystem:
+#     fstype: "ext4"
+#     dev: "/dev/MyVol/{{ item }}"
+#   with_items:
+#     - "root"
+#     - "home"
+
+- name: "Mount root"
+  mount:
+    src: "/dev/MyVol/{{ item.src }}"
+    path: "{{ item.path }}"
+    fstype: "ext4"
+    state: "mounted"
+  with_items:
+    - { path: "/mnt",      src: "root" }
+    - { path: "/mnt/home", src: "home" }
+
+- name: "Mount boot"
+  block:
+    - file: path="/mnt/boot" state="directory"
+    - command: "mkfs.fat -F32 /dev/sdb1"
+    - mount: src="/dev/sdb1" path="/mnt/boot" fstype="fat" state="mounted"
+
+# - name: "install"
+#   command: "pacstrap /mnt base"
+
+# - import_tasks: "grub.yml"
+
+# - name: "Leave arch-chroot"
+#   command: "exit"
+
+# - name: "Generate fstab"
+#   shell: "genfstab -U /mnt >> /mnt/etc/fstab"

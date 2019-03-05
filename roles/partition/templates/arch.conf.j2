@@ -4,3 +4,4 @@ title   Arch Linux
 linux 	/vmlinuz-linux
 initrd  /intel-ucode.img
 initrd  /initramfs-linux.img
+options cryptdevice=UUID={{ uuid }}:cryptolvm root=/dev/mapper/MyVol-root quiet rw
