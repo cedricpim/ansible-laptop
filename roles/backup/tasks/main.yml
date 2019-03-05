@@ -21,9 +21,10 @@
   command: "fallocate -l {{ backup_size }} {{ tempdir.path }}/{{ backup_name }}.img"
   when: tempdir is defined
 
+# TODO: Move to keyfile
 - name: "Create backup"
   block:
-    - shell: "echo -n '{{ backup_password }}' | cryptsetup luksFormat {{ tempdir.path }}/{{ backup_name }}.img -"
+    - shell: "echo -n '{{ backup_password }}' | cryptsetup luksFormat --type luks2 {{ tempdir.path }}/{{ backup_name }}.img -"
     - shell: "echo -n '{{ backup_password }}' | cryptsetup luksOpen {{ tempdir.path }}/{{ backup_name }}.img {{ backup_name }}"
     - command: "mkfs.ext4 /dev/mapper/{{ backup_name }}"
     - mount: path="{{ backup_mount_dir }}" src="/dev/mapper/{{ backup_name }}" fstype=ext4 state=mounted
