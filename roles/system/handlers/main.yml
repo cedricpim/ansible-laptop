@@ -14,3 +14,7 @@
     name: "systemd-journald"
     state: "restarted"
   become: yes
+
+- name: "Create grub configuration"
+  command: "grub-mkconfig -o {{ grub_configuration }}"
+  become: yes

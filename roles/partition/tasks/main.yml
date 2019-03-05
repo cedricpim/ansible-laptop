@@ -2,29 +2,39 @@
 - name: "Parted 1"
   parted:
     name: "EFI System"
-    device: "/dev/sdb"
+    device: "/dev/sda"
     number: "1"
-    flags: [ boot, esp ]
+    flags: [ "boot", "esp" ]
+    label: "gpt"
     state: "present"
-    part_end: "550MiB"
+    part_end: "551MiB"
 
 - name: "Parted 2"
   parted:
     name: "Linux filesystem"
-    device: "/dev/sdb"
+    device: "/dev/sda"
     number: "2"
+    label: "gpt"
     state: "present"
-    part_start: "550MiB"
+    part_start: "551MiB"
 
-- name: "Create a ext4 filesystem on /dev/sdb1"
-  filesystem:
-    fstype: "ext4"
-    dev: "/dev/sdb1"
+- name: "LIST disks"
+  command: "lsblk -f"
+  register: encrypted
+  changed_when: no
 
 - name: "Encrypt"
   block:
-    - shell: "echo -n '{{ disk_password }}' | cryptsetup luksFormat --type luks2 /dev/sdb2"
-    - shell: "echo -n '{{ disk_password }}' | cryptsetup open /dev/sdb2 cryptolvm"
+    - tempfile: suffix="crypt" state="directory"
+      register: tempdir_encrypt
+    - lineinfile: dest="{{ tempdir_encrypt.path }}/keyfile" line="xxx" state="present" create=yes
+      no_log: yes
+    - command: "cryptsetup luksFormat --type luks2 --key-file {{ tempdir_encrypt.path }}/keyfile /dev/sda2"
+      when: encrypted is defined and encrypted.stdout.find("crypto_LUKS") == -1
+    - command: "cryptsetup open --key-file {{ tempdir_encrypt.path }}/keyfile /dev/sda2 cryptolvm"
+  always:
+    - file: path="{{ tempdir_encrypt.path }}" state="absent"
+  when: encrypted is defined and encrypted.stdout.find("cryptolvm") == -1
 
 - name: "Create a volume group on top of /dev/mapper/cryptolvm"
   lvg:
@@ -42,38 +52,53 @@
     vg: "MyVol"
     lv: "home"
     size: "100%FREE"
+    shrink: no
 
-# - name: "Create a ext4 filesystem on /dev/MyVol"
-#   filesystem:
-#     fstype: "ext4"
-#     dev: "/dev/MyVol/{{ item }}"
-#   with_items:
-#     - "root"
-#     - "home"
+- name: "Format partitions"
+  filesystem:
+    fstype: "{{ item.fstype }}"
+    dev: "{{ item.partition }}"
+    opts: "{{ item.opts }}"
+  with_items:
+    - { fstype: "ext4", partition: "/dev/MyVol/root", opts: "" }
+    - { fstype: "ext4", partition: "/dev/MyVol/home", opts: "" }
+    - { fstype: "vfat", partition: "/dev/sda1", opts: "-F32"   }
 
-- name: "Mount root"
+- name: "Mount partitions"
   mount:
-    src: "/dev/MyVol/{{ item.src }}"
+    src: "{{ item.partition }}"
     path: "{{ item.path }}"
-    fstype: "ext4"
+    fstype: "{{ item.fstype }}"
     state: "mounted"
   with_items:
-    - { path: "/mnt",      src: "root" }
-    - { path: "/mnt/home", src: "home" }
+    - { partition: "/dev/MyVol/root", path: "/mnt",      fstype: "ext4" }
+    - { partition: "/dev/MyVol/home", path: "/mnt/home", fstype: "ext4" }
+    - { partition: "/dev/sda1",       path: "/mnt/boot", fstype: "vfat" }
 
-- name: "Mount boot"
-  block:
-    - file: path="/mnt/boot" state="directory"
-    - command: "mkfs.fat -F32 /dev/sdb1"
-    - mount: src="/dev/sdb1" path="/mnt/boot" fstype="fat" state="mounted"
+# Check if some directory exists
+# - name: "Check if we are inside Arch live CD"
+#   stat:
+#     path: "/usr/bin/arch-chroot"
+#   register: arch_chroot
+- name: "install"
+  command: "pacstrap /mnt base base-devel ansible git make"
 
-# - name: "install"
-#   command: "pacstrap /mnt base"
+- name: "Download ansible-laptop repository"
+  git:
+    repo: "{{ ansible_laptop_repo }}"
+    dest: "{{ ansible_laptop_directory }}"
+    clone: yes
+    update: yes
 
-# - import_tasks: "grub.yml"
+- name: "Generate fstab"
+  command: "genfstab -U /mnt"
+  register:  genfstab
+  changed_when: no
 
-# - name: "Leave arch-chroot"
-#   command: "exit"
-
-# - name: "Generate fstab"
-#   shell: "genfstab -U /mnt >> /mnt/etc/fstab"
+- name: "Save fstab"
+  blockinfile:
+    dest: "/mnt/etc/fstab"
+    block: "{{ genfstab.stdout }}"
+    state: "present"
+    create: yes
+  when: genfstab is defined

@@ -77,3 +77,5 @@
 #     name: "yay"
 #   vars:
 #     pkg_name: "systemd-boot-pacman-hook"
+
+# Move also part of the system settings

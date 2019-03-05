@@ -16,3 +16,9 @@ journal_triggerd_directory: "/etc/journal-triggerd.rules"
 journal_triggerd_log: "/var/log/journal.failed.log"
 
 journald_system_max_use: "200M"
+
+esp_mount: "/boot"
+
+grub_configuration: "/boot/grub/grub.cfg"
+
+default_grub_configuration: "/etc/default/grub"

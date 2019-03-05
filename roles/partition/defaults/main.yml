@@ -1,6 +1,3 @@
 ---
-esp_mount: "/boot"
-
-grub_configuration: "/boot/grub/grub.cfg"
-
-default_grub_configuration: "/etc/default/grub"
+ansible_laptop_repo: "https://github.com/cedricpim/ansible-laptop.git"
+ansible_laptop_directory: "/mnt/root/ansible-laptop"

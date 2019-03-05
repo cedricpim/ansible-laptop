@@ -10,6 +10,9 @@ $(if ${CHECK},   $(eval ANSIBLE_OPTS += --check))
 $(if ${VERBOSE}, $(eval ANSIBLE_OPTS += -${VERBOSE}))
 $(if ${TAGS},    $(eval ANSIBLE_OPTS += --tags ${TAGS}))
 
+install:
+	ansible-playbook playbooks/install.yml --diff ${ANSIBLE_OPTS}
+
 arch:
 	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/system.txt)
 	$(if ${NETWORK}, $(eval ANSIBLE_OPTS += --extra-vars "network=true"))
