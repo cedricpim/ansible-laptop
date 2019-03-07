@@ -79,6 +79,10 @@ if has("unix")
   set clipboard=unnamed,unnamedplus " Clipboard to work with X
 endif
 
+if has('nvim')
+  let $GIT_EDITOR = "nvr --remote-wait +'set bufhidden=delete'"
+endif
+
 
 """""""""""""
 " Functions "
@@ -169,9 +173,10 @@ inoremap <S-Tab> <C-D>
 " On visual mode, use tab and shift tab to indent the current selected text
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
-nnoremap <C-t> :tabe<CR>
-nnoremap <C-h> :tabp<CR>
-nnoremap <C-l> :tabn<CR>
+nnoremap <C-t> :tabedit<CR>
+nnoremap <C-h> :tabprevious<CR>
+nnoremap <C-l> :tabnext<CR>
+nnoremap <C-q> :tabclose<CR>
 nnoremap <C-j> 19j<CR>
 nnoremap <C-k> 21k<CR>
 nnoremap <S-h> :10winc <CR>
@@ -279,6 +284,7 @@ noremap <Leader>nt :ShowTaggedNotes<CR>
 let g:deoplete#enable_at_startup = 1
 
 " Vim-fugitive configs
+noremap <Leader>gg :Git<space>
 noremap <Leader>gd :Gdiff<CR>
 noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gs :Gstatus<CR>
