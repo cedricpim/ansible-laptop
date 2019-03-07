@@ -1,7 +1,4 @@
 ---
-- name: "go to mnt"
-  command: "arch-chroot /mnt"
-
 - name: "Install grub and efibootmgr"
   pacman:
     name:
@@ -10,19 +7,35 @@
       - "intel-ucode"
     state: "present"
 
-# - name: "Set cryptdevice"
-#   lineinfile:
-#     path: "/etc/default/grub"
-#     regexp: '^GRUB_CMDLINE_LINUX='
-#     line: 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/sdb2:cryptolvm"'
-#   notify: "Create grub configuration"
+- name: "Set cryptdevice"
+  lineinfile:
+    path: "/etc/default/grub"
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptolvm"'
+  notify: "Create grub configuration"
 
-# - name: "Set HOOKS for mkinitcpio"
-#   lineinfile:
-#     path: "/etc/mkinitcpio.conf"
-#     regexp: '^HOOKS='
-#     line: 'HOOKS=(base udev autodetect modconf block filesystems keyboard fsck keymap encrypt lvm2)'
-#   notify: "Create mkinitcpio configuration"
+- name: "Set HOOKS for mkinitcpio"
+  lineinfile:
+    path: "/etc/mkinitcpio.conf"
+    regexp: '^HOOKS='
+    line: 'HOOKS=(base udev autodetect modconf block filesystems keyboard fsck keymap encrypt lvm2)'
+  notify: "Create mkinitcpio configuration"
+
+- name: "Copy entry for arch"
+  block:
+    - file: path="/boot/loader/entries" state="directory"
+    - command: "lsblk -n -o UUID /dev/sda2"
+      changed_when: no
+      register: crypto_uuid
+    - template: src="arch.conf.j2" dest="/boot/loader/entries/arch.conf"
+      vars:
+        uuid: "{{ crypto_uuid.stdout_lines | first }}"
+
+- name: "Create grub configuration"
+  command: "grub-mkconfig -o {{ grub_configuration }}"
+
+- name: "Run grub installation"
+  command: "grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB"
 
 # - name: "Hide grub"
 #   lineinfile:
@@ -38,35 +51,8 @@
 #     mode: 0744
 #   notify: "Create grub configuration"
 
-# - name: "Run grub installation"
-#   command: "grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB"
-#   notify: "Create grub configuration"
-
-# - name: "Create grub configuration"
-#   command: "grub-mkconfig -o /boot/grub/grub.cfg"
-
 # - name: "Install systemd-boot"
 #   command: "bootctl --path=/boot install"
-
-# - name: "Create mkinitcpio configuration"
-#   command: "mkinitcpio -p linux"
-
-# - name: "Get UUID"
-#   shell: "lsblk -f | grep sdb2 | awk '{print $3}'"
-#   register: crypto_uuid
-
-# - name: "Create folder for loader entries"
-#   file:
-#     path: "/boot/loader/entries"
-#     state: "directory"
-
-# - name: "Copy entry for arch"
-#   template:
-#     src: "arch.conf.j2"
-#     dest: "/boot/loader/entries/arch.conf"
-#   vars:
-#     uuid: "{{ crypto_uuid.stdout_lines }}"
-#   when: crypto_uuid is defined
 
 # - name: "change password for root user"
 #   user:
@@ -77,5 +63,3 @@
 #     name: "yay"
 #   vars:
 #     pkg_name: "systemd-boot-pacman-hook"
-
-# Move also part of the system settings
