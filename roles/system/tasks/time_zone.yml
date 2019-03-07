@@ -1,8 +1,10 @@
 ---
-- name: "Set timezone to {{ system_time_zone }}"
+- name: "Ensure the system clock is accurate"
+  command: "timedatectl set-ntp true"
+
+- name: "Set time zone to {{ system_time_zone }}"
   timezone:
     name: "{{ system_time_zone }}"
-  become: yes
   notify: "Synchronize clock"
 
 - include_role:
@@ -15,4 +17,3 @@
     name: "localtime"
     state: "started"
     enabled: yes
-  become: yes

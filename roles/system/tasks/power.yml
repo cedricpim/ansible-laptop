@@ -5,7 +5,6 @@
       - "powertop"
       - "tlp"
     state: "present"
-  become: yes
 
 - include_role:
     name: "yay"
@@ -18,7 +17,6 @@
     regexp: "RUNTIME_PM_BLACKLIST"
     line: 'RUNTIME_PM_BLACKLIST="{{ gpu_address }}"'
     state: "present"
-  become: yes
 
 - name: "Disable BTRFS optimization"
   lineinfile:
@@ -26,7 +24,6 @@
     regexp: "SATA_LINKPWR_ON_BAT"
     line: 'SATA_LINKPWR_ON_BAT="max_performance"'
     state: "present"
-  become: yes
 
 - name: "Start and enable TLP services"
   service:
@@ -35,7 +32,6 @@
   with_items:
     - "tlp"
     - "tlp-sleep"
-  become: yes
 
 - name: "Stop and mask services conflicting with TLP"
   service:
@@ -45,7 +41,6 @@
   with_items:
     - "systemd-rfkill"
     - "systemd-rfkill.socket"
-  become: yes
 
 - name: "Add instructions related to powertop"
   lineinfile:
@@ -59,7 +54,6 @@
   with_items:
     - "sudo powertop --calibrate"
     - "sudo powertop --auto-tune"
-  become: yes
 
 - name: "Enable system services"
   systemd:
@@ -69,4 +63,3 @@
   with_items:
     - "watchdog"
     - "fstrim.timer"
-  become: yes

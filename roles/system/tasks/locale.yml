@@ -4,7 +4,6 @@
     name: "{{ item }}"
     state: "present"
   with_items: "{{ locales }}"
-  become: yes
 
 - name: "Copy locale configuration to /etc/locale.conf"
   template:
@@ -12,5 +11,4 @@
     dest: "/etc/locale.conf"
     owner: "root"
     group: "root"
-    mode: 0644
-  become: yes
+    mode: "0644"

@@ -11,13 +11,11 @@
     owner: "root"
     group: "root"
     mode: "0755"
-  become: yes
 
 - name: "Check log file status"
   stat:
     path: "{{ journal_triggerd_log }}"
   register: journal_log_stat
-  become: yes
 
 - name: "Ensure log file exists"
   file:
@@ -26,7 +24,6 @@
     group: "root"
     mode: "0644"
     state: "touch"
-  become: yes
   when: journal_log_stat is defined and journal_log_stat.stat.islnk is not defined
 
 - name: "Copy journal-triggerd configuration"
@@ -36,7 +33,6 @@
     owner: "root"
     group: "root"
     mode: "0644"
-  become: yes
   notify: "Restart journal-triggerd configuration"
 
 - name: "Enable/start journal-triggerd service"
@@ -44,7 +40,6 @@
     name: "journal-triggerd"
     state: "started"
     enabled: yes
-  become: yes
 
 - name: "Set maximum size for journal logs"
   lineinfile:
@@ -52,5 +47,4 @@
     regexp: "SystemMaxUse="
     line: "SystemMaxUse={{ journald_system_max_use }}"
     state: "present"
-  become: yes
   notify: "Restart systemd-journal"

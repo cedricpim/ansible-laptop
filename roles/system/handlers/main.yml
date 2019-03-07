@@ -1,20 +1,16 @@
 ---
 - name: "Synchronize clock"
   command: "hwclock --systohc"
-  become: yes
 
 - name: "Restart journal-triggerd configuration"
   systemd:
     name: "journal-triggerd"
     state: "restarted"
-  become: yes
 
 - name: "Restart systemd-journal"
   systemd:
     name: "systemd-journald"
     state: "restarted"
-  become: yes
 
 - name: "Create grub configuration"
   command: "grub-mkconfig -o {{ grub_configuration }}"
-  become: yes
