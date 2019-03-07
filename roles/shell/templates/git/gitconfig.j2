@@ -37,9 +37,9 @@
   # Find tags containing commit
   ft = "!f() { git describe --always --contains $1; }; f"
   # Find commits by source code
-  fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+  fc = "!f() { git log -p --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
   # Find commits by commit message
-  fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+  fm = "!f() { git log -p --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
   # Remove branches that have already been merged with master a.k.a. ‘delete merged’
   mop = "!f() { git co master && git remote prune origin && git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D; }; f"
   # Like mop but do not do any destructive action, printing the branches that would be deleted instead
