@@ -81,7 +81,7 @@
 #     path: "/usr/bin/arch-chroot"
 #   register: arch_chroot
 - name: "install"
-  command: "pacstrap /mnt base base-devel ansible git make"
+  command: "pacstrap /mnt base base-devel ansible git make vim"
 
 - name: "Download ansible-laptop repository"
   git:
