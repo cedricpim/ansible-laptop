@@ -212,7 +212,7 @@ client.placeholder      $background $background $foreground $background $backgro
 exec_always --no-startup-id ~/.config/polybar/launcher.sh
 
 # Default settings related with X and environment
-exec --no-startup-id "xset dpms 240 300 0"
-exec --no-startup-id "xset r rate 200 25"
+exec_always --no-startup-id "xset dpms 240 300 0"
+exec_always --no-startup-id "xset r rate 200 25"
 exec --no-startup-id "xcape -e 'Caps_Lock=Escape;Shift_L=parenleft;Shift_R=parenright'"
 exec --no-startup-id "feh --bg-scale {{ wallpaper_directory }}/wallpaper{{ wallpaper | splitext | last }}"
