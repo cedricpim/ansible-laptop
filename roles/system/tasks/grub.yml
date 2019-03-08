@@ -14,8 +14,15 @@
     line: 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptolvm"'
   notify: "Create grub configuration"
 
+
+- name: "Check if grub is installed"
+  stat:
+    path: "/boot/grub"
+  register: grub
+
 - name: "Run grub installation"
   command: "grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB"
+  when: grub is defined and grub.stat.isdir is defined and not grub.stat.isdir
   notify: "Create grub configuration"
 
 - name: "Set HOOKS for mkinitcpio"
