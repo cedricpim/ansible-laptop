@@ -1,5 +1,5 @@
 ---
-- name: "Parted 1"
+- name: "Create boot partition"
   parted:
     name: "EFI System"
     device: "/dev/sda"
@@ -9,21 +9,21 @@
     state: "present"
     part_end: "551MiB"
 
-- name: "Parted 2"
+- name: "Create OS partition"
   parted:
-    name: "Linux filesystem"
+    name: "Operative System"
     device: "/dev/sda"
     number: "2"
     label: "gpt"
     state: "present"
     part_start: "551MiB"
 
-- name: "LIST disks"
+- name: "Display current partitions"
   command: "lsblk -f"
   changed_when: no
   register: encrypted
 
-- name: "Encrypt"
+- name: "Create LUKS partition"
   block:
     - tempfile: suffix="crypt" state="directory"
       register: tempdir_encrypt
@@ -36,23 +36,20 @@
     - file: path="{{ tempdir_encrypt.path }}" state="absent"
   when: encrypted is defined and encrypted.stdout.find("cryptolvm") == -1
 
-- name: "Create a volume group on top of /dev/mapper/cryptolvm"
+- name: "Create the volume group (and physical volume) inside the LUKS partition"
   lvg:
     vg: "MyVol"
     pvs: "/dev/mapper/cryptolvm"
 
-- name: "Create a logical volume the size of"
+- name: "Create the logical volumes"
   lvol:
     vg: "MyVol"
-    lv: "root"
-    size: "8g"
-
-- name: "Create a logical volume the size of"
-  lvol:
-    vg: "MyVol"
-    lv: "home"
-    size: "100%FREE"
+    lv: "{{ item.name }}"
+    size: "{{ item.size }}"
     shrink: no
+  with_items:
+    - { name: "root", size: "8g" }
+    - { name: "home", size: "100%FREE" }
 
 - name: "Format partitions"
   filesystem:
@@ -75,13 +72,13 @@
     - { partition: "/dev/MyVol/home", path: "/mnt/home", fstype: "ext4" }
     - { partition: "/dev/sda1",       path: "/mnt/boot", fstype: "vfat" }
 
-- name: "Check if pacstrap has already been run"
+- name: "Check if Arch Linux is already installed"
   command: "arch-chroot /mnt"
   failed_when: no
   changed_when: no
   register: arch_chroot_mount
 
-- name: "install"
+- name: "Install Arch Linux"
   command: "pacstrap /mnt base base-devel ansible git make vim"
   when: arch_chroot_mount is defined and arch_chroot_mount.stderr.find("ERROR") >= 0
 
