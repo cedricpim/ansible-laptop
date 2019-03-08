@@ -16,8 +16,8 @@ if [[ "$TERM" == "xterm-termite" ]]; then
     change-color "$(original-color 'foreground')" "$(original-color 'background')"
   }
 
-  function colorssh() {
-    if [[ "$1" =~ "^k8prod" ]] || [[ "$1" =~ "^cx ssh " ]] || [[ "$1" =~ "^ssh " ]]; then
+  function colorproduction() {
+    if {{ production_commands | map('regex_replace', '^(.*)$', '[[ "$1" =~ "^\\1" ]]') | join(' || ') }}; then
       change-color "#FFFFFF" "#CB7E7E"
     else
       reset-colors
@@ -26,5 +26,5 @@ if [[ "$TERM" == "xterm-termite" ]]; then
 
   autoload -U add-zsh-hook
   add-zsh-hook precmd  reset-colors
-  add-zsh-hook preexec colorssh
+  add-zsh-hook preexec colorproduction
 fi

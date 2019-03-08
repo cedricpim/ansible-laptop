@@ -44,6 +44,6 @@
     - aliases
     - exports
     - functions
-    - ssh-warning
+    - production-warning
     - zsettings
     - zstyles

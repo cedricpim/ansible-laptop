@@ -57,6 +57,8 @@ personal_server_photos: "{{ vault_personal_server_photos }}"
 personal_local_photos: "{{ vault_personal_local_photos }}"
 personal_public_files: "{{ vault_personal_public_files }}"
 
+production_commands: "{{ vault_production_commands }}"
+
 ssh_entries: "{{ vault_ssh_entries }}"
 
 syncthing_port: "{{ vault_syncthing_port }}"
