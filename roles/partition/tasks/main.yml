@@ -77,6 +77,8 @@
 
 - name: "Check if pacstrap has already been run"
   command: "arch-chroot /mnt"
+  failed_when: no
+  changed_when: no
   register: arch_chroot_mount
 
 - name: "install"
