@@ -75,13 +75,13 @@
     - { partition: "/dev/MyVol/home", path: "/mnt/home", fstype: "ext4" }
     - { partition: "/dev/sda1",       path: "/mnt/boot", fstype: "vfat" }
 
-# Check if some directory exists
-# - name: "Check if we are inside Arch live CD"
-#   stat:
-#     path: "/usr/bin/arch-chroot"
-#   register: arch_chroot
+- name: "Check if pacstrap has already been run"
+  command: "arch-chroot /mnt"
+  register: arch_chroot_mount
+
 - name: "install"
   command: "pacstrap /mnt base base-devel ansible git make vim"
+  when: arch_chroot_mount is defined and arch_chroot_mount.stderr.find("ERROR") == -1
 
 - name: "Download ansible-laptop repository"
   git:
