@@ -1,29 +1,38 @@
 ---
 - name: "Install grub and efibootmgr"
   pacman:
-    name:
-      - "grub"
-      - "efibootmgr"
-      - "intel-ucode"
+    name: "intel-ucode"
     state: "present"
 
-- name: "Set cryptdevice"
-  lineinfile:
-    path: "/etc/default/grub"
-    regexp: '^GRUB_CMDLINE_LINUX='
-    line: 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptolvm"'
-  notify: "Create grub configuration"
+- name: "install systemd-boot"
+  command: "bootctl --path=/boot install"
 
+- name: "Copy entry for arch"
+  block:
+    - file: path="/boot/loader/entries" state="directory"
+    - command: "blkid -s UUID -o value /dev/sda2"
+      changed_when: no
+      register: crypto_uuid
+    - template: src="arch.conf.j2" dest="/boot/loader/entries/arch.conf"
+      vars:
+        uuid: "{{ crypto_uuid.stdout }}"
 
-- name: "Check if grub is installed"
-  stat:
-    path: "/boot/grub"
-  register: grub
-
-- name: "Run grub installation"
-  command: "grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB"
-  when: grub is defined and grub.stat.isdir is defined and not grub.stat.isdir
-  notify: "Create grub configuration"
+#- name: "Set cryptdevice"
+#  lineinfile:
+#    path: "/etc/default/grub"
+#    regexp: '^GRUB_CMDLINE_LINUX='
+#    line: 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptolvm"'
+#  notify: "Create grub configuration"
+#
+#- name: "Check if grub is installed"
+#  stat:
+#    path: "/boot/grub"
+#  register: grub
+#
+#- name: "Run grub installation"
+#  command: "grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB"
+#  when: grub is defined and grub.stat.isdir is defined and not grub.stat.isdir
+#  notify: "Create grub configuration"
 
 - name: "Set HOOKS for mkinitcpio"
   lineinfile:
