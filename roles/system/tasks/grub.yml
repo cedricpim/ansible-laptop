@@ -7,16 +7,6 @@
       - "intel-ucode"
     state: "present"
 
-- name: "Copy entry for arch"
-  block:
-    - file: path="/boot/loader/entries" state="directory"
-    - command: "lsblk -n -o UUID /dev/sda2"
-      changed_when: no
-      register: crypto_uuid
-    - template: src="arch.conf.j2" dest="/boot/loader/entries/arch.conf"
-      vars:
-        uuid: "{{ crypto_uuid.stdout_lines | first }}"
-
 - name: "Set cryptdevice"
   lineinfile:
     path: "/etc/default/grub"
