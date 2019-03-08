@@ -23,7 +23,7 @@
 
 - name: "Create backup"
   block:
-    - lineinfile: dest="{{ tempdir.path }}/keyfile" line="{{ backup_password }}" state="present" create=yes
+    - copy: content="{{ backup_password }}" dest="{{ tempdir.path }}/keyfile"
       no_log: yes
     - command: "cryptsetup luksFormat --type luks2 --key-file {{ tempdir.path }}/keyfile {{ tempdir.path }}/{{ backup_name }}.img"
     - command: "cryptsetup luksOpen --key-file {{ tempdir.path }}/keyfile {{ tempdir.path }}/{{ backup_name }}.img {{ backup_name }}"

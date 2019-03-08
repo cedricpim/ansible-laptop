@@ -20,14 +20,14 @@
 
 - name: "LIST disks"
   command: "lsblk -f"
-  register: encrypted
   changed_when: no
+  register: encrypted
 
 - name: "Encrypt"
   block:
     - tempfile: suffix="crypt" state="directory"
       register: tempdir_encrypt
-    - lineinfile: dest="{{ tempdir_encrypt.path }}/keyfile" line="xxx" state="present" create=yes
+    - copy: content="xxx" dest="{{ tempdir_encrypt.path }}/keyfile"
       no_log: yes
     - command: "cryptsetup luksFormat --type luks2 --key-file {{ tempdir_encrypt.path }}/keyfile /dev/sda2"
       when: encrypted is defined and encrypted.stdout.find("crypto_LUKS") == -1
@@ -83,7 +83,7 @@
 
 - name: "install"
   command: "pacstrap /mnt base base-devel ansible git make vim"
-  when: arch_chroot_mount is defined and arch_chroot_mount.stderr.find("ERROR") == 0
+  when: arch_chroot_mount is defined and arch_chroot_mount.stderr.find("ERROR") >= 0
 
 - name: "Download ansible-laptop repository"
   git:
@@ -94,8 +94,8 @@
 
 - name: "Generate fstab"
   command: "genfstab -U /mnt"
-  register:  genfstab
   changed_when: no
+  register: genfstab
 
 - name: "Save fstab"
   blockinfile:
