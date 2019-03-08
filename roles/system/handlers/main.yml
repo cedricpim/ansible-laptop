@@ -12,8 +12,5 @@
     name: "systemd-journald"
     state: "restarted"
 
-- name: "Create grub configuration"
-  command: "grub-mkconfig -o {{ grub_configuration }}"
-
 - name: "Create mkinitcpio configuration"
   command: "mkinitcpio -p linux"

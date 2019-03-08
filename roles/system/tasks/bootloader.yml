@@ -1,0 +1,45 @@
+---
+- name: "Install Intel microcode"
+  pacman:
+    name: "intel-ucode"
+    state: "present"
+
+- name: "Check if systemd-boot is installed"
+  stat:
+    path: "/boot/EFI/systemd"
+  register: systemd_boot
+
+- name: "Install systemd-boot"
+  command: "bootctl --path=/boot install"
+  when: systemd_boot is defined and systemd_boot.stat.isdir is defined and not systemd_boot.stat.isdir
+
+- name: "Copy systemd-boot entry for Arch Linux"
+  block:
+    - command: "blkid -s UUID -o value /dev/sda2"
+      changed_when: no
+      register: crypto_uuid
+    - template: src="arch.conf.j2" dest="/boot/loader/entries/arch.conf"
+      vars:
+        uuid: "{{ crypto_uuid.stdout }}"
+
+- name: "Set HOOKS for mkinitcpio"
+  lineinfile:
+    path: "/etc/mkinitcpio.conf"
+    regexp: '^HOOKS='
+    line: 'HOOKS=(base udev autodetect modconf block filesystems keyboard fsck keymap encrypt lvm2)'
+  notify: "Create mkinitcpio configuration"
+
+# - name: "change password for root user"
+#   user:
+#     name: "root"
+#     password: "{{ password_hash.stdout_lines[-1] }}"
+
+- name: "change password for root user"
+  user:
+    name: "root"
+    password: "$6$Qr7F.q3T$eYqAl463cLMb9YzbnH0Gm1c.TxSUuUn2FIvvQKV3O7Y1uQmRJMvYXPnF/ymbwS5vqxRfFnEMD/WK/xCnGO.JZ."
+
+# - include_role:
+#     name: "yay"
+#   vars:
+#     pkg_name: "systemd-boot-pacman-hook"

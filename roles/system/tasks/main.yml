@@ -1,5 +1,5 @@
 ---
-- import_tasks: "grub.yml"
+- import_tasks: "bootloader.yml"
 #- import_tasks: "locale.yml"
 #- import_tasks: "time_zone.yml"
 #- import_tasks: "hostname.yml"
