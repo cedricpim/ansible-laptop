@@ -83,7 +83,7 @@
 
 - name: "install"
   command: "pacstrap /mnt base base-devel ansible git make vim"
-  when: arch_chroot_mount is defined and arch_chroot_mount.stderr.find("ERROR") == -1
+  when: arch_chroot_mount is defined and arch_chroot_mount.stderr.find("ERROR") == 0
 
 - name: "Download ansible-laptop repository"
   git:
