@@ -2,7 +2,7 @@
 - hosts: local
 
   pre_tasks:
-    - name: "Check if we are inside Arch live CD"
+    - name: "Check if we are inside Arch Linux live CD"
       stat:
         path: "/usr/bin/arch-chroot"
       register: arch_chroot
