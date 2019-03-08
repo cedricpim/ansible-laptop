@@ -50,7 +50,7 @@
 - name: "Install/update plugins defined on neovim configuration"
   command: "nvim +'PlugUpdate --sync' +qa"
   register: neovim_plugin_install_result
-  changed_when: neovim_plugin_install_result.stdout.find(neovim_plugin_installation_message) != -1
+  changed_when: neovim_plugin_install_result.stdout.find(neovim_plugin_installation_message) >= 0
 
 - name: "Create folder for neovim notes"
   file:
