@@ -7,20 +7,6 @@
       - "intel-ucode"
     state: "present"
 
-- name: "Set cryptdevice"
-  lineinfile:
-    path: "/etc/default/grub"
-    regexp: '^GRUB_CMDLINE_LINUX='
-    line: 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptolvm"'
-  notify: "Create grub configuration"
-
-- name: "Set HOOKS for mkinitcpio"
-  lineinfile:
-    path: "/etc/mkinitcpio.conf"
-    regexp: '^HOOKS='
-    line: 'HOOKS=(base udev autodetect modconf block filesystems keyboard fsck keymap encrypt lvm2)'
-  notify: "Create mkinitcpio configuration"
-
 - name: "Copy entry for arch"
   block:
     - file: path="/boot/loader/entries" state="directory"
@@ -31,11 +17,23 @@
       vars:
         uuid: "{{ crypto_uuid.stdout_lines | first }}"
 
-- name: "Create grub configuration"
-  command: "grub-mkconfig -o {{ grub_configuration }}"
+- name: "Set cryptdevice"
+  lineinfile:
+    path: "/etc/default/grub"
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: 'GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda2:cryptolvm"'
+  notify: "Create grub configuration"
 
 - name: "Run grub installation"
   command: "grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB"
+  notify: "Create grub configuration"
+
+- name: "Set HOOKS for mkinitcpio"
+  lineinfile:
+    path: "/etc/mkinitcpio.conf"
+    regexp: '^HOOKS='
+    line: 'HOOKS=(base udev autodetect modconf block filesystems keyboard fsck keymap encrypt lvm2)'
+  notify: "Create mkinitcpio configuration"
 
 # - name: "Hide grub"
 #   lineinfile:
