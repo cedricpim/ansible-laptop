@@ -37,17 +37,17 @@
 - name: "Create the logical volumes"
   lvol:
     vg: "{{ partition_volume_group }}"
-    lv: "{{ item.name }}"
+    lv: "{{ item.partition | split('/') | last }}"
     size: "{{ item.size }}"
     shrink: no
-  with_items: "{{ partition_logical_volumes }}"
+  with_items: "{{ partition_volumes }}"
 
 - name: "Format partitions"
   filesystem:
     fstype: "{{ item.fstype }}"
     dev: "{{ item.partition }}"
     opts: "{{ item.opts }}"
-  with_items: "{{ partition_volumes }}"
+  with_items: "{{ partition_volumes + partition_boot }}"
 
 - name: "Mount partitions"
   mount:
@@ -55,7 +55,7 @@
     path: "{{ item.path }}"
     fstype: "{{ item.fstype }}"
     state: "mounted"
-  with_items: "{{ partition_volumes }}"
+  with_items: "{{ partition_volumes + partition_boot }}"
 
 - name: "Check if Arch Linux is already installed"
   command: "arch-chroot {{ partition_main_mount_point }}"
