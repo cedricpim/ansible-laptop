@@ -15,6 +15,7 @@
 
   roles:
     - { role: "pacman", tags: "pacman" }
+    - { role: "system", tags: "system" }
     - { role: "network", tags: "network" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
