@@ -1,0 +1,5 @@
+---
+backup_size: "{{ vault_backup_size }}"
+backup_password: "{{ vault_backup_password }}"
+backup_dirs: "{{ vault_backup_dirs }}"
+backup_exclude_options: "{{ vault_backup_exclude_options }}"

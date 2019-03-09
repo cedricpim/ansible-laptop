@@ -2,8 +2,8 @@
 - hosts: local
 
   vars_files:
-    - "../vaulted_vars/system.yml"
-    - "../vars/system.yml"
+    - "../vaulted_vars/backup.yml"
+    - "../vars/backup.yml"
 
   roles:
     - { role: "backup", tags: "backup" }

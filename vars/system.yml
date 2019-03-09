@@ -20,8 +20,3 @@ network_passphrase: "{{ vault_network_passphrase }}"
 network_wireguard_service: "{{ vault_network_wireguard_service }}"
 
 github_access_token: "{{ vault_github_access_token }}"
-
-backup_size: "{{ vault_backup_size }}"
-backup_password: "{{ vault_backup_password }}"
-backup_dirs: "{{ vault_backup_dirs }}"
-backup_exclude_options: "{{ vault_backup_exclude_options }}"
