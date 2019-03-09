@@ -23,7 +23,6 @@
     name: "yay"
     state: "present"
   become: yes
-  notify: "Delete yay user"
   when:
     - pkg_name is defined
     - (aur_yay_check is defined and aur_yay_check.rc != 0) or (aur_package_check is defined and aur_package_check.rc != 0)
