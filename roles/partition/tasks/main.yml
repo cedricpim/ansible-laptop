@@ -47,7 +47,7 @@
     fstype: "{{ item.fstype }}"
     dev: "{{ item.partition }}"
     opts: "{{ item.opts }}"
-  with_items: "{{ partition_format_volumes }}"
+  with_items: "{{ partition_volumes }}"
 
 - name: "Mount partitions"
   mount:
@@ -55,7 +55,7 @@
     path: "{{ item.path }}"
     fstype: "{{ item.fstype }}"
     state: "mounted"
-  with_items: "{{ partition_mount_volumes }}"
+  with_items: "{{ partition_volumes }}"
 
 - name: "Check if Arch Linux is already installed"
   command: "arch-chroot {{ partition_main_mount_point }}"

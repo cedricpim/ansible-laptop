@@ -32,4 +32,5 @@
     path: "/etc/mkinitcpio.conf"
     regexp: '^HOOKS='
     line: 'HOOKS=(base udev autodetect modconf block filesystems keyboard fsck keymap encrypt lvm2)'
+    state: "present"
   notify: "Create mkinitcpio configuration"
