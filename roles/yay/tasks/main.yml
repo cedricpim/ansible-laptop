@@ -29,6 +29,7 @@
 
 - name: "Install Yay"
   block:
+    - file: path="~yay/.ansible/tmp" owner="yay" group="yay" state="directory"
     - tempfile: suffix="yay" state="directory"
       register: yay_tempdir
       become_user: "yay"
