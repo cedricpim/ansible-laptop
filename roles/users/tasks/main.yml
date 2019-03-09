@@ -18,6 +18,14 @@
   no_log: yes
   become: yes
 
+- name: "Install git and openssh"
+  pacman:
+    name:
+      - "git"
+      - "openssh"
+    state: "present"
+  become: yes
+
 - name: "Generate SSH keys"
   user:
     name: "{{ item.owner }}"
@@ -30,12 +38,6 @@
   no_log: yes
   become: yes
   register: ssh_keys_created
-
-- name: "Install git"
-  pacman:
-    name: "git"
-    state: "present"
-  become: yes
 
 - name: "Setup Github with SSH key"
   block:
