@@ -22,9 +22,12 @@
 
 - name: "Copy LightDM configuration"
   template:
-    src: "lightdm/lightdm.conf.j2"
-    dest: "{{ lightdm_directory }}/lightdm.conf"
+    src: "lightdm/{{ item }}.j2"
+    dest: "{{ lightdm_directory }}/{{ item }}"
     mode: "0644"
+  with_items:
+    - "lightdm.conf"
+    - "users.conf"
   become: yes
 
 - include_role:
