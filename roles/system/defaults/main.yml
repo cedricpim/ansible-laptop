@@ -1,4 +1,6 @@
 ---
+systemd_directory: "/etc/systemd/system"
+
 locales:
   - "en_GB.UTF-8"
   - "en_US.UTF-8"

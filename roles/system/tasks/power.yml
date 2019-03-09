@@ -42,18 +42,11 @@
     - "systemd-rfkill"
     - "systemd-rfkill.socket"
 
-- name: "Add instructions related to powertop"
-  lineinfile:
-    path: "~{{ users[0].name }}/todo"
-    regexp: "{{ item }}"
-    line: "{{ item }}"
-    state: "present"
-    create: yes
-    owner: "{{ users[0].name }}"
-    group: "{{ users[0].name }}"
-  with_items:
-    - "sudo powertop --calibrate"
-    - "sudo powertop --auto-tune"
+- name: "Copy powertop service configuration"
+  template:
+    src: "powertop.service.j2"
+    dest: "{{ systemd_directory }}/powertop.service"
+    mode: "0644"
 
 - name: "Enable system services"
   systemd:
@@ -63,3 +56,4 @@
   with_items:
     - "watchdog"
     - "fstrim.timer"
+    - "powertop"
