@@ -4,6 +4,11 @@
     name: "intel-ucode"
     state: "present"
 
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "systemd-boot-pacman-hook"
+
 - name: "Check if systemd-boot is installed"
   stat:
     path: "/boot/EFI/systemd"
@@ -29,17 +34,7 @@
     line: 'HOOKS=(base udev autodetect modconf block filesystems keyboard fsck keymap encrypt lvm2)'
   notify: "Create mkinitcpio configuration"
 
-# - name: "change password for root user"
-#   user:
-#     name: "root"
-#     password: "{{ password_hash.stdout_lines[-1] }}"
-
-- name: "change password for root user"
+- name: "Change password for root user"
   user:
     name: "root"
     password: "$6$Qr7F.q3T$eYqAl463cLMb9YzbnH0Gm1c.TxSUuUn2FIvvQKV3O7Y1uQmRJMvYXPnF/ymbwS5vqxRfFnEMD/WK/xCnGO.JZ."
-
-# - include_role:
-#     name: "yay"
-#   vars:
-#     pkg_name: "systemd-boot-pacman-hook"
