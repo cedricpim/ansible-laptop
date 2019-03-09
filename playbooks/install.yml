@@ -14,3 +14,4 @@
   roles:
     - { role: "partition", tags: "partition", when: arch_chroot is defined and arch_chroot.stat.islnk is defined }
     - { role: "system", tags: "system", when: arch_chroot is defined and arch_chroot.stat.islnk is not defined }
+    - { role: "network", tags: "network", when: arch_chroot is defined and arch_chroot.stat.islnk is not defined }
