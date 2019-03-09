@@ -11,12 +11,11 @@ $(if ${VERBOSE}, $(eval ANSIBLE_OPTS += -${VERBOSE}))
 $(if ${TAGS},    $(eval ANSIBLE_OPTS += --tags ${TAGS}))
 
 install:
-	ansible-playbook playbooks/install.yml --diff ${ANSIBLE_OPTS}
+	ansible-playbook playbooks/install.yml --diff --ask-vault-pass ${ANSIBLE_OPTS}
 
 arch:
-	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/system.txt)
 	$(if ${NETWORK}, $(eval ANSIBLE_OPTS += --extra-vars "network=true"))
-	ansible-playbook playbooks/archlinux.yml --diff --ask-become-pass ${ANSIBLE_OPTS}
+	ansible-playbook playbooks/archlinux.yml --diff --ask-become-pass --ask-vault-pass ${ANSIBLE_OPTS}
 
 backup:
 	$(eval ANSIBLE_OPTS += --vault-password-file vaulted_vars/system.txt)
