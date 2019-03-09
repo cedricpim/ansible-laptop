@@ -1,22 +1,15 @@
 ---
-- name: "Create boot partition"
+- name: "Create partitions"
   parted:
-    name: "EFI System"
-    device: "/dev/sda"
-    number: "1"
-    flags: [ "boot", "esp" ]
-    label: "gpt"
+    name: "{{ item.name }}"
+    device: "{{ partition_device }}"
+    number: "{{ item.number }}"
+    flags: {{ item.flags }}
+    label: "{{ item.label }}"
     state: "present"
-    part_end: "551MiB"
-
-- name: "Create OS partition"
-  parted:
-    name: "Operative System"
-    device: "/dev/sda"
-    number: "2"
-    label: "gpt"
-    state: "present"
-    part_start: "551MiB"
+    part_start: "{{ item.part_start }}"
+    part_end: "{{ item.part_end }}"
+  with_items: "{{ partition_partitions }}"
 
 - name: "Display current partitions"
   command: "lsblk -f"
@@ -27,39 +20,34 @@
   block:
     - tempfile: suffix="crypt" state="directory"
       register: tempdir_encrypt
-    - copy: content="xxx" dest="{{ tempdir_encrypt.path }}/keyfile"
+    - copy: content="{{ partition_password }}" dest="{{ tempdir_encrypt.path }}/keyfile"
       no_log: yes
-    - command: "cryptsetup luksFormat --type luks2 --key-file {{ tempdir_encrypt.path }}/keyfile /dev/sda2"
+    - command: "cryptsetup luksFormat --type luks2 --key-file {{ tempdir_encrypt.path }}/keyfile {{ partition_os }}"
       when: encrypted is defined and encrypted.stdout.find("crypto_LUKS") == -1
-    - command: "cryptsetup open --key-file {{ tempdir_encrypt.path }}/keyfile /dev/sda2 cryptolvm"
+    - command: "cryptsetup open --key-file {{ tempdir_encrypt.path }}/keyfile {{ partition_os }} {{ partition_physical_group }}"
   always:
     - file: path="{{ tempdir_encrypt.path }}" state="absent"
   when: encrypted is defined and encrypted.stdout.find("cryptolvm") == -1
 
 - name: "Create the volume group (and physical volume) inside the LUKS partition"
   lvg:
-    vg: "MyVol"
-    pvs: "/dev/mapper/cryptolvm"
+    vg: "{{ partition_volume_group }}"
+    pvs: "/dev/mapper/{{ partition_physical_group }}"
 
 - name: "Create the logical volumes"
   lvol:
-    vg: "MyVol"
+    vg: "{{ partition_volume_group }}"
     lv: "{{ item.name }}"
     size: "{{ item.size }}"
     shrink: no
-  with_items:
-    - { name: "root", size: "8g" }
-    - { name: "home", size: "100%FREE" }
+  with_items: "{{ partition_logical_volumes }}"
 
 - name: "Format partitions"
   filesystem:
     fstype: "{{ item.fstype }}"
     dev: "{{ item.partition }}"
     opts: "{{ item.opts }}"
-  with_items:
-    - { fstype: "ext4", partition: "/dev/MyVol/root", opts: "" }
-    - { fstype: "ext4", partition: "/dev/MyVol/home", opts: "" }
-    - { fstype: "vfat", partition: "/dev/sda1", opts: "-F32"   }
+  with_items: "{{ partition_format_volumes }}"
 
 - name: "Mount partitions"
   mount:
@@ -67,19 +55,16 @@
     path: "{{ item.path }}"
     fstype: "{{ item.fstype }}"
     state: "mounted"
-  with_items:
-    - { partition: "/dev/MyVol/root", path: "/mnt",      fstype: "ext4" }
-    - { partition: "/dev/MyVol/home", path: "/mnt/home", fstype: "ext4" }
-    - { partition: "/dev/sda1",       path: "/mnt/boot", fstype: "vfat" }
+  with_items: "{{ partition_mount_volumes }}"
 
 - name: "Check if Arch Linux is already installed"
-  command: "arch-chroot /mnt"
+  command: "arch-chroot {{ partition_main_mount_point }}"
   failed_when: no
   changed_when: no
   register: arch_chroot_mount
 
 - name: "Install Arch Linux"
-  command: "pacstrap /mnt base base-devel ansible git make vim"
+  command: "pacstrap {{ partition_main_mount_point }} base base-devel ansible git make vim"
   when: arch_chroot_mount is defined and arch_chroot_mount.stderr.find("ERROR") >= 0
 
 - name: "Download ansible-laptop repository"
@@ -90,13 +75,13 @@
     update: yes
 
 - name: "Generate fstab"
-  command: "genfstab -U /mnt"
+  command: "genfstab -U {{ partition_main_mount_point }}"
   changed_when: no
   register: genfstab
 
 - name: "Save fstab"
   blockinfile:
-    dest: "/mnt/etc/fstab"
+    dest: "{{ partition_main_mount_point }}/etc/fstab"
     block: "{{ genfstab.stdout }}"
     state: "present"
     create: yes

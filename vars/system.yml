@@ -1,9 +1,16 @@
 ---
 main: "{{ vault_main }}"
 
+partition_password: "{{ vault_partition_password }}"
+partition_device: "{{ vault_partition_device }}"
+partition_partitions: "{{ vault_partition_partitions }}"
+partition_main_mount_point: "{{ vault_partition_main_mount_point }}"
 partition_os: "{{ vault_partition_os }}"
 partition_physical_group: "{{ vault_partition_physical_group }}"
 partition_volume_group: "{{ vault_partition_volume_group }}"
+partition_logical_volumes: "{{ vault_partition_logical_volumes }}"
+partition_format_volumes: "{{ vault_partition_format_volumes }}"
+partition_mount_volumes: "{{ vault_partition_mount_volumes }}"
 
 root_password: "{{ vault_root_password }}"
 

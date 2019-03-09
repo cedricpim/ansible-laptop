@@ -22,6 +22,7 @@
   user:
     name: "yay"
     state: "present"
+    shell: "/usr/bin/nologin"
   become: yes
   when:
     - pkg_name is defined
