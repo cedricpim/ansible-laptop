@@ -1,5 +1,8 @@
 ---
 main: "{{ vault_main }}"
+
+root_password: "{{ vault_root_password }}"
+
 users: "{{ vault_users }}"
 
 ssh_keys: "{{ vault_ssh_keys }}"

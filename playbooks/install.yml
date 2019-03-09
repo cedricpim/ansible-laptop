@@ -1,6 +1,10 @@
 ---
 - hosts: local
 
+  vars_files:
+    - "../vaulted_vars/system.yml"
+    - "../vars/system.yml"
+
   pre_tasks:
     - name: "Check if we are inside Arch Linux live CD"
       stat:

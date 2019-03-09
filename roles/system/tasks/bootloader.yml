@@ -33,8 +33,3 @@
     regexp: '^HOOKS='
     line: 'HOOKS=(base udev autodetect modconf block filesystems keyboard fsck keymap encrypt lvm2)'
   notify: "Create mkinitcpio configuration"
-
-- name: "Change password for root user"
-  user:
-    name: "root"
-    password: "$6$Qr7F.q3T$eYqAl463cLMb9YzbnH0Gm1c.TxSUuUn2FIvvQKV3O7Y1uQmRJMvYXPnF/ymbwS5vqxRfFnEMD/WK/xCnGO.JZ."
