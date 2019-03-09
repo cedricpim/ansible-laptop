@@ -4,7 +4,7 @@
     name: "{{ item.name }}"
     device: "{{ partition_device }}"
     number: "{{ item.number }}"
-    flags: {{ item.flags }}
+    flags: "{{ item.flags }}"
     label: "{{ item.label }}"
     state: "present"
     part_start: "{{ item.part_start }}"
