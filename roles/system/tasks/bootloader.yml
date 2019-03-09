@@ -11,16 +11,16 @@
 
 - name: "Check if systemd-boot is installed"
   stat:
-    path: "/boot/EFI/systemd"
+    path: "{{ esp_mount }}/EFI/systemd"
   register: systemd_boot
 
 - name: "Install systemd-boot"
-  command: "bootctl --path=/boot install"
+  command: "bootctl --path={{ esp_mount }} install"
   when: systemd_boot is defined and systemd_boot.stat.islnk is not defined
 
 - name: "Copy systemd-boot entry for Arch Linux"
   block:
-    - command: "blkid -s UUID -o value /dev/sda2"
+    - command: "blkid -s UUID -o value {{ partition_os }}"
       changed_when: no
       register: crypto_uuid
     - template: src="arch.conf.j2" dest="/boot/loader/entries/arch.conf"

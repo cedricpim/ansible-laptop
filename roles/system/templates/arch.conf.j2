@@ -1,7 +1,7 @@
 {{ ansible_managed | comment }}
 
 title   Arch Linux
-linux 	/vmlinuz-linux
+linux   /vmlinuz-linux
 initrd  /intel-ucode.img
 initrd  /initramfs-linux.img
-options cryptdevice=UUID={{ uuid }}:cryptolvm root=/dev/mapper/MyVol-root quiet rw
+options cryptdevice=UUID={{ uuid }}:{{ partition_physical_group }} root=/dev/mapper/{{ partition_volume_group }}-root quiet rw

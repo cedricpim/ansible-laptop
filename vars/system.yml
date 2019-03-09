@@ -1,6 +1,10 @@
 ---
 main: "{{ vault_main }}"
 
+partition_os: "{{ vault_partition_os }}"
+partition_physical_group: "{{ vault_partition_physical_group }}"
+partition_volume_group: "{{ vault_partition_volume_group }}"
+
 root_password: "{{ vault_root_password }}"
 
 users: "{{ vault_users }}"
