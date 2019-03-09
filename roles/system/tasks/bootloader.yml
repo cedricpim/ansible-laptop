@@ -16,7 +16,7 @@
 
 - name: "Install systemd-boot"
   command: "bootctl --path=/boot install"
-  when: systemd_boot is defined and systemd_boot.stat.isdir is defined and not systemd_boot.stat.isdir
+  when: systemd_boot is defined and systemd_boot.stat.islnk is not defined
 
 - name: "Copy systemd-boot entry for Arch Linux"
   block:
