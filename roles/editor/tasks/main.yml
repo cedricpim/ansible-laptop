@@ -4,7 +4,6 @@
     name:
       - "vim"
       - "neovim"
-      - "python2-neovim"
       - "python-neovim"
       - "xsel"
     state: "present"
@@ -12,8 +11,11 @@
 
 - include_role:
     name: "yay"
-  vars:
-    pkg_name: "neovim-remote"
+  with_items:
+    - "python2-neovim-git"
+    - "neovim-remote"
+  loop_control:
+    loop_var: "pkg_name"
 
 - name: "Create folder for neovim configuration"
   file:
