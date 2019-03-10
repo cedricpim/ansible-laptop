@@ -37,25 +37,32 @@
 - name: "Create the logical volumes"
   lvol:
     vg: "{{ partition_volume_group }}"
-    lv: "{{ item.partition | split('/') | last }}"
+    lv: "{{ item.partition.split('/') | last }}"
     size: "{{ item.size }}"
     shrink: no
   with_items: "{{ partition_volumes }}"
 
-- name: "Format partitions"
+- name: "Format logical partitions"
   filesystem:
     fstype: "{{ item.fstype }}"
     dev: "{{ item.partition }}"
     opts: "{{ item.opts | default('') }}"
-  with_items: "{{ partition_volumes + partition_boot }}"
+  with_items: "{{ partition_volumes }}"
 
-- name: "Mount partitions"
+- name: "Mount logical partitions"
   mount:
     src: "{{ item.partition }}"
     path: "{{ item.path }}"
     fstype: "{{ item.fstype }}"
     state: "mounted"
-  with_items: "{{ partition_volumes + partition_boot }}"
+  with_items: "{{ partition_volumes }}"
+
+- name: "Format boot partition"
+  command: "mkfs.{{ boot_partition.fstype }} {{ boot_partition.opts }} {{ boot_partition.partition }}"
+
+- name: "Mount boot partition"
+  command: "mount {{ boot_partition.partition }} {{ boot_partition.path }}"
+  warn: no # We require mount since we want the format to be FAT32
 
 - name: "Check if Arch Linux is already installed"
   command: "arch-chroot {{ partition_main_mount_point }}"
