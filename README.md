@@ -2,7 +2,7 @@
 
 ### Internet setup
 
-If you are using `wpa_supplicant`, then you can get internet connection by
+If using `wpa_supplicant`, then you can get internet connection by
 running the following:
 
 ```
@@ -11,7 +11,7 @@ $ wpa_supplicant -B -i NETWORK_INTERFACE -c <(wpa_passphrase NETWORK_NAME NETWOR
 $ dhcpcd NETWORK_INTERFACE
 ```
 
-If you are using `connmanctl`, then you should do the following (make sure
+If using `connmanctl`, then you should do the following (make sure
 wpa_supplicant is not running):
 
 ```
