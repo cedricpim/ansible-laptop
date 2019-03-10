@@ -58,15 +58,3 @@
     state: "started"
     enabled: yes
   become: yes
-
-- name: "Connect to WI-FI"
-  block:
-    - command: "ip link set {{ network_interface }} up"
-    - command: "wpa_supplicant -B -i {{ network_interface }} -C <(wpa_passphrase {{ network_name }} {{ network_passphrase }})"
-    - command: "dhcpcd {{ network_interface }}"
-  become: yes
-  when:
-    - network is defined
-    - network_interface is defined
-    - network_name is defined
-    - network_passphrase is defined

@@ -20,9 +20,6 @@ ssh_keys: "{{ vault_ssh_keys }}"
 system_time_zone: "{{ vault_system_time_zone }}"
 system_hostname: "{{ vault_system_hostname }}"
 
-network_interface: "{{ vault_network_interface }}"
-network_name: "{{ vault_network_name }}"
-network_passphrase: "{{ vault_network_passphrase }}"
 network_wireguard_service: "{{ vault_network_wireguard_service }}"
 
 github_access_token: "{{ vault_github_access_token }}"

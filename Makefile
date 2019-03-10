@@ -3,7 +3,6 @@ CHECK ?=
 VERBOSE ?=
 TAGS ?=
 ANSIBLE_OPTS ?=
-NETWORK ?=
 VAULT ?= ${USER}
 
 $(if ${CHECK},   $(eval ANSIBLE_OPTS += --check))
@@ -11,11 +10,9 @@ $(if ${VERBOSE}, $(eval ANSIBLE_OPTS += -${VERBOSE}))
 $(if ${TAGS},    $(eval ANSIBLE_OPTS += --tags ${TAGS}))
 
 install:
-	$(if ${NETWORK}, $(eval ANSIBLE_OPTS += --extra-vars "network=true"))
 	ansible-playbook playbooks/install.yml --diff --ask-vault-pass ${ANSIBLE_OPTS}
 
 arch:
-	$(if ${NETWORK}, $(eval ANSIBLE_OPTS += --extra-vars "network=true"))
 	ansible-playbook playbooks/archlinux.yml --diff --ask-become-pass --ask-vault-pass ${ANSIBLE_OPTS}
 
 backup:
