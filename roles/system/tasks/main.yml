@@ -4,6 +4,11 @@
     name: "root"
     password: "{{ root_password }}"
 
+- name: "Install firmware updater"
+  pacman:
+    name: "fwupd"
+    state: "present"
+
 - import_tasks: "hostname.yml"
 - import_tasks: "locale.yml"
 - import_tasks: "time_zone.yml"
