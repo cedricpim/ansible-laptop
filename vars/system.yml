@@ -8,8 +8,8 @@ partition_main_mount_point: "{{ vault_partition_main_mount_point }}"
 partition_os: "{{ vault_partition_os }}"
 partition_physical_group: "{{ vault_partition_physical_group }}"
 partition_volume_group: "{{ vault_partition_volume_group }}"
-partition_logical_volumes: "{{ vault_partition_logical_volumes }}"
 partition_volumes: "{{ vault_partition_volumes }}"
+partition_boot: "{{ vault_partition_boot }}"
 
 root_password: "{{ vault_root_password }}"
 
