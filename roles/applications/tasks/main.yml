@@ -21,6 +21,7 @@
     name: "yay"
   with_items:
     - "slack-desktop"
+    - "popcorntime"
     - "postman-bin"
     - "peek"
     - "youtube-dl"
