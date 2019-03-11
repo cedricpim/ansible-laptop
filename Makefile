@@ -22,11 +22,11 @@ install:
 arch:
 	ansible-playbook playbooks/archlinux.yml --diff --ask-become-pass --ask-vault-pass ${ANSIBLE_OPTS}
 
-backup:
-	ansible-playbook playbooks/backup.yml --diff --ask-become-pass --vault-password-file vaulted_vars/backup.txt ${ANSIBLE_OPTS}
-
 dotfiles:
 	ansible-playbook playbooks/dotfiles.yml --diff --ask-become-pass ${ANSIBLE_OPTS} ${VAULT_OPTS}
+
+backup:
+	ansible-playbook playbooks/backup.yml --diff --ask-become-pass --ask-vault-pass ${ANSIBLE_OPTS}
 
 deploy-vagrant:
 	VAGRANT_VERBOSE=${VERBOSE} VAGRANT_TAGS=${TAGS} VAGRANT_PLAYBOOK=${VAGRANT_PLAYBOOK} vagrant provision
