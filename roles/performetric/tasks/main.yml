@@ -1,0 +1,39 @@
+---
+- name: "Install unzip"
+  pacman:
+    name: "unzip"
+  become: yes
+
+- name: "Create folder for Performetric"
+  file:
+    path: "{{ performetric_directory }}"
+    state: "directory"
+    owner: "root"
+    group: "root"
+    mode: "0755"
+  become: yes
+
+- name: "Check if Performetric is installed"
+  stat:
+    path: "/usr/bin/performetric"
+  register: performetric
+
+- name: "Download and install Performetric"
+  block:
+    - tempfile: suffix="performetric" state="directory"
+      register: tempdir
+    - get_url: url="{{ performetric_url }}" dest="{{ tempdir.path }}/performetric.zip" checksum="{{ performetric_checksum }}"
+    - unarchive: src="{{ tempdir.path }}/performetric.zip" dest="{{ performetric_directory }}" remote_src=yes
+  always:
+    - file: path="{{ tempdir.path }}" state="absent"
+  when: performetric is defined and performetric.stat.islnk is not defined
+  become: yes
+
+- name: "Add Performetric executable to /usr/bin"
+  file:
+    src: "{{ performetric_directory }}/performetric"
+    dest: "/usr/bin/performetric"
+    owner: "root"
+    group: "root"
+    state: "link"
+  become: yes

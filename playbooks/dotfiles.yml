@@ -18,7 +18,6 @@
 
   roles:
     - { role: "sound", tags: "sound" }
-    - { role: "desktop", tags: "desktop" }
     - { role: "zsh", tags: "zsh" }
     - { role: "agenda", tags: "agenda" }
     - { role: "editor", tags: "editor" }
@@ -28,3 +27,5 @@
     - { role: "shell", tags: "shell" }
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }
+    - { role: "performetric", tags: "performetric" }
+    - { role: "desktop", tags: "desktop" }

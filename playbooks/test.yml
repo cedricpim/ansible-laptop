@@ -25,7 +25,8 @@
     - { role: "shell", tags: "shell" }
     - { role: "torrents", tags: "torrents" }
     - { role: "sound", tags: "sound" }
-    - { role: "desktop", tags: "desktop" }
     - { role: "zsh", tags: "zsh" }
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }
+    - { role: "performetric", tags: "performetric" }
+    - { role: "desktop", tags: "desktop" }
