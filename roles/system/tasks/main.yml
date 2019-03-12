@@ -4,9 +4,11 @@
     name: "root"
     password: "{{ root_password }}"
 
-- name: "Install firmware updater"
+- name: "Install firmware updater and gparted"
   pacman:
-    name: "fwupd"
+    name:
+      - "fwupd"
+      - "gparted"
     state: "present"
 
 - import_tasks: "hostname.yml"
