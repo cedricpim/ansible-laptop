@@ -18,13 +18,6 @@
     line: 'RUNTIME_PM_BLACKLIST="{{ gpu_address }}"'
     state: "present"
 
-- name: "Disable BTRFS optimization"
-  lineinfile:
-    path: "/etc/default/tlp"
-    regexp: "SATA_LINKPWR_ON_BAT"
-    line: 'SATA_LINKPWR_ON_BAT="max_performance"'
-    state: "present"
-
 - name: "Start and enable TLP services"
   service:
     name: "{{ item }}"
