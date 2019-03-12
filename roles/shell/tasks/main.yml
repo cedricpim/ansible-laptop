@@ -17,6 +17,7 @@
       - "jq"
       - "ncdu"
       - "tmux"
+      - "unzip"
     state: "present"
   become: yes
 
