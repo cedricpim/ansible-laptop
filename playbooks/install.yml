@@ -10,6 +10,7 @@
       stat:
         path: "/usr/bin/arch-chroot"
       register: arch_chroot
+      tags: "always"
 
   roles:
     - { role: "partition", tags: "partition", when: arch_chroot is defined and arch_chroot.stat.islnk is defined }

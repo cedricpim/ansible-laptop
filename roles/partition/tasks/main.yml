@@ -60,9 +60,11 @@
 - name: "Format boot partition"
   command: "mkfs.{{ boot_partition.fstype }} {{ boot_partition.opts }} {{ boot_partition.partition }}"
 
+# We require mount since we want the format to be FAT32
 - name: "Mount boot partition"
   command: "mount {{ boot_partition.partition }} {{ boot_partition.path }}"
-  warn: no # We require mount since we want the format to be FAT32
+  args:
+    warn: no
 
 - name: "Check if Arch Linux is already installed"
   command: "arch-chroot {{ partition_main_mount_point }}"
