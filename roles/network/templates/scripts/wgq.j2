@@ -11,6 +11,6 @@ fi
 
 if [[ "$1" == "stop" ]]; then sed -i 's/#nameserver/nameserver/' /etc/resolv.conf; fi
 
-systemctl $1 wg-quick@{{ network_wireguard_service }}-$2
+systemctl $1 wg-quick@mullvad-$2
 
 if [[ "$1" == "start" ]]; then sed -i 's/nameserver 1\./#nameserver 1./' /etc/resolv.conf; fi

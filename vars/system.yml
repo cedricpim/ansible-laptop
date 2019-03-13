@@ -13,13 +13,13 @@ partition_boot: "{{ vault_partition_boot }}"
 
 root_password: "{{ vault_root_password }}"
 
+mullvad_account_number: "{{ vault_mullvad_account_number }}"
+
 users: "{{ vault_users }}"
 
 ssh_keys: "{{ vault_ssh_keys }}"
 
 system_time_zone: "{{ vault_system_time_zone }}"
 system_hostname: "{{ vault_system_hostname }}"
-
-network_wireguard_service: "{{ vault_network_wireguard_service }}"
 
 github_access_token: "{{ vault_github_access_token }}"

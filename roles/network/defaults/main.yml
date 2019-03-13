@@ -1,6 +1,10 @@
 ---
 systemd_directory: "/etc/systemd/system"
 
+mullvad_script_url: "https://mullvad.net/media/files/mullvad-wg.sh"
+mullvad_checksum: "sha256:d123bf7baeb6171e487ccdc5794d85ec1668d3f37e94ba7175ca1f62f655a03a"
+mullvad_account_number: "0000"
+
 name_servers:
   - "1.1.1.1"
   - "1.0.0.1"

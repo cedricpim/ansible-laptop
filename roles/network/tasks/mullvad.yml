@@ -1,0 +1,33 @@
+---
+- name: "Install wireguard"
+  pacman:
+    name:
+      - "wireguard-dkms"
+      - "wireguard-tools"
+      - "linux-headers"
+  become: yes
+
+- name: "Install dependencies for Mullvad script"
+  pacman:
+    name:
+      - "bash"
+      - "curl"
+      - "jq"
+  become: yes
+
+- name: "Install Mullvad"
+  block:
+    - tempfile: suffix="mullvad" state="directory"
+      register: tempdir
+    - get_url: url="{{ mullvad_script_url }}" dest="{{ tempdir.path }}/mullvad-wg.sh" checksum="{{ mullvad_checksum }}" mode="0700"
+    - shell: "echo {{ mullvad_account_number }} | sh {{ tempdir.path }}/mullvad-wg.sh"
+  always:
+    - file: path="{{ tempdir.path }}" state="absent"
+  become: yes
+
+- include_role:
+    name: "zsh"
+    tasks_from: "scripts"
+  vars:
+    script: "wgq"
+
