@@ -21,5 +21,6 @@ firefox_options:
   - { option: "network.prefetch-next", value: "false" }
   - { option: "webgl.disabled", value: "true" }
   - { option: "network.cookie.lifetimePolicy", value: "1" }
+  - { option: "privacy.resistFingerprinting", value: "true" }
 
 syncthing_port: "8384"
