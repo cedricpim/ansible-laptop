@@ -22,5 +22,6 @@ firefox_options:
   - { option: "webgl.disabled", value: "true" }
   - { option: "network.cookie.lifetimePolicy", value: "1" }
   - { option: "privacy.resistFingerprinting", value: "true" }
+  - { option: "layers.acceleration.force-enabled", value: "true" }
 
 syncthing_port: "8384"
