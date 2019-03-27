@@ -148,6 +148,8 @@ for_window [instance={{ application.name | to_json }}] move scratchpad
 bindsym $mod+{{ application.keybinding }} exec {{ i3_directory }}/scratchpad-launcher.sh {{ application.name | to_json}} {{ application.custom | default("") | to_json }}
 {% endfor %}
 
+for_window [title="Calculator"] floating enable
+
 {% if i3_extra is defined %}
 {{ i3_extra }}
 {% endif %}
