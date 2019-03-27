@@ -2,8 +2,9 @@
 - name: "Install Xorg related packages"
   pacman:
     name:
-      - "xorg-xinit"
       - "xorg-setxkbmap"
+      - "xorg-xinit"
+      - "xorg-xprop"
       - "xorg-xrandr"
     state: "present"
   become: yes
