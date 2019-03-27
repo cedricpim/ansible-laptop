@@ -5,10 +5,11 @@
       - "calibre"
       - "chromium"
       - "ffmpeg"
+      - "gnome-calculator"
       - "qpdfview"
       - "vlc"
       - "vagrant"
-      - "gnome-calculator"
+      - "xournalpp"
     state: "present"
   become: yes
 
