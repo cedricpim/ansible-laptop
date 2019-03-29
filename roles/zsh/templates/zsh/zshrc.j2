@@ -28,10 +28,6 @@ for file in `/usr/bin/find -L ~/.zsh -maxdepth 1 -type f`; do
   [ -r $file ] && [ -f $file ] && [ "$(basename -- $file)" != "last_dir" ] && source $file
 done
 
-# Set the list of directories that Zsh searches for programs.
-path=( $path )
-fpath=(~/.zsh.d/ $fpath)
-
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 

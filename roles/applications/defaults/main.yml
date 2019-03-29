@@ -1,7 +1,4 @@
 ---
-cht_autocomplete_directory: "~/.zsh.d"
-cht_autocomplete_dest: "{{ cht_autocomplete_directory }}/_cht"
-
 copyq_directory: "~/.config/copyq"
 keepassxc_directory: "~/.config/keepassxc"
 

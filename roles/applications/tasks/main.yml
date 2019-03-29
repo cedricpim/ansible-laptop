@@ -17,7 +17,6 @@
 - import_tasks: "syncthing.yml"
 - import_tasks: "copyq.yml"
 - import_tasks: "firefox.yml"
-- import_tasks: "cheat.yml"
 
 - include_role:
     name: "yay"
