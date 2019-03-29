@@ -8,6 +8,13 @@
 # Always use ASCII characters only.
 accounts = {{ offlineimap_email_accounts | map(attribute="name") | join(", ") }}
 
+# This specifies where Offlineimap is to store its metadata.
+# This directory will be created if it does not already exist.
+#
+# Tilde and environment variable expansions will be performed.
+#
+metadata = {{ offlineimap_directory }}/metadata
+
 # You can give a Python source filename here and all config file
 # python snippets will be evaluated in the context of that file.
 # This allows you to e.g. define helper functions in the Python
