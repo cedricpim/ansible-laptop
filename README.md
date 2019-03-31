@@ -23,3 +23,14 @@ connmanctl> agent on
 connmanctl> connect WIFI_ID (and put passphrase if requested)
 connmanctl> quit
 ```
+
+Or, if using iwd, do:
+
+```
+$ service start iwd
+$ iwctl
+[iwd]# device list
+[iwd]# station DEVICE scan
+[iwd]# station DEVICE get-networks
+[iwd]# station DEVICE connect SSID
+```

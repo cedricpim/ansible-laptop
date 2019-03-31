@@ -4,12 +4,12 @@
     name:
       - "iw"
       - "iwd"
-      - "wpa_supplicant"
       - "bluez"
       - "connman"
       - "cmst"
       - "ntp"
       - "openresolv"
+      - "openssl"
     state: "present"
   become: yes
 
