@@ -3,6 +3,7 @@
   pacman:
     name:
       - "iw"
+      - "iwd"
       - "bluez"
       - "connman"
       - "cmst"
