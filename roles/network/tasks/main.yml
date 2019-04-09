@@ -3,13 +3,12 @@
   pacman:
     name:
       - "iw"
-      - "iwd"
       - "bluez"
       - "connman"
       - "cmst"
       - "ntp"
       - "openresolv"
-      - "openssl"
+      - "wpa_supplicant"
     state: "present"
   become: yes
 
@@ -26,13 +25,6 @@
     path: "{{ systemd_directory }}/connman.service.d"
     state: "directory"
     mode: "0755"
-  become: yes
-
-- name: "Copy ConnMan overriding configuration for systemd"
-  template:
-    src: "connman/override.conf.j2"
-    dest: "{{ systemd_directory }}/connman.service.d/override.conf"
-    mode: "0644"
   become: yes
 
 - name: "Enable/start service for ConnMan"
