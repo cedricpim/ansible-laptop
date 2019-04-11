@@ -21,10 +21,11 @@
 - include_role:
     name: "yay"
   with_items:
-    - "slack-desktop"
     - "popcorntime"
     - "postman-bin"
     - "peek"
+    - "slack-desktop"
+    - "spotify"
     - "youtube-dl"
   loop_control:
     loop_var: "pkg_name"
