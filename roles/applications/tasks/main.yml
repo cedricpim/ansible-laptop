@@ -21,8 +21,8 @@
 - include_role:
     name: "yay"
   with_items:
+    - "insomnia"
     - "popcorntime"
-    - "postman-bin"
     - "peek"
     - "slack-desktop"
     - "spotify"
