@@ -39,12 +39,10 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Add color to icons on nerdtree
 Plug 'xolox/vim-misc' " Needed for vim-notes
 Plug 'xolox/vim-notes' " Allow note taking
 Plug 'tpope/vim-rhubarb' " Used by vim-fugitive :Gbrowser
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Autocomplete
-Plug 'fishbullet/deoplete-ruby' " Autocomplete for Ruby
 Plug 'tpope/vim-obsession' " Continuously update session files
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }} " Autocomplete
 
 call plug#end()
-
 
 """""""""""
 " General "
@@ -98,22 +96,6 @@ function! GetVisual()
   let &clipboard = cb_save
   return selection
 endfunction
-
-" Disable deoplete when using multiple cursors
-func! Multiple_cursors_before()
-  if deoplete#is_enabled()
-    call deoplete#disable()
-    let g:deoplete_is_enable_before_multi_cursors = 1
-  else
-    let g:deoplete_is_enable_before_multi_cursors = 0
-  endif
-endfunc
-
-func! Multiple_cursors_after()
-  if g:deoplete_is_enable_before_multi_cursors
-    call deoplete#enable()
-  endif
-endfunc
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -193,6 +175,9 @@ nnoremap <Leader>rfp :let @+=expand("%") . ':' . line(".")<CR>
 """"""""""""""""""
 " Configurations "
 """"""""""""""""""
+
+" Coc Nvim
+let g:coc_global_extensions = ['coc-solargraph', 'coc-json', 'coc-css']
 
 " Fzf configs
 nnoremap <C-p> :Files<CR>
@@ -278,9 +263,6 @@ noremap <Leader>nd :DeleteNote<CR>
 noremap <Leader>ns :SearchNote<space>
 noremap <Leader>nl :RecentNotes<CR>
 noremap <Leader>nt :ShowTaggedNotes<CR>
-
-" Deoplete
-let g:deoplete#enable_at_startup = 1
 
 " Vim-fugitive configs
 noremap <Leader>gg :Git<space>
