@@ -1,8 +1,11 @@
 ---
 - include_role:
     name: "yay"
-  vars:
-    pkg_name: "flameshot"
+  with_items:
+    - "caffeine-ng"
+    - "flameshot"
+  loop_control:
+    loop_var: "pkg_name"
 
 - name: "Install feh"
   pacman:
