@@ -8,7 +8,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.config/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' " FZF finder Ctrl+P
 Plug 'jeetsukumaran/vim-buffergator' " List buffers
-Plug 'neomake/neomake' " Linter
 Plug 'kassio/neoterm' " Better terminal
 Plug 'janko-m/vim-test' " Better tests
 Plug 'tpope/vim-fugitive' " Git on nvim
@@ -286,19 +285,23 @@ nnoremap <silent> <Leader>ra :Rg --hidden --sort-files -g '!.git' <cword><CR>
 " Autocmd "
 """""""""""
 
-autocmd! BufWritePost * Neomake
-autocmd BufWritePre * :%s/\s\+$//e " Trim whitespaces
+fun! StripTrailingWhitespace()
+  if exists('b:noStripWhitespace')
+    return
+  endif
+  %s/\s\+$//e
+endfun
+
+fun! LastKnownPosition()
+  if line("'\"") > 1 && line("'\"") <= line("$") |
+    exe "normal! g`\"" |
+  endif
+endfun
+
+autocmd BufWritePre * call StripTrailingWhitespace()
+autocmd FileType yaml let b:noStripWhitespace=1
 autocmd FileType crontab setlocal nobackup nowritebackup " Edit crontab files
 autocmd FileType gitcommit setlocal spell textwidth=72 " Helps Git commit messages
 autocmd BufRead,BufNewFile *.md setlocal textwidth=80 " Apply 80 characters limit to Markdown
 autocmd VimLeave * call system("xsel -ib", getreg('+'))
-
-" When editing a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid or when inside an event handler
-" (happens when dropping a file on gvim).
-" Also don't do it when the mark is in the first line, that is the default
-" position when opening a file.
-autocmd BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  \   exe "normal! g`\"" |
-  \ endif
+autocmd BufReadPost * call LastKnownPosition()
