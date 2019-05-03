@@ -37,7 +37,8 @@ Plug 'ryanoasis/vim-devicons' " Add icons to vim
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Add color to icons on nerdtree
 Plug 'xolox/vim-misc' " Needed for vim-notes
 Plug 'xolox/vim-notes' " Allow note taking
-Plug 'tpope/vim-rhubarb' " Used by vim-fugitive :Gbrowser
+Plug 'tpope/vim-rhubarb' " Used by vim-fugitive :Gbrowser for GitHub
+Plug 'shumphrey/fugitive-gitlab.vim' " Used by vim-fugitive :Gbrowser for GitLab
 Plug 'tpope/vim-obsession' " Continuously update session files
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }} " Autocomplete
 
@@ -175,6 +176,11 @@ nnoremap <Leader>rfp :let @+=expand("%") . ':' . line(".")<CR>
 " Configurations "
 """"""""""""""""""
 
+{% if editor_private_gitlab is defined and editor_private_gitlab | length %}
+" fugitive-gitlab.vim
+let g:fugitive_gitlab_domains = ["{{ editor_private_gitlab }}"]
+{% endif %}
+
 " Coc Nvim
 let g:coc_global_extensions = ['coc-solargraph', 'coc-json', 'coc-css']
 
@@ -271,7 +277,8 @@ noremap <Leader>gs :Gstatus<CR>
 noremap <Leader>gc :Gcommit -S<CR>
 noremap <Leader>gk :Gcommit -S %<CR>
 noremap <Leader>gp :Gpush<CR>
-noremap <Leader>gb :Gbrowse<CR>
+noremap <Leader>gB :Gbrowse<CR>
+noremap <Leader>gr :Gread<CR>
 
 " Ripgrep configs
 " Use RipGrep for lightning fast Gsearch command

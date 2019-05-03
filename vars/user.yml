@@ -11,6 +11,8 @@ bluetooth_device_id: "{{ vault_bluetooth_device_id }}"
 
 default_browser: "{{ vault_default_browser }}"
 
+editor_private_gitlab: "{{ vault_editor_private_gitlab }}"
+
 firefox_profile: "{{ vault_firefox_profile }}"
 
 git_full_name: "{{ vault_git_full_name }}"
