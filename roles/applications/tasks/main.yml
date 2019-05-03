@@ -10,6 +10,7 @@
       - "vlc"
       - "vagrant"
       - "xournalpp"
+      - "android-file-transfer"
     state: "present"
   become: yes
 
