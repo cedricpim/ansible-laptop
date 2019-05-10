@@ -41,6 +41,8 @@ Plug 'tpope/vim-rhubarb' " Used by vim-fugitive :Gbrowser for GitHub
 Plug 'shumphrey/fugitive-gitlab.vim' " Used by vim-fugitive :Gbrowser for GitLab
 Plug 'tpope/vim-obsession' " Continuously update session files
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }} " Autocomplete
+Plug 'vimwiki/vimwiki' " Wiki in Vim
+Plug 'tbabej/taskwiki' " Enhance Vimwiki
 
 call plug#end()
 
@@ -63,6 +65,8 @@ set nofoldenable " do not immediately fold when opening a file
 set spell " set spell checker
 set timeoutlen=1000 ttimeoutlen=0 " reduce delay with key presses (for ESC mostly)
 set guicursor= " disable cursor styling
+set nocompatible " required by vimwiki
+filetype plugin on " required by vimwiki
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -286,6 +290,11 @@ set grepprg=rg\ --vimgrep\ --no-heading\ --sort-files
 set grepformat=%f:%l:%c:%m,%f:%l:%m
 nmap <Leader>rg :Rg --hidden --sort-files -g '!.git' ""<Left>
 nnoremap <silent> <Leader>ra :Rg --hidden --sort-files -g '!.git' <cword><CR>
+
+" Vimwiki/taskwiki configs
+let g:vimwiki_list = [{"path": "{{ editor_wiki }}", "syntax": "markdown", "ext": ".md"}]
+let g:taskwiki_data_location = "{{ agenda_task }}"
+let g:taskwiki_taskrc_location = "{{ task_config_directory }}/taskrc"
 
 
 """""""""""

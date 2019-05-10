@@ -17,7 +17,7 @@ export TIME_STYLE=long-iso
 # Highlight section titles in manual pages
 export LESS_TERMCAP_md="${yellow}"
 
-# Don’t clear the screen after quitting a manual page
+# Don't clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
 # Set the default Less options.
@@ -34,14 +34,5 @@ fi
 export FZF_DEFAULT_COMMAND='rg -uu -L -g "" -g '!.git/' --files --smart-case'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# Source NVM
-[ -e /usr/share/nvm/init-nvm.sh ] && . /usr/share/nvm/init-nvm.sh  # This loads nvm
-
-# Use Python3
-if [ `command -v python3` ]; then
-  alias python="python3"
-  if [ `command -v pip3` ]; then
-    alias pip="pip3"
-    alias pip-update="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U --user"
-  fi
-fi
+# Define the location for taskrc
+export TASKRC="{{ task_config_directory }}/taskrc"

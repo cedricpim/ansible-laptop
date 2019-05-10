@@ -9,3 +9,5 @@ neovim_spell_dictionaries:
 neovim_notes: "~/.local/share/nvim/plugged/vim-notes/misc/notes/user"
 neovim_colorscheme: "hybrid"
 neovim_background_color: "dark"
+
+editor_wiki: "~/.config/wiki"

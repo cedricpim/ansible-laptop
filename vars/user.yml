@@ -2,6 +2,8 @@
 main: "{{ vault_main }}"
 server: "{{ vault_server }}"
 
+editor_wiki: "{{ vault_editor_wiki }}"
+agenda_task: "{{ vault_agenda_task }}"
 agenda_todo: "{{ vault_agenda_todo }}"
 agenda_khal: "{{ vault_agenda_khal }}"
 agenda_khard: "{{ vault_agenda_khard }}"

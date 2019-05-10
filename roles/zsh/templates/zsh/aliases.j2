@@ -86,6 +86,9 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 # find . -name .gitattributes | map dirname
 alias map="xargs -n1"
 
+# Update pip
+alias pip-update="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U --user"
+
 alias reload!="source ~/.zshrc"
 
 # Vim/Nvim
