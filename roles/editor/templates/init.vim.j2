@@ -180,7 +180,7 @@ nnoremap <Leader>rfp :let @+=expand("%") . ':' . line(".")<CR>
 " Configurations "
 """"""""""""""""""
 
-{% if editor_private_gitlab is defined and editor_private_gitlab | length %}
+{% if editor_private_gitlab is defined %}
 " fugitive-gitlab.vim
 let g:fugitive_gitlab_domains = ["{{ editor_private_gitlab }}"]
 {% endif %}

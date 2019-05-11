@@ -1,0 +1,134 @@
+---
+### General configurations
+main: yes
+server: yes
+
+agenda_task: "~/Sync/general/files/task"
+agenda_todo: "~/Sync/general/files/todo"
+task_theme: "solarized-dark-256"
+
+default_browser: "firefox"
+
+editor_wiki: "~/Sync/general/files/wiki"
+
+firefox_profile: "Path=[a-z0-9]{8}.default"
+
+ledger_file: "~/Sync/general/files/ledger.csv"
+ledger_networth: "~/Sync/general/files/networth.csv"
+ledger_currency: "EUR"
+ledger_investment_categories:
+  - "Investment"
+ledger_excluded_categories:
+  - "Exchange"
+  - "Investment"
+
+syncthing_port: "8384"
+
+wallpaper: "landscape.jpg"
+
+workspaces:
+  - { key: "$ws1",  keybinding: "1",  name: "1:", assigned: "Slack" }
+  - { key: "$ws2",  keybinding: "2",  name: "2:", assigned: "Firefox" }
+  - { key: "$ws3",  keybinding: "3",  name: "3:" }
+  - { key: "$ws4",  keybinding: "4",  name: "4" }
+  - { key: "$ws5",  keybinding: "5",  name: "5" }
+  - { key: "$ws6",  keybinding: "6",  name: "6" }
+  - { key: "$ws7",  keybinding: "7",  name: "7" }
+  - { key: "$ws8",  keybinding: "8",  name: "8" }
+  - { key: "$ws9",  keybinding: "9",  name: "9" }
+  - { key: "$ws10", keybinding: "0", name: "10" }
+
+startup_applications:
+  - "sleep 5 && keepassxc"
+  - "caffeine"
+  - "copyq"
+  - "dunst"
+  - "slack"
+  - "firefox"
+  - "light-locker"
+  - "redshift-gtk"
+  - "udiskie -ans"
+  - "performetric"
+
+scratchpad_applications:
+  - { name: "todo",     keybinding: "t" }
+  - { name: "mpsyt",    keybinding: "m" }
+  - { name: "ikhal",    keybinding: "c" }
+  - { name: "neomutt",  keybinding: "e", custom: "resize set 70ppt 80ppt" }
+  - { name: "spotify",  keybinding: "s" }
+  - { name: "newsboat", keybinding: "n" }
+
+neovim_background_color: "dark"
+
+colorscheme:
+  foreground: "#FFFFFF"
+  background: "#000000"
+  cursor_color: "#FFFFFF"
+  colors:
+    - { key: "color0",  name: "darkblack",   value: "#393939" }
+    - { key: "color1",  name: "darkred",     value: "#DA4939" }
+    - { key: "color2",  name: "darkgreen",   value: "#9ACC79" }
+    - { key: "color3",  name: "darkyellow",  value: "#D0D26B" }
+    - { key: "color4",  name: "darkblue",    value: "#6D9CBE" }
+    - { key: "color5",  name: "darkmagenta", value: "#9F5079" }
+    - { key: "color6",  name: "darkcyan",    value: "#435D75" }
+    - { key: "color7",  name: "darkwhite",   value: "#C2C2C2" }
+    - { key: "color8",  name: "black",       value: "#474747" }
+    - { key: "color9",  name: "red",         value: "#FF6C5C" }
+    - { key: "color10", name: "green",       value: "#8FB676" }
+    - { key: "color11", name: "yellow",      value: "#C8BC45" }
+    - { key: "color12", name: "blue",        value: "#D0D0FF" }
+    - { key: "color13", name: "magenta",     value: "#A761C2" }
+    - { key: "color14", name: "cyan",        value: "#6E98A4" }
+    - { key: "color15", name: "white",       value: "#C2C2C2" }
+
+### Encrypted
+
+agenda_khal: "{{ vault_agenda_khal }}"
+agenda_khard: "{{ vault_agenda_khard }}"
+agenda_vdirsyncer: "{{ vault_agenda_vdirsyncer }}"
+
+bluetooth_device_id: "{{ vault_bluetooth_device_id }}"
+
+git_full_name: "{{ vault_git_full_name }}"
+git_email: "{{ vault_git_email }}"
+git_signingkey: "{{ vault_git_signingkey }}"
+
+ledger_password: "{{ vault_ledger_password }}"
+ledger_salt: "{{ vault_ledger_salt }}"
+ledger_exchange_api_key: "{{ vault_ledger_exchange_api_key }}"
+ledger_functions: "{{ vault_ledger_functions }}"
+ledger_aliases: "{{ vault_ledger_aliases }}"
+
+keepassxc_database_directory: "{{ vault_keepassxc_database_directory }}"
+keepassxc_database_name: "{{ vault_keepassxc_database_name }}"
+
+neomutt_email_server: "{{ vault_neomutt_email_server }}"
+neomutt_email_accounts: "{{ vault_neomutt_email_accounts }}"
+neomutt_sender_full_name: "{{ vault_neomutt_sender_full_name }}"
+neomutt_mailboxes: "{{ vault_neomutt_mailboxes }}"
+neomutt_bindings: "{{ vault_neomutt_bindings }}"
+neomutt_mailbox_record: "{{ vault_neomutt_mailbox_record }}"
+neomutt_mailbox_postponed: "{{ vault_neomutt_mailbox_postponed }}"
+neomutt_mailbox_mbox: "{{ vault_neomutt_mailbox_mbox }}"
+neomutt_email_server_port: "{{ vault_neomutt_email_server_port }}"
+neomutt_smtp_protocol: "{{ vault_neomutt_smtp_protocol }}"
+
+newsblur_username: "{{ vault_newsblur_username }}"
+newsblur_password: "{{ vault_newsblur_password }}"
+
+notmuch_full_name: "{{ vault_notmuch_full_name }}"
+notmuch_primary_email: "{{ vault_notmuch_primary_email }}"
+notmuch_other_emails: "{{ vault_notmuch_other_emails }}"
+
+offlineimap_email_accounts: "{{ vault_offlineimap_email_accounts }}"
+
+personal_server: "{{ vault_personal_server }}"
+personal_server_shortcut: "{{ vault_personal_server_shortcut }}"
+personal_server_photos: "{{ vault_personal_server_photos }}"
+personal_local_photos: "{{ vault_personal_local_photos }}"
+personal_public_files: "{{ vault_personal_public_files }}"
+
+production_commands: "{{ vault_production_commands }}"
+
+ssh_entries: "{{ vault_ssh_entries }}"

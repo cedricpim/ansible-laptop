@@ -6,7 +6,7 @@
 
   vars_files:
     - "../vaulted_vars/{{ user }}.yml"
-    - "../vars/user.yml"
+    - "../vars/{{ user }}.yml"
 
   pre_tasks:
     - name: "Get list of services before running roles"
