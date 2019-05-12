@@ -26,7 +26,9 @@ personal_server_photos: "/home/vagrant/photos"
 personal_local_photos: "~/Pictures"
 personal_public_files: "~/Public"
 
-agenda_todo: "~/todo"
+agenda_task: "~/task"
+editor_wiki: "~/wiki"
+
 agenda_khal:
   main: "my_calendar"
   calendars:

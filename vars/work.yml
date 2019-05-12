@@ -2,7 +2,6 @@
 ### General configurations
 
 agenda_task: "~/Sync/general/files/task"
-agenda_todo: "~/Sync/general/files/todo"
 task_theme: "solarized-light-256"
 
 default_browser: "firefox-developer-edition"
