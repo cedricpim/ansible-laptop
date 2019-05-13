@@ -35,8 +35,6 @@ Plug 'tpope/vim-endwise' " Automate adding end
 Plug 'sheerun/vim-polyglot' " Add syntax
 Plug 'ryanoasis/vim-devicons' " Add icons to vim
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Add color to icons on nerdtree
-Plug 'xolox/vim-misc' " Needed for vim-notes
-Plug 'xolox/vim-notes' " Allow note taking
 Plug 'tpope/vim-rhubarb' " Used by vim-fugitive :Gbrowser for GitHub
 Plug 'shumphrey/fugitive-gitlab.vim' " Used by vim-fugitive :Gbrowser for GitLab
 Plug 'tpope/vim-obsession' " Continuously update session files
@@ -263,15 +261,6 @@ imap <silent> <Leader>d <Plug>StopMarkdownPreview<CR> " for insert mode
 " Define maximization settings
 let g:maximizer_set_mapping_with_bang = 1
 let g:maximizer_default_mapping_key = '<C-o>'
-
-" Notes configs
-let g:notes_suffix = '.md'
-let g:notes_smart_quotes = 0
-noremap <Leader>nn :tabedit note:
-noremap <Leader>nd :DeleteNote<CR>
-noremap <Leader>ns :SearchNote<space>
-noremap <Leader>nl :RecentNotes<CR>
-noremap <Leader>nt :ShowTaggedNotes<CR>
 
 " Vim-fugitive configs
 noremap <Leader>gg :Git<space>
