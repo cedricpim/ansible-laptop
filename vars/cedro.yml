@@ -20,6 +20,8 @@ ledger_investment_categories:
 ledger_excluded_categories:
   - "Exchange"
   - "Investment"
+ledger_excluded_accounts:
+  - "Vacation"
 
 syncthing_port: "8384"
 

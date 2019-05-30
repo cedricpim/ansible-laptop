@@ -8,6 +8,11 @@
 {% for investment_category in ledger_investment_categories %}
     - {{ investment_category }}
 {% endfor %}
+  :exclude:
+    :accounts:
+{% for excluded_account in ledger_excluded_accounts %}
+      - {{ excluded_account }}
+{% endfor %}
 
 :exchange:
   :api_key: "{{ ledger_exchange_api_key }}"
@@ -45,6 +50,10 @@
     :categories:
 {% for excluded_category in ledger_excluded_categories %}
       - {{ excluded_category }}
+{% endfor %}
+    :accounts:
+{% for excluded_account in ledger_excluded_accounts %}
+      - {{ excluded_account }}
 {% endfor %}
 
 :format:
