@@ -2,6 +2,7 @@
 - name: "Install neomutt and w3m to render emails"
   pacman:
     name:
+      - "aerc"
       - "neomutt"
       - "w3m"
     state: "present"
