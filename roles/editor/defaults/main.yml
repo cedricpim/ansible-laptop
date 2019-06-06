@@ -6,7 +6,6 @@ neovim_spell_dictionaries:
   - en.utf-8.spl
   - en.utf-8.sug
 
-neovim_notes: "~/.local/share/nvim/plugged/vim-notes/misc/notes/user"
 neovim_colorscheme: "hybrid"
 neovim_background_color: "dark"
 
