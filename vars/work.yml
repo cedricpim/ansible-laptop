@@ -20,6 +20,7 @@ ledger_excluded_categories:
   - "Investment"
 ledger_excluded_accounts:
   - "Vacation"
+  - "Personal"
 
 syncthing_port: "8385"
 
