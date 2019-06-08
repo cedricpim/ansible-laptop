@@ -163,10 +163,12 @@ nnoremap <C-l> :tabnext<CR>
 nnoremap <C-q> :tabclose<CR>
 nnoremap <C-j> 19j<CR>
 nnoremap <C-k> 21k<CR>
-nnoremap <S-h> :10winc <CR>
-nnoremap <S-l> :10winc <<CR>
-nnoremap <Leader>\ :vsplit<CR>
-nnoremap <Leader>- :split<CR>
+nnoremap <A-\> :vsplit<CR>
+nnoremap <A-;> :vertical resize -5<CR>
+nnoremap <A-'> :vertical resize +5<CR>
+nnoremap <A-[> :resize -5<CR>
+nnoremap <A-]> :resize +5<CR>
+nnoremap <A--> :split<CR>
 
 " Yank full file path (also with current line)
 nnoremap <Leader>fp :let @+=expand("%:p")<CR>
