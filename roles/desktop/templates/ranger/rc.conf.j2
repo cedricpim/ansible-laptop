@@ -728,6 +728,8 @@ copytmap <ESC> q Q w <C-c>
 
 # Custom bindings
 map DD shell mv %s /home/${USER}/.local/share/Trash/files/
+map pm shell mkdir {{ ranger_mountpoint }} && aft-mtp-mount {{ ranger_mountpoint }}
+map pu shell sudo umount {{ ranger_mountpoint }} && rm -rf {{ ranger_mountpoint }}
 
 # a plugin that adds file glyphs / icon support to Ranger:
 # https://github.com/alexanderjeurissen/ranger_devicons
