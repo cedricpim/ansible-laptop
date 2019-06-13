@@ -2,3 +2,9 @@
 - name: "Rebuild resolvconf configuration"
   command: "resolvconf -u"
   become: yes
+
+- name: "Restart ConnMan"
+  systemd:
+    name: "connman"
+    state: "restarted"
+  become: yes

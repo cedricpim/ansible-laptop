@@ -21,12 +21,20 @@
   become: yes
   notify: "Rebuild resolvconf configuration"
 
-- name: "Create folder for systemd ConnMan"
+- name: "Create folder for ConnMan configuration"
   file:
-    path: "{{ systemd_directory }}/connman.service.d"
+    path: "/etc/connman"
     state: "directory"
     mode: "0755"
   become: yes
+
+- name: "Copy ConnMan configuration"
+  template:
+    src: "connman/main.conf.j2"
+    dest: "/etc/connman/main.conf"
+    mode: "0644"
+  become: yes
+  notify: "Restart ConnMan"
 
 - name: "Enable/start service for ConnMan"
   systemd:
