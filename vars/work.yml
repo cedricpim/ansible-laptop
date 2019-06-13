@@ -44,7 +44,7 @@ startup_applications:
   - "copyq"
   - "dunst"
   - "slack"
-  - "firefox-developer-edition"
+  - "sleep 5 && firefox-developer-edition"
   - "light-locker"
   - "redshift-gtk"
   - "udiskie -ans"
