@@ -21,28 +21,22 @@
 
 :fields:
   :account:
-    :default: "Main"
     :presence: true
   :date:
     :default: "<%= Date.today %>"
     :presence: true
   :category:
-    :default: ""
     :presence: true
   :description:
-    :default: ""
     :presence: false
   :venue:
-    :default: ""
     :presence: false
   :amount:
-    :default: ""
     :presence: true
   :currency:
     :default: "{{ ledger_currency }}"
     :presence: true
   :travel:
-    :default: ""
     :presence: false
 
 :report:
@@ -159,21 +153,12 @@
       :expense:
         :width: 17
         :align: "left"
-      :total0:
-        :width: 15
+      :total:
+        :width: 35
         :align: "center"
-        :span: 2
-      :total1:
-        :width: 11
-        :align: "right"
-        :span: 2
       :percentage:
-        :period:
-          :width: 8
-          :align: "right"
-        :total:
-          :width: 8
-          :align: "right"
+        :width: 8
+        :align: "right"
   :fields:
     :money:
       :display:
