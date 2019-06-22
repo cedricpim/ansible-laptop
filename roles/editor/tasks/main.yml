@@ -17,36 +17,7 @@
   loop_control:
     loop_var: "pkg_name"
 
-- name: "Install dependency for Coc.nvim"
-  pacman:
-    name: "npm"
-    state: "present"
-  become: yes
-
-- name: "Install Docker language server"
-  npm:
-    name: "dockerfile-language-server-nodejs"
-    global: yes
-  become: yes
-
-# See https://github.com/mads-hartmann/bash-language-server#installation for
-# why it is not installed through npm ansible module
-- name: "Install Bash language server"
-  block:
-    - stat: path="/usr/bin/bash-language-server"
-      register: bash_language_server
-    - command: "npm --unsafe-perm i -g bash-language-server"
-      when: bash_language_server is defined and bash_language_server.stat.islnk is not defined
-  become: yes
-
-- name: "Install solargraph (and dependencies)"
-  gem:
-    name: "{{ item }}"
-    state: "latest"
-  with_items:
-    - "rdoc"
-    - "irb"
-    - "solargraph"
+- import_tasks: "languages.yml"
 
 - name: "Create folder for neovim configuration"
   file:
