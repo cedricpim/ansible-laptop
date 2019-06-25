@@ -136,6 +136,7 @@ map <Space> <Leader>
 cmap w!! w !sudo tee > /dev/null %
 
 nnoremap <Leader>cc :cclose<CR>
+nnoremap <Leader>co :copen<CR>
 nnoremap <Leader>ca :tabonly<CR>
 nnoremap <Leader>n  :noh<CR>
 
@@ -192,6 +193,12 @@ let g:fugitive_gitlab_domains = ["{{ editor_private_gitlab }}"]
 " Coc Nvim
 let g:coc_global_extensions = ['coc-solargraph', 'coc-json', 'coc-css']
 nnoremap <silent> <Leader>ld  :<C-u>CocList diagnostics<cr> " Show all diagnostics
+
+" Ale configs
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_ruby_brakeman_executable = 'bundle'
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
 
 " Fzf configs
 nnoremap <C-p> :Files<CR>
