@@ -190,6 +190,7 @@ let g:fugitive_gitlab_domains = ["{{ editor_private_gitlab }}"]
 
 " Coc Nvim
 let g:coc_global_extensions = ['coc-solargraph', 'coc-json', 'coc-css']
+nnoremap <silent> <Leader>ld  :<C-u>CocList diagnostics<cr> " Show all diagnostics
 
 " Fzf configs
 nnoremap <C-p> :Files<CR>
