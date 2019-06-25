@@ -39,7 +39,6 @@ Plug 'tpope/vim-obsession' " Continuously update session files
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }} " Autocomplete
 Plug 'vimwiki/vimwiki' " Wiki in Vim
 Plug 'tbabej/taskwiki' " Enhance Vimwiki
-Plug 'w0rp/ale' " Asynchronous Lint Engine
 
 call plug#end()
 
@@ -193,12 +192,6 @@ let g:fugitive_gitlab_domains = ["{{ editor_private_gitlab }}"]
 " Coc Nvim
 let g:coc_global_extensions = ['coc-solargraph', 'coc-json', 'coc-css']
 nnoremap <silent> <Leader>ld  :<C-u>CocList diagnostics<cr> " Show all diagnostics
-
-" Ale configs
-let g:ale_ruby_rubocop_executable = 'bundle'
-let g:ale_ruby_brakeman_executable = 'bundle'
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
 
 " Fzf configs
 nnoremap <C-p> :Files<CR>
