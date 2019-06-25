@@ -6,6 +6,7 @@
       - "neovim"
       - "python-neovim"
       - "xsel"
+      - "ctags"
     state: "present"
   become: yes
 
