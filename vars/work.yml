@@ -39,12 +39,12 @@ workspaces:
   - { key: "$ws10", keybinding: "0",  name: "10:" }
 
 startup_applications:
-  - "sleep 5 && keepassxc"
+  - "sleep 3 && keepassxc"
   - "caffeine"
   - "copyq"
   - "dunst"
   - "slack"
-  - "sleep 5 && firefox-developer-edition"
+  - "sleep 3 && firefox-developer-edition"
   - "light-locker"
   - "redshift-gtk"
   - "udiskie -ans"
