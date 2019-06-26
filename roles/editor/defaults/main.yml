@@ -1,6 +1,5 @@
 ---
 neovim_directory: "~/.config/nvim"
-neovim_plugin_dest: '~/.local/share/nvim/site/autoload'
 neovim_spell_dest: '~/.local/share/nvim/site/spell'
 neovim_spell_dictionaries:
   - en.utf-8.spl

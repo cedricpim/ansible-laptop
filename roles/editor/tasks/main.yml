@@ -1,64 +1,69 @@
 ---
-- name: "Install vim and neovim"
+- name: "Install vim and dependencies"
   pacman:
     name:
       - "vim"
-      - "neovim"
       - "python-neovim"
       - "xsel"
       - "ctags"
+      - "nodejs"
+      - "yarn"
+      - "ripgrep"
     state: "present"
   become: yes
 
 - include_role:
     name: "yay"
   with_items:
-    - "python2-neovim-git"
-    - "neovim-remote"
+    - "python2-neovim"
+    - "neovim-nightly"
+    - "nerd-fonts-complete"
   loop_control:
     loop_var: "pkg_name"
 
+- name: "Install python Think.Vim dependencies"
+  pip:
+    name: "pynvim"
+    state: "latest"
+    extra_args: "--user"
+
+- name: "Install ruby Think.Vim dependencies"
+  gem:
+    name: "rouge"
+    state: "latest"
+
 - import_tasks: "languages.yml"
 
-- name: "Create folder for neovim configuration"
+- name: "Download Think.Vim repository"
+  git:
+    repo: "{{ think_vim_repo }}"
+    dest: "{{ neovim_directory }}"
+    depth: 1
+    clone: yes
+    update: yes
+
+- name: "Create folder for Neovim local configurations"
   file:
-    path: "{{ neovim_directory }}"
+    path: "{{ neovim_directory }}/{{ think_vim_local_configuration_folder }}"
     state: "directory"
+    mode: "0700"
 
-- name: "Copy neovim configuration file"
+- name: "Copy Neovim local configurations"
   template:
-    src: "init.vim.j2"
-    dest: "{{ neovim_directory }}/init.vim"
+    src: "{{ item }}.j2"
+    dest: "{{ neovim_directory }}/{{ think_vim_local_configuration_folder }}/{{ item }}"
     mode: "0600"
+  with_items:
+    - "local_settings.vim"
+    - "local_plugins.yaml"
 
-- name: "Copy neovim Coc configuration file"
-  template:
-    src: "coc-settings.json.j2"
-    dest: "{{ neovim_directory }}/coc-settings.json"
-    mode: "0600"
-
-- name: "Create folder for neovim dictionaries"
+- name: "Create folder for Neovim dictionaries"
   file:
     path: "{{ neovim_spell_dest }}"
     state: "directory"
 
-- name: "Install neovim dictionaries"
+- name: "Install Neovim dictionaries"
   get_url:
     url: "{{ neovim_spell_url }}/{{ item }}"
     dest: "{{ neovim_spell_dest }}"
   with_items: "{{ neovim_spell_dictionaries }}"
-
-- name: "Create folder for neovim plugin manager"
-  file:
-    path: "{{ neovim_plugin_dest }}"
-    state: "directory"
-
-- name: "Install neovim plugin manager"
-  get_url:
-    url: "{{ neovim_plugin_url }}"
-    dest: "{{ neovim_plugin_dest }}"
-
-- name: "Install/update plugins defined on neovim configuration"
-  command: "nvim +'PlugUpdate --sync' +qa"
-  register: neovim_plugin_install_result
-  changed_when: neovim_plugin_install_result.stdout.find(neovim_plugin_installation_message) >= 0

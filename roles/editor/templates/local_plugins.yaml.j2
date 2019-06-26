@@ -1,0 +1,53 @@
+{{ ansible_managed | comment }}
+
+# Wiki in Vim
+- repo: vimwiki/vimwiki
+# Enhance Vimwiki and integrate with Taskwarrior
+- repo: tbabej/taskwiki
+  depends: taskwiki
+
+# Continuously update session files
+- repo: tpope/vim-obsession
+
+# Used by vim-fugitive :Gbrowser for GitLab
+- repo: shumphrey/fugitive-gitlab.vim
+  depends: vim-fugitive
+  on_cmd: Gbrowse
+# Used by vim-fugitive :Gbrowser for GitHub
+- repo: tpope/vim-rhubarb
+  depends: vim-fugitive
+  on_cmd: Gbrowse
+
+# Add syntax
+- repo: sheerun/vim-polyglot
+
+# Add dispatch to vim
+- repo: tpope/vim-dispatch
+# Place dispatch as the main handler on neovim
+- repo: radenling/vim-dispatch-neovim
+  depends: vim-dispatch
+
+# Open file on a given line
+- repo: wsdjeg/vim-fetch
+
+# Configurations for ruby
+- repo: vim-ruby/vim-ruby
+  on_ft: ruby
+# Rails helpers
+- repo: tpope/vim-rails
+  on_ft: [ruby,rake]
+
+# Maximize window
+- repo: szw/vim-maximizer
+
+# Better testing integration
+- repo: janko/vim-test
+  on_cmd: [TestNearest,TestFile,TestSuite,TestLast,TestVisit]
+
+# Better terminal integration
+- repo: kassio/neoterm
+
+# Add markdown viewer
+- repo: iamcco/markdown-preview.nvim
+  on_ft: [markdown,pandoc.markdown,rmd]
+  build: 'cd app & yarn install'

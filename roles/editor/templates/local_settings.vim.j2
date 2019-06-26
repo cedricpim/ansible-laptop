@@ -1,0 +1,174 @@
+{{ ansible_managed | comment(decoration='" ') }}
+
+"""""""""""
+" General "
+"""""""""""
+
+set nofoldenable " do not immediately fold when opening a file
+set spell " set spell checker
+set modelines=0 " ensure modelines do not run
+set nomodeline " disable modelines explicitly
+set nocompatible " required by vimwiki
+filetype plugin on " required by vimwiki
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2
+  syntax on
+  silent! colorscheme {{ neovim_colorscheme }}
+  set background={{ neovim_background_color }}
+endif
+
+" Override repo options
+set wildignore-=*/tmp/*
+set autoindent
+set smartindent
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+
+""""""""""""""""""""
+" General Mappings "
+""""""""""""""""""""
+
+" Map moving out of insert mode in terminal
+:tnoremap <ESC> <C-\><C-n>
+
+" Save file as sudo
+cmap w!! w !sudo tee > /dev/null %
+
+nnoremap <Leader>cc :cclose<CR>
+nnoremap <Leader>co :copen<CR>
+nnoremap <Leader>lc :lclose<CR>
+nnoremap <Leader>lo :lopen<CR>
+nnoremap <Leader>h  :noh<CR>
+
+" Disable arrow keys
+nnoremap <up>    <nop>
+nnoremap <down>  <nop>
+nnoremap <left>  <nop>
+nnoremap <right> <nop>
+vnoremap <up>    <nop>
+vnoremap <down>  <nop>
+vnoremap <left>  <nop>
+vnoremap <right> <nop>
+
+" On insert mode, Shift-Tab to remove indentation
+inoremap <S-Tab> <C-D>
+" On visual mode, use tab and shift tab to indent the current selected text
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+nnoremap <Leader>tc :tabedit<CR>
+nnoremap <Leader>tq :tabclose<CR>
+nnoremap <C-j> 19j<CR>
+nnoremap <C-k> 21k<CR>
+nnoremap <A-\> :vsplit<CR>
+nnoremap <A-;> :vertical resize -5<CR>
+nnoremap <A-"> :vertical resize +5<CR>
+nnoremap <A-[> :resize -5<CR>
+nnoremap <A-]> :resize +5<CR>
+nnoremap <A--> :split<CR>
+
+" Yank full file path (also with current line)
+nnoremap <Leader>fp :let @+=expand("%:p")<CR>
+nnoremap <Leader>rp :let @+=expand("%")<CR>
+nnoremap <Leader>fpl :let @+=expand("%:p") . ":" . line(".")<CR>
+nnoremap <Leader>rpl :let @+=expand("%") . ":" . line(".")<CR>
+
+
+""""""""""""""""""
+" Configurations "
+""""""""""""""""""
+
+{% if editor_private_gitlab is defined %}
+" fugitive-gitlab.vim
+let g:fugitive_gitlab_domains = ["{{ editor_private_gitlab }}"]
+{% endif %}
+
+" Coc Nvim
+" let g:coc_global_extensions = ["coc-solargraph", "coc-json", "coc-css"]
+
+" Neoterm configs
+let g:neoterm_autoinsert = 1
+let g:neoterm_default_mod = "rightbelow"
+nnoremap <silent> <Leader>tt :Ttoggle<CR>
+
+" defx.nvim configs
+map <C-p> :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+
+" Test configs
+let test#strategy = "neoterm"
+nnoremap <Leader>tn :TestNearest<CR>
+nnoremap <Leader>tf :TestFile<CR>
+nnoremap <Leader>ts :TestSuite<CR>
+nnoremap <Leader>tl :TestLast<CR>
+nnoremap <Leader>tv :TestVisit<CR>
+
+" Tagbar configs
+let g:tagbar_autoclose = 1
+let g:tagbar_type_ruby = {
+ \ "kinds" : [
+   \ "m:modules",
+   \ "c:classes",
+   \ "d:describes",
+   \ "C:contexts",
+   \ "f:methods",
+   \ "F:singleton methods"
+ \ ]
+\ }
+
+nmap <F9> :TagbarToggle<CR>
+
+" Markdown
+nmap <silent> <Leader>p <Plug>MarkdownPreviewToggle<CR>
+
+" Define maximization settings
+let g:maximizer_set_mapping_with_bang = 1
+let g:maximizer_default_mapping_key = "<C-o>"
+
+" Vim-fugitive configs
+noremap <Leader>gg :Git<space>
+noremap <Leader>gd :Gdiff<CR>
+noremap <Leader>gb :Gblame<CR>
+noremap <Leader>gs :Gstatus<CR>
+noremap <Leader>gc :Gcommit -S<CR>
+noremap <Leader>gk :Gcommit -S %<CR>
+noremap <Leader>gp :Gpush<CR>
+noremap <Leader>gB :Gbrowse<CR>
+noremap <Leader>gr :Gread<CR>
+
+" Vimwiki/taskwiki configs
+let g:vimwiki_list = [{"path": "{{ editor_wiki }}", "syntax": "markdown", "ext": ".md"}]
+let g:taskwiki_data_location = "{{ agenda_task }}"
+let g:taskwiki_taskrc_location = "{{ task_config_directory }}/taskrc"
+
+" Override FZF command to my needs
+let $FZF_DEFAULT_SETTINGS = ' --no-ignore --hidden --follow -g "!.git/*" -g "!repos/*" -g "!tmp/*" '
+let $FZF_DEFAULT_COMMAND = "rg --files".$FZF_DEFAULT_SETTINGS
+let g:rg_command = $FZF_DEFAULT_COMMAND
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --color "always"'.
+  \ $FZF_DEFAULT_SETTINGS.
+  \ shellescape(<q-args>).
+  \ '| tr -d "\017"',
+  \ 1, <bang>0)
+
+"""""""""""
+" Autocmd "
+"""""""""""
+
+fun! StripTrailingWhitespace()
+  if exists("b:noStripWhitespace")
+    return
+  endif
+  %s/\s\+$//e
+endfun
+
+autocmd BufWritePre * call StripTrailingWhitespace()
+autocmd FileType yaml let b:noStripWhitespace=1
+autocmd FileType gitcommit setlocal spell textwidth=72 " Helps Git commit messages
+autocmd FileType crontab setlocal nobackup nowritebackup " Edit crontab files
+
+augroup vimrc " Source vim configuration upon save
+  autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
+augroup END
