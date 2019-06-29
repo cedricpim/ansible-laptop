@@ -142,16 +142,6 @@ let g:vimwiki_list = [{"path": "{{ editor_wiki }}", "syntax": "markdown", "ext":
 let g:taskwiki_data_location = "{{ agenda_task }}"
 let g:taskwiki_taskrc_location = "{{ task_config_directory }}/taskrc"
 
-" Override FZF command to my needs
-let $FZF_DEFAULT_SETTINGS = ' --no-ignore --hidden --follow -g "!.git/*" -g "!repos/*" -g "!tmp/*" '
-let $FZF_DEFAULT_COMMAND = 'rg --files -g "!node_modules/*" -g "!vendor/*"'.$FZF_DEFAULT_SETTINGS
-let g:rg_command = $FZF_DEFAULT_COMMAND
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --color "always"'.
-  \ $FZF_DEFAULT_SETTINGS.
-  \ shellescape(<q-args>).
-  \ '| tr -d "\017"',
-  \ 1, <bang>0)
 
 """""""""""
 " Autocmd "
