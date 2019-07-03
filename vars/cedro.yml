@@ -51,6 +51,7 @@ startup_applications:
   - "redshift-gtk"
   - "udiskie -ans"
   - "performetric"
+  - "opensnitch-ui"
 
 scratchpad_applications:
   - { name: "todo",     keybinding: "t" }

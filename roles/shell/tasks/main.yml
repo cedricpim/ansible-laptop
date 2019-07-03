@@ -52,3 +52,4 @@
 - import_tasks: "htop.yml"
 - import_tasks: "urlview.yml"
 - import_tasks: "neofetch.yml"
+- import_tasks: "opensnitch.yml"
