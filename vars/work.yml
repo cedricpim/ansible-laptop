@@ -50,6 +50,7 @@ startup_applications:
   - "udiskie -ans"
   - "performetric"
   - "opensnitch-ui"
+  - "mullvad-vpn"
 
 scratchpad_applications:
   - { name: "todo",     keybinding: "t" }

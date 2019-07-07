@@ -7,27 +7,44 @@
       - "linux-headers"
   become: yes
 
-- name: "Install dependencies for Mullvad script"
-  pacman:
-    name:
-      - "bash"
-      - "curl"
-      - "jq"
-  become: yes
-
-- name: "Install Mullvad"
-  block:
-    - tempfile: suffix="mullvad" state="directory"
-      register: tempdir
-    - get_url: url="{{ mullvad_script_url }}" dest="{{ tempdir.path }}/mullvad-wg.sh" checksum="{{ mullvad_checksum }}" mode="0700"
-    - shell: "echo {{ mullvad_account_number }} | sh {{ tempdir.path }}/mullvad-wg.sh"
-  always:
-    - file: path="{{ tempdir.path }}" state="absent"
-  become: yes
-
 - include_role:
-    name: "zsh"
-    tasks_from: "scripts"
+    name: "yay"
   vars:
-    script: "wgq"
+    pkg_name: "mullvad-vpn"
 
+- name: "Create folder for Mullvad settings"
+  file:
+    path: "{{ mullvad_directory }}"
+    state: "directory"
+  become: yes
+
+- name: "Copy Mullvad settings"
+  template:
+    src: "mullvad/settings.json.j2"
+    dest: "{{ mullvad_directory }}/settings.json"
+    mode: "0644"
+  notify: "Restart Mullvad daemon"
+  become: yes
+
+- name: "Enable/start Mullvad daemon"
+  systemd:
+    name: "mullvad-daemon"
+    state: "started"
+    enabled: yes
+  become: yes
+
+- name: "Check if key is defined"
+  command: "mullvad tunnel wireguard key check"
+  failed_when: no
+  changed_when: no
+  register: mullvad_key_check
+  become: yes
+
+- name: "Generate key for Mullvad"
+  command: "mullvad tunnel wireguard key generate"
+  when: mullvad_key_check is defined and mullvad_key_check.stdout.find(mullvad_no_key) != -1
+  become: yes
+
+- name: "Set Mullvad to use Wireguard"
+  command: "mullvad relay set tunnel wireguard any"
+  become: yes

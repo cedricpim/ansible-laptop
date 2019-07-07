@@ -1,0 +1,39 @@
+{
+  "account_token": "{{ mullvad_account_number }}",
+  "relay_settings": {
+    "normal": {
+      "location": {
+        "only": {
+          "country": "{{ mullvad_country }}"
+        }
+      },
+      "tunnel": {
+        "only": {
+          "wireguard": {
+            "port": "any"
+          }
+        }
+      }
+    }
+  },
+  "bridge_settings": {
+    "normal": {
+      "location": "any"
+    }
+  },
+  "bridge_state": "auto",
+  "allow_lan": false,
+  "block_when_disconnected": false,
+  "auto_connect": false,
+  "tunnel_options": {
+    "openvpn": {
+      "mssfix": null
+    },
+    "wireguard": {
+      "mtu": null
+    },
+    "generic": {
+      "enable_ipv6": false
+    }
+  }
+}

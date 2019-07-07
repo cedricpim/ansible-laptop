@@ -8,3 +8,9 @@
     name: "connman"
     state: "restarted"
   become: yes
+
+- name: "Restart Mullvad daemon"
+  systemd:
+    name: "mullvad-daemon"
+    state: "restarted"
+  become: yes
