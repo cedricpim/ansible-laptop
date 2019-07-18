@@ -51,7 +51,6 @@ startup_applications:
   - "redshift-gtk"
   - "udiskie -ans"
   - "performetric"
-  - "opensnitch-ui"
   - "mullvad-vpn"
 
 scratchpad_applications:
