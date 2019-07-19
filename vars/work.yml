@@ -28,7 +28,7 @@ wallpaper: "your-wallpaper.jpg"
 
 workspaces:
   - { key: "$ws1",  keybinding: "1",  name: "1:", assigned: "Slack" }
-  - { key: "$ws2",  keybinding: "2",  name: "2:", assigned: "Firefox" }
+  - { key: "$ws2",  keybinding: "2",  name: "2:", assigned: "firefox" }
   - { key: "$ws3",  keybinding: "3",  name: "3:" }
   - { key: "$ws4",  keybinding: "4",  name: "4:" }
   - { key: "$ws5",  keybinding: "5",  name: "5" }
