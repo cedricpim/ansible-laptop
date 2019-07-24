@@ -195,7 +195,7 @@ set $mode_system System: (l) lock, (o) logout, (g) greeter, (s) suspend, (r) reb
 mode "$mode_system" {
   bindsym l exec --no-startup-id light-locker-command -l, mode "default"
   # Firefox does not close well on its own
-  bindsym o [class="Firefox"] kill; exec sleep 1 && i3-msg exit, mode "default"
+  bindsym o [class="firefox"] kill; exec sleep 1 && i3-msg exit, mode "default"
   bindsym g exec --no-startup-id dm-tool switch-to-greeter, mode "default"
   bindsym s exec --no-startup-id systemctl suspend, mode "default"
   bindsym r exec --no-startup-id systemctl reboot, mode "default"
