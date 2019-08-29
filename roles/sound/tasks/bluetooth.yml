@@ -14,3 +14,10 @@
     name: "yay"
   vars:
     pkg_name: "blueman"
+
+- name: "Enable/start service for bluetooth"
+  systemd:
+    name: "bluetooth"
+    state: "started"
+    enabled: yes
+  become: yes
