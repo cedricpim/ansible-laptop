@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+{{ ansible_managed | comment }}
+
+device="`pacmd list-cards | grep index: | tail -n 1 | cut -d' ' -f6`"
+
+case $1 in
+  set-sink-volume)
+    pactl set-sink-volume $device $2
+    ;;
+
+  set-sink-mute)
+    pactl set-sink-mute $device toggle
+    ;;
+
+  *)
+    echo $"Usage: $0 {set-sink-volume|set-sink-mute}"
+    exit 1
+esac

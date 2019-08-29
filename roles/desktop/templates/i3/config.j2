@@ -119,9 +119,9 @@ bindsym Mod1+Shift+Tab workspace prev
 # Other keybindings
 bindsym Print exec "flameshot gui"
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/audio.sh set-sink-volume +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/audio.sh set-sink-volume -5%
+bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/audio.sh set-sink-mute
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86AudioPlay exec playerctl play-pause
