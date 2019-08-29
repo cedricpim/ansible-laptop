@@ -20,9 +20,3 @@
     src: "default.pa.j2"
     dest: "{{ pulseaudio_directory }}/default.pa"
     mode: "0600"
-
-- include_role:
-    name: "zsh"
-    tasks_from: "scripts"
-  vars:
-    script: "bb"

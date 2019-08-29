@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+{{ ansible_managed | comment }}
+
+if connmanctl technologies | grep -A 1 "Type = bluetooth" | grep -q True; then
+  connmanctl disable bluetooth > /dev/null 2>&1 &
+  bluetoothctl disconnect {{ bluetooth_device_id }} > /dev/null 2>&1 &
+  pkill blueman-applet > /dev/null 2>&1 &
+else
+  (
+    # We need to add a certain delay so connmanctl can enable bluetooth but we
+    # do it inside a subshell so that the sleep doesn't affect the termination of
+    # the script
+    connmanctl enable bluetooth > /dev/null 2>&1
+    sleep 3
+    bluetoothctl connect {{ bluetooth_device_id }} > /dev/null 2>&1
+    blueman-applet > /dev/null 2>&1 &
+  ) &
+fi
