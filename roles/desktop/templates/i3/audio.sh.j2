@@ -4,7 +4,7 @@ IFS=$'\n\t'
 
 {{ ansible_managed | comment }}
 
-device="`pacmd list-cards | grep index: | tail -n 1 | cut -d' ' -f6`"
+device="$(pacmd list-cards | grep index: | tail -n 1 | cut -d' ' -f6)"
 
 case $1 in
   set-sink-volume)
