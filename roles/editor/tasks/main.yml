@@ -9,6 +9,8 @@
       - "nodejs"
       - "yarn"
       - "ripgrep"
+      - "libvterm"
+      - "neovim"
     state: "present"
   become: yes
 
@@ -16,7 +18,6 @@
     name: "yay"
   with_items:
     - "python2-neovim"
-    - "neovim-nightly"
     - "nerd-fonts-complete"
   loop_control:
     loop_var: "pkg_name"
