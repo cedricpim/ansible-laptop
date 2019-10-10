@@ -32,4 +32,10 @@ setopt NO_NOMATCH
 #   like: git comm-[tab]
 setopt complete_aliases
 
+# Use vim cli mode
+bindkey '^P' up-history
+bindkey '^N' down-history
+# ctrl-r starts searching history backward
 bindkey "^R" history-incremental-search-backward
+# ctrl-w removed word backwards
+bindkey '^w' backward-kill-word
