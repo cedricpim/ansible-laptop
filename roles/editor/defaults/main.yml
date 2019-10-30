@@ -5,7 +5,7 @@ neovim_spell_dictionaries:
   - en.utf-8.spl
   - en.utf-8.sug
 
-neovim_colorscheme: "hybrid"
+neovim_colorscheme: "PaperColor"
 neovim_background_color: "dark"
 
 editor_wiki: "~/.config/wiki"
