@@ -91,17 +91,6 @@ alias pip-update="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d 
 
 alias reload!="source ~/.zshrc"
 
-# Vim/Nvim
-function tvim() {
-  if test $# -gt 0; then
-    vim "$@"
-  elif test -f Session.vim; then
-    vim -S
-  else
-    vim -c Obsession
-  fi
-}
-
 # Weather
 function weather() {
   if [ -n "$1" ]; then place="$1"; else place=""; fi
