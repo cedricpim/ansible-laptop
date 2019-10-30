@@ -4,10 +4,7 @@
 - repo: vimwiki/vimwiki
 # Enhance Vimwiki and integrate with Taskwarrior
 - repo: tbabej/taskwiki
-  depends: taskwiki
-
-# Continuously update session files
-- repo: tpope/vim-obsession
+  depends: vimwiki
 
 # Used by vim-fugitive :Gbrowser for GitLab
 - repo: shumphrey/fugitive-gitlab.vim
@@ -59,3 +56,9 @@
 # Rust Helpers
 - repo: rust-lang/rust.vim
   on_ft: rust
+
+
+# Continuously update session files
+- repo: tpope/vim-obsession
+- repo: dhruvasagar/vim-prosession
+  depends: vim-obsession
