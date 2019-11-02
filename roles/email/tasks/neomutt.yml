@@ -2,11 +2,15 @@
 - name: "Install neomutt and w3m to render emails"
   pacman:
     name:
-      - "aerc"
       - "neomutt"
       - "w3m"
     state: "present"
   become: yes
+
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "aerc"
 
 - name: "Ensure urlview is installed"
   include_role:
