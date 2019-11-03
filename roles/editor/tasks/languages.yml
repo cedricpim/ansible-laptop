@@ -38,6 +38,9 @@
     state: "present"
   become: yes
 
+- name: "Set rust toolchain"
+  command: "rustup toolchain install stable"
+
 - include_role:
     name: "yay"
   vars:
