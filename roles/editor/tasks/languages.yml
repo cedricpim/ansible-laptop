@@ -1,7 +1,9 @@
 ---
-- name: "Install dependency for Coc.nvim"
+- name: "Install dependency for Coc.nvim and for ansible gem directive"
   pacman:
-    name: "npm"
+    name:
+      - "npm"
+      - "ruby"
     state: "present"
   become: yes
 

@@ -11,6 +11,7 @@
       - "ripgrep"
       - "libvterm"
       - "neovim"
+      - "ruby"
     state: "present"
   become: yes
 
