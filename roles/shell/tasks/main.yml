@@ -12,6 +12,7 @@
       - "powerline"
       - "cryptsetup"
       - "bat"
+      - "lsof"
       - "fd"
       - "tldr"
       - "jq"
@@ -19,6 +20,7 @@
       - "tmux"
       - "unzip"
       - "time"
+      - "wget"
     state: "present"
   become: yes
 
