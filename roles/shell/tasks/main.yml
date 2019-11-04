@@ -21,6 +21,8 @@
       - "unzip"
       - "time"
       - "wget"
+      - "tig"
+      - "man-pages"
     state: "present"
   become: yes
 
