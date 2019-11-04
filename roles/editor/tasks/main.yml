@@ -19,6 +19,7 @@
     name: "yay"
   with_items:
     - "python2-neovim"
+    - "neovim-remote"
     - "nerd-fonts-complete"
   loop_control:
     loop_var: "pkg_name"
