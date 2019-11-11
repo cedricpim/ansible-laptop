@@ -3,7 +3,6 @@
   pacman:
     name:
       - "vim"
-      - "python-neovim"
       - "xsel"
       - "ctags"
       - "nodejs"
@@ -19,6 +18,7 @@
     name: "yay"
   with_items:
     - "python2-neovim"
+    - "python-neovim"
     - "neovim-remote"
     - "nerd-fonts-complete"
   loop_control:
