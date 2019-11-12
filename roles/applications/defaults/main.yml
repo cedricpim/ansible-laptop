@@ -22,5 +22,6 @@ firefox_options:
   - { option: "layers.acceleration.force-enabled", value: "true" }
   - { option: "app.normandy.enabled", value: "false" }
   - { option: "app.normandy.logging.level", value: "0" }
+  - { option: "browser.tabs.loadDivertedInBackground", value: "true" }
 
 syncthing_port: "8384"
