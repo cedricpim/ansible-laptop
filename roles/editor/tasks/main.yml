@@ -24,11 +24,14 @@
   loop_control:
     loop_var: "pkg_name"
 
-- name: "Install python Think.Vim dependencies"
+- name: "Install Think.Vim dependencies"
   pip:
-    name: "pynvim"
+    name: "{{ item }}"
     state: "latest"
     extra_args: "--user"
+  with_items:
+    - "pynvim"
+    - "Send2Trash"
 
 - name: "Install ruby Think.Vim dependencies"
   gem:
