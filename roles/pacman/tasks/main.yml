@@ -5,3 +5,9 @@
     regexp: 'Color'
     line: 'Color'
   become: yes
+
+- name: "Enable zstd algorithm"
+  pacman:
+    name: "libarchive"
+    state: "present"
+  become: yes
