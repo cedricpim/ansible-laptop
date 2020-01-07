@@ -1,6 +1,5 @@
 ---
 wallpaper_directory: "~/Pictures"
-autorandr_directory: "~/.config/autorandr"
 i3_directory: "~/.config/i3"
 rofi_directory: "~/.config/rofi"
 polybar_directory: "~/.config/polybar"
