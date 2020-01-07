@@ -183,9 +183,9 @@ bindsym $mod+Shift+s mode "$mode_resize"
 # Displays management
 set $mode_monitors Monitors: (e) external screen, (i) internal screen, (m) multiple screens
 mode "$mode_monitors" {
-  bindsym i exec --no-startup-id "mons -o", mode "default"
-  bindsym e exec --no-startup-id "mons -s", mode "default"
-  bindsym m exec --no-startup-id "mons -e right", mode "default"
+  bindsym i exec --no-startup-id mons -o; restart, mode "default"
+  bindsym e exec --no-startup-id mons -s; restart, mode "default"
+  bindsym m exec --no-startup-id mons -e right; restart, mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
