@@ -23,7 +23,7 @@
       - "wget"
       - "tig"
       - "man-pages"
-      - "bindtools"
+      - "bind-tools"
     state: "present"
   become: yes
 
