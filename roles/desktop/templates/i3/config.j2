@@ -182,11 +182,11 @@ mode "$mode_resize" {
 bindsym $mod+Shift+s mode "$mode_resize"
 
 # Displays management
-set $mode_monitors Monitors: (e) external screen, (i) internal screen, (m) multiple screens
+set $mode_monitors Monitors: (i) internal screen, (e) external screen, (m) multiple screens
 mode "$mode_monitors" {
-  bindsym i exec_always --no-startup-id mons -o, mode "default"
-  bindsym e exec_always --no-startup-id mons -s, mode "default"
-  bindsym m exec_always --no-startup-id mons -e right, mode "default"
+  bindsym i exec --no-startup-id "mons -o; {{ polybar_directory }}/launcher.sh", mode "default"
+  bindsym e exec --no-startup-id "mons -s; {{ polybar_directory }}/launcher.sh", mode "default"
+  bindsym m exec --no-startup-id "mons -e right; {{ polybar_directory }}/launcher.sh", mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
@@ -214,7 +214,7 @@ client.unfocused        $background $background $foreground $background $backgro
 client.urgent           $background $background $foreground $darkred $background
 client.placeholder      $background $background $foreground $background $background
 
-exec_always --no-startup-id ~/.config/polybar/launcher.sh
+exec_always --no-startup-id {{ polybar_directory }}/launcher.sh
 
 # Default settings related with X and environment
 exec_always --no-startup-id "xset dpms 240 300 0"
