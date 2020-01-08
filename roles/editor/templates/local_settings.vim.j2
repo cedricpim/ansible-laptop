@@ -167,7 +167,10 @@ endfun
 
 autocmd BufWritePre * call StripTrailingWhitespace()
 autocmd FileType yaml let b:noStripWhitespace=1
-autocmd FileType gitcommit setlocal spell textwidth=72 " Helps Git commit messages
+" Helps Git commit messages
+autocmd FileType gitcommit setlocal spell textwidth=72
+autocmd User VimagitEnterCommit setlocal spell textwidth=72
+autocmd User VimagitLeaveCommit setlocal textwidth=0
 autocmd FileType crontab setlocal nobackup nowritebackup " Edit crontab files
 
 augroup vimrc " Source vim configuration upon save
