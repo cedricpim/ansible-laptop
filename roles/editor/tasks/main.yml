@@ -26,12 +26,11 @@
 
 - name: "Install Think.Vim dependencies"
   pip:
-    name: "{{ item }}"
+    name:
+      - "pynvim"
+      - "Send2Trash"
     state: "latest"
     extra_args: "--user"
-  with_items:
-    - "pynvim"
-    - "Send2Trash"
 
 - name: "Install ruby Think.Vim dependencies"
   gem:
