@@ -1,10 +1,11 @@
 ---
-backup_size: "200M"
-backup_name: "backup"
-backup_mount_dir: "/mnt/backup"
-backup_password: "123456"
-backup_dirs:
-  - "/opt"
-backup_exclude_options:
-  - "--exclude=/home/*/some_dir"
-backup_final_destination: "~"
+backup_main_user: "user"
+backup_final_destination: "/home/user/backups"
+
+backup_configurations:
+  - name: "home"
+    directory: "/home"
+    password: "12345678"
+    filters:
+      - "-*/some_dir/"
+      - "-*/backups/"

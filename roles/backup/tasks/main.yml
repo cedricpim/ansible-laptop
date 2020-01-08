@@ -1,50 +1,74 @@
 ---
-- name: "Install cryptsetup"
-  pacman:
-    name: "cryptsetup"
-    state: "present"
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "duplicacy"
+
+- name: "Install pexpect"
+  pip:
+    name: "pexpect"
+    state: "latest"
   become: yes
 
-- name: "Retrieve list of packages installed"
+- name: "Create folder for backups"
+  file:
+    path: "{{ backup_final_destination }}"
+    owner: "{{ backup_main_user }}"
+    group: "{{ backup_main_user }}"
+    state: "directory"
+    mode: "0755"
+  become: yes
+
+- name: "Retrieve list of installed packages"
   command: "yay -Qet"
   changed_when: false
   register: packages_list
 
-- name: "Create temporary backup directory"
-  tempfile:
-    suffix: "backup"
-    state: "directory"
-  register: tempdir
-  notify: "Cleanup backup tempdir"
+- name: "Copy list of installed packages"
+  copy:
+    content: "{{ packages_list.stdout }}"
+    dest: "{{ backup_final_destination }}/packages"
+  become: yes
+  when: packages_list is defined
 
-- name: "Create empty file with size of container"
-  command: "fallocate -l {{ backup_size }} {{ tempdir.path }}/{{ backup_name }}.img"
-  when: tempdir is defined
+- name: "Check if duplicacy repository has been initiated"
+  stat:
+    path: "{{ item.directory }}/.duplicacy"
+  with_items: "{{ backup_configurations }}"
+  no_log: yes
+  become: yes
+  register: duplicacy_repositories
 
-- name: "Create backup"
-  block:
-    - copy: content="{{ backup_password }}" dest="{{ tempdir.path }}/keyfile"
-      no_log: yes
-    - command: "cryptsetup luksFormat --type luks2 --key-file {{ tempdir.path }}/keyfile {{ tempdir.path }}/{{ backup_name }}.img"
-    - command: "cryptsetup luksOpen --key-file {{ tempdir.path }}/keyfile {{ tempdir.path }}/{{ backup_name }}.img {{ backup_name }}"
-    - filesystem: fstype="ext4" dev="/dev/mapper/{{ backup_name }}"
-    - mount: path="{{ backup_mount_dir }}" src="/dev/mapper/{{ backup_name }}" fstype="ext4" state="mounted"
-    - copy: content="{{ packages_list.stdout }}" dest="{{ backup_mount_dir }}/packages"
-    - synchronize: src="{{ item }}" dest="{{ backup_mount_dir }}" archive=yes recursive=yes delete=yes rsync_opts="{{ backup_exclude_options }}"
-      delegate_to: "{{ inventory_hostname }}"
-      with_items: "{{ backup_dirs }}"
-  always:
-    - file: path="{{ tempdir.path }}/keyfile" state="absent"
-    - mount: path="{{ backup_mount_dir }}" state="absent"
-    - command: "cryptsetup luksClose {{ backup_name }}"
+- name: "Initiate the repositories for backups"
+  expect:
+    command: "duplicacy init -e -storage-name {{ item.item.name }} {{ item.item.name }} {{ backup_final_destination }}/{{ item.item.name }}"
+    responses:
+      password: "{{ item.item.password }}"
+  args:
+    chdir: "{{ item.item.directory }}"
+  with_items: "{{ duplicacy_repositories.results }}"
+  no_log: yes
   become: yes
   when:
-    - tempdir is defined
-    - packages_list is defined
+    - duplicacy_repositories is defined
+    - not item.stat.exists
 
-- name: "Copy backup to HOME folder"
-  copy:
-    src: "{{ tempdir.path }}/{{ backup_name }}.img"
-    dest: "{{ backup_final_destination | regex_replace('~', ansible_env.HOME) }}/{{ backup_name }}.img"
-    remote_src: yes
-  when: tempdir is defined
+- name: "Copy filters for backup"
+  template:
+    src: "filters.j2"
+    dest: "{{ item.directory }}/.duplicacy/filters"
+    mode: "0644"
+  vars:
+    lines: "{{ item.filters | default([]) }}"
+  with_items: "{{ backup_configurations }}"
+  no_log: yes
+  become: yes
+
+- name: "Ensure {{ backup_main_user }} permissions are set"
+  file:
+    path: "{{ backup_final_destination }}"
+    owner: "{{ backup_main_user }}"
+    group: "{{ backup_main_user }}"
+    state: "directory"
+    recurse: yes
+  become: yes

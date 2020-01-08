@@ -2,8 +2,27 @@
 - hosts: local
 
   vars_files:
-    - "../vaulted_vars/backup.yml"
-    - "../vars/backup.yml"
+    - "../vaulted_vars/system.yml"
+    - "../vars/system.yml"
 
-  roles:
-    - { role: "backup", tags: "backup" }
+  tasks:
+    - name: "Execute backup"
+      expect:
+        command: "duplicacy backup"
+        responses:
+          password: "{{ item.password }}"
+        timeout: null
+      args:
+        chdir: "{{ item.directory }}"
+      with_items: "{{ backup_configurations }}"
+      no_log: yes
+      become: yes
+
+    - name: "Ensure {{ backup_main_user }} permissions are set"
+      file:
+        path: "{{ backup_final_destination }}"
+        owner: "{{ backup_main_user }}"
+        group: "{{ backup_main_user }}"
+        state: "directory"
+        recurse: yes
+      become: yes
