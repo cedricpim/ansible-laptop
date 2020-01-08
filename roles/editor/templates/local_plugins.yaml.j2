@@ -6,14 +6,14 @@
 - repo: tbabej/taskwiki
   depends: vimwiki
 
+# Git related plugins
+- repo: tpope/vim-fugitive
 # Used by vim-fugitive :Gbrowser for GitLab
 - repo: shumphrey/fugitive-gitlab.vim
   depends: vim-fugitive
-  on_cmd: Gbrowse
 # Used by vim-fugitive :Gbrowser for GitHub
 - repo: tpope/vim-rhubarb
   depends: vim-fugitive
-  on_cmd: Gbrowse
 
 # Add syntax
 - repo: sheerun/vim-polyglot
