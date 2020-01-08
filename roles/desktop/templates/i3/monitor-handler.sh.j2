@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+{{ ansible_managed | comment }}
+
+case ${MONS_NUMBER} in
+  1)
+    mons -o
+    ;;
+  2)
+    mons -s
+    ;;
+esac
+
+feh --bg-scale {{ wallpaper_directory }}/wallpaper{{ wallpaper | splitext | last }}
+i3-msg restart

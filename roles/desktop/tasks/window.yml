@@ -29,6 +29,7 @@
     - { name: "scratchpad-launcher.sh", mode: "0700" }
     - { name: "audio.sh", mode: "0700" }
     - { name: "bb.sh", mode: "0700" }
+    - { name: "monitor-handler.sh", mode: "0700" }
 
 - name: "Create folder for rofi configuration"
   file:

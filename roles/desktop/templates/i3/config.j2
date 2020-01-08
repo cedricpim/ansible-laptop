@@ -143,6 +143,7 @@ assign [class={{ workspace.assigned | to_json }}] → number {{ workspace.key }}
 {% for application in startup_applications %}
 exec --no-startup-id {{ application }}
 {% endfor %}
+exec --no-startup-id mons -a #-x "~/.config/i3/monitor-handler.sh"
 
 {% for application in scratchpad_applications %}
 for_window [instance={{ application.name | to_json }}] move scratchpad
@@ -183,9 +184,9 @@ bindsym $mod+Shift+s mode "$mode_resize"
 # Displays management
 set $mode_monitors Monitors: (e) external screen, (i) internal screen, (m) multiple screens
 mode "$mode_monitors" {
-  bindsym i exec --no-startup-id mons -o; restart, mode "default"
-  bindsym e exec --no-startup-id mons -s; restart, mode "default"
-  bindsym m exec --no-startup-id mons -e right; restart, mode "default"
+  bindsym i exec_always --no-startup-id mons -o, mode "default"
+  bindsym e exec_always --no-startup-id mons -s, mode "default"
+  bindsym m exec_always --no-startup-id mons -e right, mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
