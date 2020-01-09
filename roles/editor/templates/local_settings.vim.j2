@@ -131,13 +131,12 @@ let g:maximizer_set_mapping_with_bang = 1
 let g:maximizer_default_mapping_key = "<C-o>"
 
 " Vim-fugitive configs
-noremap <Leader>gg :Git<space>
+noremap <Leader>gg :!git<space>
 noremap <Leader>gd :Gdiff<CR>
 noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gc :Gcommit -S %<CR>
 noremap <Leader>gp :Gpush<CR>
-noremap <Leader>gP :Git push --force-with-lease<CR>
-noremap <Leader>go :Gbrowse<CR>
+noremap <Leader>gP :Gpush --force-with-lease<CR>
 noremap <Leader>gr :Gread<CR>
 
 " Vimwiki/taskwiki configs
