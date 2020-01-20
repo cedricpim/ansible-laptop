@@ -5,6 +5,14 @@
     state: "present"
   become: yes
 
+- name: "Ensure yay user exists"
+  user:
+    name: "yay"
+    state: "present"
+    shell: "/usr/bin/nologin"
+    create_home: no
+  become: yes
+
 - name: "Check if Yay is installed"
   command: "pacman -Q yay"
   failed_when: no
@@ -18,19 +26,8 @@
   register: aur_package_check
   when: pkg_name is defined
 
-- name: "Ensure yay user exists"
-  user:
-    name: "yay"
-    state: "present"
-    shell: "/usr/bin/nologin"
-  become: yes
-  when:
-    - pkg_name is defined
-    - (aur_yay_check is defined and aur_yay_check.rc != 0) or (aur_package_check is defined and aur_package_check.rc != 0)
-
 - name: "Install Yay"
   block:
-    - file: path="~yay/.ansible/tmp" owner="yay" group="yay" state="directory"
     - tempfile: suffix="yay" state="directory"
       register: yay_tempdir
       become_user: "yay"
@@ -50,11 +47,18 @@
 
 - name: "Install {{ pkg_name }}"
   block:
+    - tempfile: suffix="yay" state="directory"
+      register: yay_install_tempdir
+      become_user: "yay"
     - lineinfile: path="/etc/sudoers" insertbefore="BOF" line="yay ALL=(ALL) NOPASSWD{{ ':' }} ALL" validate="visudo -cf %s" state="present"
     - command: "yay -Sy {{ pkg_name }} --needed --noconfirm"
+      environment:
+        XDG_CONFIG_HOME: "{{ yay_install_tempdir.path }}"
+        XDG_CACHE_HOME: "{{ yay_install_tempdir.path }}"
       become_user: "yay"
   always:
     - lineinfile: path="/etc/sudoers" regexp='^yay' validate="visudo -cf %s" state="absent"
+    - file: path="{{ yay_install_tempdir.path }}" state="absent"
   become: yes
   when:
     - pkg_name is defined
