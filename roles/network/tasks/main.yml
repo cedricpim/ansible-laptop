@@ -10,6 +10,7 @@
       - "ntp"
       - "openresolv"
       - "wpa_supplicant"
+      - "whois"
     state: "present"
   become: yes
 
