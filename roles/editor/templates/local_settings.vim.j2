@@ -45,30 +45,36 @@ nnoremap <Leader>lo :lopen<CR>
 nnoremap <Leader>h  :noh<CR>
 
 " Disable arrow keys
-nnoremap <up>    <nop>
-nnoremap <down>  <nop>
-nnoremap <left>  <nop>
-nnoremap <right> <nop>
-vnoremap <up>    <nop>
-vnoremap <down>  <nop>
-vnoremap <left>  <nop>
-vnoremap <right> <nop>
+nnoremap <Up>    <Nop>
+nnoremap <Down>  <Nop>
+nnoremap <Left>  <Nop>
+nnoremap <Right> <Nop>
+vnoremap <Up>    <Nop>
+vnoremap <Down>  <Nop>
+vnoremap <Left>  <Nop>
+vnoremap <Right> <Nop>
 
 " On insert mode, Shift-Tab to remove indentation
 inoremap <S-Tab> <C-D>
 " On visual mode, use tab and shift tab to indent the current selected text
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
+
 nnoremap <Leader>tc :tabedit<CR>
 nnoremap <Leader>tq :tabclose<CR>
 nnoremap <C-j> 19j<CR>
 nnoremap <C-k> 21k<CR>
+
 nnoremap <A-\> :vsplit<CR>
 nnoremap <A-;> :vertical resize -5<CR>
-nnoremap <A-"> :vertical resize +5<CR>
+nnoremap <A-'> :vertical resize +5<CR>
 nnoremap <A-[> :resize -5<CR>
 nnoremap <A-]> :resize +5<CR>
 nnoremap <A--> :split<CR>
+nnoremap <S-h> <C-w>h
+nnoremap <S-j> <C-w>j
+nnoremap <S-k> <C-w>k
+nnoremap <S-l> <C-w>l
 
 " Yank full file path (also with current line)
 nnoremap <Leader>fp :let @+=expand("%:p")<CR>
@@ -79,6 +85,14 @@ nnoremap <Leader>rpl :let @+=expand("%") . ":" . line(".")<CR>
 " Buffers movement
 noremap gp :bp<CR>
 noremap gn :bn<CR>
+
+nnoremap <S-Tab> za
+nnoremap <Leader>q :q<CR>
+
+nnoremap <Up> :cp<CR>
+nnoremap <Down> :cn<CR>
+nnoremap <Left> :cpf<CR>
+nnoremap <Right> :cnf<CR>
 
 """"""""""""""""""
 " Configurations "
