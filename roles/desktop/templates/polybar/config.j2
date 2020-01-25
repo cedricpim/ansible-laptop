@@ -52,7 +52,7 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-modules-left = vpn wlan battery volume backlight
+modules-left = wlan battery volume backlight
 modules-center = i3
 modules-right = temperature memory cpu datetime
 
@@ -72,14 +72,6 @@ enable-scroll = false
 label-unfocused-foreground = ${colors.darkwhite}
 label-focused-foreground = ${root.focus-primary-color}
 label-urgent-foreground = ${colors.red}
-
-
-[module/vpn]
-type = custom/script
-exec = echo ""
-exec-if = "wg show interfaces | grep tun0"
-interval = 5
-label-foreground = ${colors.darkcyan}
 
 
 [module/wlan]
