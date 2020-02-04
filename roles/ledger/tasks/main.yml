@@ -4,6 +4,7 @@
     name:
       - "git"
       - "ruby"
+      - "libsodium"
     state: "present"
   become: yes
 
