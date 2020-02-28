@@ -10,8 +10,8 @@ editor_wiki: "~/Sync/general/files/wiki"
 
 firefox_profile: "Path=[a-z0-9]{8}.dev-edition-default"
 
-ledger_file: "~/Sync/general/files/ledger.csv"
-ledger_networth: "~/Sync/general/files/networth.csv"
+ledger_file: "~/Sync/general/files/rbledger.csv"
+ledger_networth: "~/Sync/general/files/rbnetworth.csv"
 ledger_currency: "EUR"
 ledger_investment_categories:
   - "Investment"
@@ -101,7 +101,6 @@ git_signingkey: "{{ vault_git_signingkey }}"
 ledger_password: "{{ vault_ledger_password }}"
 ledger_salt: "{{ vault_ledger_salt }}"
 ledger_exchange_api_key: "{{ vault_ledger_exchange_api_key }}"
-ledger_functions: "{{ vault_ledger_functions }}"
 ledger_aliases: "{{ vault_ledger_aliases }}"
 
 keepassxc_database_directory: "{{ vault_keepassxc_database_directory }}"

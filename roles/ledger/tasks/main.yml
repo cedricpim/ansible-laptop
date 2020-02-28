@@ -36,6 +36,6 @@
 
 - name: "Copy ledger configuration"
   template:
-    src: "config.j2"
-    dest: "{{ ledger_config_directory }}/config"
+    src: "ledger.conf.j2"
+    dest: "{{ ledger_config_directory }}/ledger.conf"
     mode: "0600"
