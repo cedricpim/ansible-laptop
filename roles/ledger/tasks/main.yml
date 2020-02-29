@@ -39,3 +39,5 @@
     src: "ledger.conf.j2"
     dest: "{{ ledger_config_directory }}/ledger.conf"
     mode: "0600"
+
+- import_tasks: "alternative.yml"

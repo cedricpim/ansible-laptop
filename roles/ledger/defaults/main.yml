@@ -4,7 +4,26 @@ ledger_directory: "~/.ledger"
 
 ledger_config_directory: "~/.config/ledger"
 
-ledger_file: "~/.config/ledger.csv"
-ledger_networth: "~/.config/networth.csv"
+ledger_file: "{{ ledger_config_directory }}/ledger.csv"
+ledger_networth: "{{ ledger_config_directory }}/networth.csv"
+ledger_afile: "{{ ledger_config_directory }}/aledger.csv"
+ledger_anetworth: "{{ ledger_config_directory }}/anetworth.csv"
 
 ledger_aliases: ""
+
+ledger_destination: "/usr/local/bin"
+
+ledger_currency: "EUR"
+ledger_investment_categories:
+  - "Investment"
+ledger_excluded_categories:
+  - "Transfer"
+  - "Exchange"
+  - "Investment"
+ledger_ignored_accounts:
+  - "Vacation"
+  - "Personal"
+
+ledger_version: "1.0.0"
+ledger_filename: "ledger-v{{ ledger_version }}-x86_64-unknown-linux-musl"
+ledger_url: "https://github.com/cedricpim/ledger-rust/releases/download/v{{ ledger_version }}/{{ ledger_filename }}"

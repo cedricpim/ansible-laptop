@@ -98,12 +98,6 @@ neomutt_smtp_protocol: "smtps"
 ledger_salt: "salt"
 ledger_password: "password"
 ledger_exchange_api_key: "some_key"
-ledger_currency: "EUR"
-ledger_investment_categories:
-  - "Investment"
-ledger_excluded_categories:
-  - "Exchange"
-  - "Investment"
 
 tmux_continuum: "off"
 

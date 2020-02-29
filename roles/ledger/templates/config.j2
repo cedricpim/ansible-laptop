@@ -1,0 +1,15 @@
+{{ ansible_managed | comment }}
+
+encryption: {{ ledger_apassword }}
+files:
+  ledger: {{ ledger_afile }}
+  networth: {{ ledger_anetworth }}
+exchange:
+  api_key: {{ ledger_exchange_api_key }}
+  cache_file: /tmp/exchange-cache.yml
+  ttl: 86400
+transfer: {{ ledger_excluded_categories | first }}
+ignored_accounts: {{ ledger_ignored_accounts }}
+investments: {{ ledger_investment_categories | first }}
+currency: {{ ledger_currency }}
+firefly: {{ ledger_firefly }}

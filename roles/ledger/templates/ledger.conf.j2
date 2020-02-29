@@ -10,8 +10,8 @@
 {% endfor %}
   :exclude:
     :accounts:
-{% for excluded_account in ledger_excluded_accounts %}
-      - {{ excluded_account }}
+{% for ignored_account in ledger_ignored_accounts %}
+      - {{ ignored_account }}
 {% endfor %}
 
 :exchange:
@@ -50,8 +50,8 @@
       - {{ excluded_category }}
 {% endfor %}
     :accounts:
-{% for excluded_account in ledger_excluded_accounts %}
-      - {{ excluded_account }}
+{% for ignored_account in ledger_ignored_accounts %}
+      - {{ ignored_account }}
 {% endfor %}
 
 :format:
