@@ -12,8 +12,6 @@
     - get_url: url="{{ ledger_url }}.tar.gz" dest="{{ tempdir.path }}" checksum="sha256:{{ ledger_url }}-sha256sum.txt"
     - unarchive: src="{{ ledger_url }}.tar.gz" dest="{{ tempdir.path }}" remote_src=yes
     - command: "mv {{ tempdir.path }}/{{ ledger_filename }}/ledger {{ ledger_destination }}/ledger"
-      args:
-        creates: "{{ ledger_destination }}/ledger"
     - file: path="{{ ledger_destination }}/ledger" owner="root" group="root"
   always:
     - file: path="{{ tempdir.path }}" state="absent"
