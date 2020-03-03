@@ -1,25 +1,16 @@
 ---
-ledger_repo: "https://github.com/cedricpim/ledger.git"
-ledger_directory: "~/.ledger"
-
 ledger_config_directory: "~/.config/ledger"
 
 ledger_file: "{{ ledger_config_directory }}/ledger.csv"
 ledger_networth: "{{ ledger_config_directory }}/networth.csv"
-ledger_afile: "{{ ledger_config_directory }}/aledger.csv"
-ledger_anetworth: "{{ ledger_config_directory }}/anetworth.csv"
 
 ledger_aliases: ""
 
 ledger_destination: "/usr/local/bin"
 
 ledger_currency: "EUR"
-ledger_investment_categories:
-  - "Investment"
-ledger_excluded_categories:
-  - "Transfer"
-  - "Exchange"
-  - "Investment"
+ledger_investment: "Investment"
+ledger_transfer: "Transfer"
 ledger_ignored_accounts:
   - "Vacation"
   - "Personal"

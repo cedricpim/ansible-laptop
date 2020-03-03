@@ -12,10 +12,8 @@ editor_wiki: "~/Sync/general/files/wiki"
 
 firefox_profile: "Path=[a-z0-9]{8}.default"
 
-ledger_afile: "~/Sync/general/files/ledger.csv"
-ledger_anetworth: "~/Sync/general/files/networth.csv"
-ledger_file: "~/Sync/general/files/rbledger.csv"
-ledger_networth: "~/Sync/general/files/rbnetworth.csv"
+ledger_file: "~/Sync/general/files/ledger.csv"
+ledger_networth: "~/Sync/general/files/networth.csv"
 
 syncthing_port: "8384"
 
@@ -90,11 +88,9 @@ git_full_name: "{{ vault_git_full_name }}"
 git_email: "{{ vault_git_email }}"
 git_signingkey: "{{ vault_git_signingkey }}"
 
-ledger_firefly: "{{ vault_ledger_firefly }}"
-ledger_apassword: "{{ vault_ledger_apassword }}"
 ledger_password: "{{ vault_ledger_password }}"
-ledger_salt: "{{ vault_ledger_salt }}"
 ledger_exchange_api_key: "{{ vault_ledger_exchange_api_key }}"
+ledger_firefly: "{{ vault_ledger_firefly }}"
 ledger_aliases: "{{ vault_ledger_aliases }}"
 
 keepassxc_database_directory: "{{ vault_keepassxc_database_directory }}"

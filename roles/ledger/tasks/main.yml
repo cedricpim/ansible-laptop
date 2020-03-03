@@ -1,33 +1,22 @@
 ---
-- name: "Ensure ruby is installed"
-  pacman:
-    name:
-      - "git"
-      - "ruby"
-      - "libsodium"
-    state: "present"
-  become: yes
+- name: "Get currently installed version"
+  command: "ledger --version"
+  failed_when: no
+  changed_when: no
+  register: ledger_installed_version
 
-- name: "Download ledger repository"
-  git:
-    repo: "{{ ledger_repo }}"
-    dest: "{{ ledger_directory }}"
-    clone: yes
-    update: yes
-  register: ledger_repo
-
-- name: "Install ledger"
+- name: "Download and install ledger"
   block:
-    - command: "gem build ledger.gemspec"
-      args:
-        chdir: "{{ ledger_directory }}"
-      register: ledger_gem
-    - command: "gem install {{ ledger_gem.stdout | regex_findall('File: (.*)') | first }} --no-document"
-      args:
-        chdir: "{{ ledger_directory }}"
-  rescue:
-    - file: path="{{ ledger_directory }}" state="absent"
-  when: ledger_repo is defined and ledger_repo is changed
+    - tempfile: suffix="ledger" state="directory"
+      register: tempdir
+    - get_url: url="{{ ledger_url }}.tar.gz" dest="{{ tempdir.path }}" checksum="sha256:{{ ledger_url }}-sha256sum.txt"
+    - unarchive: src="{{ ledger_url }}.tar.gz" dest="{{ tempdir.path }}" remote_src=yes
+    - command: "mv {{ tempdir.path }}/{{ ledger_filename }}/ledger {{ ledger_destination }}/ledger"
+    - file: path="{{ ledger_destination }}/ledger" owner="root" group="root"
+  always:
+    - file: path="{{ tempdir.path }}" state="absent"
+  when: ledger_installed_version.stdout is not defined or ledger_installed_version.stdout != ledger_version
+  become: yes
 
 - name: "Create folder for ledger configuration"
   file:
@@ -36,8 +25,6 @@
 
 - name: "Copy ledger configuration"
   template:
-    src: "ledger.conf.j2"
-    dest: "{{ ledger_config_directory }}/ledger.conf"
+    src: "config.j2"
+    dest: "{{ ledger_config_directory }}/config"
     mode: "0600"
-
-- import_tasks: "alternative.yml"
