@@ -188,3 +188,9 @@ autocmd FileType crontab setlocal nobackup nowritebackup " Edit crontab files
 augroup vimrc " Source vim configuration upon save
   autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
 augroup END
+
+" Toggle non relative line numbers on insert
+augroup toggle_relative_number
+  autocmd InsertEnter * :setlocal norelativenumber
+  autocmd InsertLeave * :setlocal relativenumber
+augroup END
