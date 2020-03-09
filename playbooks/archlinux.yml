@@ -19,6 +19,7 @@
     - { role: "network", tags: "network" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
+    - { role: "rkhunter", tags: "rkhunter" }
     - { role: "torrents", tags: "torrents" }
     - { role: "display", tags: "display" }
     - { role: "session", tags: "session" }

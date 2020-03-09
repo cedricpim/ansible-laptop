@@ -15,6 +15,7 @@
     - { role: "pacman", tags: "pacman" }
     - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
+    - { role: "rkhunter", tags: "rkhunter" }
     - { role: "display", tags: "display" }
     - { role: "session", tags: "session" }
     - { role: "agenda", tags: "agenda" }

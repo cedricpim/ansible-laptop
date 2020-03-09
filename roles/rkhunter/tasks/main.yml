@@ -1,0 +1,35 @@
+---
+- name: "Install Rkhunter and dependencies"
+  pacman:
+    name:
+      - "unhide"
+      - "rkhunter"
+    state: "latest"
+  become: yes
+
+- name: "Create Rkhunter directories"
+  file:
+    path: "{{ rkhunter_config_directory }}"
+    mode: "0755"
+    owner: "root"
+    group: "root"
+    state: "directory"
+  become: yes
+
+- name: "Copy Rkhunter local settings"
+  template:
+    src: "rkhunter.conf.local.j2"
+    dest: "{{ rkhunter_config_directory }}/rkhunter.conf.local"
+    mode: "0600"
+    owner: "root"
+    group: "root"
+  become: yes
+  register: rkhunter_settings
+
+- name: "Update Rkhunter"
+  command: "rkhunter --update --propupd"
+  become: yes
+  register: rkhunter_update
+  failed_when:
+    - rkhunter_update.failed
+    - not "Updated" in rkhunter_update.stdout
