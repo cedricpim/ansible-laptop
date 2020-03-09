@@ -1,5 +1,5 @@
 ---
-- name: ensure zprezto is cloned and up-to-date
+- name: "Ensure zprezto is cloned and up-to-date"
   git:
     repo: "{{ zprezto_repo }}"
     dest: "{{ zprezto_dest }}"
@@ -8,42 +8,42 @@
     recursive: yes
   register: cloned_zprezto
 
-- name: pull zprezto submodules
+- name: "Pull zprezto submodules"
   command: "git submodule update --init --recursive"
   args:
     chdir: "{{ zprezto_dest }}"
   when: cloned_zprezto is defined and cloned_zprezto.submodules_changed is defined
 
-- name: copy zprezto configuration file
+- name: "Copy zprezto configuration file"
   template:
     src: "zprezto/zpreztorc.j2"
     dest: "~/.zpreztorc"
-    mode: 0600
+    mode: "0600"
 
-- name: create folder for zsh configuration files
+- name: "Create folder for zsh configuration files"
   file:
     path: "{{ zsh_directory }}"
-    state: directory
+    state: "directory"
 
-- name: copy main zsh configuration files
+- name: "Copy main zsh configuration files"
   template:
     src: "zsh/{{ item }}.j2"
     dest: "~/.{{ item }}"
-    mode: 0600
+    mode: "0600"
   with_items:
-    - zlogin
-    - zshenv
-    - zshrc
+    - "zlogin"
+    - "zshenv"
+    - "zshrc"
 
-- name: copy the remaining zsh configuration files
+- name: "Copy the remaining zsh configuration files"
   template:
     src: "zsh/{{ item }}.j2"
     dest: "{{ zsh_directory }}/{{ item }}"
-    mode: 0600
+    mode: "0600"
   with_items:
-    - aliases
-    - exports
-    - functions
-    - production-warning
-    - zsettings
-    - zstyles
+    - "aliases"
+    - "exports"
+    - "functions"
+    - "production-warning"
+    - "zsettings"
+    - "zstyles"
