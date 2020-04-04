@@ -3,6 +3,7 @@
 [alias]
   # Main aliases
   co = checkout
+  sw = switch
   st = status
   s = status -s
   rso = remote show origin
@@ -27,11 +28,11 @@
   # Show the diff between the latest commit and the current state
   d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
   # Switch to a branch, creating it if necessary
-  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+  go = "!f() { git switch -c \"$1\" 2> /dev/null || git switch \"$1\"; }; f"
   # Interactive rebase with the given number of latest commits
   reb = "!f() { git rebase -i HEAD~$1; }; f"
   # Rebase current branch with master
-  rebup = "!f() { git co master; git pull; git co -; git rebase master; }; f"
+  rebup = "!f() { git switch master; git pull; git switch -; git rebase master; }; f"
   # Find branches containing commit
   fb = "!f() { git branch -a --contains $1; }; f"
   # Find tags containing commit
@@ -41,7 +42,7 @@
   # Find commits by commit message
   fm = "!f() { git log -p --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
   # Remove branches that have already been merged with master a.k.a. ‘delete merged’
-  mop = "!f() { git co master && git remote prune origin && git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D; }; f"
+  mop = "!f() { git switch master && git remote prune origin && git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D; }; f"
   # Like mop but do not do any destructive action, printing the branches that would be deleted instead
   dry-mop = "!f() { git remote prune origin && git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs -r0 -n1 echo; }; f"
   # Run bundled rubocop on the files that have changes from current branch to master
