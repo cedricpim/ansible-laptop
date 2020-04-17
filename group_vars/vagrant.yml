@@ -71,8 +71,8 @@ notmuch_other_emails:
   - "third@example.localhost"
 
 offlineimap_email_accounts:
-  - { name: "default",   type: "Maildir", user: "default@example.localhost",   password: "default"   }
-  - { name: "secondary", type: "Maildir", user: "secondary@example.localhost", password: "secondary" }
+  - { name: "default",   type: "Maildir", user: "default@example.localhost",   password: "default",   host: "some.host" }
+  - { name: "secondary", type: "Maildir", user: "secondary@example.localhost", password: "secondary", host: "some.host" }
 
 neomutt_email_server: "example.localhost"
 neomutt_email_accounts:

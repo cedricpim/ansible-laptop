@@ -93,7 +93,7 @@ footer = "\n"
 # You'll need to have a "Repository ..." section for each one.
 localrepository = {{ account.name }}-Local
 remoterepository = {{ account.name }}-Remote
-maxage = 90
+maxage = 180
 
 
 [Repository {{ account.name }}-Local]
@@ -120,7 +120,7 @@ ssl_version = tls1_2
 # "getcredentials" that parses a file "filename" and returns the account
 # details for "hostname".
 {% if account.type != "Gmail" %}
-remotehost = {{ account.user.split("@") | last }}
+remotehost = {{ account.host }}
 {% endif %}
 remoteuser = {{ account.user }}
 remotepass = {{ account.password }}
