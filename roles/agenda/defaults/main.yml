@@ -2,4 +2,3 @@
 vdirsyncer_directory: "~/.config/vdirsyncer"
 khal_directory: "~/.config/khal"
 khard_directory: "~/.config/khard"
-task_theme: "no-color"

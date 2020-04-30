@@ -1,9 +1,6 @@
 ---
 ### General configurations
 
-agenda_task: "~/Sync/general/files/task"
-task_theme: "solarized-light-256"
-
 default_browser: "firefox-developer-edition"
 
 editor_wiki: "~/Sync/general/files/wiki"

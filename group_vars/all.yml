@@ -2,6 +2,3 @@
 scripts_directory: "/usr/local/bin"
 
 default_browser: "firefox"
-
-task_config_directory: "~/.config/task"
-agenda_task: "~/.config/task"

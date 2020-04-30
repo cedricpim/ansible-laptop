@@ -3,9 +3,6 @@
 main: yes
 server: yes
 
-agenda_task: "~/Sync/general/files/task"
-task_theme: "solarized-dark-256"
-
 default_browser: "firefox"
 
 editor_wiki: "~/Sync/general/files/wiki"

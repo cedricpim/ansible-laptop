@@ -161,10 +161,8 @@ noremap <Leader>gp :Gpush<CR>
 noremap <Leader>gP :Gpush --force-with-lease<CR>
 noremap <Leader>gr :Gread<CR>
 
-" Vimwiki/taskwiki configs
+" Vimwiki configs
 let g:vimwiki_list = [{"path": "{{ editor_wiki }}", "syntax": "markdown", "ext": ".md"}]
-let g:taskwiki_data_location = "{{ agenda_task }}"
-let g:taskwiki_taskrc_location = "{{ task_config_directory }}/taskrc"
 
 " Make configurations
 nnoremap <S-m> :make build<CR>
