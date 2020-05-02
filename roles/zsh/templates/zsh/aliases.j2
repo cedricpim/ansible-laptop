@@ -20,7 +20,6 @@ alias rails="be rails"
 
 ## Application
 alias vim="nvim"
-alias rg="rg -p -L --hidden --sort-files"
 alias feh="feh -F"
 alias sudo="sudo " # Enable aliases to be sudo’ed
 
@@ -107,6 +106,15 @@ function remove-orphanaged() {
 function loggo() {
   cd /home
   sudo -u $1 zsh
+}
+
+# Use pager with ripgrep
+function rg() {
+  if [ -t 1 ]; then
+      command rg -p -L --hidden --sort-files "$@" | less -RMFXK
+  else
+      command rg "$@"
+  fi
 }
 
 # Use MyTraceRoute to check internet conditions
