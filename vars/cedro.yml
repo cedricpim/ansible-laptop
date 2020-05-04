@@ -40,6 +40,7 @@ startup_applications:
   - "udiskie -ans"
   - "performetric"
   - "mullvad-vpn"
+  - "blueman-applet"
 
 scratchpad_applications:
   - { name: "todo",     keybinding: "t" }
