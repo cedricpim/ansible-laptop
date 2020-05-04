@@ -78,8 +78,6 @@ agenda_khal: "{{ vault_agenda_khal }}"
 agenda_khard: "{{ vault_agenda_khard }}"
 agenda_vdirsyncer: "{{ vault_agenda_vdirsyncer }}"
 
-bluetooth_device_id: "{{ vault_bluetooth_device_id }}"
-
 editor_private_gitlab: "{{ vault_editor_private_gitlab }}"
 
 git_full_name: "{{ vault_git_full_name }}"

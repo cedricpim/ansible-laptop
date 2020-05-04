@@ -61,8 +61,6 @@ agenda_vdirsyncer:
       - { key: "client_id",     value: "client-id" }
       - { key: "client_secret", value: "client-secret" }
 
-bluetooth_device_id: "SOME_ID"
-
 notmuch_full_name: "Vagrant"
 notmuch_primary_email: "first@example.localhost"
 notmuch_other_emails:
