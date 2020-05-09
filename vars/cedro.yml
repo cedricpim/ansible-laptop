@@ -87,6 +87,7 @@ git_signingkey: "{{ vault_git_signingkey }}"
 ledger_password: "{{ vault_ledger_password }}"
 ledger_exchange_api_key: "{{ vault_ledger_exchange_api_key }}"
 ledger_firefly: "{{ vault_ledger_firefly }}"
+ledger_ignored_accounts: "{{ vault_ledger_ignored_accounts }}"
 ledger_aliases: "{{ vault_ledger_aliases }}"
 
 keepassxc_database_directory: "{{ vault_keepassxc_database_directory }}"
