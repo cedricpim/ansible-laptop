@@ -48,7 +48,8 @@ scratchpad_applications:
   - { name: "spotify",  keybinding: "s" }
   - { name: "newsboat", keybinding: "n" }
 
-neovim_background_color: "light"
+colorscheme_name: "PaperColor"
+background_color: "light"
 
 colorscheme:
   foreground: "#4A4543"
