@@ -1,4 +1,3 @@
 ---
 neovim_spell_url: "ftp://ftp.vim.org/pub/vim/runtime/spell"
-think_vim_repo: "https://github.com/cedricpim/ThinkVim.git"
-think_vim_local_configuration_folder: "core/local"
+nvim_config_repo: "git@github.com:cedricpim/nvim.config.git"

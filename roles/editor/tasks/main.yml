@@ -5,12 +5,9 @@
       - "vim"
       - "xsel"
       - "ctags"
-      - "nodejs"
-      - "yarn"
       - "ripgrep"
       - "libvterm"
       - "neovim"
-      - "ruby"
     state: "present"
   become: yes
 
@@ -24,7 +21,7 @@
   loop_control:
     loop_var: "pkg_name"
 
-- name: "Install Think.Vim dependencies"
+- name: "Install plugin dependencies"
   pip:
     name:
       - "pynvim"
@@ -32,35 +29,15 @@
     state: "latest"
     extra_args: "--user"
 
-- name: "Install ruby Think.Vim dependencies"
-  gem:
-    name: "rouge"
-    state: "latest"
-
 - import_tasks: "languages.yml"
 
-- name: "Download Think.Vim repository"
+- name: "Download Nvim configuration repository"
   git:
-    repo: "{{ think_vim_repo }}"
+    repo: "{{ nvim_config_repo }}"
     dest: "{{ neovim_directory }}"
     depth: 1
     clone: yes
     update: yes
-
-- name: "Create folder for Neovim local configurations"
-  file:
-    path: "{{ neovim_directory }}/{{ think_vim_local_configuration_folder }}"
-    state: "directory"
-    mode: "0700"
-
-- name: "Copy Neovim local configurations"
-  template:
-    src: "{{ item }}.j2"
-    dest: "{{ neovim_directory }}/{{ think_vim_local_configuration_folder }}/{{ item }}"
-    mode: "0600"
-  with_items:
-    - "local_settings.vim"
-    - "local_plugins.yaml"
 
 - name: "Create folder for Neovim dictionaries"
   file:
