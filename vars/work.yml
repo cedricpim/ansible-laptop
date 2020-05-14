@@ -3,7 +3,7 @@
 
 default_browser: "firefox-developer-edition"
 
-editor_wiki: "~/Sync/general/files/wiki"
+wiki: "~/Sync/general/files/wiki"
 
 firefox_profile: "Path=[a-z0-9]{8}.dev-edition-default"
 

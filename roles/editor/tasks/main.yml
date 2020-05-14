@@ -17,7 +17,7 @@
 - include_role:
     name: "yay"
   with_items:
-    - "python2-neovim"
+    - "python2-pynvim"
     - "python-neovim"
     - "neovim-remote"
     - "nerd-fonts-complete"

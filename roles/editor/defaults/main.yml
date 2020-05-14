@@ -7,5 +7,3 @@ neovim_spell_dictionaries:
 
 neovim_colorscheme: "PaperColor"
 neovim_background_color: "dark"
-
-editor_wiki: "~/.config/wiki"

@@ -5,7 +5,7 @@ server: yes
 
 default_browser: "firefox"
 
-editor_wiki: "~/Sync/general/files/wiki"
+wiki: "~/Sync/general/files/wiki"
 
 firefox_profile: "Path=[a-z0-9]{8}.default"
 

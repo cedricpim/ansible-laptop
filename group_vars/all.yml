@@ -2,3 +2,5 @@
 scripts_directory: "/usr/local/bin"
 
 default_browser: "firefox"
+
+wiki: "~/.config/wiki"
