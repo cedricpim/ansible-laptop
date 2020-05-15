@@ -7,3 +7,4 @@ wiki: "~/.config/wiki"
 
 colorscheme_name: "solarized"
 background_color: "dark"
+colorscheme_style: ""
