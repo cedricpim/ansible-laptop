@@ -24,6 +24,7 @@
       - "tig"
       - "man-pages"
       - "bind-tools"
+      - "fzf"
     state: "present"
   become: yes
 

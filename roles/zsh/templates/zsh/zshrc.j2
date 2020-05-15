@@ -44,16 +44,6 @@ if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
 
-# rbenv
-if [ `command -v rbenv` ]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-fi
-
-if [ `command -v gem` ] && [ `command -v ruby` ]; then
-  export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-fi
-
 # New colors for ls
 if [ `command -v dircolors` ]; then
   eval $(dircolors -b $HOME/.dircolors)
@@ -69,6 +59,9 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 [ -f /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
+
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
 {% if zsh_extra is defined %}
 {{ zsh_extra }}
