@@ -49,6 +49,10 @@ if [ `command -v dircolors` ]; then
   eval $(dircolors -b $HOME/.dircolors)
 fi
 
+if [ `command -v gem` ] && [ `command -v ruby` ]; then
+  export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+fi
+
 if [ -d "/usr/share/zsh/plugins/zsh-autosuggestions" ]; then
   source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
