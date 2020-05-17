@@ -90,15 +90,12 @@ neomutt_mailbox_mbox: "Mailbox3"
 neomutt_email_server_port: "465"
 neomutt_smtp_protocol: "smtps"
 
-ledger_salt: "salt"
 ledger_password: "password"
 ledger_exchange_api_key: "some_key"
 
-tmux_continuum: "off"
-
 background_color: "dark"
 
-vault_workspaces:
+workspaces:
   - { key: "$ws1",  keybinding: "1",  name: "1:", assigned: "Slack" }
   - { key: "$ws2",  keybinding: "2",  name: "2:", assigned: "Firefox" }
   - { key: "$ws3",  keybinding: "3",  name: "3:" }
@@ -110,7 +107,7 @@ vault_workspaces:
   - { key: "$ws9",  keybinding: "9",  name: "9" }
   - { key: "$ws10", keybinding: "10", name: "10" }
 
-vault_startup_applications:
+startup_applications:
   - "keepassxc"
   - "copyq"
   - "dunst"
@@ -118,7 +115,7 @@ vault_startup_applications:
   - "firefox"
   - "light-locker"
 
-vault_scratchpad_applications:
+scratchpad_applications:
   - { name: "todo",     keybinding: "t" }
   - { name: "mpsyt",    keybinding: "m" }
   - { name: "rikhal",   keybinding: "c" }
