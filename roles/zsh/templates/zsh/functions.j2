@@ -123,3 +123,10 @@ function codepoint() {
 function compress() {
   tar -cf - $1 | xz -9 -c - > $2.tar.xz
 }
+
+# Transform a pdf into a scanned looking pdf
+function scan() {
+  convert -density 150 $1 -colorspace gray -linear-stretch 3.5%x10% -blur 0x0.5 -attenuate 0.25 +noise Gaussian -rotate 0.5 $2.temp
+
+  command gs -dSAFER -dBATCH -dNOPAUSE -dNOCACHE -sOutputFile=$2 -sDEVICE=pdfwrite -sColorConversionStrategy=LeaveColorUnchanged -dAutoFilterColorImages=true -dAutoFilterGrayImages=true -dDownsampleMonoImages=true -dDownsampleGrayImages=true -dDownsampleColorImages=true $2.temp
+}
