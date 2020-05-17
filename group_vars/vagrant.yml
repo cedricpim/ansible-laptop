@@ -96,7 +96,7 @@ ledger_exchange_api_key: "some_key"
 
 tmux_continuum: "off"
 
-neovim_background_color: "dark"
+background_color: "dark"
 
 vault_workspaces:
   - { key: "$ws1",  keybinding: "1",  name: "1:", assigned: "Slack" }
