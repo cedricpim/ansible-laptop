@@ -5,6 +5,8 @@
     user: "{{ lookup('env', 'USER') }}"
 
   vars_files:
+    - "../vaulted_vars/general.yml"
+    - "../vars/general.yml"
     - "../vaulted_vars/{{ user }}.yml"
     - "../vars/{{ user }}.yml"
 

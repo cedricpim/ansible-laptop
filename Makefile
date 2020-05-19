@@ -12,6 +12,7 @@ $(if ${TAGS},    $(eval ANSIBLE_OPTS += --tags ${TAGS}))
 
 ifneq ("$(wildcard vaulted_vars/${VAULT}.txt)", "")
   $(eval VAULT_OPTS += --vault-password-file vaulted_vars/${VAULT}.txt)
+  $(eval VAULT_OPTS += --vault-password-file vaulted_vars/general.txt)
 else
   $(eval VAULT_OPTS += --ask-vault-pass)
 endif

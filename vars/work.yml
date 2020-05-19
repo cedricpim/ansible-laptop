@@ -3,12 +3,7 @@
 
 default_browser: "firefox-developer-edition"
 
-wiki: "~/Sync/general/files/wiki"
-
 firefox_profile: "Path=[a-z0-9]{8}.dev-edition-default"
-
-ledger_file: "~/Sync/general/files/ledger.csv"
-ledger_networth: "~/Sync/general/files/networth.csv"
 
 syncthing_port: "8385"
 
@@ -74,49 +69,6 @@ colorscheme:
     - { key: "color15", name: "white",       value: "#FFFFFF" }
 
 ### Encrypted
-
-agenda_khal: "{{ vault_agenda_khal }}"
-agenda_khard: "{{ vault_agenda_khard }}"
-agenda_vdirsyncer: "{{ vault_agenda_vdirsyncer }}"
-
-editor_private_gitlab: "{{ vault_editor_private_gitlab }}"
-
-git_full_name: "{{ vault_git_full_name }}"
-git_email: "{{ vault_git_email }}"
-git_signingkey: "{{ vault_git_signingkey }}"
-
-ledger_password: "{{ vault_ledger_password }}"
-ledger_exchange_api_key: "{{ vault_ledger_exchange_api_key }}"
-ledger_firefly: "{{ vault_ledger_firefly }}"
-ledger_ignored_accounts: "{{ vault_ledger_ignored_accounts }}"
-ledger_aliases: "{{ vault_ledger_aliases }}"
-
-keepassxc_database_directory: "{{ vault_keepassxc_database_directory }}"
-keepassxc_database_name: "{{ vault_keepassxc_database_name }}"
-
-neomutt_email_server: "{{ vault_neomutt_email_server }}"
-neomutt_email_accounts: "{{ vault_neomutt_email_accounts }}"
-neomutt_sender_full_name: "{{ vault_neomutt_sender_full_name }}"
-neomutt_mailboxes: "{{ vault_neomutt_mailboxes }}"
-neomutt_bindings: "{{ vault_neomutt_bindings }}"
-neomutt_mailbox_record: "{{ vault_neomutt_mailbox_record }}"
-neomutt_mailbox_postponed: "{{ vault_neomutt_mailbox_postponed }}"
-neomutt_mailbox_mbox: "{{ vault_neomutt_mailbox_mbox }}"
-neomutt_email_server_port: "{{ vault_neomutt_email_server_port }}"
-neomutt_smtp_protocol: "{{ vault_neomutt_smtp_protocol }}"
-
-newsblur_username: "{{ vault_newsblur_username }}"
-newsblur_password: "{{ vault_newsblur_password }}"
-
-notmuch_full_name: "{{ vault_notmuch_full_name }}"
-notmuch_primary_email: "{{ vault_notmuch_primary_email }}"
-notmuch_other_emails: "{{ vault_notmuch_other_emails }}"
-
-offlineimap_email_accounts: "{{ vault_offlineimap_email_accounts }}"
-
-production_commands: "{{ vault_production_commands }}"
-
-ssh_entries: "{{ vault_ssh_entries }}"
 
 zsh_extra: "{{ vault_zsh_extra }}"
 
