@@ -36,6 +36,7 @@ startup_applications:
   - "performetric"
   - "mullvad-vpn"
   - "blueman-applet"
+  - "solaar -w hide"
 
 scratchpad_applications:
   - { name: "todo",     keybinding: "t" }
