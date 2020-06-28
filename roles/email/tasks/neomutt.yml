@@ -37,3 +37,9 @@
     - "sender"
     - "settings"
     - "sidebar"
+
+- include_role:
+    name: "zsh"
+    tasks_from: "scripts"
+  vars:
+    script: "zneomutt"

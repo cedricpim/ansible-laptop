@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+set -eo pipefail
+IFS=$'\n\t'
+
+{{ ansible_managed | comment }}
+
+# This scripts allows for any program to call neomutt from a zsh environment,
+# where the environment variables are all loaded (solving the problem of the
+# terminal with ncurses - defined when exporting TERM environment variable)
+
+neomutt

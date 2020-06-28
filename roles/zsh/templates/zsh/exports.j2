@@ -5,6 +5,9 @@ export VISUAL='nvim'
 export EDITOR='nvim'
 export PAGER='less'
 
+# Avoid issues with terminal and ncurses: https://github.com/thestinger/termite/issues/545
+export TERM=xterm-color
+
 # Larger bash history (allow 32³ entries default is 500)
 export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
@@ -36,9 +39,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Remove Lag when changing ZSH to normal mode
 export KEYTIMEOUT=1
-
-# Avoid issues with terminal and other tools like tmux
-export TERM=xterm
 
 # Location of wiki for vim
 export VIM_WIKI={{ wiki }}
