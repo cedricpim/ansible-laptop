@@ -4,6 +4,16 @@ IFS=$'\n\t'
 
 {{ ansible_managed | comment }}
 
+### pserver — uploads the folder matching the string provided to a private
+###           server and processes those photos by running `process-photos`
+###           script on the server.
+###
+### Usage:
+###   pserver photos <folder>
+###
+### Options:
+###   <folder>  Folder containing the photos to be uploaded and processed
+
 # Only run if internet connection exists
 if ! /sbin/ping -c 1 8.8.8.8 >> /dev/null 2>&1; then
   echo "No internet connection"
@@ -20,6 +30,6 @@ case $1 in
     ;;
 
   *)
-    echo $"Usage: $0 {photos}"
+    shelp $0
     exit 1
 esac

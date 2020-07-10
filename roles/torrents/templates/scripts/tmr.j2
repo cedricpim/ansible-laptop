@@ -4,6 +4,13 @@ IFS=$'\n\t'
 
 {{ ansible_managed | comment }}
 
+### tmr — uses transmission-remote to either watch the current list of torrents
+###       or move the finished torrents to the final destination.
+###
+### Usage:
+###   tmr list (l)
+###   tmr move (mv)
+
 move_dir={{ transmission_final_destination }}
 
 case $1 in
@@ -25,6 +32,6 @@ case $1 in
     ;;
 
   *)
-    echo $"Usage: $0 {(l)ist|(m)o(v)e}"
+    shelp $0
     exit 1
 esac

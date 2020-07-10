@@ -4,6 +4,16 @@ IFS=$'\n\t'
 
 {{ ansible_managed | comment }}
 
+### luks — utility script used to mount and unmount a LUKS encrypted file.
+###
+### Usage:
+###   luks mount <filepath>
+###   luks umount <name>
+###
+### Options:
+###   <filepath>  Full path to the encrypted file
+###   <name>      Name of filesystem mounted (basename of <filepath> is usually used)
+
 case $1 in
   mount)
     name=$(basename "$2" '.img')
@@ -19,6 +29,6 @@ case $1 in
     ;;
 
   *)
-    echo $"Usage: $0 {mount|umount} container-name"
+    shelp $0
     exit 1
 esac

@@ -4,6 +4,16 @@ IFS=$'\n\t'
 
 {{ ansible_managed | comment }}
 
+### pserver-stats — parses, collects and displays information from the log file provided.
+###
+### Usage:
+###   pserver-stats codes <file>
+###   pserver-stats broken-links <file>
+###   pserver-stats ips <file>
+###
+### Options:
+###   <file>    Full path of the log to be read and parsed
+
 case $1 in
   codes)
     cat $2 | cut -d '"' -f3 | cut -d ' ' -f2 | sort | uniq -c | sort -rn
@@ -22,6 +32,6 @@ case $1 in
     ;;
 
   *)
-    echo $"Usage: $0 {codes|broken-links|ips} file"
+    shelp $0
     exit 1
 esac

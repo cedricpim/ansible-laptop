@@ -52,8 +52,11 @@
 - include_role:
     name: "zsh"
     tasks_from: "scripts"
-  vars:
-    script: "luks"
+  with_items:
+    - "shelp"
+    - "luks"
+  loop_control:
+    loop_var: "script"
 
 - import_tasks: "git.yml"
 - import_tasks: "htop.yml"
