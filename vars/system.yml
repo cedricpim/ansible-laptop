@@ -15,7 +15,6 @@ root_password: "{{ vault_root_password }}"
 
 mullvad_account_number: "{{ vault_mullvad_account_number }}"
 connman_interface_blacklist: "{{ vault_connman_interface_blacklist }}"
-name_servers: "{{ vault_name_servers }}"
 
 users: "{{ vault_users }}"
 
