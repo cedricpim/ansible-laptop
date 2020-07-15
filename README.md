@@ -11,15 +11,15 @@ $ wpa_supplicant -B -i NETWORK_INTERFACE -c <(wpa_passphrase NETWORK_NAME NETWOR
 $ dhcpcd NETWORK_INTERFACE
 ```
 
-If using `connmanctl`, then you should do the following (make sure
+If using `iwd`, then you should do the following (make sure
 wpa_supplicant is not running):
 
 ```
-$ connmanctl enable wifi
-$ connmanctl
-connmanctl> scan wifi
-connmanctl> services
-connmanctl> agent on
-connmanctl> connect WIFI_ID (and put passphrase if requested)
-connmanctl> quit
+$ ip link set NETWORK_INTERFACE up
+$ iwctl
+[iwd]# device list
+[iwd]# station device scan
+[iwd]# station device get-networks
+[iwd]# station device connect SSID (and put passphrase if requested)
+[iwd]# quit
 ```
