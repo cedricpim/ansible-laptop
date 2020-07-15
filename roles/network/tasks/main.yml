@@ -5,14 +5,21 @@
       - "iw"
       - "iwd"
       - "bluez"
-      - "connman"
-      - "cmst"
       - "ntp"
       - "openresolv"
       - "wpa_supplicant"
       - "whois"
+      - "openvpn"
+      - "nm-connection-editor"
+      - "network-manager-applet"
+      - "networkmanager-openvpn"
     state: "present"
   become: yes
+
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "networkmanager-iwd"
 
 - name: "Copy resolvconf configuration"
   template:
@@ -22,27 +29,18 @@
   become: yes
   notify: "Rebuild resolvconf configuration"
 
-- name: "Create folder for ConnMan configuration"
-  file:
-    path: "/etc/connman"
-    state: "directory"
-    mode: "0755"
-  become: yes
-
-- name: "Copy ConnMan configuration"
-  template:
-    src: "connman/main.conf.j2"
-    dest: "/etc/connman/main.conf"
-    mode: "0644"
-  become: yes
-  notify: "Restart ConnMan"
-
-- name: "Enable/start service for ConnMan"
+- name: "Enable/start service for IWD"
   systemd:
-    name: "connman"
+    name: "iwd"
     state: "started"
     enabled: yes
-    daemon_reload: yes
+  become: yes
+
+- name: "Enable/start service for NetworkManager"
+  systemd:
+    name: "NetworkManager"
+    state: "started"
+    enabled: yes
   become: yes
 
 - name: "Enable/start service for NTP"

@@ -14,7 +14,6 @@ partition_boot: "{{ vault_partition_boot }}"
 root_password: "{{ vault_root_password }}"
 
 mullvad_account_number: "{{ vault_mullvad_account_number }}"
-connman_interface_blacklist: "{{ vault_connman_interface_blacklist }}"
 
 users: "{{ vault_users }}"
 
