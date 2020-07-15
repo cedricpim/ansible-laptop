@@ -7,12 +7,15 @@
           "country": "{{ mullvad_country }}"
         }
       },
-      "tunnel": {
-        "only": {
-          "wireguard": {
-            "port": "any"
-          }
-        }
+      "tunnel_protocol": {
+        "only": "wireguard"
+      },
+      "wireguard_constraints": {
+        "port": "any"
+      },
+      "openvpn_constraints": {
+        "port": "any",
+        "protocol": "any"
       }
     }
   },
@@ -30,10 +33,13 @@
       "mssfix": null
     },
     "wireguard": {
-      "mtu": null
+      "mtu": null,
+      "automatic_rotation": null
     },
     "generic": {
       "enable_ipv6": false
     }
-  }
+  },
+  "show_beta_releases": false,
+  "settings_version": 2
 }
