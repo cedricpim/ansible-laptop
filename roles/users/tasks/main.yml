@@ -1,4 +1,27 @@
 ---
+- name: "Install permissions management packages"
+  pacman:
+    name:
+      - "sudo"
+      - "polkit"
+    state: "present"
+  become: yes
+
+- name: "Ensure we have a 'wheel' group"
+  group:
+    name: "wheel"
+    state: "present"
+  become: yes
+
+- name: "Allow 'wheel' group to have passwordless sudo"
+  lineinfile:
+    path: "/etc/sudoers"
+    regexp: '%wheel ALL=\(ALL\) ALL'
+    line: "%wheel ALL=(ALL) ALL"
+    validate: "visudo -cf %s"
+    backup: yes
+  become: yes
+
 - name: "Create initial groups"
   group:
     name: "{{ item }}"

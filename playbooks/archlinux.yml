@@ -16,9 +16,8 @@
   roles:
     - { role: "pacman", tags: "pacman" }
     - { role: "system", tags: "system" }
-    - { role: "network", tags: "network" }
-    - { role: "sudo", tags: "sudo" }
     - { role: "users", tags: "users" }
+    - { role: "network", tags: "network" }
     - { role: "rkhunter", tags: "rkhunter" }
     - { role: "torrents", tags: "torrents" }
     - { role: "display", tags: "display" }
