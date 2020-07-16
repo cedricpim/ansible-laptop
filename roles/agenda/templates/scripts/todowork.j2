@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+set -eo pipefail
+IFS=$'\n\t'
+
+{{ ansible_managed | comment }}
+
+$EDITOR -n {{ wiki }}/Work.md

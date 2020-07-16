@@ -8,3 +8,12 @@
     tasks_from: "scripts"
   vars:
     script: "todo"
+
+- include_role:
+    name: "zsh"
+    tasks_from: "scripts"
+  with_items:
+    - "todo"
+    - "todowork"
+  loop_control:
+    loop_var: "script"

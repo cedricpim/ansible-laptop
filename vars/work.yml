@@ -38,7 +38,7 @@ startup_applications:
   - "nm-applet"
 
 scratchpad_applications:
-  - { name: "todo",     keybinding: "t" }
+  - { name: "todowork", keybinding: "t" }
   - { name: "mpsyt",    keybinding: "m" }
   - { name: "ikhal",    keybinding: "c" }
   - { name: "zneomutt", keybinding: "e", custom: "resize set 70ppt 80ppt" }
