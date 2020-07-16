@@ -2,6 +2,7 @@
 - name: "Install vim and dependencies"
   pacman:
     name:
+      - "vi"
       - "vim"
       - "xsel"
       - "ctags"
