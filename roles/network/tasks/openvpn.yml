@@ -1,0 +1,51 @@
+---
+- name: "Install OpenVPN tools"
+  pacman:
+    name:
+      - "openvpn"
+      - "qopenvpn"
+
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "openvpn-update-resolv-conf"
+
+- name: "Allow 'wheel' group to call systemctl"
+  lineinfile:
+    path: "/etc/sudoers"
+    regexp: '%wheel ALL=\(ALL\) NOPASSWD: /usr/bin/systemctl'
+    line: "%wheel ALL=(ALL) NOPASSWD: /usr/bin/systemctl"
+    validate: "visudo -cf %s"
+    backup: yes
+  become: yes
+
+- name: "Make OpenVPN client configurations accessible to users"
+  file:
+    path: "{{ openvpn_directory }}/client"
+    state: "directory"
+    mode: "0755"
+  become: yes
+
+- name: "Add QOpenVPN directory"
+  file:
+    path: "{{ qopenvpn_directory }}"
+    state: "directory"
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
+    mode: "0700"
+  with_items: "{{ users }}"
+  no_log: yes
+  become: yes
+  become_user: "{{ item.name }}"
+
+- name: "Add QOpenVPN configuration"
+  template:
+    src: "openvpn/QOpenVPN.conf.j2"
+    dest: "{{ qopenvpn_directory }}/QOpenVPN.conf"
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
+    mode: "0600"
+  with_items: "{{ users }}"
+  no_log: yes
+  become: yes
+  become_user: "{{ item.name }}"

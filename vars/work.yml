@@ -36,6 +36,7 @@ startup_applications:
   - "blueman-applet"
   - "solaar -w hide"
   - "nm-applet"
+  - "qopenvpn"
 
 scratchpad_applications:
   - { name: "todowork", keybinding: "t" }

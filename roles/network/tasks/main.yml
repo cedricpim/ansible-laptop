@@ -9,10 +9,8 @@
       - "openresolv"
       - "wpa_supplicant"
       - "whois"
-      - "openvpn"
       - "nm-connection-editor"
       - "network-manager-applet"
-      - "networkmanager-openvpn"
     state: "present"
   become: yes
 
@@ -51,3 +49,4 @@
   become: yes
 
 - import_tasks: "mullvad.yml"
+- import_tasks: "openvpn.yml"
