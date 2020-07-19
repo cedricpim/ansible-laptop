@@ -1,0 +1,7 @@
+---
+modprobe_directory: "/etc/modules-load.d"
+autofs_directory: "/etc/autofs"
+
+media_remoteserver: "example.com"
+media_user: "myuser"
+media_password: "mypassword"

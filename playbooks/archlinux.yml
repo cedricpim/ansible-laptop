@@ -22,4 +22,5 @@
     - { role: "torrents", tags: "torrents" }
     - { role: "display", tags: "display" }
     - { role: "session", tags: "session" }
+    - { role: "media", tags: "media" }
     - { role: "backup", tags: "backup" }

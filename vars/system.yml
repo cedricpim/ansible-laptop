@@ -25,6 +25,10 @@ system_hostname: "{{ vault_system_hostname }}"
 
 github_access_token: "{{ vault_github_access_token }}"
 
+media_remoteserver: "{{ vault_media_remoteserver }}"
+media_user: "{{ vault_media_user }}"
+media_password: "{{ vault_media_password }}"
+
 backup_main_user: "{{ vault_backup_main_user }}"
 backup_final_destination: "{{ vault_backup_final_destination }}"
 backup_configurations: "{{ vault_backup_configurations }}"

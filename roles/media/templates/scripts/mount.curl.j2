@@ -1,0 +1,5 @@
+#! /bin/sh
+
+{{ ansible_managed | comment }}
+
+curlftpfs $1 $2 -o $4,disable_eprt
