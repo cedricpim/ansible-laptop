@@ -18,6 +18,18 @@
       no_log: yes
       become: yes
 
+    - name: "Create secondary backup"
+      expect:
+        command: "duplicacy copy -from {{ item.name }} -to {{ item.name }}-snd"
+        responses:
+          password: "{{ item.password }}"
+        timeout: null
+      args:
+        chdir: "{{ item.directory }}"
+      with_items: "{{ backup_configurations }}"
+      no_log: yes
+      become: yes
+
     - name: "Ensure {{ backup_main_user }} permissions are set"
       file:
         path: "{{ backup_final_destination }}"
