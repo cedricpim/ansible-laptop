@@ -31,4 +31,5 @@ media_password: "{{ vault_media_password }}"
 
 backup_main_user: "{{ vault_backup_main_user }}"
 backup_final_destination: "{{ vault_backup_final_destination }}"
+backup_secondary_destination: "{{ vault_backup_secondary_destination }}"
 backup_configurations: "{{ vault_backup_configurations }}"

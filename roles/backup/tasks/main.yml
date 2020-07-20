@@ -10,7 +10,7 @@
     state: "latest"
   become: yes
 
-- name: "Create folder for backups"
+- name: "Create folder for main backups"
   file:
     path: "{{ backup_final_destination }}"
     owner: "{{ backup_main_user }}"
@@ -19,25 +19,34 @@
     mode: "0755"
   become: yes
 
+- name: "Create folder for secondary backups"
+  file:
+    path: "{{ backup_secondary_destination }}"
+    state: "directory"
+  become: yes
+
 - name: "Retrieve list of installed packages"
   command: "yay -Qet"
   changed_when: false
   register: packages_list
 
-- name: "Copy list of installed packages"
+- name: "Copy list of installed packages to both backups"
   copy:
     content: "{{ packages_list.stdout }}"
-    dest: "{{ backup_final_destination }}/packages"
+    dest: "{{ item }}/packages"
+  with_items:
+  - "{{ backup_final_destination }}"
+  - "{{ backup_secondary_destination }}"
   become: yes
   when: packages_list is defined
 
-- name: "Check if duplicacy repository has been initiated"
-  stat:
-    path: "{{ item.directory }}/.duplicacy"
+- name: "Check if duplicacy repository has been initialized"
+  command: "duplicacy info {{ backup_final_destination }}/{{ item.name }}"
   with_items: "{{ backup_configurations }}"
   no_log: yes
   become: yes
-  register: duplicacy_repositories
+  register: initialized_duplicacy_repositories
+  changed_when: no
 
 - name: "Initiate the repositories for backups"
   expect:
@@ -46,12 +55,12 @@
       password: "{{ item.item.password }}"
   args:
     chdir: "{{ item.item.directory }}"
-  with_items: "{{ duplicacy_repositories.results }}"
+  with_items: "{{ initialized_duplicacy_repositories.results }}"
   no_log: yes
   become: yes
   when:
-    - duplicacy_repositories is defined
-    - not item.stat.exists
+    - initialized_duplicacy_repositories is defined
+    - item.stdout.find(storage_not_initialized) != -1
 
 - name: "Copy filters for backup"
   template:
@@ -72,3 +81,24 @@
     state: "directory"
     recurse: yes
   become: yes
+
+- name: "Check if duplicacy repository has been added"
+  command: "duplicacy info {{ backup_secondary_destination }}/{{ item.name }}"
+  with_items: "{{ backup_configurations }}"
+  no_log: yes
+  become: yes
+  register: added_duplicacy_repositories
+  changed_when: no
+
+- name: "Add additional backup repository"
+  expect:
+    command: "duplicacy add -e -bit-identical -copy {{ item.item.name }} {{ item.item.name }}-snd {{ item.item.name }} {{ backup_secondary_destination }}/{{ item.item.name }}"
+    responses:
+      password: "{{ item.item.password }}"
+  args:
+    chdir: "{{ item.item.directory }}"
+  with_items: "{{ added_duplicacy_repositories.results }}"
+  become: yes
+  when:
+    - added_duplicacy_repositories is defined
+    - item.stdout.find(storage_not_initialized) != -1
