@@ -1,7 +1,14 @@
 {{ ansible_managed | comment }}
 
-set my_login = "{{ neomutt_email_accounts[0].user }}"
+set my_login = "{{ neomutt_email_sender.user }}"
 set from = $my_login
 set use_from = yes
-set smtp_url="{{ neomutt_smtp_protocol }}://$my_login:{{ neomutt_email_accounts[0].password }}@{{ neomutt_email_server }}:{{ neomutt_email_server_port }}"
 set ssl_force_tls = yes
+
+{% if neomutt_email_sender.password is defined %}
+set smtp_url="{{ neomutt_smtp_protocol }}://$my_login:{{ neomutt_email_sender.password }}@{{ neomutt_email_server }}:{{ neomutt_email_server_port }}"
+{% else %}
+set smtp_authenticators="oauthbearer"
+set smtp_oauth_refresh_command="{{ neomutt_directory }}/oauth2.py --quiet --user=$my_login --client_id={{ neomutt_email_sender.oauth2_client_id }} --client_secret={{ neomutt_email_sender.oauth2_client_secret }} --refresh_token={{ neomutt_email_sender.oauth2_refresh_token }}"
+set smtp_url="{{ neomutt_smtp_protocol }}://$my_login@{{ neomutt_email_server }}:{{ neomutt_email_server_port }}"
+{% endif %}

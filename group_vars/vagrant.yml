@@ -71,9 +71,13 @@ offlineimap_email_accounts:
 
 neomutt_email_server: "example.localhost"
 neomutt_email_accounts:
-  - { name: "default",   key: 1, user: "default@example.localhost",   password: "default" }
-  - { name: "secondary", key: 2, user: "secondary@example.localhost", password: "secondary" }
-neomutt_sender_full_name: "Vagrant"
+  - { key: "1", name: "default"   }
+  - { key: "2", name: "secondary" }
+neomutt_email_sender:
+  full_name: "Vagrant"
+  name: "default"
+  user: "default@example.localhost"
+  password: "default"
 neomutt_mailboxes:
   - "Mailbox1"
   - "Mailbox2"

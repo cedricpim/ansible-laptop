@@ -25,7 +25,7 @@ ledger_aliases: "{{ vault_ledger_aliases }}"
 
 neomutt_email_server: "{{ vault_neomutt_email_server }}"
 neomutt_email_accounts: "{{ vault_neomutt_email_accounts }}"
-neomutt_sender_full_name: "{{ vault_neomutt_sender_full_name }}"
+neomutt_email_sender: "{{ vault_neomutt_email_sender }}"
 neomutt_mailboxes: "{{ vault_neomutt_mailboxes }}"
 neomutt_bindings: "{{ vault_neomutt_bindings }}"
 neomutt_mailbox_record: "{{ vault_neomutt_mailbox_record }}"
