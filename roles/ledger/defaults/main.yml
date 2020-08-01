@@ -15,6 +15,6 @@ ledger_ignored_accounts:
   - "Vacation"
   - "Personal"
 
-ledger_version: "3.1.0"
+ledger_version: "3.2.0"
 ledger_filename: "ledger-v{{ ledger_version }}-x86_64-unknown-linux-musl"
 ledger_url: "https://github.com/cedricpim/ledger-rust/releases/download/v{{ ledger_version }}/{{ ledger_filename }}"
