@@ -1,0 +1,2 @@
+---
+ledger_version_output: "ledger {{ ledger_version }}"
