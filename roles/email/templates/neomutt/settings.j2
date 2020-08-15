@@ -53,4 +53,4 @@ set nm_default_uri = "notmuch://{{ '~' | regex_replace('~', ansible_env.HOME) }}
 set abort_noattach = ask-yes
 # Search for the following regular expression in the body of the email
 # English: attach, attached, attachment, attachments
-set attach_keyword = "\\<attach(|ed|ments?)\\>"
+set abort_noattach_regex = "\\<attach(|ed|ments?)\\>"
