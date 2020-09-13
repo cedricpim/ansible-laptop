@@ -25,21 +25,6 @@
     state: "directory"
   become: yes
 
-- name: "Retrieve list of installed packages"
-  command: "yay -Qet"
-  changed_when: false
-  register: packages_list
-
-- name: "Copy list of installed packages to both backups"
-  copy:
-    content: "{{ packages_list.stdout }}"
-    dest: "{{ item }}/packages"
-  with_items:
-  - "{{ backup_final_destination }}"
-  - "{{ backup_secondary_destination }}"
-  become: yes
-  when: packages_list is defined
-
 - name: "Check if duplicacy repository has been initialized"
   command: "duplicacy info {{ backup_final_destination }}/{{ item.name }}"
   with_items: "{{ backup_configurations }}"

@@ -6,6 +6,22 @@
     - "../vars/system.yml"
 
   tasks:
+    - name: "Retrieve list of installed packages"
+      command: "yay -Qet"
+      changed_when: false
+      register: packages_list
+
+    - name: "Copy list of installed packages to both backups"
+      copy:
+        content: "{{ packages_list.stdout }}"
+        dest: "{{ backup_final_destination }}/packages"
+      become: yes
+      when: packages_list is defined
+
+    - name: "Copy list of installed packages to secondary backup"
+      command: "cp --force {{ backup_final_destination }}/packages {{ backup_secondary_destination }}"
+      become: yes
+
     - name: "Execute backup"
       expect:
         command: "duplicacy backup"
