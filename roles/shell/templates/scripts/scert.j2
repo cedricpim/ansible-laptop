@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+set -o pipefail
+IFS=$'\n\t'
+
+{{ ansible_managed | comment }}
+
+### scert — return the issuer and lifetime of the SSL certificate for a provided domain
+###
+### Usage:
+###   scert <domain>
+###
+### Options:
+###   <domain>    Domain to connect to [append ':' + port number if needed]
+
+echo | openssl s_client -connect $1 2>/dev/null | openssl x509 -noout -dates -subject -issuer

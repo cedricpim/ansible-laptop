@@ -56,6 +56,7 @@
   with_items:
     - "shelp"
     - "luks"
+    - "scert"
   loop_control:
     loop_var: "script"
 
