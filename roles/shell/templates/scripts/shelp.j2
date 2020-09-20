@@ -13,7 +13,13 @@ IFS=$'\n\t'
 ###   <filepath>    File path to the script being parsed
 
 if [[ -n "$1" ]]; then
-  sed -rn 's/^### ?//;T;p' "$1"
+  filepath=`command -v $1`
+
+  if [[ -n "$filepath" ]]; then
+    sed -rn 's/^### ?//;T;p' "$filepath"
+  else
+    which $1
+  fi
 else
   shelp $0
 fi
