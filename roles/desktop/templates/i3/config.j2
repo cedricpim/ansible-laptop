@@ -187,7 +187,7 @@ set $mode_monitors Monitors: (i) internal screen, (e) external screen, (m) multi
 mode "$mode_monitors" {
   bindsym i exec --no-startup-id "mons -o; {{ polybar_directory }}/launcher.sh", mode "default"
   bindsym e exec --no-startup-id "mons -s; {{ polybar_directory }}/launcher.sh", mode "default"
-  bindsym m exec --no-startup-id "mons -e right; {{ polybar_directory }}/launcher.sh", mode "default"
+  bindsym m exec --no-startup-id "mons -e left; {{ polybar_directory }}/launcher.sh", mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
