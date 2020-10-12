@@ -15,6 +15,7 @@ root_password: "{{ vault_root_password }}"
 
 mullvad_account_number: "{{ vault_mullvad_account_number }}"
 openvpn_name: "{{ vault_openvpn_name }}"
+name_servers: "{{ vault_name_servers }}"
 
 users: "{{ vault_users }}"
 

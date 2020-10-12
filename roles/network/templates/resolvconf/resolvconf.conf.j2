@@ -7,3 +7,6 @@ resolv_conf=/etc/resolv.conf
 # If you run a local name server, you should uncomment the below line and
 # configure your subscribers configuration files below.
 #name_servers=127.0.0.1
+{% if name_servers is defined %}
+name_servers="{{ name_servers | join(" ") }}"
+{% endif %}
