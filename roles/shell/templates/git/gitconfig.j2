@@ -30,9 +30,9 @@
   # Switch to a branch, creating it if necessary
   go = "!f() { git switch -c \"$1\" 2> /dev/null || git switch \"$1\"; }; f"
   # Interactive rebase with the given number of latest commits
-  reb = "!f() { git rebase -i HEAD~$1; }; f"
+  reb = "!f() { git rebase -S -i HEAD~$1; }; f"
   # Rebase current branch with master
-  rebup = "!f() { git switch master; git pull; git switch -; git pull; git rebase master; }; f"
+  rebup = "!f() { git switch master; git pull; git switch -; git pull; git rebase -S master; }; f"
   # Find branches containing commit
   fb = "!f() { git branch -a --contains $1; }; f"
   # Find tags containing commit
