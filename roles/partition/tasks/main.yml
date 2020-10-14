@@ -1,6 +1,6 @@
 ---
 - name: "Create partitions"
-  parted:
+  community.general.parted:
     name: "{{ item.name }}"
     device: "{{ partition_device }}"
     number: "{{ item.number }}"
@@ -30,12 +30,12 @@
   when: encrypted is defined and encrypted.stdout.find(partition_physical_group) == -1
 
 - name: "Create the volume group (and physical volume) inside the LUKS partition"
-  lvg:
+  community.general.lvg:
     vg: "{{ partition_volume_group }}"
     pvs: "/dev/mapper/{{ partition_physical_group }}"
 
 - name: "Create the logical volumes"
-  lvol:
+  community.general.lvol:
     vg: "{{ partition_volume_group }}"
     lv: "{{ item.partition.split('/') | last }}"
     size: "{{ item.size }}"
@@ -43,14 +43,14 @@
   with_items: "{{ partition_volumes }}"
 
 - name: "Format logical partitions"
-  filesystem:
+  community.general.filesystem:
     fstype: "{{ item.fstype }}"
     dev: "{{ item.partition }}"
     opts: "{{ item.opts | default('') }}"
   with_items: "{{ partition_volumes }}"
 
 - name: "Mount logical partitions"
-  mount:
+  ansible.posix.mount:
     src: "{{ item.partition }}"
     path: "{{ item.path }}"
     fstype: "{{ item.fstype }}"
