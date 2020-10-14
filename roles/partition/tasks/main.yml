@@ -57,14 +57,14 @@
     state: "mounted"
   with_items: "{{ partition_volumes }}"
 
-- name: "Format boot partition"
-  command: "mkfs.{{ partition_boot.fstype }} {{ partition_boot.opts }} {{ partition_boot.partition }}"
-
-# We require mount since we want the format to be FAT32
-- name: "Mount boot partition"
-  command: "mount {{ partition_boot.partition }} {{ partition_boot.path }}"
-  args:
-    warn: no
+# We require command actions since we want the format to be FAT32
+- name: "Format and mount boot partition"
+  block:
+    - command: "mkfs.{{ partition_boot.fstype }} {{ partition_boot.opts }} {{ partition_boot.partition }}"
+    - file: path="{{ partition_boot.path }}" state="directory"
+    - command: "mount {{ partition_boot.partition }} {{ partition_boot.path }}"
+      args:
+        warn: no
 
 - name: "Check if Arch Linux is already installed"
   command: "arch-chroot {{ partition_main_mount_point }}"
