@@ -58,11 +58,11 @@
   with_items: "{{ partition_volumes }}"
 
 - name: "Format boot partition"
-  command: "mkfs.{{ boot_partition.fstype }} {{ boot_partition.opts }} {{ boot_partition.partition }}"
+  command: "mkfs.{{ partition_boot.fstype }} {{ partition_boot.opts }} {{ partition_boot.partition }}"
 
 # We require mount since we want the format to be FAT32
 - name: "Mount boot partition"
-  command: "mount {{ boot_partition.partition }} {{ boot_partition.path }}"
+  command: "mount {{ partition_boot.partition }} {{ partition_boot.path }}"
   args:
     warn: no
 
