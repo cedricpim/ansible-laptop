@@ -10,8 +10,9 @@
     name: "yay"
     state: "present"
     shell: "/usr/bin/nologin"
-    create_home: no
+  register: yay_user
   become: yes
+  notify: "Remove yay user"
 
 - name: "Check if Yay is installed"
   command: "pacman -Q yay"
@@ -28,37 +29,27 @@
 
 - name: "Install Yay"
   block:
-    - tempfile: suffix="yay" state="directory"
-      register: yay_tempdir
-      become_user: "yay"
-    - git: repo="{{ yay_repo }}" dest="{{ yay_tempdir.path }}" clone=yes update=yes
+    - git: repo="{{ yay_repo }}" dest="{{ yay_user.home }}" clone=yes update=yes
     - lineinfile: path="/etc/sudoers" insertbefore="BOF" line="yay ALL=(ALL) NOPASSWD{{ ':' }} ALL" validate="visudo -cf %s" state="present"
     - command: "makepkg -si --noconfirm"
       args:
-        chdir: "{{ yay_tempdir.path }}"
+        chdir: "{{ yay_user.home }}"
       become_user: "yay"
   always:
     - lineinfile: path="/etc/sudoers" regexp='^yay' validate="visudo -cf %s" state="absent"
-    - file: path="{{ yay_tempdir.path }}" state="absent"
   become: yes
   when:
+    - yay_user is defined
     - pkg_name is defined
     - aur_yay_check is defined and aur_yay_check.rc != 0
 
 - name: "Install {{ pkg_name }}"
   block:
-    - tempfile: suffix="yay" state="directory"
-      register: yay_install_tempdir
-      become_user: "yay"
     - lineinfile: path="/etc/sudoers" insertbefore="BOF" line="yay ALL=(ALL) NOPASSWD{{ ':' }} ALL" validate="visudo -cf %s" state="present"
     - command: "yay -Sy {{ pkg_name }} --needed --noconfirm"
-      environment:
-        XDG_CONFIG_HOME: "{{ yay_install_tempdir.path }}"
-        XDG_CACHE_HOME: "{{ yay_install_tempdir.path }}"
       become_user: "yay"
   always:
     - lineinfile: path="/etc/sudoers" regexp='^yay' validate="visudo -cf %s" state="absent"
-    - file: path="{{ yay_install_tempdir.path }}" state="absent"
   become: yes
   when:
     - pkg_name is defined

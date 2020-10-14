@@ -1,0 +1,7 @@
+---
+- name: "Remove yay user"
+  user:
+    name: "yay"
+    state: "absent"
+    remove: "yes"
+  become: yes
