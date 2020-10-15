@@ -33,12 +33,9 @@
 - import_tasks: "languages.yml"
 
 - name: "Download Nvim configuration repository"
-  git:
-    repo: "{{ nvim_config_repo }}"
-    dest: "{{ neovim_directory }}"
-    depth: 1
-    clone: yes
-    update: yes
+  block:
+    - git: repo="{{ nvim_config_repo }}" dest="{{ neovim_directory }}" depth=1 clone=yes update=yes
+    - replace: path="{{ neovim_directory }}/.git/config" regexp="{{ github_https_base }}" replace="{{ github_ssh_base }}"
 
 - name: "Create folder for Neovim dictionaries"
   file:

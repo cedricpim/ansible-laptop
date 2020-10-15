@@ -6,6 +6,3 @@ users_groups:
 ansible_laptop_repo: "https://github.com/cedricpim/ansible-laptop.git"
 ansible_laptop_directory: "~/Projects"
 ansible_laptop_dest: "{{ ansible_laptop_directory }}/ansible-laptop"
-
-github_https_base: "https://github.com/"
-github_ssh_base: "git@github.com:"
