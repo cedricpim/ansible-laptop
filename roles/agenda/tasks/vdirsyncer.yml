@@ -9,7 +9,9 @@
   register: vdirsyncer_install
 
 - name: "Install extra dependencies"
-  command: "pip install vdirsyncer[google]"
+  pip:
+    name: "vdirsyncer[google]"
+    state: "latest"
   become: yes
   when: vdirsyncer_install is defined and vdirsyncer_install.changed
 
