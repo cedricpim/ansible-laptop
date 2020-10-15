@@ -7,6 +7,9 @@
     name: "{{ system_time_zone }}"
   notify: "Synchronize clock"
 
+- name: "Synchronize clock"
+  command: "hwclock --systohc"
+
 - include_role:
     name: "yay"
   vars:

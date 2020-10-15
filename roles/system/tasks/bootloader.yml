@@ -36,3 +36,6 @@
     line: 'HOOKS=(base udev autodetect modconf block filesystems keyboard fsck keymap encrypt lvm2)'
     state: "present"
   notify: "Create mkinitcpio configuration"
+
+- name: "Create mkinitcpio configuration"
+  command: "mkinitcpio -p linux"
