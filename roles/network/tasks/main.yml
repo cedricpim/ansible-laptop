@@ -5,6 +5,7 @@
       - "iw"
       - "iwd"
       - "bluez"
+      - "dhcpcd"
       - "ntp"
       - "openresolv"
       - "wpa_supplicant"
