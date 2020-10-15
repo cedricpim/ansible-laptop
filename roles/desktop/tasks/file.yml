@@ -12,30 +12,16 @@
     state: "present"
   become: yes
 
-- name: "Check ranger_icons plugin status"
-  stat:
-    path: "{{ ranger_directory }}/plugins/devicons.py"
-  register: ranger_devicon_stat
-
-- name: "Download & install ranger_icons repository"
-  block:
-    - tempfile: suffix="ranger" state="directory"
-      register: tempdir
-    - git: repo="{{ ranger_icons_repo }}" dest="{{ tempdir.path }}" clone=yes
-    - command: "make install"
-      args:
-        chdir: "{{ tempdir.path }}"
-  always:
-    - file: path="{{ tempdir.path }}" state="absent"
-  when:
-    - ranger_devicon_stat is defined
-    - ranger_devicon_stat.stat.islnk is not defined
-
 - name: "Create folder for ranger configuration"
   file:
     path: "{{ ranger_directory }}"
     state: "directory"
     mode: "0700"
+
+- name: "Install ranger file icons"
+  block:
+    - file: path="{{ ranger_icons_directory }}" state="directory" mode="0700"
+    - git: repo="{{ ranger_icons_repo }}" dest="{{ ranger_icons_directory }}" clone=yes update=yes
 
 - name: "Copy ranger configuration"
   template:
