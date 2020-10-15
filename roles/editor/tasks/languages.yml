@@ -41,7 +41,7 @@
 - name: "Set rust toolchain"
   command: "rustup toolchain install stable"
 
-- name: "Install rusta-analyzer"
+- name: "Install rust-analyzer once toolchain is installed"
   pacman:
     name: "rust-analyzer"
     state: "present"
