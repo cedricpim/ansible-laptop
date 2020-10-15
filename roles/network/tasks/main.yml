@@ -9,16 +9,17 @@
       - "openresolv"
       - "wpa_supplicant"
       - "whois"
-      - "nm-connection-editor"
-      - "network-manager-applet"
     state: "present"
   become: yes
 
 - name: "Remove current networkmanager"
   pacman:
     name: 
-      - "networkmanager"
+      - "nm-connection-editor"
+      - "network-manager-applet"
+      - "libnma"
       - "libnm"
+      - "networkmanager"
     state: "absent"
   become: yes
 
@@ -26,6 +27,14 @@
     name: "yay"
   vars:
     pkg_name: "networkmanager-iwd"
+
+- name: "Install add-ons to networkmanager"
+  pacman:
+    name:
+      - "nm-connection-editor"
+      - "network-manager-applet"
+    state: "present"
+  become: yes
 
 - name: "Copy resolvconf configuration"
   template:
