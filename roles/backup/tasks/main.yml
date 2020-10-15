@@ -4,6 +4,12 @@
   vars:
     pkg_name: "duplicacy"
 
+- name: "Install python-pip dependency"
+  pacman:
+    name: "python-pip"
+    state: "present"
+  become: yes
+
 - name: "Install pexpect"
   pip:
     name: "pexpect"
