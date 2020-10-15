@@ -26,5 +26,4 @@ github_access_token: "{{ vault_github_access_token }}"
 
 backup_main_user: "{{ vault_backup_main_user }}"
 backup_final_destination: "{{ vault_backup_final_destination }}"
-backup_secondary_destination: "{{ vault_backup_secondary_destination }}"
 backup_configurations: "{{ vault_backup_configurations }}"

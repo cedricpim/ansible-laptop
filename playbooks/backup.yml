@@ -18,24 +18,9 @@
       become: yes
       when: packages_list is defined
 
-    - name: "Copy list of installed packages to secondary backup"
-      command: "cp --force {{ backup_final_destination }}/packages {{ backup_secondary_destination }}"
-      become: yes
-
     - name: "Execute backup"
       expect:
         command: "duplicacy backup"
-        responses:
-          password: "{{ item.password }}"
-        timeout: null
-      args:
-        chdir: "{{ item.directory }}"
-      with_items: "{{ backup_configurations }}"
-      become: yes
-
-    - name: "Create secondary backup"
-      expect:
-        command: "duplicacy copy -from {{ item.name }} -to {{ item.name }}-snd"
         responses:
           password: "{{ item.password }}"
         timeout: null
