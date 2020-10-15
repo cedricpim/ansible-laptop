@@ -45,6 +45,7 @@
 
 - name: "Set rust toolchain"
   command: "rustup toolchain install stable"
+  become: yes
   become_user: "yay"
   when:
     - pkg_name is defined
