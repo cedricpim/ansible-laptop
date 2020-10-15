@@ -33,7 +33,6 @@ startup_applications:
   - "light-locker"
   - "redshift-gtk"
   - "udiskie -ans"
-  - "performetric"
   - "mullvad-vpn"
   - "blueman-applet"
   - "solaar -w hide"
