@@ -1,3 +1,45 @@
 ---
-- import_tasks: "nvidia.yml"
+- name: "Install graphic's related packages"
+  pacman:
+    name:
+      - "mesa"
+      - "xf86-video-intel"
+    state: "present"
+  become: yes
+
+- name: "Install acpilight package"
+  pacman:
+    name: "acpilight"
+    state: "present"
+  become: yes
+
+- name: "Add video group to user"
+  user:
+    name: "{{ item.name }}"
+    groups: "video"
+    append: yes
+    state: "present"
+  with_items: "{{ users }}"
+  become: yes
+
+- name: "Install geoclue package"
+  pacman:
+    name: "geoclue2"
+    state: "present"
+  become: yes
+
+- name: "Create folder for GeoClue2"
+  file:
+    path: "{{ geoclue_directory }}"
+    state: "directory"
+    mode: "0755"
+  become: yes
+
+- name: "Copy Geoclue configuration"
+  template:
+    src: "geoclue.conf.j2"
+    dest: "{{ geoclue_directory }}/geoclue.conf"
+    mode: "0644"
+  become: yes
+
 - import_tasks: "xorg.yml"

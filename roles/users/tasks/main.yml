@@ -4,6 +4,7 @@
     name:
       - "sudo"
       - "polkit"
+      - "ntfs-3g"
     state: "present"
   become: yes
 
