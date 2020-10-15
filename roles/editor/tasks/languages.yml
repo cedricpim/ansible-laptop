@@ -41,7 +41,8 @@
 - name: "Set rust toolchain"
   command: "rustup toolchain install stable"
 
-- include_role:
-    name: "yay"
-  vars:
-    pkg_name: "rust-analyzer-git"
+- name: "Install rusta-analyzer"
+  pacman:
+    name: "rust-analyzer"
+    state: "present"
+  become: yes
