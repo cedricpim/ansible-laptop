@@ -7,6 +7,7 @@
       - "xorg-xinit"
       - "xorg-xprop"
       - "xorg-xrandr"
+      - "xorg-xclock"
     state: "present"
   become: yes
 
