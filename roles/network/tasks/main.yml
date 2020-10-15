@@ -15,8 +15,8 @@
 - name: "Remove current networkmanager"
   pacman:
     name: 
-      - "nm-connection-editor"
       - "network-manager-applet"
+      - "nm-connection-editor"
       - "libnma"
       - "libnm"
       - "networkmanager"
