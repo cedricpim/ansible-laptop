@@ -6,6 +6,8 @@
 $ pacman -Sy git ansible-base make
 $ git clone https://github.com/cedricpim/ansible-laptop
 $ cd ansible-laptop
+$ ansible-galaxy collection install ansible.posix
+$ ansible-galaxy collection install community.general
 $ make install
 ```
 
