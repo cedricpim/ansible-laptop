@@ -12,8 +12,6 @@ monetary: "en_GB.UTF-8"
 paper: "en_GB.UTF-8"
 measurement: "en_GB.UTF-8"
 
-gpu_address: "01:00.0"
-
 journal_triggerd_directory: "/etc/journal-triggerd.rules"
 journal_triggerd_log: "/var/log/journal.failed.log"
 
