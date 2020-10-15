@@ -20,8 +20,8 @@
 - import_tasks: "copyq.yml"
 - import_tasks: "firefox.yml"
 
-- import_tasks: "mullvad.yml"
-- import_tasks: "openvpn.yml"
+#- import_tasks: "mullvad.yml"
+#- import_tasks: "openvpn.yml"
 
 - include_role:
     name: "yay"
@@ -31,7 +31,7 @@
     - "popcorntime"
     - "peek"
     - "slack-desktop"
-    - "spotify"
+    #- "spotify"
     - "youtube-dl"
     - "realvnc-vnc-viewer"
     - "obsidian-appimage"
