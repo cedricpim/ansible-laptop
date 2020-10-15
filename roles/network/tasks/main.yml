@@ -13,17 +13,6 @@
     state: "present"
   become: yes
 
-- name: "Remove current networkmanager"
-  pacman:
-    name: 
-      - "network-manager-applet"
-      - "nm-connection-editor"
-      - "libnma"
-      - "libnm"
-      - "networkmanager"
-    state: "absent"
-  become: yes
-
 - include_role:
     name: "yay"
   vars:
