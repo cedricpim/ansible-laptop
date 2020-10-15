@@ -4,3 +4,9 @@
     name: "syncthing"
     state: "restarted"
     scope: "user"
+
+- name: "Restart Mullvad daemon"
+  systemd:
+    name: "mullvad-daemon"
+    state: "restarted"
+  become: yes

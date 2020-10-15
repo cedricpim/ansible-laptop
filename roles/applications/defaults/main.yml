@@ -25,3 +25,10 @@ firefox_options:
   - { option: "browser.tabs.loadDivertedInBackground", value: "true" }
 
 syncthing_port: "8384"
+
+mullvad_directory: "/etc/mullvad-vpn"
+mullvad_country: "es"
+mullvad_account_number: "0000"
+
+openvpn_directory: "/etc/openvpn"
+qopenvpn_directory: "~/.config/QOpenVPN"

@@ -46,3 +46,6 @@ offlineimap_email_accounts: "{{ vault_offlineimap_email_accounts }}"
 production_commands: "{{ vault_production_commands }}"
 
 ssh_entries: "{{ vault_ssh_entries }}"
+
+mullvad_account_number: "{{ vault_mullvad_account_number }}"
+openvpn_name: "{{ vault_openvpn_name }}"

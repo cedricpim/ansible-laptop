@@ -4,6 +4,7 @@
     name:
       - "openvpn"
       - "qopenvpn"
+  become: yes
 
 - include_role:
     name: "yay"
@@ -35,8 +36,6 @@
     mode: "0700"
   with_items: "{{ users }}"
   no_log: yes
-  become: yes
-  become_user: "{{ item.name }}"
 
 - name: "Add QOpenVPN configuration"
   template:
@@ -47,5 +46,3 @@
     mode: "0600"
   with_items: "{{ users }}"
   no_log: yes
-  become: yes
-  become_user: "{{ item.name }}"
