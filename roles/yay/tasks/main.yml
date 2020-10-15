@@ -29,14 +29,16 @@
 
 - name: "Install Yay"
   block:
-    - git: repo="{{ yay_repo }}" dest="{{ yay_user.home }}" clone=yes update=yes
+    - git: repo="{{ yay_repo }}" dest="{{ yay_user.home }}/yay-repo" clone=yes update=yes
+      become_user: "yay"
     - lineinfile: path="/etc/sudoers" insertbefore="BOF" line="yay ALL=(ALL) NOPASSWD{{ ':' }} ALL" validate="visudo -cf %s" state="present"
     - command: "makepkg -si --noconfirm"
       args:
-        chdir: "{{ yay_user.home }}"
+        chdir: "{{ yay_user.home }}/yay-repo"
       become_user: "yay"
   always:
     - lineinfile: path="/etc/sudoers" regexp='^yay' validate="visudo -cf %s" state="absent"
+    - file: path="{{ yay_user.home }}/yay-repo" state="absent"
   become: yes
   when:
     - yay_user is defined
