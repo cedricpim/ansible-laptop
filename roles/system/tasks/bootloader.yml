@@ -44,7 +44,9 @@
 
 - name: "Create preset for linux"
   pacman:
-    name: "linux"
+    name:
+      - "linux"
+      - "linux-firmware"
     state: "present"
 
 - name: "Create mkinitcpio configuration"
