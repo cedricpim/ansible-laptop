@@ -36,6 +36,16 @@ $ iwctl
 [iwd]# quit
 ```
 
+#### NetworkManager
+
+Once `NetworkManager` is running, it overrides all other network related
+applications, so it must be used as:
+
+```
+$ nmcli device wifi list
+$ nmcli device wifi connect "SSID" password "PASSWORD"
+```
+
 #### WPA Supplication
 
 If using `wpa_supplicant`, then you can get internet connection by
