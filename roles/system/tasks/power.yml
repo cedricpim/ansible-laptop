@@ -13,11 +13,9 @@
 
 - name: "Start and enable TLP services"
   service:
-    name: "{{ item }}"
+    name: "tlp"
     enabled: yes
-  with_items:
-    - "tlp"
-    - "tlp-sleep"
+    state: "started"
 
 - name: "Stop and mask services conflicting with TLP"
   service:
