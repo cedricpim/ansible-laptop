@@ -39,7 +39,6 @@
     append: yes
     state: "present"
   with_items: "{{ users }}"
-  no_log: yes
   become: yes
 
 - name: "Install git and openssh"
@@ -59,7 +58,6 @@
     ssh_key_passphrase: "{{ item.passphrase }}"
     ssh_key_comment: "{{ item.owner }} - {{ item.service }}"
   with_items: "{{ ssh_keys }}"
-  no_log: yes
   become: yes
   register: ssh_keys_created
 
@@ -71,7 +69,6 @@
       with_items: "{{ ssh_keys_created.results | selectattr('ssh_key_file', 'search', 'github_id_rsa$') | list }}"
       when: group_names[0] != "vagrant"
   when: ssh_keys_created is defined
-  no_log: yes
   become: yes
   become_user: "{{ item.name }}"
 
@@ -88,6 +85,5 @@
     - copy: content="{{ item.vault }}" dest="{{ ansible_laptop_dest }}/vaulted_vars/{{ item.name }}.txt"
       with_items: "{{ users }}"
       when: group_names[0] != "vagrant"
-  no_log: yes
   become: yes
   become_user: "{{ item.name }}"

@@ -35,7 +35,6 @@
     group: "{{ item.name }}"
     mode: "0700"
   with_items: "{{ users }}"
-  no_log: yes
 
 - name: "Add QOpenVPN configuration"
   template:
@@ -45,4 +44,3 @@
     group: "{{ item.name }}"
     mode: "0600"
   with_items: "{{ users }}"
-  no_log: yes

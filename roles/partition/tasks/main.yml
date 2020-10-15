@@ -21,7 +21,6 @@
     - tempfile: suffix="crypt" state="directory"
       register: tempdir_encrypt
     - copy: content="{{ partition_password }}" dest="{{ tempdir_encrypt.path }}/keyfile"
-      no_log: yes
     - command: "cryptsetup luksFormat --type luks2 --key-file {{ tempdir_encrypt.path }}/keyfile {{ partition_os }}"
       when: encrypted is defined and encrypted.stdout.find("crypto_LUKS") == -1
     - command: "cryptsetup open --key-file {{ tempdir_encrypt.path }}/keyfile {{ partition_os }} {{ partition_physical_group }}"

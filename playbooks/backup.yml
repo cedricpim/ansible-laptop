@@ -31,7 +31,6 @@
       args:
         chdir: "{{ item.directory }}"
       with_items: "{{ backup_configurations }}"
-      no_log: yes
       become: yes
 
     - name: "Create secondary backup"
@@ -43,7 +42,6 @@
       args:
         chdir: "{{ item.directory }}"
       with_items: "{{ backup_configurations }}"
-      no_log: yes
       become: yes
 
     - name: "Ensure {{ backup_main_user }} permissions are set"

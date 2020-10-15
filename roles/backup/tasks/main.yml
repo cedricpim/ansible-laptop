@@ -28,7 +28,6 @@
 - name: "Check if duplicacy repository has been initialized"
   command: "duplicacy info {{ backup_final_destination }}/{{ item.name }}"
   with_items: "{{ backup_configurations }}"
-  no_log: yes
   become: yes
   register: initialized_duplicacy_repositories
   changed_when: no
@@ -41,7 +40,6 @@
   args:
     chdir: "{{ item.item.directory }}"
   with_items: "{{ initialized_duplicacy_repositories.results }}"
-  no_log: yes
   become: yes
   when:
     - initialized_duplicacy_repositories is defined
@@ -55,7 +53,6 @@
   vars:
     lines: "{{ item.filters | default([]) }}"
   with_items: "{{ backup_configurations }}"
-  no_log: yes
   become: yes
 
 - name: "Ensure {{ backup_main_user }} permissions are set"
@@ -70,7 +67,6 @@
 - name: "Check if duplicacy repository has been added"
   command: "duplicacy info {{ backup_secondary_destination }}/{{ item.name }}"
   with_items: "{{ backup_configurations }}"
-  no_log: yes
   become: yes
   register: added_duplicacy_repositories
   changed_when: no
