@@ -1,7 +1,9 @@
 ---
-- name: "Install Intel microcode"
+- name: "Install Intel microcode and mkinitcpio"
   pacman:
-    name: "intel-ucode"
+    name:
+      - "intel-ucode"
+      - "mkinitcpio"
     state: "present"
 
 - include_role:
