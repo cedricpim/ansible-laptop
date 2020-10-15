@@ -2,6 +2,7 @@
 - name: "Install Xorg related packages"
   pacman:
     name:
+      - "xterm"
       - "xorg-setxkbmap"
       - "xorg-xinit"
       - "xorg-xprop"
