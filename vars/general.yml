@@ -1,8 +1,8 @@
 ---
-wiki: "~/Sync/general/files/wiki"
+wiki: "~/Sync/General/files/wiki"
 
-ledger_file: "~/Sync/general/files/ledger.csv"
-ledger_networth: "~/Sync/general/files/networth.csv"
+ledger_file: "~/Sync/General/files/ledger.csv"
+ledger_networth: "~/Sync/General/files/networth.csv"
 
 ### Encrypted
 
