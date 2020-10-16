@@ -56,7 +56,7 @@
     ssh_key_file: ".ssh/{{ item.service }}_id"
     ssh_key_type: "{{ item.type }}"
     ssh_key_passphrase: "{{ item.passphrase }}"
-    ssh_key_comment: "{{ item.owner }} - {{ item.service }}"
+    ssh_key_comment: "{{ item.owner }}@{{ item.service }}"
   with_items: "{{ ssh_keys }}"
   become: yes
   register: ssh_keys_created
