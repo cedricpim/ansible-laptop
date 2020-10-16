@@ -1,3 +1,4 @@
 ---
 - name: "Discover vdirsyncer"
   shell: "yes | vdirsyncer discover"
+  when: user != "work"
