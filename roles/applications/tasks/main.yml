@@ -20,7 +20,6 @@
 - import_tasks: "copyq.yml"
 - import_tasks: "firefox.yml"
 
-#- import_tasks: "mullvad.yml"
 #- import_tasks: "openvpn.yml"
 
 - include_role:

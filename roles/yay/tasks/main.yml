@@ -54,6 +54,14 @@
     - aur_package_check is defined and aur_package_check.rc != 0
     - rust is defined and rust
 
+- name: "Import key for Mullvad"
+  command: "gpg --keyserver {{ keyserver }} --recv-keys {{ mullvad_key }}"
+  become: yes
+  become_user: "yay"
+  when:
+    - pkg_name is defined and pkg_name == "mullvad-vpn"
+    - aur_package_check is defined and aur_package_check.rc != 0
+
 - name: "Install {{ pkg_name }}"
   block:
     - lineinfile: path="/etc/sudoers" insertbefore="BOF" line="yay ALL=(ALL) NOPASSWD{{ ':' }} ALL" validate="visudo -cf %s" state="present"

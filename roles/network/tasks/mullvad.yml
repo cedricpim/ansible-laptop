@@ -33,18 +33,6 @@
     enabled: yes
   become: yes
 
-- name: "Check if key is defined"
-  command: "mullvad tunnel wireguard key check"
-  failed_when: no
-  changed_when: no
-  register: mullvad_key_check
-  become: yes
-
-- name: "Generate key for Mullvad"
-  command: "mullvad tunnel wireguard key generate"
-  when: mullvad_key_check is defined and mullvad_key_check.stdout.find(mullvad_no_key) != -1
-  become: yes
-
 - name: "Set Mullvad to use Wireguard"
   command: "mullvad relay set tunnel wireguard any"
   become: yes

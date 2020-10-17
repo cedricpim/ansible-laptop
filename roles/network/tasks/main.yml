@@ -54,3 +54,5 @@
     state: "started"
     enabled: yes
   become: yes
+
+- import_tasks: "mullvad.yml"
