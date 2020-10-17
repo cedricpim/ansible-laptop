@@ -25,6 +25,8 @@
       - "man-pages"
       - "bind-tools"
       - "fzf"
+      - "man-pages"
+      - "man-db"
     state: "present"
   become: yes
 
