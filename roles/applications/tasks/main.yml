@@ -30,7 +30,7 @@
     - "popcorntime"
     - "peek"
     - "slack-desktop"
-    #- "spotify"
+    - "spotify"
     - "youtube-dl"
     - "realvnc-vnc-viewer"
     - "obsidian-appimage"

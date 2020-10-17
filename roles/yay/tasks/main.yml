@@ -50,7 +50,7 @@
   become: yes
   become_user: "yay"
   when:
-    - pkg_name is defined
+    - pkg_name is defined and pkg_name == "ytop"
     - aur_package_check is defined and aur_package_check.rc != 0
     - rust is defined and rust
 
@@ -62,11 +62,17 @@
     - pkg_name is defined and pkg_name == "mullvad-vpn"
     - aur_package_check is defined and aur_package_check.rc != 0
 
+# For now, spotify needs to have the pgp check skipped since the current key is
+# invalid. See: https://aur.archlinux.org/packages/spotify/
 - name: "Install {{ pkg_name }}"
   block:
     - lineinfile: path="/etc/sudoers" insertbefore="BOF" line="yay ALL=(ALL) NOPASSWD{{ ':' }} ALL" validate="visudo -cf %s" state="present"
     - command: "yay -Sy {{ pkg_name }} --needed --noconfirm"
       become_user: "yay"
+      when: pkg_name is defined and pkg_name != "spotify"
+    - command: "yay -Sy {{ pkg_name }} --needed --noconfirm --mflags '--skippgpcheck'"
+      become_user: "yay"
+      when: pkg_name is defined and pkg_name == "spotify"
   always:
     - lineinfile: path="/etc/sudoers" regexp='^yay' validate="visudo -cf %s" state="absent"
   become: yes

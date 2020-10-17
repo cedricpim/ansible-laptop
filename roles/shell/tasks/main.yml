@@ -40,8 +40,6 @@
     - "ytop"
   loop_control:
     loop_var: "pkg_name"
-  vars:
-    rust: yes
 
 - name: "Create folder for SSH"
   file:
