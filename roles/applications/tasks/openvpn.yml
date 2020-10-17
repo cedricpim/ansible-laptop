@@ -31,16 +31,10 @@
   file:
     path: "{{ qopenvpn_directory }}"
     state: "directory"
-    owner: "{{ item.name }}"
-    group: "{{ item.name }}"
     mode: "0700"
-  with_items: "{{ users }}"
 
 - name: "Add QOpenVPN configuration"
   template:
     src: "openvpn/QOpenVPN.conf.j2"
     dest: "{{ qopenvpn_directory }}/QOpenVPN.conf"
-    owner: "{{ item.name }}"
-    group: "{{ item.name }}"
     mode: "0600"
-  with_items: "{{ users }}"
