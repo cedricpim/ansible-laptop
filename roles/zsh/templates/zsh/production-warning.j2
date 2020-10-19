@@ -2,7 +2,7 @@
 
 # Credits to Miha Rekar: http://mr.si/posts/2016/01/29/dont-screw-up-when-you-ssh-to-production/
 
-if [[ "$TERM" == "xterm-termite" ]]; then
+if [[ "$TERM" == "xterm-color" ]]; then
   function change-color() {
     printf "\033]10;$1\007" # foreground
     printf "\033]11;$2\007" # background
