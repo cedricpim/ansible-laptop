@@ -34,14 +34,6 @@
     name: "lvm2"
     state: "present"
 
-- name: "Set HOOKS for mkinitcpio"
-  lineinfile:
-    path: "/etc/mkinitcpio.conf"
-    regexp: '^HOOKS='
-    line: 'HOOKS=(base udev autodetect modconf block filesystems keyboard fsck keymap encrypt lvm2)'
-    state: "present"
-  notify: "Create mkinitcpio configuration"
-
 - name: "Create preset for linux"
   pacman:
     name:
@@ -49,5 +41,10 @@
       - "linux-firmware"
     state: "present"
 
-- name: "Create mkinitcpio configuration"
-  command: "mkinitcpio -p linux"
+- name: "Set HOOKS for mkinitcpio"
+  lineinfile:
+    path: "/etc/mkinitcpio.conf"
+    regexp: '^HOOKS='
+    line: 'HOOKS=(base udev autodetect modconf block filesystems keyboard fsck keymap encrypt lvm2)'
+    state: "present"
+  notify: "Create mkinitcpio configuration"
