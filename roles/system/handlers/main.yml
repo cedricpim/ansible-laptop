@@ -14,3 +14,10 @@
 
 - name: "Create mkinitcpio configuration"
   command: "mkinitcpio -p linux"
+
+- name: "Tune powertop"
+  debug:
+    msg:
+      - "Please run"
+      - "'powertop --html=powerreport.html' and 'powertop --auto-tune'"
+      - "and follow the suggestions with: 'awk -F '</?td ?>' '/tune/ { print $4 }' powerreport.html'"

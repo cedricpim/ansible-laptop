@@ -5,6 +5,7 @@
       - "powertop"
       - "tlp"
     state: "present"
+  notify: "Tune powertop"
 
 - include_role:
     name: "yay"
