@@ -35,6 +35,7 @@ startup_applications:
   - "blueman-applet"
   - "solaar -w hide"
   - "nm-applet"
+  - "xcompmgr" # Used by zoom
 
 scratchpad_applications:
   - { name: "todowork", keybinding: "t" }
