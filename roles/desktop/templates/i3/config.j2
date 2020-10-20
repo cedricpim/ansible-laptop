@@ -120,10 +120,10 @@ bindsym Mod1+Shift+Tab workspace prev
 bindsym Print exec "flameshot gui"
 bindsym $mod+grave exec "notify-send 'DUNST_COMMAND_TOGGLE'"
 
+bindsym $mod+Shift+i exec ~/.config/i3/bb.sh
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/audio.sh set-sink-volume +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/audio.sh set-sink-volume -5%
 bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/audio.sh set-sink-mute
-bindsym XF86Search exec --no-startup-id ~/.config/i3/bb.sh
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86AudioPlay exec playerctl play-pause

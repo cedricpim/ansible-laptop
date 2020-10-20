@@ -4,8 +4,8 @@ IFS=$'\n\t'
 
 {{ ansible_managed | comment }}
 
-if connmanctl technologies | grep -A 1 "Type = bluetooth" | grep -q True; then
-  connmanctl disable bluetooth
+if rfkill list bluetooth | grep -q "yes"; then
+  sudo rfkill unblock bluetooth
 else
-  connmanctl enable bluetooth
+  sudo rfkill block bluetooth
 fi

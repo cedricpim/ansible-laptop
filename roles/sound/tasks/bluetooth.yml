@@ -15,6 +15,22 @@
   vars:
     pkg_name: "blueman"
 
+- name: "Add auto-connect to pulse"
+  lineinfile:
+    path: "/etc/pulse/default.pa"
+    regexp: 'load-module module-switch-on-connect'
+    line: "load-module module-switch-on-connect"
+  become: yes
+
+- name: "Allow 'wheel' group to call rfkill"
+  lineinfile:
+    path: "/etc/sudoers"
+    regexp: '%wheel ALL=\(ALL\) NOPASSWD: /usr/bin/rfkill'
+    line: "%wheel ALL=(ALL) NOPASSWD: /usr/bin/rfkill"
+    validate: "visudo -cf %s"
+    backup: yes
+  become: yes
+
 - name: "Enable/start service for bluetooth"
   systemd:
     name: "bluetooth"
