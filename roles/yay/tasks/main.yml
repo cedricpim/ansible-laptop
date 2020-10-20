@@ -54,14 +54,6 @@
     - aur_package_check is defined and aur_package_check.rc != 0
     - rust is defined and rust
 
-- name: "Import key for Mullvad"
-  command: "gpg --keyserver {{ keyserver }} --recv-keys {{ mullvad_key }}"
-  become: yes
-  become_user: "yay"
-  when:
-    - pkg_name is defined and pkg_name == "mullvad-vpn"
-    - aur_package_check is defined and aur_package_check.rc != 0
-
 # For now, spotify needs to have the pgp check skipped since the current key is
 # invalid. See: https://aur.archlinux.org/packages/spotify/
 - name: "Install {{ pkg_name }}"
@@ -69,10 +61,10 @@
     - lineinfile: path="/etc/sudoers" insertbefore="BOF" line="yay ALL=(ALL) NOPASSWD{{ ':' }} ALL" validate="visudo -cf %s" state="present"
     - command: "yay -Sy {{ pkg_name }} --needed --noconfirm"
       become_user: "yay"
-      when: pkg_name is defined and pkg_name != "spotify"
+      when: pkg_name is defined and pkg_name != "spotify" and pkg_name != "mullvad-vpn"
     - command: "yay -Sy {{ pkg_name }} --needed --noconfirm --mflags '--skippgpcheck'"
       become_user: "yay"
-      when: pkg_name is defined and pkg_name == "spotify"
+      when: pkg_name is defined and (pkg_name == "spotify" or pkg_name == "mullvad-vpn")
   always:
     - lineinfile: path="/etc/sudoers" regexp='^yay' validate="visudo -cf %s" state="absent"
   become: yes

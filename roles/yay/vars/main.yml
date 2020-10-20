@@ -1,6 +1,2 @@
 ---
 yay_repo: "https://aur.archlinux.org/yay.git"
-
-keyserver: "keyserver.ubuntu.com"
-
-mullvad_key: "EA0A77BF9E115615FC3BD8BC7653B940E494FE87"
