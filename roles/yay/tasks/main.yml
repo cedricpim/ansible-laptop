@@ -5,15 +5,6 @@
     state: "present"
   become: yes
 
-- name: "Ensure yay user exists"
-  user:
-    name: "yay"
-    state: "present"
-    shell: "/usr/bin/nologin"
-  register: yay_user
-  become: yes
-  notify: "Remove yay user"
-
 - name: "Check if Yay is installed"
   command: "pacman -Q yay"
   failed_when: no
@@ -26,6 +17,16 @@
   failed_when: no
   register: aur_package_check
   when: pkg_name is defined
+
+- name: "Ensure yay user exists"
+  user:
+    name: "yay"
+    state: "present"
+    shell: "/usr/bin/nologin"
+  when: (aur_yay_check is defined and aur_yay_check.rc != 0) or (aur_package_check is defined and aur_package_check.rc != 0)
+  register: yay_user
+  become: yes
+  notify: "Remove yay user"
 
 - name: "Install Yay"
   block:
@@ -41,8 +42,7 @@
     - file: path="{{ yay_user.home }}/yay-repo" state="absent"
   become: yes
   when:
-    - yay_user is defined
-    - pkg_name is defined
+    - pkg_name is defined and yay_user is defined
     - aur_yay_check is defined and aur_yay_check.rc != 0
 
 - name: "Set rust toolchain"
@@ -69,5 +69,5 @@
     - lineinfile: path="/etc/sudoers" regexp='^yay' validate="visudo -cf %s" state="absent"
   become: yes
   when:
-    - pkg_name is defined
+    - pkg_name is defined and yay_user is defined
     - aur_package_check is defined and aur_package_check.rc != 0
