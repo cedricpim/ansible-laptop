@@ -34,6 +34,14 @@
     name: "lvm2"
     state: "present"
 
+- include_role:
+    name: "yay"
+  with_items:
+    - "aic94xx-firmware"
+    - "wd719x-firmware"
+  loop_control:
+    loop_var: "pkg_name"
+
 - name: "Create preset for linux"
   pacman:
     name:
