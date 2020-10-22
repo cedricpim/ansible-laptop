@@ -41,3 +41,38 @@
     dest: "~/.ssh/config"
     mode: "0600"
   become: yes
+
+- name: "Retrieve list of installed packages"
+  command: "yay -Qet"
+  changed_when: false
+  register: packages_list
+
+- name: "Copy list of installed packages to both backups"
+  copy:
+    content: "{{ packages_list.stdout }}"
+    dest: "/home/packages"
+  become: yes
+  when: packages_list is defined
+
+- name: "Initialize repositories"
+  command: "borgmatic init --encryption repokey --verbosity 1"
+  become: yes
+
+- name: "Copy Borgmatic systemd"
+  template:
+    src: "systemd/{{ item }}.j2"
+    dest: "{{ systemd_directory }}/{{ item }}"
+    mode: "0755"
+  with_items:
+    - "borgmatic.service"
+    - "borgmatic.timer"
+  become: yes
+  notify: "Restart Borgmatic timer"
+
+- name: "Start/Enable Borgmatic"
+  systemd:
+    name: "borgmatic.timer"
+    state: "started"
+    enabled: yes
+    daemon_reload: yes
+  become: yes

@@ -1,0 +1,6 @@
+---
+- name: "Restart Borgmatic timer"
+  systemd:
+    name: "borgmatic.timer"
+    state: "restarted"
+  become: yes

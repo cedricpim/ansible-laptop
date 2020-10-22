@@ -8,27 +8,7 @@
   roles:
     - { role: "backup", tags: "backup" }
 
-  tasks:
-    - name: "Retrieve list of installed packages"
-      command: "yay -Qet"
-      changed_when: false
-      register: packages_list
-
-    - name: "Copy list of installed packages to both backups"
-      copy:
-        content: "{{ packages_list.stdout }}"
-        dest: "/home/packages"
-      become: yes
-      when: packages_list is defined
-
-    - name: "Initialize repositories"
-      command: "borgmatic init --encryption repokey --verbosity 1"
-      become: yes
-
-    - name: "Make backup"
-      command: "borgmatic --verbosity 1 --files"
-      become: yes
-
-    - name: "Make check"
-      command: "borgmatic check --verbosity 1"
-      become: yes
+  post_tasks:
+    - name: "Display message about how to run a backup"
+      debug:
+        msg: "Please run 'borgmatic --verbosity 1 --files'"

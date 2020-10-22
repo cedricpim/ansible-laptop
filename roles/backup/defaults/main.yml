@@ -1,4 +1,6 @@
 ---
+systemd_directory: "/etc/systemd/system"
+
 borgmatic_directory: "/etc/borgmatic"
 
 backup_sources:
