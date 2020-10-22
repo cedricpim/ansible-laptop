@@ -1,65 +1,43 @@
 ---
-- include_role:
-    name: "yay"
-  vars:
-    pkg_name: "duplicacy"
-
-- name: "Install python-pip dependency"
+- name: "Install borg related software"
   pacman:
-    name: "python-pip"
+    name:
+      - "borg"
+      - "borgmatic"
     state: "present"
   become: yes
 
-- name: "Install pexpect"
-  pip:
-    name: "pexpect"
-    state: "latest"
-  become: yes
-
-- name: "Create folder for main backups"
+- name: "Create folder for borgmatic configuration"
   file:
-    path: "{{ backup_final_destination }}"
-    owner: "{{ backup_main_user }}"
-    group: "{{ backup_main_user }}"
+    path: "{{ borgmatic_directory }}"
     state: "directory"
-    mode: "0755"
+    mode: "0700"
   become: yes
 
-- name: "Check if duplicacy repository has been initialized"
-  command: "duplicacy info {{ backup_final_destination }}/{{ item.name }}"
-  with_items: "{{ backup_configurations }}"
-  become: yes
-  register: initialized_duplicacy_repositories
-  changed_when: no
-
-- name: "Initiate the repositories for backups"
-  expect:
-    command: "duplicacy init -e -storage-name {{ item.item.name }} {{ item.item.name }} {{ backup_final_destination }}/{{ item.item.name }}"
-    responses:
-      password: "{{ item.item.password }}"
-  args:
-    chdir: "{{ item.item.directory }}"
-  with_items: "{{ initialized_duplicacy_repositories.results }}"
-  become: yes
-  when:
-    - initialized_duplicacy_repositories is defined
-    - item.stdout.find(storage_not_initialized) != -1
-
-- name: "Copy filters for backup"
+- name: "Copy configuration and excludes for borgmatic"
   template:
-    src: "filters.j2"
-    dest: "{{ item.directory }}/.duplicacy/filters"
-    mode: "0644"
-  vars:
-    lines: "{{ item.filters | default([]) }}"
-  with_items: "{{ backup_configurations }}"
+    src: "{{ item }}.j2"
+    dest: "{{ borgmatic_directory }}/{{ item }}"
+    mode: "0600"
+  with_items:
+    - "config.yaml"
+    - "excludes"
   become: yes
 
-- name: "Ensure {{ backup_main_user }} permissions are set"
-  file:
-    path: "{{ backup_final_destination }}"
-    owner: "{{ backup_main_user }}"
-    group: "{{ backup_main_user }}"
-    state: "directory"
-    recurse: yes
+- name: "Generate SSH keys"
+  user:
+    name: "{{ item.owner }}"
+    generate_ssh_key: yes
+    ssh_key_file: ".ssh/{{ item.service }}_id"
+    ssh_key_type: "{{ item.type }}"
+    ssh_key_passphrase: "{{ item.passphrase }}"
+    ssh_key_comment: "{{ item.owner }}@{{ item.service }}"
+  with_items: "{{ backup_ssh_keys }}"
+  become: yes
+
+- name: "Set SSH configuration"
+  template:
+    src: "ssh/config.j2"
+    dest: "~/.ssh/config"
+    mode: "0600"
   become: yes

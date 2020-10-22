@@ -1,11 +1,13 @@
 ---
-backup_main_user: "user"
-backup_final_destination: "/home/user/backups"
+borgmatic_directory: "/etc/borgmatic"
 
-backup_configurations:
-  - name: "home"
-    directory: "/home"
-    password: "12345678"
-    filters:
-      - "-*/some_dir/"
-      - "-*/backups/"
+backup_sources:
+  - "/home"
+  - "/etc"
+backup_repositories:
+  - "/home/user/Downloads/backups"
+  - "user@backupserver:sourcehostname.borg"
+backup_passphrase: "12345678"
+backup_excludes:
+  - "/home/*/some_dir"
+  - "/home/*/Downloads"

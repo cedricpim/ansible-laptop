@@ -5,6 +5,9 @@
     - "../vaulted_vars/system.yml"
     - "../vars/system.yml"
 
+  roles:
+    - { role: "backup", tags: "backup" }
+
   tasks:
     - name: "Retrieve list of installed packages"
       command: "yay -Qet"
@@ -14,26 +17,18 @@
     - name: "Copy list of installed packages to both backups"
       copy:
         content: "{{ packages_list.stdout }}"
-        dest: "{{ backup_final_destination }}/packages"
+        dest: "/home/packages"
       become: yes
       when: packages_list is defined
 
-    - name: "Execute backup"
-      expect:
-        command: "duplicacy backup"
-        responses:
-          password: "{{ item.password }}"
-        timeout: null
-      args:
-        chdir: "{{ item.directory }}"
-      with_items: "{{ backup_configurations }}"
+    - name: "Initialize repositories"
+      command: "borgmatic init --encryption repokey --verbosity 1"
       become: yes
 
-    - name: "Ensure {{ backup_main_user }} permissions are set"
-      file:
-        path: "{{ backup_final_destination }}"
-        owner: "{{ backup_main_user }}"
-        group: "{{ backup_main_user }}"
-        state: "directory"
-        recurse: yes
+    - name: "Make backup"
+      command: "borgmatic --verbosity 1 --files"
+      become: yes
+
+    - name: "Make check"
+      command: "borgmatic check --verbosity 1"
       become: yes
