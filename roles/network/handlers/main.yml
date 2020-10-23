@@ -1,8 +1,4 @@
 ---
-- name: "Rebuild resolvconf configuration"
-  command: "resolvconf -u"
-  become: yes
-
 - name: "Restart Mullvad daemon"
   systemd:
     name: "mullvad-daemon"

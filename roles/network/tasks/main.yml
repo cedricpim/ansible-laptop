@@ -26,14 +26,6 @@
     state: "present"
   become: yes
 
-- name: "Copy resolvconf configuration"
-  template:
-    src: "resolvconf/resolvconf.conf.j2"
-    dest: "/etc/resolvconf.conf"
-    mode: "0644"
-  become: yes
-  notify: "Rebuild resolvconf configuration"
-
 - name: "Enable/start service for IWD"
   systemd:
     name: "iwd"

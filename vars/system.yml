@@ -13,8 +13,6 @@ partition_boot: "{{ vault_partition_boot }}"
 
 root_password: "{{ vault_root_password }}"
 
-name_servers: "{{ vault_name_servers }}"
-
 users: "{{ vault_users }}"
 
 ssh_keys: "{{ vault_ssh_keys }}"
