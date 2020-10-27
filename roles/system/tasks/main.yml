@@ -17,3 +17,16 @@
 - import_tasks: "power.yml"
 - import_tasks: "journal.yml"
 - import_tasks: "bootloader.yml"
+
+- name: "Install card reader software"
+  pacman:
+    name:
+      - "ccid"
+      - "opensc"
+    state: "present"
+
+- name: "Enable/start pcscd service"
+  systemd:
+    name: "pcscd"
+    state: "started"
+    enabled: yes
