@@ -6,6 +6,7 @@
     name:
       - "pulseaudio"
       - "pulseaudio-alsa"
+      - "pavucontrol"
     state: "present"
   become: yes
 
