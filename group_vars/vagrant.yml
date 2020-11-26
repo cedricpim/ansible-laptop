@@ -95,7 +95,7 @@ neomutt_email_server_port: "465"
 neomutt_smtp_protocol: "smtps"
 
 ledger_password: "password"
-ledger_exchange_api_key: "some_key"
+ledger_exchange_key: "some_key"
 
 background_color: "dark"
 

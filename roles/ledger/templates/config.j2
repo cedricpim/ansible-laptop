@@ -4,10 +4,7 @@ encryption: {{ ledger_password }}
 files:
   ledger: {{ ledger_file }}
   networth: {{ ledger_networth }}
-exchange:
-  api_key: {{ ledger_exchange_api_key }}
-  cache_file: /tmp/exchange-cache.yml
-  ttl: 86400
+exchange_key: {{ ledger_exchange_key }}
 transfer: {{ ledger_transfer }}
 ignored_accounts: {{ ledger_ignored_accounts }}
 investments: {{ ledger_investment }}
