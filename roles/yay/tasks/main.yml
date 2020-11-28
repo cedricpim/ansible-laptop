@@ -52,7 +52,6 @@
   when:
     - pkg_name is defined and pkg_name == "ytop"
     - aur_package_check is defined and aur_package_check.rc != 0
-    - rust is defined and rust
 
 # For now, spotify needs to have the pgp check skipped since the current key is
 # invalid. See: https://aur.archlinux.org/packages/spotify/
