@@ -38,6 +38,7 @@
     - "prettyping"
     - "bandwhich"
     - "ytop"
+    - "battop"
   loop_control:
     loop_var: "pkg_name"
 

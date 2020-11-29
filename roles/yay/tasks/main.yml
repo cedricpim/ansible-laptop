@@ -50,7 +50,7 @@
   become: yes
   become_user: "yay"
   when:
-    - pkg_name is defined and pkg_name == "ytop"
+    - pkg_name is defined and (pkg_name == "ytop" or pkg_name == "battop")
     - aur_package_check is defined and aur_package_check.rc != 0
 
 # For now, spotify needs to have the pgp check skipped since the current key is
