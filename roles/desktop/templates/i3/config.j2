@@ -97,7 +97,7 @@ bindsym $mod+Shift+o floating toggle
 bindsym $mod+o focus mode_toggle
 
 # focus the parent container
-bindsym $mod+p focus parent
+# bindsym $mod+p focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -155,6 +155,7 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id solaar -w hide
 exec --no-startup-id nm-applet
 exec --no-startup-id mons -a #-x "~/.config/i3/monitor-handler.sh"
+exec --no-startup-id Pilorama
 
 {% for application in scratchpad_applications %}
 for_window [instance={{ application.name | to_json }}] move scratchpad
@@ -162,6 +163,9 @@ bindsym $mod+{{ application.keybinding }} exec {{ i3_directory }}/scratchpad-lau
 {% endfor %}
 
 for_window [title="Calculator"] floating enable
+# Improve accessibility of Pilorama
+for_window [instance="Pilorama"] move scratchpad
+bindsym $mod+p exec i3-msg "[instance=\"Pilorama\"] scratchpad show"
 
 {% if i3_extra is defined %}
 {{ i3_extra }}

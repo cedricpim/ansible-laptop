@@ -35,5 +35,6 @@
     - "realvnc-vnc-viewer"
     - "obsidian-appimage"
     - "solaar"
+    - "pilorama-git"
   loop_control:
     loop_var: "pkg_name"
