@@ -144,6 +144,16 @@ assign [class={{ workspace.assigned | to_json }}] → number {{ workspace.key }}
 {% for application in startup_applications %}
 exec --no-startup-id {{ application }}
 {% endfor %}
+exec --no-startup-id caffeine
+exec --no-startup-id copyq
+exec --no-startup-id dunst
+exec --no-startup-id light-locker
+exec --no-startup-id redshift-gtk
+exec --no-startup-id udiskie -ans
+exec --no-startup-id mullvad-vpn
+exec --no-startup-id blueman-applet
+exec --no-startup-id solaar -w hide
+exec --no-startup-id nm-applet
 exec --no-startup-id mons -a #-x "~/.config/i3/monitor-handler.sh"
 
 {% for application in scratchpad_applications %}

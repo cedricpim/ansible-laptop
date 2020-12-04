@@ -25,18 +25,8 @@ workspaces:
 
 startup_applications:
   - "sleep 3 && keepassxc"
-  - "caffeine"
-  - "copyq"
-  - "dunst"
   - "slack"
   - "sleep 3 && firefox"
-  - "light-locker"
-  - "redshift-gtk"
-  - "udiskie -ans"
-  - "mullvad-vpn"
-  - "blueman-applet"
-  - "solaar -w hide"
-  - "nm-applet"
 
 scratchpad_applications:
   - { name: "todo",     keybinding: "t" }
