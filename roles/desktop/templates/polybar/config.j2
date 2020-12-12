@@ -54,7 +54,7 @@ module-margin-right = 2
 
 modules-left = wlan battery volume backlight
 modules-center = i3
-modules-right = temperature memory cpu datetime
+modules-right = systemdfail temperature memory cpu datetime
 
 tray-position = right
 tray-padding = 2
@@ -160,6 +160,15 @@ ramp-0-foreground = ${colors.darkblack}
 ramp-1-foreground = ${colors.black}
 ramp-2-foreground = ${colors.yellow}
 ramp-foreground = ${root.focus-secondary-color}
+
+
+[module/systemdfail]
+type = custom/script
+exec = echo "$(systemctl --failed --no-legend | wc -l) failed"
+exec-if = systemctl --failed --no-legend | wc -l | grep -v -q '^0$'
+interval = 120
+
+format-foreground = ${colors.darkred}
 
 
 [module/temperature]
