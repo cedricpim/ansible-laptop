@@ -62,7 +62,7 @@
   template:
     src: "systemd/{{ item }}.j2"
     dest: "{{ systemd_directory }}/{{ item }}"
-    mode: "0755"
+    mode: "0644"
   with_items:
     - "borgmatic.service"
     - "borgmatic.timer"
