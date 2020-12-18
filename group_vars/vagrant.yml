@@ -117,7 +117,6 @@ startup_applications:
   - "dunst"
   - "slack"
   - "firefox"
-  - "light-locker"
 
 scratchpad_applications:
   - { name: "todo",     keybinding: "t" }

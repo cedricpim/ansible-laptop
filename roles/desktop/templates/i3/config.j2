@@ -147,7 +147,6 @@ exec --no-startup-id {{ application }}
 exec --no-startup-id caffeine
 exec --no-startup-id copyq
 exec --no-startup-id dunst
-exec --no-startup-id light-locker
 exec --no-startup-id redshift-gtk
 exec --no-startup-id udiskie -ans
 exec --no-startup-id mullvad-vpn
@@ -210,11 +209,11 @@ bindsym $mod+Shift+m mode "$mode_monitors"
 
 set $mode_system System: (l) lock, (o) logout, (g) greeter, (s) suspend, (r) reboot, (Shift+p) poweroff
 mode "$mode_system" {
-  bindsym l exec --no-startup-id light-locker-command -l, mode "default"
+  bindsym l exec --no-startup-id dm-tool lock, mode "default"
   # Firefox does not close well on its own
   bindsym o [class="firefox"] kill; exec sleep 1 && i3-msg exit, mode "default"
   bindsym g exec --no-startup-id dm-tool switch-to-greeter, mode "default"
-  bindsym s exec --no-startup-id systemctl suspend, mode "default"
+  bindsym s exec --no-startup-id dm-tool lock && systemctl suspend, mode "default"
   bindsym r exec --no-startup-id systemctl reboot, mode "default"
   bindsym Shift+p exec --no-startup-id systemctl poweroff -i, mode "default"
 

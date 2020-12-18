@@ -3,7 +3,6 @@
   pacman:
     name:
       - "lightdm"
-      - "light-locker"
       - "xautolock"
     state: "present"
   become: yes
