@@ -54,7 +54,7 @@ module-margin-right = 2
 
 modules-left = wlan battery volume backlight
 modules-center = i3
-modules-right = systemdfail temperature memory cpu datetime
+modules-right = firmwareupdate systemdfail temperature memory cpu datetime
 
 tray-position = right
 tray-padding = 2
@@ -160,6 +160,15 @@ ramp-0-foreground = ${colors.darkblack}
 ramp-1-foreground = ${colors.black}
 ramp-2-foreground = ${colors.yellow}
 ramp-foreground = ${root.focus-secondary-color}
+
+
+[module/firmwareupdate]
+type = custom/script
+exec = echo "New Firmware Update"
+exec-if = test -z `fwupdmgr get-updates 2>&1 | grep "No updates available for remaining devices"`
+interval = 120
+
+format-foreground = ${colors.darkgreen}
 
 
 [module/systemdfail]
