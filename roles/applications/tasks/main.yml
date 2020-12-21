@@ -38,3 +38,9 @@
     - "pilorama-git"
   loop_control:
     loop_var: "pkg_name"
+
+- include_role:
+    name: "yay"
+  with_items: "{{ extra_applications }}"
+  loop_control:
+    loop_var: "pkg_name"
