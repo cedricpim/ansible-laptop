@@ -12,10 +12,10 @@
       - "xournalpp"
       - "android-file-transfer"
       - "mplayer"
+      - "keepassxc"
     state: "present"
   become: yes
 
-- import_tasks: "keepassxc.yml"
 - import_tasks: "syncthing.yml"
 - import_tasks: "copyq.yml"
 - import_tasks: "firefox.yml"

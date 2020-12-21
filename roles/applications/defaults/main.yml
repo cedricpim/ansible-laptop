@@ -1,6 +1,5 @@
 ---
 copyq_directory: "~/.config/copyq"
-keepassxc_directory: "~/.config/keepassxc"
 
 firefox_profiles_file: "~/.mozilla/firefox"
 
