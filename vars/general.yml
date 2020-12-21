@@ -49,3 +49,5 @@ ssh_entries: "{{ vault_ssh_entries }}"
 
 mullvad_account_number: "{{ vault_mullvad_account_number }}"
 openvpn_name: "{{ vault_openvpn_name }}"
+
+extra_applications: "{{ vault_extra_applications | default([]) }}"

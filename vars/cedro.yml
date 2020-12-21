@@ -69,5 +69,3 @@ personal_server_shortcut: "{{ vault_personal_server_shortcut }}"
 personal_server_photos: "{{ vault_personal_server_photos }}"
 personal_local_photos: "{{ vault_personal_local_photos }}"
 personal_public_files: "{{ vault_personal_public_files }}"
-
-extra_applications: "{{ vault_extra_applications | default([]) }}"
