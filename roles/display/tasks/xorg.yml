@@ -30,9 +30,6 @@
 
 - include_role:
     name: "yay"
-  vars:
-- include_role:
-    name: "yay"
   with_items:
     - "interception-tools"
     - "interception-space2meta"
