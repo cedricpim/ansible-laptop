@@ -38,7 +38,7 @@
 
 - name: "Configure space2meta on udevmon" 
   blockinfile:
-    path: "/etc/udevmon.yaml"
+    path: "{{ interception_directory }}/udevmon.yaml"
     block: |
       - JOB: "intercept -g $DEVNODE | space2meta | uinput -d $DEVNODE"
         DEVICE:
