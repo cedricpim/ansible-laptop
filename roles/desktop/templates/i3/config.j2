@@ -155,6 +155,7 @@ exec --no-startup-id solaar -w hide
 exec --no-startup-id nm-applet
 exec --no-startup-id mons -a #-x "~/.config/i3/monitor-handler.sh"
 exec --no-startup-id Pilorama
+exec --no-startup-id signal-desktop --use-tray-icon
 
 {% for application in scratchpad_applications %}
 for_window [instance={{ application.name | to_json }}] move scratchpad
@@ -162,6 +163,10 @@ bindsym $mod+{{ application.keybinding }} exec {{ i3_directory }}/scratchpad-lau
 {% endfor %}
 
 for_window [title="Calculator"] floating enable
+# Improve accessibility of Signal
+for_window [class="Signal"] floating enable
+for_window [class="Signal"] move scratchpad
+bindsym $mod+m exec i3-msg "[class=\"Signal\"] scratchpad show"
 # Improve accessibility of Pilorama
 for_window [instance="Pilorama"] move scratchpad
 bindsym $mod+p exec i3-msg "[instance=\"Pilorama\"] scratchpad show"
