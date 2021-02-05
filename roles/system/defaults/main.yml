@@ -1,5 +1,5 @@
 ---
-systemd_directory: "/etc/systemd/system"
+systemd_directory: "/usr/lib/systemd/system"
 
 locales:
   - "en_GB.UTF-8"

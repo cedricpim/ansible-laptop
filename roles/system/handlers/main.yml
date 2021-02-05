@@ -21,3 +21,9 @@
       - "Please run"
       - "'powertop --html=powerreport.html' and 'powertop --auto-tune'"
       - "and follow the suggestions with: 'awk -F '</?td ?>' '/tune/ { print $4 }' powerreport.html'"
+
+- name: "Restart localtime"
+  systemd:
+    name: "localtime"
+    state: "restarted"
+    daemon_reload: yes

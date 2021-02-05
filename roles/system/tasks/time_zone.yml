@@ -12,8 +12,18 @@
   vars:
     pkg_name: "localtime"
 
-- name: "Enable Localtime service"
+- name: "Create localtime service"
+  template:
+    src: "localtime.service.j2"
+    dest: "{{ systemd_directory }}/localtime.service"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify: "Restart localtime"
+
+- name: "Enable localtime service"
   systemd:
     name: "localtime"
     state: "started"
     enabled: yes
+    daemon_reload: yes
