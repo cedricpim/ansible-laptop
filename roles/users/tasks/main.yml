@@ -41,6 +41,20 @@
   with_items: "{{ users }}"
   become: yes
 
+- name: "Check existing users"
+  getent:
+    database: "passwd"
+    key: "{{ item.name }}"
+  with_items: "{{ users }}"
+  failed_when: no
+  register: existing_users
+
+- name: "Ensure users are logged in"
+  command: "loginctl enable-linger {{ item.item.name }}"
+  with_items: "{{ existing_users.results }}"
+  when: item.ansible_facts is defined
+  become: yes
+
 - name: "Install git and openssh"
   pacman:
     name:

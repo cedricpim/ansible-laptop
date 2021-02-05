@@ -2,4 +2,4 @@
 xorg_directory: "/etc/X11/xorg.conf.d"
 geoclue_directory: "/etc/geoclue"
 interception_directory: "/etc/interception"
-systemd_directory: "/usr/lib/systemd/user"
+systemd_directory: "/usr/lib/systemd"

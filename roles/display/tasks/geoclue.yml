@@ -22,11 +22,36 @@
 - name: "Copy GeoClue service configuration"
   template:
     src: "geoclue-agent.service.j2"
-    dest: "{{ systemd_directory }}/geoclue-agent.service"
+    dest: "{{ systemd_directory }}/{{ item }}/geoclue-agent.service"
     mode: "0644"
     owner: "root"
     group: "root"
+  with_items:
+    - "system"
+    - "user"
+  become: yes
+
+- name: "Enable Geoclue service"
+  systemd:
+    name: "geoclue-agent"
+    state: "started"
+    enabled: yes
+    daemon_reload: yes
+  become: yes
+
+- name: "Check existing users"
+  getent:
+    database: "passwd"
+    key: "{{ item.name }}"
   with_items: "{{ users }}"
+  failed_when: no
+  register: existing_users
+  become: yes
+
+- name: "Ensure users are logged in"
+  command: "loginctl enable-linger {{ item.item.name }}"
+  with_items: "{{ existing_users.results }}"
+  when: item.ansible_facts is defined
   become: yes
 
 - name: "Enable Geoclue service"
