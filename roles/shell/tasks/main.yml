@@ -37,7 +37,7 @@
     - "mkpasswd"
     - "prettyping"
     - "bandwhich"
-    - "ytop"
+    - "bottom"
     - "battop"
   loop_control:
     loop_var: "pkg_name"
