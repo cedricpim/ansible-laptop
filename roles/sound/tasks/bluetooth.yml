@@ -6,7 +6,6 @@
       - "bluez-utils"
       - "bluez-libs"
       - "bluez-hid2hci"
-      - "pulseaudio-bluetooth"
     state: "present"
   become: yes
 
@@ -14,13 +13,6 @@
     name: "yay"
   vars:
     pkg_name: "blueman"
-
-- name: "Add auto-connect to pulse"
-  lineinfile:
-    path: "/etc/pulse/default.pa"
-    regexp: 'load-module module-switch-on-connect'
-    line: "load-module module-switch-on-connect"
-  become: yes
 
 - name: "Allow 'wheel' group to call rfkill"
   lineinfile:
@@ -36,4 +28,12 @@
     name: "bluetooth"
     state: "started"
     enabled: yes
+  become: yes
+
+- name: "Ensure Bluetooth uses the right codec"
+  lineinfile:
+    path: "{{ pipewire_directory }}/media-session.d/bluez-monitor.conf"
+    regexp: '    bluez5.codecs'
+    insertafter: '#bluez5.codecs'
+    line: "    bluez5.codecs = [ sbc ]"
   become: yes

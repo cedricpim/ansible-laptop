@@ -1,2 +1,2 @@
 ---
-pulseaudio_directory: "~/.config/pulse"
+pipewire_directory: "/etc/pipewire"

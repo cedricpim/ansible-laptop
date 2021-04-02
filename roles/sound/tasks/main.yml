@@ -1,23 +1,15 @@
 ---
-- import_tasks: "bluetooth.yml"
-
-- name: "Install PulseAudio related packages"
+- name: "Install PipeWire related packages"
   pacman:
     name:
-      - "pulseaudio"
-      - "pulseaudio-alsa"
+      - "pipewire-pulse"
       - "pavucontrol"
     state: "present"
   become: yes
 
-- name: "Create folder for PulseAudio configuration"
-  file:
-    path: "{{ pulseaudio_directory }}"
-    state: "directory"
-    mode: "0700"
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "pipewire-jack-dropin"
 
-- name: "Copy PulseAudio configuration"
-  template:
-    src: "default.pa.j2"
-    dest: "{{ pulseaudio_directory }}/default.pa"
-    mode: "0600"
+- import_tasks: "bluetooth.yml"
