@@ -9,6 +9,7 @@
       - "ripgrep"
       - "libvterm"
       - "neovim"
+      - "pandoc"
     state: "present"
   become: yes
 
