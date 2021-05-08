@@ -13,7 +13,7 @@ if [[ "$TERM" == "xterm-color" ]]; then
   }
 
   function reset-colors() {
-    change-color "$(original-color 'foreground')" "$(original-color 'background')"
+    change-color "$(original-color 'foreground:')" "$(original-color 'background:')"
   }
 
   function colorproduction() {
