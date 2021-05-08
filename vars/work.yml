@@ -41,24 +41,24 @@ background_color: "light"
 colorscheme:
   foreground: "#4A4543"
   background: "#E4E4E4"
-  cursor_color: "#FFFFFF"
+  cursor: "#585C63"
   colors:
-    - { key: "color0",  name: "darkblack",   value: "#090300" }
-    - { key: "color1",  name: "darkred",     value: "#DB2D20" }
-    - { key: "color2",  name: "darkgreen",   value: "#01A252" }
-    - { key: "color3",  name: "darkyellow",  value: "#9E9A09" }
-    - { key: "color4",  name: "darkblue",    value: "#01A0E4" }
-    - { key: "color5",  name: "darkmagenta", value: "#A16A94" }
-    - { key: "color6",  name: "darkcyan",    value: "#B5E4F4" }
-    - { key: "color7",  name: "darkwhite",   value: "#A5A2A2" }
-    - { key: "color8",  name: "black",       value: "#5C5855" }
-    - { key: "color9",  name: "red",         value: "#DB2D20" }
-    - { key: "color10", name: "green",       value: "#01A252" }
-    - { key: "color11", name: "yellow",      value: "#FBA922" }
-    - { key: "color12", name: "blue",        value: "#01A0E4" }
-    - { key: "color13", name: "magenta",     value: "#A16A94" }
-    - { key: "color14", name: "cyan",        value: "#B5E4F4" }
-    - { key: "color15", name: "white",       value: "#FFFFFF" }
+    - { name: "darkblack",   value: "#090300" }
+    - { name: "darkred",     value: "#DB2D20" }
+    - { name: "darkgreen",   value: "#01A252" }
+    - { name: "darkyellow",  value: "#9E9A09" }
+    - { name: "darkblue",    value: "#01A0E4" }
+    - { name: "darkmagenta", value: "#A16A94" }
+    - { name: "darkcyan",    value: "#B5E4F4" }
+    - { name: "darkwhite",   value: "#A5A2A2" }
+    - { name: "black",       value: "#5C5855" }
+    - { name: "red",         value: "#DB2D20" }
+    - { name: "green",       value: "#01A252" }
+    - { name: "yellow",      value: "#FBA922" }
+    - { name: "blue",        value: "#01A0E4" }
+    - { name: "magenta",     value: "#A16A94" }
+    - { name: "cyan",        value: "#B5E4F4" }
+    - { name: "white",       value: "#FFFFFF" }
 
 ### Encrypted
 

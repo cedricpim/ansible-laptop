@@ -1,18 +1,18 @@
 ---
 - name: "Install terminal related packages"
   pacman:
-    name: "termite"
+    name: "alacritty"
     state: "present"
   become: yes
 
-- name: "Create folder for termite configuration"
+- name: "Create folder for terminal configuration"
   file:
-    path: "{{ termite_directory }}"
+    path: "{{ terminal_directory }}"
     state: "directory"
     mode: "0700"
 
-- name: "Copy termite configuration"
+- name: "Copy terminal configuration"
   template:
-    src: "termite/config.j2"
-    dest: "{{ termite_directory }}/config"
+    src: "alacritty/alacritty.yml.j2"
+    dest: "{{ terminal_directory }}/alacritty.yml"
     mode: "0600"
