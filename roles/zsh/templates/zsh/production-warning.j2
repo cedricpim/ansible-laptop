@@ -9,7 +9,7 @@ if [[ "$TERM" == "xterm-color" ]]; then
   }
 
   function original-color() {
-    grep -m 1 $1 ~/.config/termite/config | sed -r 's/[^#]*(.+)/\1/'
+    grep -m 1 $1 {{ terminal_configuration }} | sed -r "s/[^']*'(.+)'/\1/"
   }
 
   function reset-colors() {
