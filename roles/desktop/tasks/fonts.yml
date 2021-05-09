@@ -12,5 +12,8 @@
 
 - include_role:
     name: "yay"
-  vars:
-    pkg_name: "nerd-fonts-complete"
+  with_items:
+    - "ttf-iosevka"
+    - "nerd-fonts-complete"
+  loop_control:
+    loop_var: "pkg_name"
