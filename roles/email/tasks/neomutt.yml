@@ -38,9 +38,3 @@
     src: "neomutt/oauth2.py.j2"
     dest: "{{ neomutt_directory }}/oauth2.py"
     mode: "0700"
-
-- include_role:
-    name: "zsh"
-    tasks_from: "scripts"
-  vars:
-    script: "zneomutt"

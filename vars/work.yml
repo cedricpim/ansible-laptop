@@ -31,7 +31,7 @@ scratchpad_applications:
   - { name: "todowork", keybinding: "t" }
   - { name: "mpsyt",    keybinding: "y" }
   - { name: "ikhal",    keybinding: "c" }
-  - { name: "zneomutt", keybinding: "e", custom: "resize set 70ppt 80ppt" }
+  - { name: "neomutt",  keybinding: "e", custom: "resize set 70ppt 80ppt" }
   - { name: "spotify",  keybinding: "s" }
   - { name: "newsboat", keybinding: "n" }
 
