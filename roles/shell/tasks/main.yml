@@ -27,6 +27,7 @@
       - "fzf"
       - "man-pages"
       - "man-db"
+      - "exa"
     state: "present"
   become: yes
 
