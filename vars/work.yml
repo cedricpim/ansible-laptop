@@ -41,7 +41,7 @@ background_color: "light"
 colorscheme:
   foreground: "#4A4543"
   background: "#E4E4E4"
-  cursor: "#585C63"
+  cursor: "#BEC0C4"
   colors:
     - { name: "darkblack",   value: "#090300" }
     - { name: "darkred",     value: "#DB2D20" }
