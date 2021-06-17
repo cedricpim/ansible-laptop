@@ -34,7 +34,7 @@
 - include_role:
     name: "yay"
   with_items:
-    - "diff-so-fancy"
+    - "git-delta"
     - "mkpasswd"
     - "prettyping"
     - "bandwhich"

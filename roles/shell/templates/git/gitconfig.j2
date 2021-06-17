@@ -58,7 +58,18 @@
   autocrlf = input
   excludesfile = ~/.gitignore
   editor = nvim
-  pager = diff-so-fancy | less --tabs=4 -RFX
+
+[pager]
+  diff = delta --diff-so-fancy
+  log = delta --diff-so-fancy
+  reflog = delta --diff-so-fancy
+  show = delta --diff-so-fancy
+
+[interactive]
+    diffFilter = delta --diff-so-fancy --color-only
+
+[delta]
+    features = side-by-side line-numbers
 
 [color]
   # Use colors in Git commands that are capable of colored output when
