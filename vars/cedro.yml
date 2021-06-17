@@ -43,7 +43,7 @@ colorscheme_style: "oceanic"
 colorscheme:
   foreground: "#FFFFFF"
   background: "#000000"
-  cursor: "#90949A"
+  cursor: "#726B72"
   colors:
     - { name: "darkblack",   value: "#393939" }
     - { name: "darkred",     value: "#DA4939" }
