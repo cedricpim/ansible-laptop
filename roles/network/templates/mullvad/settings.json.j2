@@ -7,11 +7,13 @@
           "country": "{{ mullvad_country }}"
         }
       },
+      "providers": "any",
       "tunnel_protocol": {
         "only": "wireguard"
       },
       "wireguard_constraints": {
-        "port": "any"
+        "port": "any",
+        "ip_version": "any"
       },
       "openvpn_constraints": {
         "port": "any",
@@ -21,7 +23,8 @@
   },
   "bridge_settings": {
     "normal": {
-      "location": "any"
+      "location": "any",
+      "providers": "any"
     }
   },
   "bridge_state": "auto",
@@ -34,12 +37,16 @@
     },
     "wireguard": {
       "mtu": null,
-      "automatic_rotation": null
+      "rotation_interval": null
     },
     "generic": {
       "enable_ipv6": false
+    },
+    "dns_options": {
+      "custom": false,
+      "addresses": []
     }
   },
   "show_beta_releases": false,
-  "settings_version": 2
+  "settings_version": 3
 }
