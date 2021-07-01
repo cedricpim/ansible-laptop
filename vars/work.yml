@@ -62,6 +62,4 @@ colorscheme:
 
 ### Encrypted
 
-zsh_extra: "{{ vault_zsh_extra }}"
-
 i3_extra: "{{ vault_i3_extra }}"

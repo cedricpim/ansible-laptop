@@ -67,6 +67,5 @@ fi
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
-{% if zsh_extra is defined %}
-{{ zsh_extra }}
-{% endif %}
+[ -f /usr/share/chruby/chruby.sh ] && source /usr/share/chruby/chruby.sh
+[ -f /usr/share/chruby/auto.sh ] && source /usr/share/chruby/auto.sh
