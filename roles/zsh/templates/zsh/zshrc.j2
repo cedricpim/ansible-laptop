@@ -69,3 +69,7 @@ fi
 
 [ -f /usr/share/chruby/chruby.sh ] && source /usr/share/chruby/chruby.sh
 [ -f /usr/share/chruby/auto.sh ] && source /usr/share/chruby/auto.sh
+
+if [ `command -v nodenv` ]; then
+  eval "$(nodenv init -)"
+fi
