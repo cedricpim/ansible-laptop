@@ -29,10 +29,8 @@ alias dlc="docker ps -l -q" # return the last-run container ID
 alias drm="docker ps -a | grep Exited | cut -d ' ' -f 1 | xargs docker rm" # remove all stopped containers
 alias drun="docker run -ti"
 
-# Tmux
-alias tma="tmux attach"
-alias tml="tmux list-sessions"
-alias tmk="tmux kill-session -t"
+## Kubernetes aliases
+alias kc="kubectl -n prod"
 
 # Override default applications
 alias ping="prettyping --nolegend"
