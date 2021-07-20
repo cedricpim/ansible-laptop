@@ -25,7 +25,7 @@ startup_applications:
   - "sleep 3 && keepassxc"
   - "slack"
   - "sleep 3 && firefox-developer-edition"
-  - "xcompmgr" # Used by zoom
+  - "xcompmgr" # Used for screensharing
 
 scratchpad_applications:
   - { name: "todowork", keybinding: "t" }
