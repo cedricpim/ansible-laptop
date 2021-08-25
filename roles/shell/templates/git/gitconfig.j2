@@ -49,6 +49,7 @@
   cop = !git diff --name-only $(git merge-base master HEAD) --diff-filter=AM -- '*.rb' '*.rake' | grep -v schema.rb$ | xargs bundle exec rubocop
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
   stash-all = stash save --include-untracked
+  uni = !DELTA_FEATURES='delta.features=side-by-side=false' git
 
 [apply]
   # Detect whitespace errors when applying a patch
@@ -66,10 +67,10 @@
   show = delta --diff-so-fancy
 
 [interactive]
-    diffFilter = delta --diff-so-fancy --color-only
+  diffFilter = delta --diff-so-fancy --color-only
 
 [delta]
-    features = side-by-side line-numbers
+  features = side-by-side line-numbers
 
 [color]
   # Use colors in Git commands that are capable of colored output when
