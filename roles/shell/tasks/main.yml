@@ -61,6 +61,7 @@
     - "shelp"
     - "luks"
     - "scert"
+    - "spihole"
   loop_control:
     loop_var: "script"
 

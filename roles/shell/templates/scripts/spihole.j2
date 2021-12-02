@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+set -o pipefail
+IFS=$'\n\t'
+
+{{ ansible_managed | comment }}
+
+### spihole — allow running commands on the Pi-Hole instance running on Raspberry PI
+###
+### Usage:
+###   pi disable <time>
+###   pi enable
+###
+### Options:
+###   <time>    Amount of time to disable the Pi-Hole (10s, 5m, ...)
+
+case $1 in
+  disable)
+    ssh raspberry 'pihole disable $2'
+    ;;
+
+  enable)
+    ssh raspberry 'pihole enable'
+    ;;
+
+  *)
+    shelp $0
+    exit 1
+esac
