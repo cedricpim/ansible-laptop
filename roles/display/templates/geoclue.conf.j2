@@ -12,13 +12,16 @@
 
 # Whitelist of desktop IDs (without .desktop part) of all agents we recognise,
 # separated by a ';'.
-whitelist=geoclue-demo-agent;gnome-shell;io.elementary.desktop.agent-geoclue2
+whitelist=geoclue-demo-agent;gnome-shell;io.elementary.desktop.agent-geoclue2;sm.puri.Phosh;lipstick
 
 # Network NMEA source configuration options
 [network-nmea]
 
 # Fetch location from NMEA sources on local network?
 enable=true
+
+# use aa nmea unix socket as the data source
+# nmea-socket=/var/run/gps-share.sock
 
 # 3G source configuration options
 [3g]
@@ -44,7 +47,7 @@ enable=true
 # Enable WiFi source
 enable=true
 
-# URL to the wifi geolocation service. If not set, defaults to Mozilla's
+# URL to the WiFi geolocation service. If not set, defaults to Mozilla's
 # Location Service with a hardcoded key. To use a custom key, uncomment this URL
 # while changing YOUR_KEY to your MLS API key.
 url=https://location.services.mozilla.com/v1/geolocate?key=geoclue
@@ -72,6 +75,12 @@ submit-data=false
 
 # A nickname to submit network data with. A nickname must be 2-32 characters long.
 submission-nick=geoclue
+
+# Compass configuration options
+[compass]
+
+# Enable Compass
+enable=true
 
 # Application configuration options
 #
@@ -126,9 +135,19 @@ allowed=true
 system=false
 users=
 
+[sm.puri.Phosh]
+allowed=true
+system=true
+users=
+
 [firefox]
 allowed=true
 system=false
+users=
+
+[lipstick]
+allowed=true
+system=true
 users=
 
 [redshift]
