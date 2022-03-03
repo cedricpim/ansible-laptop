@@ -3,7 +3,6 @@
   pacman:
     name:
       - "ranger"
-      - "atool"
       - "highlight"
       - "mediainfo"
       - "ffmpegthumbnailer"
@@ -11,6 +10,11 @@
       - "udiskie"
     state: "present"
   become: yes
+
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "atool"
 
 - name: "Create folder for ranger configuration"
   file:
