@@ -165,7 +165,7 @@ ramp-foreground = ${root.focus-secondary-color}
 [module/firmwareupdate]
 type = custom/script
 exec = echo "New Firmware Update"
-exec-if = test -z `fwupdmgr get-updates 2>&1 | grep -E "No updates available for remaining devices|No updatable devices"`
+exec-if = test -z `fwupdmgr get-updates 2>&1 | grep -E "No updates available|No updatable devices"`
 interval = 120
 
 format-foreground = ${colors.darkgreen}
