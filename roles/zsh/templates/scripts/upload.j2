@@ -15,7 +15,7 @@ IFS=$'\n\t'
 ### Options:
 ###   <file>    Full path to the file being uploaded/removed
 
-base_dir="{{ personal_public_files }}"
+base_dir={{ personal_public_files }}
 
 case $1 in
   add)
@@ -39,10 +39,10 @@ case $1 in
     filename="$(uuidgen)$extension"
 
     # Copy file over to public folder
-    cp "$2" "$base_dir/$filename"
+    cp $2 $base_dir/$filename
 
     # Keep index of files uploaded
-    touch "$base_dir/index"
+    touch $base_dir/index
     echo "$original_filename => $filename" | tee -a "$base_dir/index" > /dev/null
 
     url="https://{{ personal_server }}/public/$filename"
