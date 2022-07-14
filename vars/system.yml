@@ -24,8 +24,6 @@ github_access_token: "{{ vault_github_access_token }}"
 
 mullvad_account_number: "{{ vault_mullvad_account_number }}"
 
-logwatch_filename: "{{ vault_logwatch_filename }}"
-
 backup_ssh_entries: "{{ vault_backup_ssh_entries }}"
 backup_ssh_keys: "{{ vault_backup_ssh_keys }}"
 backup_sources: "{{ vault_backup_sources }}"

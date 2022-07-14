@@ -18,6 +18,3 @@ journal_triggerd_log: "/var/log/journal.failed.log"
 journald_system_max_use: "200M"
 
 esp_mount: "/boot"
-
-logwatch_directory: "/etc/logwatch/conf"
-logwatch_filename: "/tmp/logwatch"

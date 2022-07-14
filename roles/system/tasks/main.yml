@@ -17,7 +17,6 @@
 - import_tasks: "power.yml"
 - import_tasks: "journal.yml"
 - import_tasks: "bootloader.yml"
-- import_tasks: "logs.yml"
 
 - name: "Install card reader software"
   pacman:
