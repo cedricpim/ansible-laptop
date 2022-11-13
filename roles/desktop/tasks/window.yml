@@ -4,6 +4,8 @@
     name:
       - "i3-gaps"
       - "rofi"
+      - "rofi-calc"
+      - "xclip"
       - "xcb-util-xrm"
     state: "present"
   become: yes

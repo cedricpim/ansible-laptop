@@ -118,7 +118,7 @@ startup_applications:
 scratchpad_applications:
   - { name: "todo",     keybinding: "t" }
   - { name: "mpsyt",    keybinding: "m" }
-  - { name: "rikhal",   keybinding: "c" }
+  - { name: "rikhal",   keybinding: "a" }
   - { name: "neomutt",  keybinding: "e" }
   - { name: "newsboat", keybinding: "n" }
 
