@@ -35,7 +35,6 @@
     name: "yay"
   with_items:
     - "git-delta"
-    - "mkpasswd"
     - "prettyping"
     - "bandwhich"
     - "bottom"
