@@ -41,6 +41,7 @@
     - "bottom"
     - "battop"
     - "httptoolkit-bin"
+    - "asdf-vm"
   loop_control:
     loop_var: "pkg_name"
 

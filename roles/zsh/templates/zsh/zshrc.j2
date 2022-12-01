@@ -75,6 +75,8 @@ fi
 [ -f /usr/share/chruby/chruby.sh ] && source /usr/share/chruby/chruby.sh
 [ -f /usr/share/chruby/auto.sh ] && source /usr/share/chruby/auto.sh
 
+[ -f /opt/asdf-vm/asdf.sh ] && source /opt/asdf-vm/asdf.sh
+
 if [ `command -v nodenv` ]; then
   eval "$(nodenv init -)"
 fi
