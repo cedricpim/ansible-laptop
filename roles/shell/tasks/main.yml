@@ -28,6 +28,7 @@
       - "man-pages"
       - "man-db"
       - "exa"
+      - "lnav"
     state: "present"
   become: yes
 
