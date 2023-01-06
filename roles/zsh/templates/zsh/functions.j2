@@ -130,3 +130,8 @@ function scan() {
 
   command gs -dSAFER -dBATCH -dNOPAUSE -dNOCACHE -sOutputFile=$2 -sDEVICE=pdfwrite -sColorConversionStrategy=LeaveColorUnchanged -dAutoFilterColorImages=true -dAutoFilterGrayImages=true -dDownsampleMonoImages=true -dDownsampleGrayImages=true -dDownsampleColorImages=true $2.temp
 }
+
+# Calculate sum of values
+function total() {
+  awk '{ sum += $1 } END { print sum }'
+}
