@@ -145,6 +145,7 @@ assign [class={{ workspace.assigned | to_json }}] → number {{ workspace.key }}
 {% for application in startup_applications %}
 exec --no-startup-id {{ application }}
 {% endfor %}
+exec --no-startup-id snixembed --fork
 exec --no-startup-id caffeine
 exec --no-startup-id copyq
 exec --no-startup-id dunst
