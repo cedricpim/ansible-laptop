@@ -1,9 +1,8 @@
 ---
-- name: "Install transmission-cli"
-  pacman:
-    name: "transmission-cli"
-    state: "present"
-  become: yes
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "transmission4-cli"
 
 - name: "Create staff group"
   group:
