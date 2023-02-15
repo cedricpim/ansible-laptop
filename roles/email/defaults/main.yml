@@ -5,4 +5,5 @@ email_directory: "~/.cache/Mail"
 
 offlineimap_directory: "~/.config/offlineimap"
 
+notmuch_directory: "~/.config/notmuch/default"
 notmuch_other_emails: []

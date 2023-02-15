@@ -1,7 +1,7 @@
 ---
-zprezto_dest: "~/.zprezto"
+zprezto_dest: "{{ zsh_directory }}/.zprezto"
 ripgrep_autocomplete_dest: "/usr/share/zsh/functions/Completion/Zsh/_rg"
-zsh_directory: "~/.zsh"
+zsh_directory: "~/.config/zsh"
 terminal_configuration: "~/.config/alacritty/alacritty.yml"
 terminal_term: "alacritty"
 

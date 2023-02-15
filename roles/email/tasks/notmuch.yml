@@ -5,8 +5,13 @@
     state: "present"
   become: yes
 
+- name: "Create folder for notmuch configuration"
+  file:
+    path: "{{ notmuch_directory }}/default"
+    state: "directory"
+
 - name: "Copy notmuch configuration"
   template:
     src: "notmuch/notmuch-config.j2"
-    dest: "~/.notmuch-config"
+    dest: "{{ notmuch_directory }}/config"
     mode: "0600"

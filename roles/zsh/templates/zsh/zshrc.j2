@@ -24,14 +24,14 @@ autoload -Uz run-help
 # save path on cd
 function cd {
   builtin cd "$@"
-  pwd >| ~/.zsh/last_dir
+  pwd >| ~/.config/zsh/last_dir
 }
 
 # restore last saved path
-if [ -f ~/.zsh/last_dir ]; then cd "`cat ~/.zsh/last_dir`"; fi
+if [ -f ~/.config/zsh/last_dir ]; then cd "`cat ~/.config/zsh/last_dir`"; fi
 
 # Source zsh config files
-for file in `/usr/bin/find -L ~/.zsh -maxdepth 1 -type f`; do
+for file in `/usr/bin/find -L ~/.config/zsh/extra -maxdepth 1 -type f`; do
   [ -r $file ] && [ -f $file ] && [ "$(basename -- $file)" != "last_dir" ] && source $file
 done
 
@@ -82,4 +82,4 @@ if [ `command -v nodenv` ]; then
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh

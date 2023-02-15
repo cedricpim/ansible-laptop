@@ -90,7 +90,7 @@ alias pip-update="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d 
 alias reload!="source ~/.zshrc"
 
 # Alias wget to use a custom hsts cache file location
-alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
 
 # Weather
 function weather() {

@@ -17,18 +17,21 @@
 - name: "Copy zprezto configuration file"
   template:
     src: "zprezto/zpreztorc.j2"
-    dest: "~/.zpreztorc"
+    dest: "{{ zsh_directory }}/.zpreztorc"
     mode: "0600"
 
 - name: "Create folder for zsh configuration files"
   file:
-    path: "{{ zsh_directory }}"
+    path: "{{ item }}"
     state: "directory"
+  with_items:
+    - "{{ zsh_directory }}"
+    - "{{ zsh_directory }}/extra"
 
 - name: "Copy main zsh configuration files"
   template:
     src: "zsh/{{ item }}.j2"
-    dest: "~/.{{ item }}"
+    dest: "{{ zsh_directory }}/.{{ item }}"
     mode: "0600"
   with_items:
     - "zlogin"
@@ -38,7 +41,7 @@
 - name: "Copy the remaining zsh configuration files"
   template:
     src: "zsh/{{ item }}.j2"
-    dest: "{{ zsh_directory }}/{{ item }}"
+    dest: "{{ zsh_directory }}/extra/{{ item }}"
     mode: "0600"
   with_items:
     - "aliases"
