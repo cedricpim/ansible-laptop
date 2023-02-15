@@ -5,11 +5,16 @@
     state: "present"
   become: yes
 
+- name: "Create folder for git configuration"
+  file:
+    path: "{{ git_directory }}"
+    state: "directory"
+
 - name: "Copy git configuration files"
   template:
-    src: "git/{{ item }}.j2"
-    dest: "~/.{{ item }}"
+    src: "git/{{ item.src }}.j2"
+    dest: "{{ git_directory }}/{{ item.dest }}"
     mode: "0600"
   with_items:
-    - "gitconfig"
-    - "gitignore"
+    - { src: "gitconfig", dest: "config" }
+    - { src: "gitignore", dest: "ignore" }

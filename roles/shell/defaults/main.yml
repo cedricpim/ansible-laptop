@@ -1,4 +1,6 @@
 ---
+git_directory: "~/.config/git"
+
 htop_directory: "~/.config/htop"
 
 neofetch_directory: "~/.config/neofetch"
