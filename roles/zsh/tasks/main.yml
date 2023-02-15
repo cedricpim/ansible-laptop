@@ -19,19 +19,6 @@
     dest: "~/.dircolors"
     mode: "0600"
 
-- name: "Copy zshenv general environment variables file"
-  template:
-    src: "zsh/zshenv.etc.j2"
-    dest: "/etc/zsh/zshenv"
-    mode: "0644"
-  become: yes
-
-- name: "Copy p10k configuration file"
-  template:
-    src: "p10k.zsh.j2"
-    dest: "~/.config/zsh/p10k.zsh"
-    mode: "0600"
-
 - include_role:
     name: "yay"
   vars:

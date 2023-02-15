@@ -28,6 +28,19 @@
     - "{{ zsh_directory }}"
     - "{{ zsh_directory }}/extra"
 
+- name: "Copy zshenv general environment variables file"
+  template:
+    src: "zsh/zshenv.etc.j2"
+    dest: "/etc/zsh/zshenv"
+    mode: "0644"
+  become: yes
+
+- name: "Copy p10k configuration file"
+  template:
+    src: "p10k.zsh.j2"
+    dest: "~/.config/zsh/p10k.zsh"
+    mode: "0600"
+
 - name: "Copy main zsh configuration files"
   template:
     src: "zsh/{{ item }}.j2"
