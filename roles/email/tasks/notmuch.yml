@@ -7,7 +7,7 @@
 
 - name: "Create folder for notmuch configuration"
   file:
-    path: "{{ notmuch_directory }}/default"
+    path: "{{ notmuch_directory }}"
     state: "directory"
 
 - name: "Copy notmuch configuration"
