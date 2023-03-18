@@ -1,7 +1,9 @@
 ---
 - name: "Install git"
   pacman:
-    name: "git"
+    name:
+      - "git"
+      - "lazygit"
     state: "present"
   become: yes
 
