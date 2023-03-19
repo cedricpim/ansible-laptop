@@ -36,9 +36,7 @@ scratchpad_applications:
   - { name: "spotify",  keybinding: "s" }
   - { name: "newsboat", keybinding: "n" }
 
-colorscheme_name: "vim-material"
-background_color: "dark"
-colorscheme_style: "oceanic"
+colorscheme_name: "catppuccin-mocha"
 
 colorscheme:
   foreground: "#FFFFFF"
