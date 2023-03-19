@@ -29,7 +29,6 @@
       - "man-db"
       - "exa"
       - "lnav"
-      - "gdu"
     state: "present"
   become: yes
 

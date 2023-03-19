@@ -1,6 +1,6 @@
 ---
 neovim_directory: "~/.config/nvim"
-neovim_spell_dest: '~/.local/share/nvim/site/spell'
+neovim_spell_dest: '~/.local/share/nvim/spell'
 neovim_spell_dictionaries:
   - en.utf-8.spl
   - en.utf-8.sug
