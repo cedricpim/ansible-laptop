@@ -158,6 +158,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id mons -a #-x "~/.config/i3/monitor-handler.sh"
 exec --no-startup-id Pilorama
 exec --no-startup-id signal-desktop --use-tray-icon
+exec --no-startup-id opensnitch-ui
 
 {% for application in scratchpad_applications %}
 for_window [instance={{ application.name | to_json }}] move scratchpad
