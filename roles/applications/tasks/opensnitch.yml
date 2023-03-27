@@ -1,9 +1,7 @@
 ---
-- name: "Install Opensnitch and dependencies"
+- name: "Install Opensnitch"
   pacman:
-    name:
-      - "opensnitch"
-      - "python-pyasn"
+    name: "opensnitch"
     state: "present"
   become: yes
 
