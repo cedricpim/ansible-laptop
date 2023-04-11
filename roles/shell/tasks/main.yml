@@ -67,6 +67,7 @@
     - "luks"
     - "scert"
     - "spihole"
+    - "stlsa"
   loop_control:
     loop_var: "script"
 

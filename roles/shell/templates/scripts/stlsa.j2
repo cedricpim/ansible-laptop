@@ -1,0 +1,21 @@
+
+#!/usr/bin/env sh
+set -o pipefail
+IFS=$'\n\t'
+
+{{ ansible_managed | comment }}
+
+### stlsa — generate TLSA record for the given domain
+###
+### Usage:
+###   stlsa <domain>
+###
+### Options:
+###   <domain>    Domain for which to generate the TSLA record
+
+if [[ -n "$1" ]]; then
+  tlsa --port 25 --create --ipv4 --selector 1 --insecure $1
+else
+  shelp $0
+  exit 1
+fi
