@@ -44,6 +44,7 @@
     - "asdf-vm"
     - "xdg-ninja"
     - "shellgpt-git"
+    - "hash-slinger"
   loop_control:
     loop_var: "pkg_name"
 
