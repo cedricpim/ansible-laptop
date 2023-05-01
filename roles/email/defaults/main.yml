@@ -7,3 +7,5 @@ offlineimap_directory: "~/.config/offlineimap"
 
 notmuch_directory: "~/.config/notmuch/default"
 notmuch_other_emails: []
+
+neomutt_mailbox_extra: ""
