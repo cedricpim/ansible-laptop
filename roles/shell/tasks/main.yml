@@ -29,6 +29,7 @@
       - "man-db"
       - "exa"
       - "lnav"
+      - "progress"
     state: "present"
   become: yes
 
