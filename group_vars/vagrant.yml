@@ -116,11 +116,11 @@ startup_applications:
   - "firefox"
 
 scratchpad_applications:
-  - { name: "todo",     keybinding: "t" }
-  - { name: "mpsyt",    keybinding: "m" }
-  - { name: "rikhal",   keybinding: "a" }
-  - { name: "neomutt",  keybinding: "e" }
-  - { name: "newsboat", keybinding: "n" }
+  - { name: "todo",     keybinding: "t", launcher: "scratchpad-launcher.sh" }
+  - { name: "mpsyt",    keybinding: "m", launcher: "scratchpad-launcher.sh" }
+  - { name: "rikhal",   keybinding: "a", launcher: "scratchpad-launcher.sh" }
+  - { name: "neomutt",  keybinding: "e", launcher: "scratchpad-launcher.zsh" }
+  - { name: "newsboat", keybinding: "n", launcher: "scratchpad-launcher.sh" }
 
 colorscheme:
   foreground: "#FFFFFF"

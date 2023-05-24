@@ -29,12 +29,12 @@ startup_applications:
   - "sleep 3 && firefox"
 
 scratchpad_applications:
-  - { name: "todo",     keybinding: "t" }
-  - { name: "mpsyt",    keybinding: "y" }
-  - { name: "ikhal",    keybinding: "a" }
-  - { name: "neomutt",  keybinding: "e", custom: "resize set 70ppt 80ppt" }
-  - { name: "spotify",  keybinding: "s" }
-  - { name: "newsboat", keybinding: "n" }
+  - { name: "todo",     keybinding: "t", launcher: "scratchpad-launcher.sh" }
+  - { name: "mpsyt",    keybinding: "y", launcher: "scratchpad-launcher.sh" }
+  - { name: "ikhal",    keybinding: "a", launcher: "scratchpad-launcher.sh" }
+  - { name: "neomutt",  keybinding: "e", launcher: "scratchpad-launcher.zsh", custom: "resize set 70ppt 80ppt" }
+  - { name: "spotify",  keybinding: "s", launcher: "scratchpad-launcher.sh" }
+  - { name: "newsboat", keybinding: "n", launcher: "scratchpad-launcher.sh" }
 
 colorscheme_name: "catppuccin-mocha"
 

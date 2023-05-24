@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+IFS=$'\n\t'
+PATH=$PATH:{{ scripts_directory }}
+
+{{ ansible_managed | comment }}
+
+if ! pgrep -u $USER -f $1 | grep -v $$ >/dev/null; then
+  i3-sensible-terminal --title "$1" --class "$1" -e "$1" & # launch application
+  while ! pgrep -u $USER -lf $1 | grep -v -E "$$|$!" >/dev/null; do sleep 1; done # wait for application to be launched
+fi
+
+command="scratchpad show"
+if [ "$2" != "" ]; then command="$command, $2"; fi
+i3-msg "[instance=\"$1\"] $command" # show application on scratchpad

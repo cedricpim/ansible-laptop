@@ -162,7 +162,7 @@ exec --no-startup-id opensnitch-ui
 
 {% for application in scratchpad_applications %}
 for_window [instance={{ application.name | to_json }}] move scratchpad
-bindsym $mod+{{ application.keybinding }} exec {{ i3_directory }}/scratchpad-launcher.sh {{ application.name | to_json}} {{ application.custom | default("") | to_json }}
+bindsym $mod+{{ application.keybinding }} exec {{ i3_directory }}/{{ application.launcher }} {{ application.name | to_json }} {{ application.custom | default("") | to_json }}
 {% endfor %}
 
 for_window [title="Calculator"] floating enable

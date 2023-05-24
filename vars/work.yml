@@ -28,12 +28,12 @@ startup_applications:
   - "xcompmgr" # Used for screensharing
 
 scratchpad_applications:
-  - { name: "todowork", keybinding: "t" }
-  - { name: "mpsyt",    keybinding: "y" }
-  - { name: "ikhal",    keybinding: "a" }
-  - { name: "neomutt",  keybinding: "e", custom: "resize set 70ppt 80ppt" }
-  - { name: "spotify",  keybinding: "s" }
-  - { name: "newsboat", keybinding: "n" }
+  - { name: "todowork", keybinding: "t", launcher: "scratchpad-launcher.sh"}
+  - { name: "mpsyt",    keybinding: "y", launcher: "scratchpad-launcher.sh"}
+  - { name: "ikhal",    keybinding: "a", launcher: "scratchpad-launcher.sh"}
+  - { name: "neomutt",  keybinding: "e", launcher: "scratchpad-launcher.zsh", custom: "resize set 70ppt 80ppt" }
+  - { name: "spotify",  keybinding: "s", launcher: "scratchpad-launcher.sh"}
+  - { name: "newsboat", keybinding: "n", launcher: "scratchpad-launcher.sh"}
 
 colorscheme_name: "catppuccin-latte"
 
