@@ -58,5 +58,5 @@
     dest: "{{ polybar_directory }}/{{ item.name }}"
     mode: "{{ item.mode }}"
   with_items:
-    - { name: "config", mode: "0600" }
+    - { name: "config.ini", mode: "0600" }
     - { name: "launcher.sh", mode: "0700" }
