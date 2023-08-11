@@ -156,7 +156,7 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id solaar -w hide
 exec --no-startup-id nm-applet
 exec --no-startup-id mons -a #-x "~/.config/i3/monitor-handler.sh"
-exec --no-startup-id Pilorama
+exec --no-startup-id pilorama
 exec --no-startup-id signal-desktop --use-tray-icon
 exec --no-startup-id opensnitch-ui
 
@@ -170,9 +170,9 @@ for_window [title="Calculator"] floating enable
 for_window [class="Signal"] floating enable
 for_window [class="Signal"] move scratchpad
 bindsym $mod+m exec i3-msg "[class=\"Signal\"] scratchpad show"
-# Improve accessibility of Pilorama
-for_window [instance="Pilorama"] move scratchpad
-bindsym $mod+p exec i3-msg "[instance=\"Pilorama\"] scratchpad show"
+# Improve accessibility of pilorama
+for_window [instance="pilorama"] move scratchpad
+bindsym $mod+p exec i3-msg "[instance=\"pilorama\"] scratchpad show"
 
 {% if i3_extra is defined %}
 {{ i3_extra }}
