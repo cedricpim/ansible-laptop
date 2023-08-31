@@ -187,6 +187,9 @@ colors:
   primary:
     background: '{{ colorscheme.background }}'
     foreground: '{{ colorscheme.foreground }}'
+{% if colorscheme.extras is defined %}
+    dim_foreground: '{{ colorscheme.extras.dim_foreground }}'
+{% endif %}
 
     # Bright and dim foreground colors
     #
@@ -204,8 +207,10 @@ colors:
   # Allowed values are CellForeground and CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
   cursor:
-  #  text: CellBackground
     cursor: '{{ colorscheme.cursor }}'
+{% if colorscheme.extras is defined %}
+    text: '{{ colorscheme.extras.cursor_text }}'
+{% endif %}
 
   # Vi mode cursor colors
   #
@@ -216,6 +221,11 @@ colors:
   #vi_mode_cursor:
   #  text: CellBackground
   #  cursor: CellForeground
+{% if colorscheme.extras is defined %}
+  vi_mode_cursor:
+    text: '{{ colorscheme.extras.vi_mode_cursor.text }}'
+    cursor: '{{ colorscheme.extras.vi_mode_cursor.cursor }}'
+{% endif %}
 
   # Search colors
   #
@@ -233,6 +243,15 @@ colors:
     #bar:
     #  background: '#c5c8c6'
     #  foreground: '#1d1f21'
+{% if colorscheme.extras is defined %}
+  search:
+    matches:
+      foreground: {{ colorscheme.extras.search.matches.foreground }}
+      background: '{{ colorscheme.extras.search.matches.background }}'
+    footer_bar:
+      foreground: '{{ colorscheme.extras.search.footer_bar.foreground }}'
+      background: '{{ colorscheme.extras.search.footer_bar.background }}'
+{% endif %}
 
   # Line indicator
   #
@@ -253,6 +272,11 @@ colors:
   #selection:
   #  text: CellBackground
   #  background: CellForeground
+{% if colorscheme.extras is defined %}
+  selection:
+    text: {{ colorscheme.extras.selection.text }}
+    background: '{{ colorscheme.extras.selection.background }}'
+{% endif %}
 
   # Normal colors
   normal:
@@ -262,7 +286,7 @@ colors:
 
   # Bright colors
   bright:
-{% for color in colorscheme.colors | rejectattr('name', 'match', '^dark') %}
+{% for color in colorscheme.colors | rejectattr('name', 'match', '^dark|^dim') %}
     {{ color.name }}: '{{ color.value }}'
 {% endfor %}
 
@@ -279,6 +303,10 @@ colors:
   #  magenta: '#75617b'
   #  cyan:    '#5b7d78'
   #  white:   '#828482'
+  dim:
+{% for color in colorscheme.colors | selectattr('name', 'match', '^dim') %}
+    {{ color.name | regex_replace('^dim', '') }}: '{{ color.value }}'
+{% endfor %}
 
   # Indexed Colors
   #

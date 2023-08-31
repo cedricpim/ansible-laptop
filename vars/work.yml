@@ -35,29 +35,53 @@ scratchpad_applications:
   - { name: "spotify",  keybinding: "s", launcher: "scratchpad-launcher.sh"}
   - { name: "newsboat", keybinding: "n", launcher: "scratchpad-launcher.sh"}
 
-colorscheme_name: "catppuccin-latte"
+colorscheme_name: "nord"
 
 colorscheme:
-  foreground: "#4A4543"
-  background: "#E4E4E4"
-  cursor: "#BEC0C4"
+  foreground: "#D8DEE9"
+  background: "#2E3440"
+  cursor: "#D8DEE9"
   colors:
-    - { name: "darkblack",   value: "#090300" }
-    - { name: "darkred",     value: "#DB2D20" }
-    - { name: "darkgreen",   value: "#01A252" }
-    - { name: "darkyellow",  value: "#9E9A09" }
-    - { name: "darkblue",    value: "#01A0E4" }
-    - { name: "darkmagenta", value: "#A16A94" }
-    - { name: "darkcyan",    value: "#B5E4F4" }
-    - { name: "darkwhite",   value: "#A5A2A2" }
-    - { name: "black",       value: "#5C5855" }
-    - { name: "red",         value: "#DB2D20" }
-    - { name: "green",       value: "#01A252" }
-    - { name: "yellow",      value: "#FBA922" }
-    - { name: "blue",        value: "#01A0E4" }
-    - { name: "magenta",     value: "#A16A94" }
-    - { name: "cyan",        value: "#B5E4F4" }
-    - { name: "white",       value: "#FFFFFF" }
+    - { name: "darkblack",       value: "#3B4252" }
+    - { name: "darkred",         value: "#BF616A" }
+    - { name: "darkgreen",       value: "#A3BE8C" }
+    - { name: "darkyellow",      value: "#EBCB8B" }
+    - { name: "darkblue",        value: "#81A1C1" }
+    - { name: "darkmagenta",     value: "#B48EAD" }
+    - { name: "darkcyan",        value: "#88C0D0" }
+    - { name: "darkwhite",       value: "#E5E9F0" }
+    - { name: "black",           value: "#4C566A" }
+    - { name: "red",             value: "#BF616A" }
+    - { name: "green",           value: "#A3BE8C" }
+    - { name: "yellow",          value: "#EBCB8B" }
+    - { name: "blue",            value: "#81A1C1" }
+    - { name: "magenta",         value: "#B48EAD" }
+    - { name: "cyan",            value: "#8FBCBB" }
+    - { name: "white",           value: "#ECEFF4" }
+    - { name: "dimblack",        value: "#373E4D" }
+    - { name: "dimred",          value: "#94545D" }
+    - { name: "dimgreen",        value: "#809575" }
+    - { name: "dimyellow",       value: "#B29E75" }
+    - { name: "dimblue",         value: "#68809A" }
+    - { name: "dimmagenta",      value: "#8C738C" }
+    - { name: "dimcyan",         value: "#6D96A5" }
+    - { name: "dimwhite",        value: "#AEB3BB" }
+  extras:
+    dim_foreground: "#A5ABB6"
+    cursor_text: "#2E3440"
+    vi_mode_cursor:
+      text: "#2E3440"
+      cursor: "#D8DEE9"
+    selection:
+      text: CellForeground
+      background: "#4C566A"
+    search:
+      matches:
+        foreground: CellBackground
+        background: "#88C0D0"
+      footer_bar:
+        background: "#434C5E"
+        foreground: "#D8DEE9"
 
 ### Encrypted
 
