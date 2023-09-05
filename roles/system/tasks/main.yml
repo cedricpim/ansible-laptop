@@ -30,3 +30,9 @@
     name: "pcscd"
     state: "started"
     enabled: yes
+
+- name: "Enable/start avahi-daemon service"
+  systemd:
+    name: "avahi-daemon"
+    state: "started"
+    enabled: yes
