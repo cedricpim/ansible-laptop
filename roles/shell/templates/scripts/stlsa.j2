@@ -1,4 +1,3 @@
-
 #!/usr/bin/env sh
 set -o pipefail
 IFS=$'\n\t'
@@ -8,13 +7,18 @@ IFS=$'\n\t'
 ### stlsa — generate TLSA record for the given domain
 ###
 ### Usage:
-###   stlsa <domain>
+###   stlsa <domain> <port>
 ###
 ### Options:
 ###   <domain>    Domain for which to generate the TSLA record
+###   <port>      Port for which to generate the TSLA record (when port is 25, it assumes that it is a check on smtp)
 
 if [[ -n "$1" ]]; then
-  tlsa --port 25 --create --ipv4 --selector 1 --insecure $1
+  if [[ "$2" == "25" ]]; then
+    tlsa --port 25 --starttls smtp --create --ipv4 --selector 1 --insecure mail.$1
+  else
+    tlsa --port 443 --create --ipv4 --selector 1 --insecure $1
+  fi
 else
   shelp $0
   exit 1
