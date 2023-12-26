@@ -14,5 +14,8 @@
 
 - include_role:
     name: "yay"
-  vars:
-    pkg_name: "ttf-iosevka"
+  with_items:
+    - "ttf-iosevka"
+    - "ttf-meslo-nerd-font-powerlevel10k"
+  loop_control:
+    loop_var: "pkg_name"
