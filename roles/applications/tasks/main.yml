@@ -28,7 +28,7 @@
     name: "yay"
   with_items:
     - "portfolio"
-    - "insomnia"
+    - "insomnium"
     - "popcorntime"
     - "peek"
     - "slack-desktop"
