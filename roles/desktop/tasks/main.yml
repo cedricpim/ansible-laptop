@@ -33,7 +33,7 @@
 - name: "Install Media Player related packages"
   pacman:
     name:
-      - "mps-youtube"
+      - "yewtube"
       - "mpv"
       - "playerctl"
     state: "present"

@@ -29,7 +29,7 @@ startup_applications:
 
 scratchpad_applications:
   - { name: "todowork", keybinding: "t", launcher: "scratchpad-launcher.sh"}
-  - { name: "mpsyt",    keybinding: "y", launcher: "scratchpad-launcher.sh"}
+  - { name: "yt",       keybinding: "y", launcher: "scratchpad-launcher.sh"}
   - { name: "ikhal",    keybinding: "a", launcher: "scratchpad-launcher.sh"}
   - { name: "neomutt",  keybinding: "e", launcher: "scratchpad-launcher.zsh", custom: "resize set 70ppt 80ppt" }
   - { name: "spotify",  keybinding: "s", launcher: "scratchpad-launcher.sh"}

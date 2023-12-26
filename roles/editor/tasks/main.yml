@@ -15,11 +15,8 @@
 
 - include_role:
     name: "yay"
-  with_items:
-    - "bottom"
-    - "nerd-fonts-complete"
-  loop_control:
-    loop_var: "pkg_name"
+  vars:
+    pkg_name: "bottom"
 
 - name: "Download AstroNvim configuration repository"
   git: 

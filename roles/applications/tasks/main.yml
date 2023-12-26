@@ -14,6 +14,7 @@
       - "mplayer"
       - "keepassxc"
       - "signal-desktop"
+      - "obsidian"
     state: "present"
   become: yes
 
@@ -34,7 +35,6 @@
     - "spotify"
     - "youtube-dl"
     - "realvnc-vnc-viewer"
-    - "obsidian-appimage"
     - "solaar"
     - "pilorama-git"
   loop_control:

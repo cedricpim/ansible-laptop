@@ -7,13 +7,12 @@
       - "ttf-hack"
       - "ttf-fira-code"
       - "ttf-font-awesome"
+      - "ttf-dejavu-nerd"
+      - "ttf-roboto-mono-nerd"
     state: "present"
   become: yes
 
 - include_role:
     name: "yay"
-  with_items:
-    - "ttf-iosevka"
-    - "nerd-fonts-complete"
-  loop_control:
-    loop_var: "pkg_name"
+  vars:
+    pkg_name: "ttf-iosevka"

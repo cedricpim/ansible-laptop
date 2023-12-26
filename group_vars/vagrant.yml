@@ -117,7 +117,7 @@ startup_applications:
 
 scratchpad_applications:
   - { name: "todo",     keybinding: "t", launcher: "scratchpad-launcher.sh" }
-  - { name: "mpsyt",    keybinding: "m", launcher: "scratchpad-launcher.sh" }
+  - { name: "yt",       keybinding: "m", launcher: "scratchpad-launcher.sh" }
   - { name: "rikhal",   keybinding: "a", launcher: "scratchpad-launcher.sh" }
   - { name: "neomutt",  keybinding: "e", launcher: "scratchpad-launcher.zsh" }
   - { name: "newsboat", keybinding: "n", launcher: "scratchpad-launcher.sh" }
