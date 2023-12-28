@@ -30,6 +30,7 @@
       - "exa"
       - "lnav"
       - "progress"
+      - "speedtest-cli"
     state: "present"
   become: yes
 
