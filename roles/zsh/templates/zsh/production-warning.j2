@@ -9,11 +9,11 @@ if [[ "$TERM" == "{{ terminal_term }}" ]]; then
   }
 
   function original-color() {
-    grep -m 1 $1 {{ terminal_configuration }} | sed -r "s/[^']*'(.+)'/\1/"
+    grep -m 1 $1 {{ terminal_configuration }} | sed -r "s/[^\"]*\"(.+)\"/\1/"
   }
 
   function reset-colors() {
-    change-color "$(original-color 'foreground:')" "$(original-color 'background:')"
+    change-color "$(original-color 'foreground =')" "$(original-color 'background =')"
   }
 
   function colorproduction() {

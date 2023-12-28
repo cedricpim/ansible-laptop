@@ -25,7 +25,12 @@
     pkg_name: "zsh-autosuggestions"
 
 - import_tasks: "configurations.yml"
-- import_tasks: "ripgrep.yml"
+
+- name: "Install ripgrep"
+  pacman:
+    name: "ripgrep"
+    state: "present"
+  become: yes
 
 - include_tasks: "scripts.yml"
   with_items:

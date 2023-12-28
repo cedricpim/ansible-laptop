@@ -1,0 +1,62 @@
+{{ ansible_managed | comment }}
+
+[env]
+  WINIT_X11_SCALE_FACTOR = "1"
+
+[font]
+  size = 15
+
+  [font.normal]
+    family = "Iosevka"
+
+  [font.bold]
+    family = "Iosevka"
+
+  [font.italic]
+    family = "Iosevka"
+
+  [font.bold_italic]
+    family = "Iosevka"
+    style = "Bold Italic"
+
+[colors]
+  draw_bold_text_with_bright_colors = true
+{% if colorscheme.extras is defined %}
+  cursor = { text = "{{ colorscheme.extras.cursor_text }}", cursor = "{{ colorscheme.cursor }}" }
+  vi_mode_cursor = { text = "{{ colorscheme.extras.vi_mode_cursor.text }}", cursor = "{{ colorscheme.extras.vi_mode_cursor.cursor }}" }
+  footer_bar = { foreground = "{{ colorscheme.extras.search.footer_bar.foreground }}", background = "{{ colorscheme.extras.search.footer_bar.background }}" }
+  selection = { text = "{{ colorscheme.extras.selection.text }}", background = "{{ colorscheme.extras.selection.background }}" }
+
+  [colors.search]
+    matches = { foreground = "{{ colorscheme.extras.search.matches.foreground }}", background = "{{ colorscheme.extras.search.matches.background }}" }
+{% else %}
+  cursor = { cursor = "{{ colorscheme.cursor }}" }
+{% endif %}
+
+  [colors.primary]
+    background = "{{ colorscheme.background }}"
+    foreground = "{{ colorscheme.foreground }}"
+{% if colorscheme.extras is defined %}
+    dim_foreground = "{{ colorscheme.extras.dim_foreground }}"
+{% endif %}
+
+  [colors.normal]
+{% for color in colorscheme.colors | selectattr('name', 'match', '^dark') %}
+    {{ color.name | regex_replace('^dark', '') }} = "{{ color.value }}"
+{% endfor %}
+
+  [colors.bright]
+{% for color in colorscheme.colors | rejectattr('name', 'match', '^dark|^dim') %}
+    {{ color.name }} = "{{ color.value }}"
+{% endfor %}
+
+  [colors.dim]
+{% for color in colorscheme.colors | selectattr('name', 'match', '^dim') %}
+    {{ color.name | regex_replace('^dim', '') }} = "{{ color.value }}"
+{% endfor %}
+
+[keyboard]
+  bindings = [
+    { key = "K", mods = "Shift", mode = "Vi|~Search", action = "ScrollPageUp" },
+    { key = "J", mods = "Shift", mode = "Vi|~Search", action = "ScrollPageDown" }
+  ]

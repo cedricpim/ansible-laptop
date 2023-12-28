@@ -13,6 +13,6 @@
 
 - name: "Copy terminal configuration"
   template:
-    src: "alacritty/alacritty.yml.j2"
-    dest: "{{ terminal_directory }}/alacritty.yml"
+    src: "alacritty/alacritty.toml.j2"
+    dest: "{{ terminal_directory }}/alacritty.toml"
     mode: "0600"
