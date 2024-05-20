@@ -18,16 +18,10 @@
   vars:
     pkg_name: "bottom"
 
-- name: "Download AstroNvim configuration repository"
-  git: 
-    repo="{{ astronvim_config_repo }}" 
-    dest="{{ neovim_directory }}" 
-    depth=1 
-
-- name: "Download AstroNvim User configuration repository"
+- name: "Download Nvim configuration repository"
   block:
-    - git: repo="{{ user_astronvim_config_repo }}" dest="{{ neovim_directory }}/lua/user" depth=1
-    - replace: path="{{ neovim_directory }}/lua/user/.git/config" regexp="{{ github_https_base }}" replace="{{ github_ssh_base }}"
+    - git: repo="{{ nvim_config_repo }}" dest="{{ neovim_directory }}"
+    - replace: path="{{ neovim_directory }}/.git/config" regexp="{{ github_https_base }}" replace="{{ github_ssh_base }}"
 
 - name: "Create folder for Neovim dictionaries"
   file:

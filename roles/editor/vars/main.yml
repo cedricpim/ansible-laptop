@@ -1,7 +1,6 @@
 ---
 neovim_spell_url: "ftp://ftp.vim.org/pub/vim/runtime/spell"
-astronvim_config_repo: "https://github.com/AstroNvim/AstroNvim.git"
-user_astronvim_config_repo: "https://github.com/cedricpim/astronvim_config.git"
+nvim_config_repo: "https://github.com/cedricpim/nvim.git"
 
 github_https_base: "https://github.com/"
 github_ssh_base: "git@github.com:"
