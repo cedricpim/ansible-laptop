@@ -50,6 +50,8 @@
   aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /' | sort
   stash-all = stash save --include-untracked
   uni = !DELTA_FEATURES='delta.features=side-by-side=false' git
+  # Find git history for a given function
+  hist = "!f() { git log -L :$1:$2 -n${3:-3}; }; f"
 
 [apply]
   # Detect whitespace errors when applying a patch
