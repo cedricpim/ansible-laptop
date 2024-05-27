@@ -20,3 +20,4 @@
   with_items:
     - { src: "gitconfig", dest: "config" }
     - { src: "gitignore", dest: "ignore" }
+    - { src: "gitattributes", dest: "attributes" }
