@@ -17,8 +17,8 @@
 - name: "Allow 'wheel' group to call rfkill"
   lineinfile:
     path: "/etc/sudoers"
-    regexp: '%wheel ALL=\(ALL\) NOPASSWD: /usr/bin/rfkill'
-    line: "%wheel ALL=(ALL) NOPASSWD: /usr/bin/rfkill"
+    regexp: '%wheel ALL=\(ALL:ALL\) NOPASSWD: /usr/bin/rfkill'
+    line: "%wheel ALL=(ALL:ALL) NOPASSWD: /usr/bin/rfkill"
     validate: "visudo -cf %s"
     backup: yes
   become: yes
@@ -33,7 +33,7 @@
 - name: "Ensure Bluetooth uses the right codec"
   lineinfile:
     path: "{{ pipewire_directory }}/media-session.d/bluez-monitor.conf"
-    regexp: '    bluez5.codecs'
-    insertafter: '#bluez5.codecs'
+    regexp: "    bluez5.codecs"
+    insertafter: "#bluez5.codecs"
     line: "    bluez5.codecs = [ sbc ]"
   become: yes

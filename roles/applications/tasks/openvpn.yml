@@ -14,8 +14,8 @@
 - name: "Allow 'wheel' group to call systemctl"
   lineinfile:
     path: "/etc/sudoers"
-    regexp: '%wheel ALL=\(ALL\) NOPASSWD: /usr/bin/systemctl'
-    line: "%wheel ALL=(ALL) NOPASSWD: /usr/bin/systemctl"
+    regexp: '%wheel ALL=\(ALL:ALL\) NOPASSWD: /usr/bin/systemctl'
+    line: "%wheel ALL=(ALL:ALL) NOPASSWD: /usr/bin/systemctl"
     validate: "visudo -cf %s"
     backup: yes
   become: yes
