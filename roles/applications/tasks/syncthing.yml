@@ -12,14 +12,14 @@
     scope: "user"
     enabled: yes
 
-- name: "Wait until the file ~/.config/syncthing/config.xml is present"
+- name: "Wait until the file ~/.local/state/syncthing/config.xml is present"
   wait_for:
-    path: "~/.config/syncthing/config.xml"
+    path: "~/.local/state/syncthing/config.xml"
     state: "present"
 
 - name: "Define syncthing port"
   lineinfile:
-    path: "~/.config/syncthing/config.xml"
+    path: "~/.local/state/syncthing/config.xml"
     regexp: '^(\s+)<address>127\.0\.0\.1'
     line: '\1<address>127.0.0.1:{{ syncthing_port }}</address>'
     backrefs: yes
