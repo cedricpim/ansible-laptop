@@ -1,7 +1,9 @@
 ---
 - name: "Install docker"
   pacman:
-    name: "docker"
+    name:
+      - "docker"
+      - "docker-buildx"
     state: "present"
   become: yes
 
