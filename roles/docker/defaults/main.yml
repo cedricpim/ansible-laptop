@@ -1,0 +1,3 @@
+---
+docker_configuration_directory: "/etc/docker"
+docker_data_directory: "/var/lib/docker"

@@ -48,4 +48,6 @@ ssh_entries: "{{ vault_ssh_entries }}"
 
 openvpn_name: "{{ vault_openvpn_name }}"
 
+docker_data_directory: "{{ vault_docker_data_directory }}"
+
 extra_applications: "{{ vault_extra_applications | default([]) }}"
