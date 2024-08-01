@@ -38,7 +38,7 @@
 - name: "Copy p10k configuration file"
   template:
     src: "p10k.zsh.j2"
-    dest: "~/.config/zsh/p10k.zsh"
+    dest: "{{ zsh_directory }}/p10k.zsh"
     mode: "0600"
 
 - name: "Copy main zsh configuration files"
