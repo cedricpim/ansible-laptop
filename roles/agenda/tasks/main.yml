@@ -1,7 +1,10 @@
 ---
 - import_tasks: "khal.yml"
+  when: agenda_khal is defined
 - import_tasks: "khard.yml"
+  when: agenda_khard is defined
 - import_tasks: "vdirsyncer.yml"
+  when: agenda_vdirsyncer is defined
 
 - include_role:
     name: "zsh"
