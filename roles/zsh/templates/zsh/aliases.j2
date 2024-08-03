@@ -87,7 +87,7 @@ alias map="xargs -n1"
 # Update pip
 alias pip-update="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U --user"
 
-alias reload!="source ~/.zshrc"
+alias reload!="source {{ zsh_directory }}/.zshrc"
 
 # Alias wget to use a custom hsts cache file location
 alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
@@ -121,5 +121,14 @@ function rg() {
 
 # Use MyTraceRoute to check internet conditions
 alias internet-report="sudo mtr 8.8.8.8"
+
+# Devcontainer
+function devc() {
+  if [ "$1" = "stop" ] || [ "$1" = "start" ]; then
+    docker compose -f .devcontainer/docker-compose.yml $1
+  elif [ -n "$1" ]; then
+    devcontainer exec --workspace-folder . $@
+  fi
+}
 
 {{ ledger_aliases }}
