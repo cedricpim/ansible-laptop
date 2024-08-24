@@ -2,7 +2,6 @@
 - name: "Install wireguard"
   pacman:
     name:
-      - "wireguard-dkms"
       - "wireguard-tools"
       - "linux-headers"
   become: yes
