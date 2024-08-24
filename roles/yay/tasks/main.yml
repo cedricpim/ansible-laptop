@@ -45,14 +45,6 @@
     - pkg_name is defined and yay_user is defined
     - aur_yay_check is defined and aur_yay_check.rc != 0
 
-- name: "Set rust toolchain"
-  command: "rustup toolchain install stable"
-  become: yes
-  become_user: "yay"
-  when:
-    - pkg_name is defined and pkg_name == "battop"
-    - aur_package_check is defined and aur_package_check.rc != 0
-
 # For now, spotify needs to have the pgp check skipped since the current key is
 # invalid. See: https://aur.archlinux.org/packages/spotify/
 - name: "Install {{ pkg_name }}"
