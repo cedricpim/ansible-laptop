@@ -19,6 +19,18 @@ $ cd /root/ansible-laptop
 $ make install
 ```
 
+Reboot and then login to root and run:
+
+```
+$ make arch
+```
+
+Reboot, move to command line from greeter, login to user and run:
+
+```
+$ make dotfiles
+```
+
 ### Internet setup
 
 #### IWD (recommended)
