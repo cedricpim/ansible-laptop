@@ -6,7 +6,6 @@
       - "chromium"
       - "ffmpeg"
       - "gnome-calculator"
-      - "qpdfview"
       - "vlc"
       - "vagrant"
       - "xournalpp"
@@ -37,7 +36,7 @@
     - "realvnc-vnc-viewer"
     - "solaar"
     - "pilorama-git"
-    - "losslesscut-bin"
+    - "qpdfview"
   loop_control:
     loop_var: "pkg_name"
 

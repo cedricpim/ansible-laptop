@@ -4,6 +4,7 @@
   with_items:
     - "caffeine-ng"
     - "flameshot"
+    - "yewtube"
   loop_control:
     loop_var: "pkg_name"
 
@@ -33,7 +34,6 @@
 - name: "Install Media Player related packages"
   pacman:
     name:
-      - "yewtube"
       - "mpv"
       - "playerctl"
     state: "present"
