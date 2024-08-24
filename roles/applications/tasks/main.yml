@@ -39,6 +39,7 @@
     - "qpdfview"
   loop_control:
     loop_var: "pkg_name"
+  when: slow_packages is defined and slow_packages
 
 - include_role:
     name: "yay"

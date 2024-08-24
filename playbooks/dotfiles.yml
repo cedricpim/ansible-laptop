@@ -30,3 +30,11 @@
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }
     - { role: "desktop", tags: "desktop" }
+
+  post_tasks:
+    - name: "Display message about slow packages to compile"
+      debug:
+        msg:
+          - "Please run packages from applications/tasks/main for yay"
+      when: slow_packages is not defined
+      tags: "always"

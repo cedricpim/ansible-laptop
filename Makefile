@@ -4,11 +4,13 @@ VERBOSE ?=
 TAGS ?=
 ANSIBLE_OPTS ?=
 VAULT_OPTS ?=
+SLOW_PACKAGES ?=
 VAULT ?= ${USER}
 
-$(if ${CHECK},   $(eval ANSIBLE_OPTS += --check))
+$(if ${CHECK}, $(eval ANSIBLE_OPTS += --check))
 $(if ${VERBOSE}, $(eval ANSIBLE_OPTS += -${VERBOSE}))
-$(if ${TAGS},    $(eval ANSIBLE_OPTS += --tags ${TAGS}))
+$(if ${TAGS}, $(eval ANSIBLE_OPTS += --tags ${TAGS}))
+$(if ${SLOW_PACKAGES}, $(eval ANSIBLE_OPTS += -e "slow_packages=yes"))
 
 ifneq ("$(wildcard vaulted_vars/${VAULT}.txt)", "")
   $(eval VAULT_OPTS += --vault-password-file vaulted_vars/${VAULT}.txt)

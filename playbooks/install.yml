@@ -16,3 +16,11 @@
     - { role: "partition", tags: "partition", when: arch_chroot is defined and arch_chroot.stat.islnk is defined }
     - { role: "system", tags: "system", when: arch_chroot is defined and arch_chroot.stat.islnk is not defined }
     - { role: "network", tags: "network", when: arch_chroot is defined and arch_chroot.stat.islnk is not defined }
+
+  post_tasks:
+    - name: "Display message about slow packages to compile"
+      debug:
+        msg:
+          - "Please run 'yay -Sy networkmanager-iwd'"
+      when: slow_packages is not defined
+      tags: "always"

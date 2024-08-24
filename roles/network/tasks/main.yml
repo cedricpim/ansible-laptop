@@ -17,6 +17,7 @@
     name: "yay"
   vars:
     pkg_name: "networkmanager-iwd"
+  when: slow_packages is defined and slow_packages
 
 - name: "Install add-ons to networkmanager"
   pacman:
