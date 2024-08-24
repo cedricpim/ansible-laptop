@@ -1,8 +1,10 @@
 ---
+# Using urlview-git since current urlview package fails to build
+# See: https://aur.archlinux.org/packages/urlview
 - include_role:
     name: "yay"
   vars:
-    pkg_name: urlview
+    pkg_name: "urlview-git"
 
 - name: "Copy urlview configuration file"
   template:
