@@ -29,11 +29,3 @@
     state: "started"
     enabled: yes
   become: yes
-
-- name: "Ensure Bluetooth uses the right codec"
-  lineinfile:
-    path: "{{ pipewire_directory }}/media-session.d/bluez-monitor.conf"
-    regexp: "    bluez5.codecs"
-    insertafter: "#bluez5.codecs"
-    line: "    bluez5.codecs = [ sbc ]"
-  become: yes
