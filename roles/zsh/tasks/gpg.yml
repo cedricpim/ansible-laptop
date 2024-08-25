@@ -1,0 +1,11 @@
+---
+- name: "Install gnupg"
+  pacman:
+    name: "gnupg"
+    state: "present"
+  become: yes
+
+- name: "Set GPG"
+  block:
+    - file: path="{{ gnupg_directory }}" state="directory" mode="0700"
+    - command: "gpg --list-keys"

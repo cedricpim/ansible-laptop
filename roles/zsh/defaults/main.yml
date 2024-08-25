@@ -4,6 +4,8 @@ zsh_directory: "~/.config/zsh"
 terminal_configuration: "~/.config/alacritty/alacritty.toml"
 terminal_term: "alacritty"
 
+gnupg_directory: "~/.local/share/gnupg"
+
 production_commands:
   - "ssh"
   - "scp"

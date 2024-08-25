@@ -25,6 +25,7 @@
     pkg_name: "zsh-autosuggestions"
 
 - import_tasks: "configurations.yml"
+- import_tasks: "gpg.yml"
 
 - name: "Install ripgrep"
   pacman:
