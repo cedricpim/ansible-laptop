@@ -1,10 +1,9 @@
 ---
-- name: "Ensure the system clock is accurate"
-  command: "timedatectl set-ntp true"
-
 - name: "Set time zone to {{ system_time_zone }}"
-  timezone:
-    name: "{{ system_time_zone }}"
+  file:
+    src: "/usr/share/zoneinfo/{{ system_time_zone }}"
+    dest: "/etc/localtime"
+    state: "link"
   notify: "Synchronize clock"
 
 - include_role:
