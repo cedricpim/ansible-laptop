@@ -51,5 +51,3 @@ openvpn_name: "{{ vault_openvpn_name }}"
 docker_data_directory: "{{ vault_docker_data_directory }}"
 
 extra_applications: "{{ vault_extra_applications | default([]) }}"
-
-vpn_mullvad_account_number: "{{ vault_vpn_mullvad_account_number }}"
