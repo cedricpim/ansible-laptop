@@ -11,6 +11,11 @@
       - "gparted"
     state: "present"
 
+- name: "Install tmux (useful for scrolling)"
+  pacman:
+    name: "tmux"
+    state: "present"
+
 - import_tasks: "hostname.yml"
 - import_tasks: "locale.yml"
 - import_tasks: "time_zone.yml"
