@@ -30,6 +30,7 @@
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }
     - { role: "desktop", tags: "desktop" }
+    - { role: "vpn", tags: "vpn" }
 
   post_tasks:
     - name: "Display message about slow packages to compile"

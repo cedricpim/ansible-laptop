@@ -30,3 +30,4 @@
     - { role: "applications", tags: "applications" }
     - { role: "docker", tags: "docker" }
     - { role: "desktop", tags: "desktop" }
+    - { role: "vpn", tags: "vpn" }

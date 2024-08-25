@@ -13,14 +13,14 @@
 
 - name: "Create folder for Mullvad settings"
   file:
-    path: "{{ mullvad_directory }}"
+    path: "{{ vpn_mullvad_directory }}"
     state: "directory"
   become: yes
 
 - name: "Copy Mullvad settings"
   template:
     src: "mullvad/settings.json.j2"
-    dest: "{{ mullvad_directory }}/settings.json"
+    dest: "{{ vpn_mullvad_directory }}/settings.json"
     mode: "0644"
   notify: "Restart Mullvad daemon"
   become: yes

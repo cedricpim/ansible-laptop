@@ -48,6 +48,3 @@
     state: "started"
     enabled: yes
   become: yes
-
-- import_tasks: "mullvad.yml"
-  when: slow_packages is defined and slow_packages
