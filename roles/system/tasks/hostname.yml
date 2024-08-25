@@ -1,4 +1,6 @@
 ---
 - name: "Add hostname"
-  hostname:
-    name: "{{ system_hostname }}"
+  lineinfile:
+    path: "/etc/hostname"
+    line: "{{ system_hostname }}"
+    create: yes
