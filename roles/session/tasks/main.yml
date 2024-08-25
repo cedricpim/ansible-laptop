@@ -1,3 +1,7 @@
 ---
 - import_tasks: "lightdm.yml"
 - import_tasks: "keyring.yml"
+
+- name: "Ensure the system clock is accurate"
+  command: "timedatectl set-ntp true"
+  become: yes
