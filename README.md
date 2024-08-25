@@ -17,14 +17,13 @@ Then, once everything is setup.
 $ arch-chroot /mnt
 $ cd /root/ansible-laptop
 $ make install
-$ yay -Sy --mflags '--skippgpcheck' networkmanager-iwd mullvad-vpn
-$ SLOW_PACKAGES=1 make install
 ```
 
 Reboot and then login to root and run:
 
 ```
-$ make arch
+$ yay -Sy --mflags '--skippgpcheck' networkmanager-iwd mullvad-vpn
+$ SLOW_PACKAGES=1 make arch
 ```
 
 Reboot, move to command line from greeter, login to user and run:
