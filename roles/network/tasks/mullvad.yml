@@ -31,7 +31,3 @@
     state: "started"
     enabled: yes
   become: yes
-
-- name: "Set Mullvad to use Wireguard"
-  command: "mullvad relay set tunnel wireguard any"
-  become: yes
