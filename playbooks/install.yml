@@ -21,6 +21,6 @@
     - name: "Display message about slow packages to compile"
       debug:
         msg:
-          - "Please run 'yay -Sy networkmanager-iwd'"
+          - "Please run 'yay -Sy networkmanager-iwd mullvad-vpn --mflags '--skippgpcheck'' and then re-rerun playbook with SLOW_PACKAGES"
       when: slow_packages is not defined
       tags: "always"
