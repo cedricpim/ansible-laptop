@@ -12,7 +12,7 @@
   with_items: "{{ partition_partitions }}"
 
 - name: "Display current partitions"
-  command: "lsblk -f"
+  command: "lsblk -f {{ partition_device }}"
   changed_when: no
   register: encrypted
 
