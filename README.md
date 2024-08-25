@@ -33,6 +33,17 @@ Reboot, move to command line from greeter, login to user and run:
 $ make dotfiles
 ```
 
+### Reset drive
+
+```
+$ lvchange -an /dev/Vol/{home,data,tmp,root,...}
+$ lvremove /dev/Vol/{home,data,tmp,root,...}
+$ vgremove Vol
+$ pvremove /dev/sda
+```
+
+After, use parted to remove any partitions.
+
 ### Internet setup
 
 #### IWD (recommended)
