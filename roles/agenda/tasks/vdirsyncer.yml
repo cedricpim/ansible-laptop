@@ -3,16 +3,14 @@
   pacman:
     name:
       - "vdirsyncer"
-      - "python-pip"
+      - "python-pipx"
     state: "present"
   become: yes
   register: vdirsyncer_install
 
 - name: "Install extra dependencies"
-  pip:
+  community.general.pipx:
     name: "vdirsyncer[google]"
-    state: "latest"
-  become: yes
   when: vdirsyncer_install is defined and vdirsyncer_install.changed
 
 - name: "Create folder for vdirsyncer configuration"
