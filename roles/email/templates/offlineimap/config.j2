@@ -105,6 +105,7 @@ type = Maildir
 # to maildirs created under this path.  Offlineimap will create the
 # maildirs for you as needed.
 localfolders = {{ email_directory }}/{{ account.name }}
+{{ account.reverse_nametrans | default("") }}
 
 
 [Repository {{ account.name }}-Remote]
@@ -132,6 +133,7 @@ oauth2_request_url = {{ account.oauth2_request_url }}
 {% if account.oauth2_refresh_token is defined %}
 oauth2_refresh_token = {{ account.oauth2_refresh_token }}
 {% endif %}
+{{ account.nametrans | default("") }}
 
 
 {% endfor %}
