@@ -12,22 +12,6 @@
   vars:
     pkg_name: "devcontainer-cli"
 
-- name: "Create folders for docker"
-  file:
-    path: "{{ item }}"
-    state: "directory"
-  with_items:
-    - "{{ docker_configuration_directory }}"
-    - "{{ docker_data_directory }}"
-  become: yes
-
-- name: "Copy docker daemon configuration"
-  template:
-    src: "daemon.json.j2"
-    dest: "{{ docker_configuration_directory }}/daemon.json"
-    mode: "0600"
-  become: yes
-
 - name: "Restart service for docker"
   systemd:
     name: "docker"
