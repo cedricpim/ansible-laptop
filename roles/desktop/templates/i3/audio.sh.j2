@@ -4,7 +4,7 @@ IFS=$'\n\t'
 
 {{ ansible_managed | comment }}
 
-device="$(pactl list sinks | grep Name: | tail -n 1 | cut -d' ' -f2)"
+device="$(pactl list sinks | grep HW_MUTE_CTRL -B 15 | grep Name: | tail -n 1 | cut -d' ' -f2)"
 
 case $1 in
   set-sink-volume)
