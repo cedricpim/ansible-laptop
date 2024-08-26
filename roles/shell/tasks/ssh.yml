@@ -1,0 +1,13 @@
+---
+- name: "Install GCR-4"
+  pacman:
+    name: "gcr-4"
+    state: "present"
+  become: yes
+
+- name: "Enable/start GCR socket"
+  systemd:
+    name: "gcr-ssh-agent.socket"
+    state: "started"
+    enabled: yes
+  become: yes
