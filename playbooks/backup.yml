@@ -11,4 +11,4 @@
   post_tasks:
     - name: "Display message about how to run a backup"
       debug:
-        msg: "Please run 'borgmatic --verbosity 1 --files'"
+        msg: "Please run 'borgmatic init --encryption repokey --verbosity 1' and 'borgmatic --verbosity 1 --files'"

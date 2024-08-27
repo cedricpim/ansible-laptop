@@ -54,10 +54,6 @@
   become: yes
   when: packages_list is defined
 
-- name: "Initialize repositories"
-  command: "borgmatic init --encryption repokey --verbosity 1"
-  become: yes
-
 - name: "Copy Borgmatic systemd"
   template:
     src: "systemd/{{ item }}.j2"
