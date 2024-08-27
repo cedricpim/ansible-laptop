@@ -12,9 +12,6 @@
     name: "systemd-journald"
     state: "restarted"
 
-- name: "Create mkinitcpio configuration"
-  command: "mkinitcpio -p linux"
-
 - name: "Tune powertop"
   debug:
     msg:

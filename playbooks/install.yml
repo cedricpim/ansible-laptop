@@ -12,9 +12,37 @@
       register: arch_chroot
       tags: "always"
 
+    - name: "Create STDOUT output for lsblk"
+      command: "lsblk -f"
+      changed_when: no
+      register: lsblk
+
+    # Can use this if we want to pick only drives without a file system
+    # lsblk -oNAME,PTTYPE,FSTYPE --noheadings --nodeps | awk '$2 == "" && $3 == "" { print $0 }'
+    - name: "Pick existing drives"
+      command: "lsblk -oNAME,FSTYPE,FSTYPE --noheadings --nodeps"
+      changed_when: no
+      register: existing_disks
+
+    - name: "Show result of lsblk"
+      debug:
+        msg: "{{ lsblk.stdout }}"
+
+    - pause:
+        prompt: "Select which disk to use?"
+      register: selected_disk
+      failed_when: selected_disk.user_input not in (existing_disks.stdout_lines | map('trim') | list)
+
+    - name: "Define disk dependent variables"
+      set_fact:
+        partition_device: "/dev/{{ selected_disk.user_input }}"
+        partition_boot: "/dev/{{ selected_disk.user_input }}p1"
+        partition_os: "/dev/{{ selected_disk.user_input }}p2"
+
   roles:
     - { role: "partition", tags: "partition", when: arch_chroot is defined and arch_chroot.stat.islnk is defined }
     - { role: "system", tags: "system", when: arch_chroot is defined and arch_chroot.stat.islnk is not defined }
+    - { role: "bootloader", tags: "bootloader", when: arch_chroot is defined and arch_chroot.stat.islnk is not defined }
     - { role: "network", tags: "network", when: arch_chroot is defined and arch_chroot.stat.islnk is not defined }
 
   post_tasks:

@@ -1,0 +1,3 @@
+---
+- name: "Create mkinitcpio configuration"
+  command: "mkinitcpio -p linux"

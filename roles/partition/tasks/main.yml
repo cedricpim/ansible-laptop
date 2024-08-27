@@ -36,32 +36,28 @@
 - name: "Create the logical volumes"
   community.general.lvol:
     vg: "{{ partition_volume_group }}"
-    lv: "{{ item.partition.split('/') | last }}"
-    size: "{{ item.size }}"
+    lv: "{{ partition_volume.partition.split('/') | last }}"
+    size: "{{ partition_volume.size }}"
     shrink: no
-  with_items: "{{ partition_volumes }}"
 
 - name: "Format logical partitions"
   community.general.filesystem:
-    fstype: "{{ item.fstype }}"
-    dev: "{{ item.partition }}"
-    opts: "{{ item.opts | default('') }}"
-  with_items: "{{ partition_volumes }}"
+    fstype: "{{ partition_volume.fstype }}"
+    dev: "{{ partition_volume.partition }}"
 
 - name: "Mount logical partitions"
   ansible.posix.mount:
-    src: "{{ item.partition }}"
-    path: "{{ item.path }}"
-    fstype: "{{ item.fstype }}"
+    src: "{{ partition_volume.partition }}"
+    path: "{{ partition_volume.path }}"
+    fstype: "{{ partition_volume.fstype }}"
     state: "mounted"
-  with_items: "{{ partition_volumes }}"
 
 # We require command actions since we want the format to be FAT32
 - name: "Format and mount boot partition"
   block:
-    - command: "mkfs.{{ partition_boot.fstype }} {{ partition_boot.opts }} {{ partition_boot.partition }}"
-    - file: path="{{ partition_boot.path }}" state="directory"
-    - command: "mount {{ partition_boot.partition }} {{ partition_boot.path }}"
+    - command: "mkfs.{{ partition_boot_options.fstype }} {{ partition_boot_options.opts }} {{ partition_boot }}"
+    - file: path="{{ partition_boot_options.path }}" state="directory"
+    - command: "mount {{ partition_boot }} {{ partition_boot_options.path }}"
 
 - name: "Check if Arch Linux is already installed"
   command: "arch-chroot {{ partition_main_mount_point }}"
