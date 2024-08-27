@@ -4,6 +4,7 @@
     name:
       - "docker"
       - "docker-buildx"
+      - "minikube"
     state: "present"
   become: yes
 
