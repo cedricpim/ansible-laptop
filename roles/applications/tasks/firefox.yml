@@ -1,14 +1,11 @@
 ---
 - name: "Install firefox"
   pacman:
-    name: "firefox"
+    name:
+      - "firefox"
+      - "firefox-developer-edition"
     state: "present"
   become: yes
-
-- include_role:
-    name: "yay"
-  vars:
-    pkg_name: "firefox-developer-edition"
 
 - name: "Check profiles.ini"
   stat:
@@ -30,7 +27,7 @@
 - name: "Add magnet handler"
   lineinfile:
     path: "{{ firefox_profiles_file }}/{{ profile.stdout }}/handlers.json"
-    regexp: "(.*)\"schemes.*"
+    regexp: '(.*)"schemes.*'
     line: '\1"schemes":{"magnet":{"action":2,"handlers":[{"name":"magnet","path":"{{ scripts_directory }}/magnet"}]}}}'
     state: present
     backrefs: true
@@ -46,7 +43,7 @@
   lineinfile:
     path: "{{ firefox_profiles_file }}/{{ profile.stdout }}/prefs.js"
     regexp: ".*{{ item.option }}.*"
-    line: "user_pref(\"{{ item.option }}\", {{ item.value }});"
+    line: 'user_pref("{{ item.option }}", {{ item.value }});'
     state: present
   with_items: "{{ firefox_options }}"
   when: st_prefs is defined and not st_prefs is skipped and st_prefs.stat.islnk is defined
