@@ -10,8 +10,11 @@
 
 - include_role:
     name: "yay"
-  vars:
-    pkg_name: "devcontainer-cli"
+  with_items:
+    - "devcontainer-cli"
+    - "lazydocker"
+  loop_control:
+    loop_var: "pkg_name"
 
 - name: "Restart service for docker"
   systemd:
