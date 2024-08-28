@@ -38,3 +38,10 @@
     src: "openvpn/QOpenVPN.conf.j2"
     dest: "{{ qopenvpn_directory }}/QOpenVPN.conf"
     mode: "0600"
+
+- name: "Add client configuration"
+  template:
+    src: "openvpn/client.conf.j2"
+    dest: "{{ openvpn_directory }}/client/{{ openvpn_name }}.conf"
+    mode: "0600"
+  become: yes
