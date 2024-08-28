@@ -36,11 +36,8 @@
 
 - include_role:
     name: "yay"
-  with_items:
-    - "aic94xx-firmware"
-    - "wd719x-firmware"
-  loop_control:
-    loop_var: "pkg_name"
+  vars:
+    pkg_name: "mkinitcpio-firmware"
 
 - name: "Create preset for linux"
   pacman:
