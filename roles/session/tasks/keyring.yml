@@ -5,6 +5,7 @@
       - "gnome-keyring"
       - "libsecret"
       - "gcr-4"
+      - "seahorse"
     state: "present"
   become: yes
 
