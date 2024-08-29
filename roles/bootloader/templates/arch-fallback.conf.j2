@@ -1,7 +1,7 @@
 {{ ansible_managed | comment }}
 
-title   Arch Linux
+title   Arch Linux (fallback initramfs)
 linux   /vmlinuz-linux
 initrd  /{{ cpu }}-ucode.img
-initrd  /initramfs-linux.img
+initrd  /initramfs-linux-fallback.img
 options cryptdevice=UUID={{ uuid }}:{{ partition_physical_group }} root=/dev/mapper/{{ partition_volume_group }}-root quiet rw

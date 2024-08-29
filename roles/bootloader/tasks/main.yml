@@ -1,8 +1,14 @@
 ---
-- name: "Install Intel microcode and mkinitcpio"
+- name: "Find CPU manufacturer"
+  shell: "lscpu | grep 'Model name:' | cut -d':' -f2 | xargs | cut -d' ' -f1 | sed -E 's#(intel|amd).*#\\1#i' | tr '[:upper:]' '[:lower:]'"
+  changed_when: no
+  register: cpu_manufacturer
+  failed_when: cpu_manufacturer.stdout not in ["amd", "intel"]
+
+- name: "Install microcode and mkinitcpio"
   pacman:
     name:
-      - "intel-ucode"
+      - "{{ cpu_manufacturer.stdout }}-ucode"
       - "mkinitcpio"
     state: "present"
 
@@ -28,23 +34,24 @@
     - template: src="arch.conf.j2" dest="/boot/loader/entries/arch.conf"
       vars:
         uuid: "{{ crypto_uuid.stdout }}"
+        cpu: "{{ cpu_manufacturer.stdout }}"
+    - template: src="arch-fallback.conf.j2" dest="/boot/loader/entries/arch-fallback.conf"
+      vars:
+        uuid: "{{ crypto_uuid.stdout }}"
+        cpu: "{{ cpu_manufacturer.stdout }}"
 
 - name: "Install dependencies defined on mkinitcpio"
   pacman:
-    name: "lvm2"
+    name:
+      - "linux"
+      - "linux-firmware"
+      - "lvm2"
     state: "present"
 
 - include_role:
     name: "yay"
   vars:
     pkg_name: "mkinitcpio-firmware"
-
-- name: "Create preset for linux"
-  pacman:
-    name:
-      - "linux"
-      - "linux-firmware"
-    state: "present"
 
 - name: "Set HOOKS for mkinitcpio"
   lineinfile:
