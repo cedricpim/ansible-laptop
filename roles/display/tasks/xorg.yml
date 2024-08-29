@@ -8,6 +8,7 @@
       - "xorg-xprop"
       - "xorg-xrandr"
       - "xorg-xclock"
+      - "xorg-server"
     state: "present"
   become: yes
 
@@ -36,7 +37,7 @@
   loop_control:
     loop_var: "pkg_name"
 
-- name: "Configure space2meta on udevmon" 
+- name: "Configure space2meta on udevmon"
   blockinfile:
     path: "{{ interception_directory }}/udevmon.yaml"
     block: |

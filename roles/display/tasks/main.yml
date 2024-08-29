@@ -1,9 +1,7 @@
 ---
 - name: "Install graphic's related packages"
   pacman:
-    name:
-      - "mesa"
-      - "xf86-video-intel"
+    name: "mesa"
     state: "present"
   become: yes
 
