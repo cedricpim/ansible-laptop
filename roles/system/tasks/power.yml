@@ -7,11 +7,6 @@
     state: "present"
   notify: "Tune powertop"
 
-- include_role:
-    name: "yay"
-  vars:
-    pkg_name: "watchdog"
-
 - name: "Start and enable TLP services"
   service:
     name: "tlp"
@@ -39,6 +34,5 @@
     enabled: yes
     state: "started"
   with_items:
-    - "watchdog"
     - "fstrim.timer"
     - "powertop"
