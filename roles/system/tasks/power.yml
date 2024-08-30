@@ -36,3 +36,9 @@
   with_items:
     - "fstrim.timer"
     - "powertop"
+
+- name: "Blacklist watchdog module"
+  lineinfile:
+    path: "/etc/modprobe.d/disable-sp5100-watchdog.conf"
+    line: "blacklist sp5100_tco"
+    create: yes
