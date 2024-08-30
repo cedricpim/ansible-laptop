@@ -4,4 +4,4 @@ IFS=$'\n\t'
 
 {{ ansible_managed | comment }}
 
-echo ${1:q} | tee -a {{ journal_triggerd_log }} > /dev/null
+echo "[$(date -u)]" ${1:q} | tee -a {{ journal_triggerd_log }} > /dev/null
