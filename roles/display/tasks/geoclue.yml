@@ -1,22 +1,8 @@
 ---
 - name: "Install GeoClue package"
   pacman:
-    name: "geoclue2"
+    name: "geoclue"
     state: "present"
-  become: yes
-
-- name: "Create folder for GeoClue"
-  file:
-    path: "{{ geoclue_directory }}"
-    state: "directory"
-    mode: "0755"
-  become: yes
-
-- name: "Copy GeoClue configuration"
-  template:
-    src: "geoclue.conf.j2"
-    dest: "{{ geoclue_directory }}/geoclue.conf"
-    mode: "0644"
   become: yes
 
 - name: "Copy GeoClue service configuration"
