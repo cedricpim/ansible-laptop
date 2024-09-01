@@ -222,9 +222,7 @@ mode "$mode_system" {
   # Firefox does not close well on its own
   bindsym o [class="firefox"] kill; exec sleep 1 && rm /tmp/osui.sock && i3-msg exit, mode "default"
   bindsym g exec --no-startup-id dm-tool switch-to-greeter, mode "default"
-  # Disabled while suspend is not working and hibernate is used instead
-  # bindsym s exec --no-startup-id dm-tool lock && systemctl suspend, mode "default"
-  bindsym s exec --no-startup-id systemctl hibernate, mode "default"
+  bindsym s exec --no-startup-id dm-tool lock && systemctl suspend, mode "default"
   bindsym r exec --no-startup-id systemctl reboot, mode "default"
   bindsym Shift+p exec --no-startup-id systemctl poweroff -i, mode "default"
 
