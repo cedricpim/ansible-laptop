@@ -1,3 +1,6 @@
 ---
 esp_mount: "/boot"
 cpu_manufacturer: "amd"
+
+swapfile: "/swapfile"
+swapsize: "32G"

@@ -26,15 +26,35 @@
   command: "bootctl --path={{ esp_mount }} install"
   when: systemd_boot is defined and systemd_boot.stat.islnk is not defined
 
+- name: "Make swap"
+  command: "mkswap -U clear --size {{ swapsize }} --file {{ swapfile }}"
+
+- name: "Turn swap on"
+  command: "swapon {{ swapfile }}"
+
+- name: "Add to fstab"
+  lineinfile:
+    dest: "/etc/fstab"
+    line: "{{ swapfile }} none swap defaults 0 0"
+    state: "present"
+
 - name: "Copy systemd-boot entry for Arch Linux"
   block:
     - command: "blkid -s UUID -o value {{ partition_os }}"
       changed_when: no
       register: crypto_uuid
+    - command: "findmnt -no UUID -T {{ swapfile }}"
+      changed_when: no
+      register: swap_uuid
+    - shell: 'filefrag -v {{ swapfile }} | awk ''$1=="0:" {print substr($4, 1, length($4)-2)}'''
+      changed_when: no
+      register: swap_offset
     - template: src="arch.conf.j2" dest="/boot/loader/entries/arch.conf"
       vars:
         uuid: "{{ crypto_uuid.stdout }}"
         cpu: "{{ cpu_manufacturer.stdout }}"
+        resume_uuid: "{{ swap_uuid.stdout }}"
+        resume_offset: "{{ swap_offset.stdout }}"
     - template: src="arch-fallback.conf.j2" dest="/boot/loader/entries/arch-fallback.conf"
       vars:
         uuid: "{{ crypto_uuid.stdout }}"
