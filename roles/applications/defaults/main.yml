@@ -24,6 +24,3 @@ firefox_options:
   - { option: "browser.tabs.loadDivertedInBackground", value: "true" }
 
 syncthing_port: "8384"
-
-openvpn_directory: "/etc/openvpn"
-qopenvpn_directory: "~/.config/QOpenVPN"

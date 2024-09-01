@@ -44,9 +44,6 @@ production_commands: "{{ vault_production_commands }}"
 
 ssh_entries: "{{ vault_ssh_entries }}"
 
-openvpn_name: "{{ vault_openvpn_name }}"
-openvpn_home_conf: "{{ vault_openvpn_home_conf }}"
-
 docker_data_directory: "{{ vault_docker_data_directory }}"
 
 extra_applications: "{{ vault_extra_applications | default([]) }}"
