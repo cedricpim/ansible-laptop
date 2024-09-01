@@ -77,6 +77,6 @@
   lineinfile:
     path: "/etc/mkinitcpio.conf"
     regexp: "^HOOKS="
-    line: "HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck encrypt lvm2)"
+    line: "HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck encrypt resume lvm2)"
     state: "present"
   notify: "Create mkinitcpio configuration"
