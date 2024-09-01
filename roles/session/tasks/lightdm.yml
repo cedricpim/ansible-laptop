@@ -4,6 +4,7 @@
     name:
       - "lightdm"
       - "xautolock"
+      - "numlockx"
     state: "present"
   become: yes
 

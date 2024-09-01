@@ -4,6 +4,7 @@ IFS=$'\n\t'
 
 {{ ansible_managed | comment }}
 
+numlockx on
 xautolock -time 5 -locker "systemctl suspend" &
 
 exit 0
