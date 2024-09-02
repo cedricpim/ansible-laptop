@@ -6,21 +6,21 @@ firefox_profiles_file: "~/.mozilla/firefox"
 firefox_profile: "Path=[a-z1-9]{8}.default"
 
 firefox_options:
-  - { option: "network.protocol-handler.expose.magnet", value: "false" }
-  - { option: "browser.tabs.loadDivertedInBackground", value: "true" }
-  - { option: "media.peerconnection.enabled", value: "false" }
-  - { option: "privacy.firstparty.isolate", value: "true" }
-  - { option: "geo.enabled", value: "false" }
-  - { option: "media.navigator.enabled", value: "false" }
-  - { option: "network.cookie.cookieBehavior", value: "1" }
-  - { option: "network.dns.disablePrefetch", value: "true" }
-  - { option: "network.prefetch-next", value: "false" }
-  - { option: "webgl.disabled", value: "true" }
-  - { option: "network.cookie.lifetimePolicy", value: "1" }
-  - { option: "privacy.resistFingerprinting", value: "true" }
-  - { option: "layers.acceleration.force-enabled", value: "true" }
   - { option: "app.normandy.enabled", value: "false" }
   - { option: "app.normandy.logging.level", value: "0" }
   - { option: "browser.tabs.loadDivertedInBackground", value: "true" }
+  - { option: "dom.private-attribution.submission.enabled", value: "false" }
+  - { option: "geo.enabled", value: "false" }
+  - { option: "layers.acceleration.force-enabled", value: "true" }
+  - { option: "media.navigator.enabled", value: "false" }
+  - { option: "media.peerconnection.enabled", value: "false" }
+  - { option: "network.cookie.cookieBehavior", value: "1" }
+  - { option: "network.cookie.lifetimePolicy", value: "1" }
+  - { option: "network.dns.disablePrefetch", value: "true" }
+  - { option: "network.prefetch-next", value: "false" }
+  - { option: "network.protocol-handler.expose.magnet", value: "false" }
+  - { option: "privacy.firstparty.isolate", value: "true" }
+  - { option: "privacy.resistFingerprinting", value: "true" }
+  - { option: "webgl.disabled", value: "true" }
 
 syncthing_port: "8384"
