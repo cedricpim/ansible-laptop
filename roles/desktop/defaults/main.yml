@@ -10,6 +10,8 @@ ranger_mountpoint: "~/Device"
 redshift_directory: "~/.config/redshift"
 ranger_colorscheme: "dark"
 
+display_scale: "1.5x1.5"
+
 dunst_colorscheme:
   frame_color: "#070F1D"
   urgencies:

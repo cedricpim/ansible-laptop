@@ -27,9 +27,12 @@
 
 - name: "Copy Xprofile configuration"
   template:
-    src: "xprofile.j2"
-    dest: "~/.xprofile"
+    src: "{{ item }}.j2"
+    dest: "~/.{{ item }}"
     mode: "0600"
+  with_items:
+    - "xprofile"
+    - "Xresources"
 
 - name: "Install Media Player related packages"
   pacman:

@@ -208,7 +208,7 @@ bindsym $mod+Shift+s mode "$mode_resize"
 set $mode_monitors Monitors: (i) internal screen, (e) external screen, (m) multiple screens
 mode "$mode_monitors" {
   bindsym i exec --no-startup-id "mons -o; {{ polybar_directory }}/launcher.sh", mode "default"
-  bindsym e exec --no-startup-id "mons -s; {{ polybar_directory }}/launcher.sh", mode "default"
+  bindsym e exec --no-startup-id "xrandr --output DisplayPort-0 --auto --scale {{ display_scale }} --output eDP --off; {{ polybar_directory }}/launcher.sh", mode "default"
   bindsym m exec --no-startup-id "mons -e right; {{ polybar_directory }}/launcher.sh", mode "default"
 
   bindsym Return mode "default"
@@ -216,13 +216,14 @@ mode "$mode_monitors" {
 }
 bindsym $mod+Shift+m mode "$mode_monitors"
 
-set $mode_system System: (l) lock, (o) logout, (g) greeter, (s) suspend, (r) reboot, (Shift+p) poweroff
+set $mode_system System: (l) lock, (o) logout, (g) greeter, (s) suspend, (h) hibernate, (r) reboot, (Shift+p) poweroff
 mode "$mode_system" {
   bindsym l exec --no-startup-id dm-tool lock, mode "default"
   # Firefox does not close well on its own
   bindsym o [class="firefox"] kill; exec sleep 1 && rm /tmp/osui.sock && i3-msg exit, mode "default"
   bindsym g exec --no-startup-id dm-tool switch-to-greeter, mode "default"
   bindsym s exec --no-startup-id dm-tool lock && systemctl suspend, mode "default"
+  bindsym h exec --no-startup-id systemctl hibernate, mode "default"
   bindsym r exec --no-startup-id systemctl reboot, mode "default"
   bindsym Shift+p exec --no-startup-id systemctl poweroff -i, mode "default"
 
