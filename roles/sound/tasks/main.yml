@@ -4,7 +4,15 @@
     name:
       - "pipewire-pulse"
       - "pavucontrol"
+      - "wireplumber"
     state: "present"
   become: yes
+
+- name: "Enable/start Wireplumber"
+  systemd:
+    name: "wireplumber"
+    state: "started"
+    scope: "user"
+    enabled: yes
 
 - import_tasks: "bluetooth.yml"
