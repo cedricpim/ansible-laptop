@@ -1,0 +1,34 @@
+---
+- name: "Install SDDM"
+  pacman:
+    name:
+      - "sddm"
+      - "layer-shell-qt"
+      - "layer-shell-qt5"
+      - "hyprland"
+    state: "present"
+  become: yes
+
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "sddm-elegant-theme-git"
+
+- name: "Copy SDDM configuration"
+  template:
+    src: "sddm/sddm.conf.j2"
+    dest: "{{ sddm_directory }}/sddm.conf"
+    mode: "0644"
+  become: yes
+
+- name: "Add Hyprland stub for SDDM"
+  file:
+    path: "{{ ssdm_hyprland_conf }}"
+    state: "touch"
+  become: yes
+
+- name: "Enable service for SDDM"
+  systemd:
+    name: "sddm"
+    enabled: yes
+  become: yes

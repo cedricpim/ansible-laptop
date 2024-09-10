@@ -1,0 +1,11 @@
+{{ ansible_managed | comment }}
+
+[General]
+DisplayServer=wayland
+GreeterEnvironment=QT_WAYLAND_SHELL_INTEGRATION=layer-shell
+
+[Wayland]
+CompositorCommand=Hyprland -c {{ ssdm_hyprland_conf }}
+
+[Theme]
+Current=Elegant
