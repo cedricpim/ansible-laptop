@@ -1,6 +1,6 @@
 ---
-- name: "Restart udevmon"
+- name: "Restart Keyd conf"
   systemd:
-    name: "udevmon"
+    name: "keyd"
     state: "restarted"
   become: yes

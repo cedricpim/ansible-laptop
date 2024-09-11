@@ -1,0 +1,16 @@
+{{ ansible_managed | comment }}
+
+[ids]
+
+*
+
+[main]
+
+# Maps capslock to escape when pressed and control when held.
+capslock = overload(control, esc)
+space = overloadt2(meta, space, 200)
+
+# When tapped, the Shift will produce '(' or ')'
+# When held, it will act as the Shift key
+leftshift = overload(shift, S-9)
+rightshift = overload(shift, S-0)
