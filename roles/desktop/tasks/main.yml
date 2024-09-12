@@ -49,3 +49,4 @@
 - import_tasks: "notifications.yml"
 - import_tasks: "terminal.yml"
 - import_tasks: "window.yml"
+- import_tasks: "hyprland.yml"
