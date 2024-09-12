@@ -215,7 +215,6 @@ bind = $mainMod, Tab, cyclenext, prev
 bind = $mainMod SHIFT, R, exec, hyprctl reload
 bind = , Print, exec, hyprshot -m region --clipboard-only
 bind = $mainMod, Print, exec, hyprshot -m region
-# bind = $mainMod, P, pseudo, # dwindle
 
 
 # Move focus with mainMod + arrow keys
@@ -227,6 +226,9 @@ bind = $mainMod, H, movefocus, l
 bind = $mainMod, L, movefocus, r
 bind = $mainMod, K, movefocus, u
 bind = $mainMod, J, movefocus, d
+
+bind = $mainMod SHIFT, H, movewindow, l
+bind = $mainMod SHIFT, L, movewindow, r
 
 {% for workspace in workspaces %}
 bind = $mainMod, {{ workspace.keybinding }}, workspace, {{ workspace.key }}
