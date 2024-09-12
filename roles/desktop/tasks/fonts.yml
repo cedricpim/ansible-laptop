@@ -17,5 +17,6 @@
   with_items:
     - "ttf-iosevka"
     - "ttf-meslo-nerd-font-powerlevel10k"
+    - "apple-fonts"
   loop_control:
     loop_var: "pkg_name"
