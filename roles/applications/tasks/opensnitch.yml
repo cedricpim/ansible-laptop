@@ -16,3 +16,11 @@
     state: "started"
     enabled: yes
   become: yes
+
+- name: "Allow user to remove opensnitch socket"
+  lineinfile:
+    path: "/etc/sudoers"
+    line: "{{ user }} ALL=(ALL) NOPASSWD: /bin/rm /tmp/osui.sock"
+    validate: "visudo -cf %s"
+    backup: yes
+  become: yes
