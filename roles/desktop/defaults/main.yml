@@ -65,3 +65,5 @@ rofi_colorscheme:
       value: "#C792EA"
     - key: "base0F"
       value: "#FF5370"
+
+hyprland_directory: "~/.config/hypr"

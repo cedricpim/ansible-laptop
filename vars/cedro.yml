@@ -12,16 +12,16 @@ syncthing_port: "8384"
 wallpaper: "landscape.jpg"
 
 workspaces:
-  - { key: "$ws1",  keybinding: "1",  name: "1:", assigned: "Slack" }
-  - { key: "$ws2",  keybinding: "2",  name: "2:", assigned: "firefox" }
-  - { key: "$ws3",  keybinding: "3",  name: "3:" }
-  - { key: "$ws4",  keybinding: "4",  name: "4" }
-  - { key: "$ws5",  keybinding: "5",  name: "5" }
-  - { key: "$ws6",  keybinding: "6",  name: "6" }
-  - { key: "$ws7",  keybinding: "7",  name: "7" }
-  - { key: "$ws8",  keybinding: "8",  name: "8" }
-  - { key: "$ws9",  keybinding: "9",  name: "9" }
-  - { key: "$ws10", keybinding: "0", name: "10" }
+  - { key: "1", keybinding: "1", name: "", assigned: "Slack" }
+  - { key: "2", keybinding: "2", name: "", assigned: "firefox" }
+  - { key: "3", keybinding: "3", name: "" }
+  - { key: "4", keybinding: "4", name: "4" }
+  - { key: "5", keybinding: "5", name: "5" }
+  - { key: "6", keybinding: "6", name: "6" }
+  - { key: "7", keybinding: "7", name: "7" }
+  - { key: "8", keybinding: "8", name: "8" }
+  - { key: "9", keybinding: "9", name: "9" }
+  - { key: "10", keybinding: "0", name: "10" }
 
 startup_applications:
   - "sleep 3 && keepassxc"
@@ -29,12 +29,15 @@ startup_applications:
   - "sleep 3 && firefox"
 
 scratchpad_applications:
-  - { name: "todo",     keybinding: "t", launcher: "scratchpad-launcher.sh" }
-  - { name: "yt",       keybinding: "y", launcher: "scratchpad-launcher.sh" }
-  - { name: "ikhal",    keybinding: "a", launcher: "scratchpad-launcher.sh" }
-  - { name: "neomutt",  keybinding: "e", launcher: "scratchpad-launcher.zsh", custom: "resize set 70ppt 80ppt" }
-  - { name: "spotify",  keybinding: "s", launcher: "scratchpad-launcher.sh" }
-  - { name: "newsboat", keybinding: "n", launcher: "scratchpad-launcher.sh" }
+  - { name: "todo", keybinding: "T", launcher: "terminal" }
+  - { name: "yt", keybinding: "Y", launcher: "terminal" }
+  - { name: "ikhal", keybinding: "A", launcher: "terminal" }
+  - { name: "neomutt", keybinding: "E", launcher: "terminal" }
+  - { name: "newsboat", keybinding: "N", launcher: "terminal" }
+  - { name: "Spotify", keybinding: "S", launcher: "spotify" }
+  - { name: "Signal", keybinding: "M", launcher: "signal-desktop" }
+  - { name: "Pilorama", keybinding: "P", launcher: "pilorama" }
+  - { name: "CopyQ", keybinding: "C", launcher: "copyq toggle" }
 
 colorscheme_name: "catppuccin-mocha"
 
@@ -43,22 +46,22 @@ colorscheme:
   background: "#000000"
   cursor: "#726B72"
   colors:
-    - { name: "darkblack",   value: "#393939" }
-    - { name: "darkred",     value: "#DA4939" }
-    - { name: "darkgreen",   value: "#9ACC79" }
-    - { name: "darkyellow",  value: "#D0D26B" }
-    - { name: "darkblue",    value: "#6D9CBE" }
+    - { name: "darkblack", value: "#393939" }
+    - { name: "darkred", value: "#DA4939" }
+    - { name: "darkgreen", value: "#9ACC79" }
+    - { name: "darkyellow", value: "#D0D26B" }
+    - { name: "darkblue", value: "#6D9CBE" }
     - { name: "darkmagenta", value: "#9F5079" }
-    - { name: "darkcyan",    value: "#435D75" }
-    - { name: "darkwhite",   value: "#C2C2C2" }
-    - { name: "black",       value: "#474747" }
-    - { name: "red",         value: "#FF6C5C" }
-    - { name: "green",       value: "#8FB676" }
-    - { name: "yellow",      value: "#C8BC45" }
-    - { name: "blue",        value: "#D0D0FF" }
-    - { name: "magenta",     value: "#A761C2" }
-    - { name: "cyan",        value: "#6E98A4" }
-    - { name: "white",       value: "#C2C2C2" }
+    - { name: "darkcyan", value: "#435D75" }
+    - { name: "darkwhite", value: "#C2C2C2" }
+    - { name: "black", value: "#474747" }
+    - { name: "red", value: "#FF6C5C" }
+    - { name: "green", value: "#8FB676" }
+    - { name: "yellow", value: "#C8BC45" }
+    - { name: "blue", value: "#D0D0FF" }
+    - { name: "magenta", value: "#A761C2" }
+    - { name: "cyan", value: "#6E98A4" }
+    - { name: "white", value: "#C2C2C2" }
 
 ### Encrypted
 

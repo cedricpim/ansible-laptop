@@ -1,0 +1,54 @@
+---
+- name: "Install Hyprland"
+  pacman:
+    name: "hyprland"
+    state: "present"
+  become: yes
+
+- name: "Install Wayland utilities"
+  pacman:
+    name:
+      - "qt5-wayland"
+      - "qt6-wayland"
+      - "wayland"
+      - "wl-clipboard"
+    state: "present"
+  become: yes
+
+- name: "Install Hyprland utilities"
+  pacman:
+    name:
+      - "hyprpaper"
+      - "hypridle"
+      - "hyprlock"
+      - "waybar"
+    state: "present"
+  become: yes
+
+- name: "Create folder for Hyprland configuration and scripts"
+  file:
+    path: "{{ item }}"
+    state: "directory"
+    mode: "0700"
+  with_items:
+    - "{{ hyprland_directory }}"
+    - "{{ hyprland_directory }}/scripts"
+
+- name: "Copy Hyprland configurations"
+  template:
+    src: "hyprland/{{ item }}.j2"
+    dest: "{{ hyprland_directory }}/{{ item }}"
+    mode: "0600"
+  with_items:
+    - "hyprland.conf"
+    - "hyprpaper.conf"
+    - "hypridle.conf"
+    - "hyprlock.conf"
+
+- name: "Copy Hyprland script"
+  template:
+    src: "hyprland/scripts/{{ item }}.j2"
+    dest: "{{ hyprland_directory }}/scripts/{{ item }}"
+    mode: "0700"
+  with_items:
+    - "special-launcher.sh"

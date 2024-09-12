@@ -1,0 +1,323 @@
+{{ ansible_managed | comment }}
+
+# Refer to the wiki for more information.
+# https://wiki.hyprland.org/Configuring/Configuring-Hyprland/
+
+# Please note not all available settings / options are set here.
+# For a full list, see the wiki
+
+# You can split this configuration into multiple files
+# Create your files separately and then link them to this file like this:
+# source = ~/.config/hypr/myColors.conf
+
+
+################
+### MONITORS ###
+################
+
+# See https://wiki.hyprland.org/Coniguring/Monitors/
+monitor=,preferred,auto,auto
+
+
+###################
+### MY PROGRAMS ###
+###################
+
+# See https://wiki.hyprland.org/Configuring/Keywords/
+
+# Set programs that you use
+$terminal = alacritty
+$menu = rofi -show drun
+
+
+#################
+### AUTOSTART ###
+#################
+
+# Autostart necessary processes (like notifications daemons, status bars, etc.)
+# Or execute your favorite apps at launch like this:
+
+exec-once = hyprpaper
+exec-once = hypridle
+exec-once = waybar
+
+exec-once = keepassxc
+exec-once = slack
+exec-once = caffeine
+exec-once = dunst
+exec-once = copyq
+exec-once = udiskie -ans
+exec-once = mullvad-vpn
+exec-once = blueman-applet
+exec-once = solaar -w hide
+exec-once = nm-applet
+exec-once = tuxedo-control-center --tray
+# Always delete previously existing file since it might be from other user
+# If this causes problems, it is possible to use visudo
+exec-once = sudo rm /tmp/osui.sock &> /dev/null || true && opensnitch-ui --background
+exec-once = signal-desktop --start-in-tray
+exec-once = copyq --start-server
+
+exec-once = {{ default_browser }}
+
+
+#############################
+### ENVIRONMENT VARIABLES ###
+#############################
+
+# See https://wiki.hyprland.org/Configuring/Environment-variables/
+
+env = XCURSOR_SIZE,24
+env = HYPRCURSOR_SIZE,24
+
+
+#####################
+### LOOK AND FEEL ###
+#####################
+
+# Refer to https://wiki.hyprland.org/Configuring/Variables/
+
+# https://wiki.hyprland.org/Configuring/Variables/#general
+general {
+    gaps_in = 5
+    gaps_out = 20
+
+    border_size = 2
+
+    # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
+    col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
+    col.inactive_border = rgba(595959aa)
+
+    # Set to true enable resizing windows by clicking and dragging on borders and gaps
+    resize_on_border = false
+
+    # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
+    allow_tearing = false
+
+    layout = dwindle
+}
+
+# https://wiki.hyprland.org/Configuring/Variables/#decoration
+decoration {
+    rounding = 10
+
+    # Change transparency of focused and unfocused windows
+    active_opacity = 1.0
+    inactive_opacity = 1.0
+
+    drop_shadow = true
+    shadow_range = 4
+    shadow_render_power = 3
+    col.shadow = rgba(1a1a1aee)
+
+    # https://wiki.hyprland.org/Configuring/Variables/#blur
+    blur {
+        enabled = true
+        size = 3
+        passes = 1
+
+        vibrancy = 0.1696
+    }
+}
+
+# https://wiki.hyprland.org/Configuring/Variables/#animations
+animations {
+    enabled = true
+
+    # Default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+
+    bezier = myBezier, 0.05, 0.9, 0.1, 1.05
+
+    animation = windows, 1, 7, myBezier
+    animation = windowsOut, 1, 7, default, popin 80%
+    animation = border, 1, 10, default
+    animation = borderangle, 1, 8, default
+    animation = fade, 1, 7, default
+    animation = workspaces, 1, 6, default
+}
+
+# See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+dwindle {
+    pseudotile = true # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+    preserve_split = true # You probably want this
+}
+
+# See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+master {
+    new_status = master
+}
+
+# https://wiki.hyprland.org/Configuring/Variables/#misc
+misc {
+    force_default_wallpaper = -1 # Set to 0 or 1 to disable the anime mascot wallpapers
+    disable_hyprland_logo = false # If true disables the random hyprland logo / anime girl background. :(
+}
+
+
+#############
+### INPUT ###
+#############
+
+# https://wiki.hyprland.org/Configuring/Variables/#input
+input {
+    kb_layout = us
+    kb_variant =
+    kb_model =
+    kb_options = compose:ralt
+    kb_rules =
+
+    follow_mouse = 1
+
+    sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
+
+    repeat_rate = 25
+    repeat_delay = 200
+
+    touchpad {
+        natural_scroll = false
+    }
+}
+
+# https://wiki.hyprland.org/Configuring/Variables/#gestures
+gestures {
+    workspace_swipe = false
+}
+
+# Example per-device config
+# See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
+device {
+    name = epic-mouse-v1
+    sensitivity = -0.5
+}
+
+binds {
+    workspace_back_and_forth = true
+}
+
+
+###################
+### KEYBINDINGS ###
+###################
+
+# See https://wiki.hyprland.org/Configuring/Keywords/
+$mainMod = SUPER # Sets "Windows" key as main modifier
+
+# Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+bind = $mainMod, RETURN, exec, $terminal
+bind = $mainMod, Q, killactive,
+bind = $mainMod, F, fullscreen
+bind = $mainMod SHIFT, O, togglefloating,
+bindr = $mainMod, D, exec, pkill rofi || $menu
+bind = $mainMod SHIFT, J, togglesplit, # dwindle
+bind = $mainMod, GRAVE, exec, dunstctl set-paused toggle
+bind = $mainMod, Tab, cyclenext, prev
+bind = $mainMod SHIFT, R, exec, hyprctl reload
+# bind = $mainMod, P, pseudo, # dwindle
+# bind = , Print, exec, $screenshot --now
+
+
+# Move focus with mainMod + arrow keys
+bind = $mainMod, LEFT, movefocus, l
+bind = $mainMod, RIGHT, movefocus, r
+bind = $mainMod, UP, movefocus, u
+bind = $mainMod, DOWN, movefocus, d
+bind = $mainMod, H, movefocus, l
+bind = $mainMod, L, movefocus, r
+bind = $mainMod, K, movefocus, u
+bind = $mainMod, J, movefocus, d
+
+{% for workspace in workspaces %}
+bind = $mainMod, {{ workspace.keybinding }}, workspace, {{ workspace.key }}
+bind = $mainMod SHIFT, {{ workspace.keybinding }}, movetoworkspace, {{ workspace.key }}
+workspace = {{ workspace.key }}, defaultName:{{ workspace.name }}
+{% if workspace.assigned is defined %}
+windowrulev2 = workspace {{ workspace.key }} silent, class:^({{ workspace.assigned }})$
+{% endif %}
+
+{% endfor %}
+
+# Example special workspace (scratchpad)
+bind = $mainMod, EQUAL, togglespecialworkspace, magic
+bind = $mainMod, MINUS, movetoworkspace, special:magic
+
+# Scroll through existing workspaces with mainMod + scroll
+bind = $mainMod, mouse_down, workspace, e+1
+bind = $mainMod, mouse_up, workspace, e-1
+
+# Move/resize windows with mainMod + LMB/RMB and dragging
+bindm = $mainMod, mouse:272, movewindow
+bindm = $mainMod, mouse:273, resizewindow
+
+# Function keys
+bindel = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindel = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bind = ,XF86MonBrightnessUp, exec, xbacklight -inc 10
+bind = ,XF86MonBrightnessDown, exec, xbacklight -dec 10
+bind = ,XF86AudioPlay, exec, playerctl play-pause
+bind = ,XF86AudioNext, exec, playerctl next
+bind = ,XF86AudioPrev, exec, playerctl previous
+
+bind = $mainMod SHIFT, S, submap, resize # switch to a submap called resize
+submap = resize # start a submap called "resize"
+
+# sets repeatable binds for resizing the active window
+binde = , RIGHT, resizeactive, 10 0
+binde = , LEFT, resizeactive, -10 0
+binde = , UP, resizeactive, 0 -10
+binde = , DOWN, resizeactive, 0 10
+
+binde = , H, resizeactive, 10 0
+binde = , L, resizeactive, -10 0
+binde = , K, resizeactive, 0 -10
+binde = , J, resizeactive, 0 1
+
+bind = , escape, submap, reset # reset to go back to the global submap
+submap = reset # reset the submap, which will return to the global submap
+
+bind = $mainMod SHIFT, P, submap, system
+submap = system
+
+bind = , L, exec, hyprlock
+bind = , L, submap, reset
+bind = , S, exec, systemctl suspend
+bind = , S, submap, reset
+bind = , O, exec, hyprctl dispatch exit 1
+bind = , H, exec, systemctl hybernate
+bind = , R, exec, systemctl reboot
+bind = SHIFT, P, exec, systemctl poweroff -i
+
+bind = , escape, submap, reset
+submap = reset
+
+bind = $mainMod SHIFT, M, submap, displays
+submap = displays
+
+bind = , E, exec, hyprctl keyword monitor eDP-1, disable
+bind = , E, submap, reset
+bind = , A, exec, hyprctl keyword monitor *, preferred, auto, auto
+bind = , A, submap, reset
+bind = , I, exec, hyprctl keyword monitor DP-1, disable
+bind = , I, submap, reset
+
+bind = , escape, submap, reset
+submap = reset
+
+
+##############################
+### WINDOWS AND WORKSPACES ###
+##############################
+
+# See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+# See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
+
+{% for application in scratchpad_applications %}
+windowrulev2 = float, class:({{ application.name }})
+windowrulev2 = workspace special:{{ application.name | lower }}, class:({{ application.name }})
+bind = $mainMod, {{ application.keybinding }}, exec, {{ hyprland_directory }}/scripts/special-launcher.sh {{ application.name | lower }} {{ application.launcher }}
+{% endfor %}
+
+windowrulev2 = float, title:^(Calculator)$
+windowrulev2 = float, title:^(rofi)
+
+windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
