@@ -12,6 +12,7 @@
       - "qt6-wayland"
       - "wayland"
       - "wl-clipboard"
+      - "gammastep"
     state: "present"
   become: yes
 

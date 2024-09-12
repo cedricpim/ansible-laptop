@@ -43,7 +43,7 @@
   become: yes
 
 - import_tasks: "display.yml"
-- import_tasks: "redshift.yml"
+- import_tasks: "gammastep.yml"
 - import_tasks: "fonts.yml"
 - import_tasks: "file.yml"
 - import_tasks: "notifications.yml"

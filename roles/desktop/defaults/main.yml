@@ -7,7 +7,6 @@ dunst_directory: "~/.config/dunst"
 terminal_directory: "~/.config/alacritty"
 ranger_directory: "~/.config/ranger"
 ranger_mountpoint: "~/Device"
-redshift_directory: "~/.config/redshift"
 ranger_colorscheme: "dark"
 
 display_scale: "1.5x1.5"
@@ -67,3 +66,4 @@ rofi_colorscheme:
       value: "#FF5370"
 
 hyprland_directory: "~/.config/hypr"
+gammastep_directory: "~/.config/gammastep"

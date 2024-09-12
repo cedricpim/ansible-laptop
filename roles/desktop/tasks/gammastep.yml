@@ -1,0 +1,18 @@
+---
+- name: "Install Gammastep package"
+  pacman:
+    name: "gammastep"
+    state: "present"
+  become: yes
+
+- name: "Create folder for Gammastep"
+  file:
+    path: "{{ gammastep_directory }}"
+    state: "directory"
+    mode: "0700"
+
+- name: "Copy Gammastep configuration"
+  template:
+    src: "gammastep/config.ini.j2"
+    dest: "{{ gammastep_directory }}/config.ini"
+    mode: "0600"
