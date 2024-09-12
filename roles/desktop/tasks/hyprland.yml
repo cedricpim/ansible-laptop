@@ -21,6 +21,7 @@
       - "hyprpaper"
       - "hypridle"
       - "hyprlock"
+      - "hyprshot"
       - "waybar"
     state: "present"
   become: yes

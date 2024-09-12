@@ -212,8 +212,9 @@ bind = $mainMod SHIFT, J, togglesplit, # dwindle
 bind = $mainMod, GRAVE, exec, dunstctl set-paused toggle
 bind = $mainMod, Tab, cyclenext, prev
 bind = $mainMod SHIFT, R, exec, hyprctl reload
+bind = , Print, exec, hyprshot -m region --clipboard-only
+bind = $mainMod, Print, exec, hyprshot -m region
 # bind = $mainMod, P, pseudo, # dwindle
-# bind = , Print, exec, $screenshot --now
 
 
 # Move focus with mainMod + arrow keys
