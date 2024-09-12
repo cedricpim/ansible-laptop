@@ -317,6 +317,7 @@ submap = reset
 windowrulev2 = float, class:({{ application.name }})
 windowrulev2 = workspace special:{{ application.name | lower }}, class:({{ application.name }})
 bind = $mainMod, {{ application.keybinding }}, exec, {{ hyprland_directory }}/scripts/special-launcher.sh {{ application.name | lower }} {{ application.launcher }}
+
 {% endfor %}
 
 windowrulev2 = float, title:^(Calculator)$
