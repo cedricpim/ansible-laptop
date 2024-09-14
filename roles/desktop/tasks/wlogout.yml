@@ -1,0 +1,26 @@
+---
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "wlogout"
+
+- name: "Create folder for wlogout configuration"
+  file:
+    path: "{{ wlogout_directory }}"
+    state: "directory"
+    mode: "0700"
+
+- name: "Copy wlogout configuration"
+  template:
+    src: "wlogout/{{ item }}.j2"
+    dest: "{{ wlogout_directory }}/{{ item }}"
+    mode: "0600"
+  with_items:
+    - "style.css"
+    - "layout"
+
+- name: "Copy icons for wlogout"
+  copy:
+    src: "wlogout/icons"
+    dest: "{{ wlogout_directory }}"
+    mode: "0600"

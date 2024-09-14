@@ -70,6 +70,7 @@ exec-once = {{ default_browser }}
 
 env = XCURSOR_SIZE,24
 env = HYPRCURSOR_SIZE,24
+env = HYPRCURSOR_THEME,rose-pine-hyprcursor
 
 
 #####################
@@ -252,6 +253,8 @@ bind = $mainMod, mouse_up, workspace, e-1
 bindm = $mainMod, mouse:272, movewindow
 bindm = $mainMod, mouse:273, resizewindow
 
+bind = $mainMod SHIFT, P, exec, {{ hyprland_directory }}/scripts/wlogout.sh
+
 # Function keys
 bindel = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
 bindel = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
@@ -278,21 +281,6 @@ binde = , J, resizeactive, 0 1
 
 bind = , escape, submap, reset # reset to go back to the global submap
 submap = reset # reset the submap, which will return to the global submap
-
-bind = $mainMod SHIFT, P, submap, system
-submap = system
-
-bind = , L, exec, hyprlock
-bind = , L, submap, reset
-bind = , S, exec, systemctl suspend
-bind = , S, submap, reset
-bind = , O, exec, hyprctl dispatch exit 1
-bind = , H, exec, systemctl hybernate
-bind = , R, exec, systemctl reboot
-bind = SHIFT, P, exec, systemctl poweroff -i
-
-bind = , escape, submap, reset
-submap = reset
 
 bind = $mainMod SHIFT, M, submap, displays
 submap = displays
@@ -326,3 +314,5 @@ windowrulev2 = float, title:^(Calculator)$
 windowrulev2 = float, title:^(rofi)
 
 windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
+
+layerrule = blur, logout_dialog

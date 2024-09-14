@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+{{ ansible_managed | comment }}
+
+# Check if wlogout is already running
+if pgrep -x "wlogout" > /dev/null; then
+  pkill -x "wlogout"
+  exit 0
+fi
+
+# Detect monitor resolution and scaling factor
+size=400
+resolution=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true) | .height / .scale' | awk -F'.' '{print $1}')
+hypr_scale=$(hyprctl -j monitors | jq -r '.[] | select(.focused==true) | .scale')
+margin=$(awk "BEGIN {printf \"%.0f\", ($resolution - ($size / $hypr_scale)) / 2}")
+wlogout --show-binds --protocol layer-shell -b 6 -T $margin -B $margin -R 100 -L 100 &

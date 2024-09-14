@@ -23,10 +23,14 @@
       - "hyprpaper"
       - "hypridle"
       - "hyprlock"
-      - "hyprshot"
       - "waybar"
     state: "present"
   become: yes
+
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "hyprshot"
 
 - name: "Create folder for Hyprland configuration and scripts"
   file:
@@ -55,3 +59,4 @@
     mode: "0700"
   with_items:
     - "special-launcher.sh"
+    - "wlogout.sh"
