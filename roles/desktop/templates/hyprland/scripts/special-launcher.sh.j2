@@ -5,12 +5,14 @@ PATH=$PATH:/usr/local/bin
 
 {{ ansible_managed | comment }}
 
+hyprctl dispatch togglespecialworkspace $1
+
 if ! hyprctl clients | grep -i $1 >/dev/null; then
   if [ "$2" == "terminal" ]; then
     alacritty --title "$1" --class "$1" -e "$1" &
   else
     ${@:2} &
   fi
-fi
 
-hyprctl dispatch togglespecialworkspace $1
+  hyprctl dispatch focuscurrentorlast
+fi
