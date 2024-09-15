@@ -1,0 +1,29 @@
+---
+- name: "Install SwayNotificationCenter"
+  pacman:
+    name: "swaync"
+    state: "present"
+  become: yes
+
+- name: "Create folder for swaync configuration"
+  file:
+    path: "{{ swaync_directory }}"
+    state: "directory"
+    mode: "0700"
+
+- name: "Copy swaync configuration"
+  template:
+    src: "swaync/{{ item }}.j2"
+    dest: "{{ swaync_directory }}/{{ item }}"
+    mode: "0600"
+  with_items:
+    - "style.css"
+    - "notifications.css"
+    - "control.css"
+    - "config.json"
+
+- name: "Copy icons for swaync"
+  copy:
+    src: "swaync/icons"
+    dest: "{{ swaync_directory }}"
+    mode: "0600"
