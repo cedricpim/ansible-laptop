@@ -27,7 +27,7 @@ monitor=,preferred,auto,auto
 
 # Set programs that you use
 $terminal = alacritty
-$menu = rofi -show drun
+$menu = rofi -show drun -modi drun,filebrowser,run,window
 
 
 #################
@@ -316,3 +316,7 @@ windowrulev2 = float, title:^(rofi)
 windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
 
 layerrule = blur, logout_dialog
+windowrule = float, rofi
+layerrule = blur, rofi
+layerrule = unset, rofi
+layerrule = ignorezero, rofi

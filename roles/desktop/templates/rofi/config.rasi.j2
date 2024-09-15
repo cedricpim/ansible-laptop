@@ -1,128 +1,216 @@
 {{ ansible_managed | comment(decoration='* ', prefix='/*', postfix='*/') }}
 
-/*
- * ROFI color theme
- *
- * Based on Base16 Material Color Scheme (https://github.com/ntpeters/base16-materialtheme-scheme) with added configuration
- *
- * User: Tomaszal
- * Copyright: Tomas Zaluckij
- */
-
+/* config - Launcher */
 
 configuration {
-  modi:                "run,window,drun";
-  display-drun:        "Launch";
-  display-run:         "Execute";
-  display-window:      "Window";
-  show-icons:          true;
-  sidebar-mode:        true;
-  kb-remove-char-back: "BackSpace,Shift+BackSpace";
-  kb-mode-next:        "Shift+Right,Control+Tab";
-  kb-mode-previous:    "Shift+Left,Control+ISO_Left_Tab";
-  dpi:                 {{ dpi }};
+  modi:                       "drun,calc";
+  show-icons:                 true;
+  display-calc:               " ";
+  display-drun:               " ";
+  drun-display-format:        "{name}";
+  font:                        "JetBrains Mono Nerd Font 12";
 }
 
+/* Config and colors ----------------------------------------------- */
+
+@import "~/.cache/wal/colors-rofi-dark.rasi"
+
 * {
-{% for color in rofi_colorscheme.colors %}
-  {{ color.key }}: {{ color.value }};
-{% endfor %}
+  background-alt:              @selected-active-background; // Buttons background
+  selected:                    @selected-normal-background; // Button selected
+  active:                      @selected-urgent-background; // Window activated
+  urgent:                      @selected-normal-background; // When hovering the activated window (maybe more?)
 
-  spacing: 0;
-  background-color: transparent;
+  text-selected:               @background;
+  text:                        @foreground;
 
-  font: "Roboto Mono 13";
+  shade-shadow:                white / 6%;
+  shade-bg:                    white / 12%;
+  shade-border:                white / 24%;
 }
 
 window {
-  transparency: "real";
-  /*fullscreen: true;*/
-  background-color: #263238CC; /*base00 + CC (80% opacity)*/
+  fullscreen:                  false;
+  transparency:                "real";
+  cursor:                      "default";
+  background-color:            black / 12%;
+  border:                      0px;
+  border-color:                @selected;
 }
 
+/* Elements ----------------------------------------------------- */
+element normal.normal,
+element alternate.normal {
+  background-color:            transparent;
+  text-color:                  @text;
+}
+
+element selected.normal {
+  background-color:            @shade-bg;
+  text-color:                  white;
+  border:                      1px solid;
+  border-color:                @selected;
+}
+
+element-text {
+  background-color:            transparent;
+  text-color:                  inherit;
+  highlight:                   inherit;
+  cursor:                      inherit;
+  vertical-align:              0.5;
+  horizontal-align:            0.5;
+}
+
+/* Listview ---------------------------------------------------- */
+
+listview {
+  border:                        0px;
+}
+
+/* Scrollbar ---------------------------------------------------- */
+scrollbar {
+  margin:                      0px 4px;
+  handle-width:                8px;
+  handle-color:                white;
+  background-color:            @shade-shadow;
+  border-radius:               4px;
+}
+
+/* Message ------------------------------------------------------ */
+message {
+  background-color:            @shade-bg;
+  border:                      1px solid;
+  border-color:                transparent;
+  border-radius:               12px;
+  padding:                     24px;
+}
+error-message {
+  padding:                     100px;
+  border:                      0px solid;
+  border-radius:               0px;
+  background-color:            black / 10%;
+  text-color:                  @text;
+}
+textbox {
+  background-color:            transparent;
+  text-color:                  @text;
+  vertical-align:              0.5;
+  horizontal-align:            0.5;
+  highlight:                   none;
+}
+
+/* Main Window ------------------------------------------------ */
+window {
+  width:                       100%;
+  height:                      100%;
+  margin:                      0px;
+  padding:                     0px;
+}
+
+/* Main Box --------------------------------------------------- */
 mainbox {
-  children: [inputbar, message, sidebar, listview];
-  spacing: 30px;
-  /*margin: 20%;*/
-  padding: 30px 0;
-  border: 1px;
-  border-color: @base0D;
+  children:                    [ "inputbar", "message", "listview", "mode-switcher" ];
+  background-color:            transparent;
+
+  spacing:                     24px;
+  margin:                      0px;
+  padding:                     100px 226px;
 }
 
+/* Inputbar --------------------------------------------------- */
 inputbar {
-  padding: 0 30px;
-  children: [prompt, textbox-prompt-colon, entry, case-indicator];
+  children:                    [ "prompt", "entry" ];
+
+  border-radius:               12px;
+  background-color:            @shade-bg;
+  text-color:                  @text;
+
+  spacing:                     12px;
+  margin:                      0% 28%;
+  padding:                     14px;
 }
 
 prompt {
-  text-color: @base0D;
+  background-color:            transparent;
+  text-color:                  inherit;
 }
 
 textbox-prompt-colon {
-  expand: false;
-  str: ":";
-  margin: 0 1ch 0 0;
-  text-color: @base0D;
+  expand:                      false;
+  str:                         "::";
+  background-color:            transparent;
+  text-color:                  inherit;
 }
 
+/* Entry input ------------------------------------------------ */
 entry {
-  text-color: @base07;
+  background-color:            transparent;
+  text-color:                  inherit;
+  cursor:                      inherit;
+  placeholder:                 " ";
+  placeholder-color:           inherit;
 }
 
-case-indicator {
-  text-color: @base0F;
-}
-
-sidebar, message {
-  border: 1px 0;
-  border-color: @base0D;
-}
-
-button, textbox {
-  background-color: @base03;
-  text-color: @base07;
-  padding: 5px;
-}
-
-button selected {
-  background-color: @base0D;
-}
-
+/* Listview --------------------------------------------------- */
 listview {
-  scrollbar: true;
-  margin: 0 10px 0 30px;
+  cursor:                      "default";
+  columns:                     6;
+  lines:                       4;
+  cycle:                       true;
+  dynamic:                     true;
+  scrollbar:                   false;
+  layout:                      vertical;
+  reverse:                     false;
+  fixed-height:                true;
+  fixed-columns:               true;
+
+  background-color:            transparent;
+  text-color:                  @text;
+
+  spacing:                     0px;
+  margin:                      0px;
+  padding:                     0px;
 }
 
-scrollbar {
-  background-color: @base03;
-  handle-color: @base0D;
-  handle-width: 10px;
-  border: 0 1px;
-  border-color: @base0D;
-  margin: 0 0 0 20px;
+/* ---- Mode Switcher ---- */
+mode-switcher{
+  background-color:            transparent;
+  border:                      0px;
+
+  margin: 0px;
+  padding: 0px;
+  spacing: 12px;
+}
+button {
+  padding:                     12px 0px;
+  border-radius:               12px;
+  background-color:            @shade-shadow;
+  text-color:                  @text;
+  cursor:                      pointer;
+}
+button selected {
+  background-color:            @shade-bg;
+  border:                      1px solid;
+  border-color:                @selected;
+  text-color:                  white;
 }
 
+/* Elements --------------------------------------------------- */
 element {
-  padding: 5px;
-  highlight: bold underline;
+  cursor:                      pointer;
+  border-radius:               24px;
+  background-color:            transparent;
+  text-color:                  @text;
+  orientation:                 vertical;
+
+  spacing:                     16px;
+  margin:                      0px;
+  padding:                     36px 0px;
 }
 
-element normal normal, element alternate normal {
-  background-color: @base01;
-}
-
-element selected normal {
-  background-color: @base0D;
-}
-
-element normal normal, element selected normal, element alternate normal {
-  text-color: @base07;
-}
-
-element normal urgent, element selected urgent, element alternate urgent {
-  text-color: @base0F;
-}
-
-element normal active, element selected active, element alternate active {
-  text-color: @base0B;
+element-icon {
+  background-color:            transparent;
+  text-color:                  inherit;
+  size:                        72px;
+  cursor:                      inherit;
 }
