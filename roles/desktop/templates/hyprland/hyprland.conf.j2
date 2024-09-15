@@ -247,7 +247,7 @@ bind = $mainMod SHIFT, R, exec, hyprctl reload
 bind = , Print, exec, hyprshot -m region --clipboard-only
 bind = $mainMod, Print, exec, hyprshot -m region
 bind = $mainMod SHIFT, P, exec, {{ hyprland_directory }}/scripts/wlogout.sh
-bind = $mainMod, C, exec, {{ hyprland_directory }}/scripts/clip_manager.sh
+bindr = $mainMod, C, exec, pkill rofi || {{ hyprland_directory }}/scripts/clip_manager.sh
 
 # Move focus with mainMod + arrow keys
 bind = $mainMod, LEFT, movefocus, l
