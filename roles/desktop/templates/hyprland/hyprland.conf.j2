@@ -317,10 +317,13 @@ submap = reset # reset the submap, which will return to the global submap
 bind = $mainMod SHIFT, M, submap, displays
 submap = displays
 
+bind = , E, exec, hyprctl keyword monitor DP-1, enable
 bind = , E, exec, hyprctl keyword monitor eDP-1, disable
 bind = , E, submap, reset
-bind = , A, exec, hyprctl keyword monitor *, preferred, auto, auto
+bind = , A, exec, hyprctl keyword monitor DP-1, enable
+bind = , A, exec, hyprctl keyword monitor eDP-1, enable
 bind = , A, submap, reset
+bind = , I, exec, hyprctl keyword monitor eDP-1, enable
 bind = , I, exec, hyprctl keyword monitor DP-1, disable
 bind = , I, submap, reset
 
