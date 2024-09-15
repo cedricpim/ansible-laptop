@@ -34,17 +34,24 @@
     - { name: "bb.sh", mode: "0700" }
     - { name: "monitor-handler.sh", mode: "0700" }
 
-- name: "Create folder for rofi configuration"
+- name: "Create folder for rofi configuration and themes"
   file:
-    path: "{{ rofi_directory }}"
+    path: "{{ item }}"
     state: "directory"
     mode: "0700"
+  with_items:
+    - "{{ rofi_directory }}"
+    - "{{ rofi_directory }}/themes"
 
-- name: "Copy rofi configuration"
+- name: "Copy rofi configurations"
   template:
-    src: "rofi/config.rasi.j2"
-    dest: "{{ rofi_directory }}/config.rasi"
+    src: "rofi/{{ item }}.j2"
+    dest: "{{ rofi_directory }}/{{ item }}"
     mode: "0600"
+  with_items:
+    - "config.rasi"
+    - "themes/default.rasi"
+    - "themes/clipboard.rasi"
 
 - name: "Create folder for polybar configuration"
   file:

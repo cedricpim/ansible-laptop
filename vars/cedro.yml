@@ -37,7 +37,6 @@ scratchpad_applications:
   - { name: "Spotify", keybinding: "S", launcher: "spotify" }
   - { name: "Signal", keybinding: "M", launcher: "signal-desktop" }
   - { name: "pilorama", keybinding: "P", launcher: "pilorama" }
-  - { name: "CopyQ", keybinding: "C", launcher: "copyq toggle" }
 
 colorscheme_name: "catppuccin-mocha"
 

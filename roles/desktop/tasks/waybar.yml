@@ -1,0 +1,41 @@
+---
+- name: "Install Waybar"
+  pacman:
+    name: "waybar"
+    state: "present"
+  become: yes
+
+- name: "Install Waybar utilities"
+  pacman:
+    name: "brightnessctl"
+    state: "present"
+  become: yes
+
+- name: "Create folders for waybar configuration"
+  file:
+    path: "{{ item }}"
+    state: "directory"
+    mode: "0700"
+  with_items:
+    - "{{ waybar_directory }}"
+    - "{{ waybar_directory }}/scripts"
+
+- name: "Copy waybar configuration"
+  template:
+    src: "waybar/{{ item }}.j2"
+    dest: "{{ waybar_directory }}/{{ item }}"
+    mode: "0600"
+  with_items:
+    - "style.css"
+    - "config"
+    - "modules"
+
+- name: "Copy waybar scripts"
+  template:
+    src: "waybar/scripts/{{ item }}.j2"
+    dest: "{{ waybar_directory }}/scripts/{{ item }}"
+    mode: "0700"
+  with_items:
+    - "brightness.sh"
+    - "weather.py"
+    - "weather.sh"

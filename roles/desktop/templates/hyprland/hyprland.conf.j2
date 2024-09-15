@@ -37,6 +37,9 @@ $menu = rofi -show drun -modi drun,filebrowser,run,window
 # Autostart necessary processes (like notifications daemons, status bars, etc.)
 # Or execute your favorite apps at launch like this:
 
+exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
 exec-once = hyprpaper
 exec-once = hypridle
 exec-once = waybar
@@ -44,20 +47,22 @@ exec-once = waybar
 exec-once = keepassxc
 exec-once = slack
 exec-once = caffeine
-exec-once = dunst
-exec-once = copyq
+exec-once = swaync
+# exec-once = copyq
 exec-once = udiskie -ans
 exec-once = mullvad-vpn
 exec-once = blueman-applet
 exec-once = solaar -w hide
-exec-once = nm-applet
+exec-once = nm-applet --indicator
 exec-once = tuxedo-control-center --tray
 exec-once = gammastep-indicator
 # Always delete previously existing file since it might be from other user
 # If this causes problems, it is possible to use visudo
 exec-once = sudo rm /tmp/osui.sock &> /dev/null || true && opensnitch-ui --background
 exec-once = signal-desktop --start-in-tray
-exec-once = copyq --start-server
+# exec-once = copyq --start-server
+exec-once = wl-paste --type text --watch cliphist store 
+exec-once = wl-paste --type image --watch cliphist store
 
 exec-once = {{ default_browser }}
 
@@ -72,6 +77,19 @@ env = XCURSOR_SIZE,24
 env = HYPRCURSOR_SIZE,24
 env = HYPRCURSOR_THEME,rose-pine-hyprcursor
 
+env = CLUTTER_BACKEND,wayland
+env = GDK_BACKEND,wayland,x11
+env = QT_AUTO_SCREEN_SCALE_FACTOR,1
+env = QT_QPA_PLATFORM,wayland;xcb
+env = QT_QPA_PLATFORMTHEME,qt5ct
+env = QT_SCALE_FACTOR,1
+env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+env = XDG_CURRENT_DESKTOP,Hyprland
+env = XDG_SESSION_DESKTOP,Hyprland
+env = XDG_SESSION_TYPE,wayland
+
+# firefox
+env = MOZ_ENABLE_WAYLAND,1
 
 #####################
 ### LOOK AND FEEL ###
@@ -87,8 +105,8 @@ general {
     border_size = 2
 
     # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-    col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-    col.inactive_border = rgba(595959aa)
+    col.active_border = $color6 $color3 90deg
+    col.inactive_border = rgba(000000A0)
 
     # Set to true enable resizing windows by clicking and dragging on borders and gaps
     resize_on_border = false
@@ -105,7 +123,10 @@ decoration {
 
     # Change transparency of focused and unfocused windows
     active_opacity = 1.0
-    inactive_opacity = 1.0
+    inactive_opacity = 0.9
+
+    dim_inactive = true
+    dim_strength = 0.35
 
     drop_shadow = true
     shadow_range = 4
@@ -115,10 +136,11 @@ decoration {
     # https://wiki.hyprland.org/Configuring/Variables/#blur
     blur {
         enabled = true
-        size = 3
-        passes = 1
+        size = 5
+        passes = 3
 
-        vibrancy = 0.1696
+        ignore_opacity = true
+        new_optimizations = true
     }
 }
 
@@ -152,7 +174,11 @@ master {
 # https://wiki.hyprland.org/Configuring/Variables/#misc
 misc {
     force_default_wallpaper = -1 # Set to 0 or 1 to disable the anime mascot wallpapers
-    disable_hyprland_logo = false # If true disables the random hyprland logo / anime girl background. :(
+    disable_hyprland_logo = true # If true disables the random hyprland logo / anime girl background. :(
+    disable_splash_rendering = true
+    mouse_move_enables_dpms = true
+    vrr = 2
+
 }
 
 
@@ -175,7 +201,10 @@ input {
     repeat_rate = 25
     repeat_delay = 200
 
+    numlock_by_default = 1
+
     touchpad {
+        disable_while_typing = 1
         natural_scroll = false
     }
 }
@@ -194,8 +223,12 @@ device {
 
 binds {
     workspace_back_and_forth = true
+    allow_workspace_cycles = true
 }
 
+xwayland {
+    force_zero_scaling = true
+}
 
 ###################
 ### KEYBINDINGS ###
@@ -211,12 +244,13 @@ bind = $mainMod, F, fullscreen
 bind = $mainMod SHIFT, O, togglefloating,
 bindr = $mainMod, D, exec, pkill rofi || $menu
 bind = $mainMod SHIFT, J, togglesplit, # dwindle
-bind = $mainMod, GRAVE, exec, dunstctl set-paused toggle
+bind = $mainMod, GRAVE, exec, swaync-client -t -sw # swayNC panel
 bind = $mainMod, Tab, cyclenext, prev
 bind = $mainMod SHIFT, R, exec, hyprctl reload
 bind = , Print, exec, hyprshot -m region --clipboard-only
 bind = $mainMod, Print, exec, hyprshot -m region
-
+bind = $mainMod SHIFT, P, exec, {{ hyprland_directory }}/scripts/wlogout.sh
+bind = $mainMod, C, exec, {{ hyprland_directory }}/scripts/clip_manager.sh
 
 # Move focus with mainMod + arrow keys
 bind = $mainMod, LEFT, movefocus, l
@@ -253,17 +287,15 @@ bind = $mainMod, mouse_up, workspace, e-1
 bindm = $mainMod, mouse:272, movewindow
 bindm = $mainMod, mouse:273, resizewindow
 
-bind = $mainMod SHIFT, P, exec, {{ hyprland_directory }}/scripts/wlogout.sh
-
 # Function keys
-bindel = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
-bindel = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindel = , XF86AudioRaiseVolume, exec, {{ hyprland_directory }}/scripts/volume_control.sh --inc
+bindel = , XF86AudioLowerVolume, exec, {{ hyprland_directory }}/scripts/volume_control.sh --dec
+bindl = , XF86AudioMute, exec, {{ hyprland_directory }}/scripts/volume_control.sh --toggle
 bind = ,XF86MonBrightnessUp, exec, xbacklight -inc 10
 bind = ,XF86MonBrightnessDown, exec, xbacklight -dec 10
-bind = ,XF86AudioPlay, exec, playerctl play-pause
-bind = ,XF86AudioNext, exec, playerctl next
-bind = ,XF86AudioPrev, exec, playerctl previous
+bind = ,XF86AudioPlay, exec, {{ hyprland_directory }}/scripts/media_control.sh --pause
+bind = ,XF86AudioNext, exec, {{ hyprland_directory }}/scripts/media_control.sh --nxt
+bind = ,XF86AudioPrev, exec, {{ hyprland_directory }}/scripts/media_control.sh --prv
 
 bind = $mainMod SHIFT, S, submap, resize # switch to a submap called resize
 submap = resize # start a submap called "resize"
@@ -304,19 +336,32 @@ submap = reset
 # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
 
 {% for application in scratchpad_applications %}
-windowrulev2 = float, class:({{ application.name }})
-windowrulev2 = workspace special:{{ application.name | lower }}, class:({{ application.name }})
+windowrulev2 = float, class:{{ application.name }}
+windowrulev2 = workspace special:{{ application.name | lower }}, class:{{ application.name }}
 bind = $mainMod, {{ application.keybinding }}, exec, {{ hyprland_directory }}/scripts/special-launcher.sh {{ application.name | lower }} {{ application.launcher }}
 
 {% endfor %}
 
 windowrulev2 = float, title:^(Calculator)$
-windowrulev2 = float, title:^(rofi)
+windowrulev2 = float, class:^(nm-connection-editor)$
+windowrulev2 = float, class:^(blueman-manager)$
+windowrulev2 = float, class:pavucontrol
 
 windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
 
 layerrule = blur, logout_dialog
-windowrule = float, rofi
+
+# Rofi
+windowrulev2 = float, class:^(rofi)
+windowrulev2 = opacity 0.9 0.6, class:^(rofi)
 layerrule = blur, rofi
 layerrule = unset, rofi
 layerrule = ignorezero, rofi
+
+# Swaync
+layerrule = blur, swaync-control-center
+layerrule = blur, swaync-notification-window
+layerrule = ignorezero, swaync-control-center
+layerrule = ignorezero, swaync-notification-window
+layerrule = ignorealpha 0.5, swaync-control-center
+layerrule = ignorealpha 0.5, swaync-notification-window

@@ -50,3 +50,6 @@
 - import_tasks: "terminal.yml"
 - import_tasks: "window.yml"
 - import_tasks: "hyprland.yml"
+- import_tasks: "wlogout.yml"
+- import_tasks: "swaync.yml"
+- import_tasks: "waybar.yml"
