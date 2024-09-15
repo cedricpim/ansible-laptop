@@ -29,8 +29,11 @@
 
 - include_role:
     name: "yay"
-  vars:
-    pkg_name: "hyprshot"
+  with_items:
+    - "hyprshot"
+    - "pywal-git"
+  loop_control:
+    loop_var: "pkg_name"
 
 - name: "Create folder for Hyprland configuration and scripts"
   file:
@@ -40,6 +43,17 @@
   with_items:
     - "{{ hyprland_directory }}"
     - "{{ hyprland_directory }}/scripts"
+    - "{{ wal_directory }}"
+    - "{{ wal_directory }}/templates"
+
+- name: "Add Hyprland template for wal"
+  template:
+    src: "wal/colors-hyprland.conf.j2"
+    dest: "{{ wal_directory }}/templates/colors-hyprland.conf"
+    mode: "0600"
+
+- name: "Set colors"
+  command: "wal -i {{ wallpaper_directory }}/wallpaper.jpg -s -t"
 
 - name: "Copy Hyprland configurations"
   template:

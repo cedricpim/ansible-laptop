@@ -68,3 +68,5 @@ rofi_colorscheme:
 hyprland_directory: "~/.config/hypr"
 gammastep_directory: "~/.config/gammastep"
 wlogout_directory: "~/.config/wlogout"
+wal_directory: "~/.config/wal"
+wal_cache_directory: "~/.cache/wal"
