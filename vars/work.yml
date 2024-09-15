@@ -11,7 +11,7 @@ wallpaper: "your-wallpaper.jpg"
 
 workspaces:
   - { key: "1",  keybinding: "1",  name: "", assigned: "Slack" }
-  - { key: "2",  keybinding: "2",  name: "", assigned: "firefox" }
+  - { key: "2",  keybinding: "2",  name: "", assigned: "firefox-developer-edition" }
   - { key: "3",  keybinding: "3",  name: "" }
   - { key: "4",  keybinding: "4",  name: "" }
   - { key: "5",  keybinding: "5",  name: "5" }
