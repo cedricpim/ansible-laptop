@@ -15,6 +15,7 @@
       - "gammastep"
       - "xdg-desktop-portal-hyprland"
       - "cliphist"
+      - "qt5ct"
     state: "present"
   become: yes
 
