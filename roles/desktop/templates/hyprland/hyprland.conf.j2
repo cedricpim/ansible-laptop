@@ -46,9 +46,7 @@ exec-once = waybar
 
 exec-once = keepassxc
 exec-once = slack
-exec-once = caffeine
 exec-once = swaync
-# exec-once = copyq
 exec-once = udiskie -ans
 exec-once = mullvad-vpn
 exec-once = blueman-applet
@@ -60,8 +58,7 @@ exec-once = gammastep-indicator
 # If this causes problems, it is possible to use visudo
 exec-once = sudo rm /tmp/osui.sock &> /dev/null || true && opensnitch-ui --background
 exec-once = signal-desktop --start-in-tray
-# exec-once = copyq --start-server
-exec-once = wl-paste --type text --watch cliphist store 
+exec-once = wl-paste --type text --watch cliphist store
 exec-once = wl-paste --type image --watch cliphist store
 
 exec-once = {{ default_browser }}
