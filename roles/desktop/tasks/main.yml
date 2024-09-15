@@ -53,3 +53,4 @@
 - import_tasks: "wlogout.yml"
 - import_tasks: "swaync.yml"
 - import_tasks: "waybar.yml"
+- import_tasks: "rofi.yml"

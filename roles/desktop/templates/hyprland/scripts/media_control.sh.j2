@@ -7,29 +7,33 @@ PATH=$PATH:/usr/local/bin
 
 # Playerctl
 
-music_icon="{{ swaync_directory }}/icons/music.png"
+music_icon="$HOME/.config/swaync/icons/music.png"
 
 # Play the next track
 play_next() {
   playerctl next
+  sleep 0.1
   show_music_notification
 }
 
 # Play the previous track
 play_previous() {
   playerctl previous
+  sleep 0.1
   show_music_notification
 }
 
 # Toggle play/pause
 toggle_play_pause() {
   playerctl play-pause
+  sleep 0.1
   show_music_notification
 }
 
 # Stop playback
 stop_playback() {
   playerctl stop
+  sleep 0.1
   notify-send -e -u low -i "$music_icon" "Playback Stopped"
 }
 

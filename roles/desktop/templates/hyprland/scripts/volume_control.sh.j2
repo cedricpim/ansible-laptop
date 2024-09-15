@@ -7,13 +7,13 @@ PATH=$PATH:/usr/local/bin
 
 # Scripts for volume controls for audio and mic 
 
-iDIR="{{ swaync_directory }}/icons"
+iDIR="$HOME/.config/swaync/icons"
 
 # Get Volume
 get_volume() {
-  dvolume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d':' -f2)
-  volume=$(echo "$((dvolume * 100))" | sed -E 's#([^\.]*).*#\1#')
-  if [[ "$volume" -eq "0" ]]; then
+  dvolume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d' ' -f2)
+  volume=$(echo "$dvolume 100" | awk '{print $1 * $2}')
+  if [[ "$(wpctl get-volume @DEFAULT_AUDIO_SINK@)" =~ "MUTED" ]] || [[ "$volume" -eq "0" ]]; then
     echo "Muted"
   else
     echo "$volume%"
@@ -45,7 +45,7 @@ notify_user() {
 
 # Increase Volume
 inc_volume() {
-  if [ "$(wpctl get-volume @DEFAULT_AUDIO_SINK@)" =~ "MUTED" ]; then
+  if [[ "$(wpctl get-volume @DEFAULT_AUDIO_SINK@)" =~ "MUTED" ]]; then
     wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && notify_user
   fi
   wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && notify_user
@@ -53,7 +53,7 @@ inc_volume() {
 
 # Decrease Volume
 dec_volume() {
-  if [ "$(wpctl get-volume @DEFAULT_AUDIO_SINK@)" =~ "MUTED" ]; then
+  if [[ "$(wpctl get-volume @DEFAULT_AUDIO_SINK@)" =~ "MUTED" ]]; then
     wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && notify_user
   fi
   wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && notify_user
@@ -61,7 +61,7 @@ dec_volume() {
 
 # Toggle Mute
 toggle_mute() {
-  if [ "$(wpctl get-volume @DEFAULT_AUDIO_SINK@)" =~ "MUTED" ]; then
+  if [[ "$(wpctl get-volume @DEFAULT_AUDIO_SINK@)" =~ "MUTED" ]]; then
     wpctl set-mute @DEFAULT_AUDIO_SINK@ 0 && notify-send -e -u low -i "$(get_icon)" "Volume Switched ON"
   else
     wpctl set-mute @DEFAULT_AUDIO_SINK@ 1 && notify-send -e -u low -i "$iDIR/volume-mute.png" "Volume Switched OFF"
@@ -70,9 +70,9 @@ toggle_mute() {
 
 # Get Microphone Volume
 get_mic_volume() {
-  dvolume=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | cut -d':' -f2)
-  volume=$(echo "$((dvolume * 100))" | sed -E 's#([^\.]*).*#\1#')
-  if [[ "$volume" -eq "0" ]]; then
+  dvolume=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | cut -d' ' -f2)
+  volume=$(echo "$dvolume 100" | awk '{print $1 * $2}')
+  if [[ "$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)" =~ "MUTED" ]] || [[ "$volume" -eq "0" ]]; then
     echo "Muted"
   else
     echo "$volume%"
@@ -98,7 +98,7 @@ notify_mic_user() {
 
 # Increase MIC Volume
 inc_mic_volume() {
-  if [ "$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)" =~ "MUTED" ]; then
+  if [[ "$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)" =~ "MUTED" ]]; then
     wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0 && notify_mic_user
   fi
   wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+ && notify_mic_user
@@ -106,7 +106,7 @@ inc_mic_volume() {
 
 # Decrease MIC Volume
 dec_mic_volume() {
-  if [ "$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)" =~ "MUTED" ]; then
+  if [[ "$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)" =~ "MUTED" ]]; then
     wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0 && notify_mic_user
   fi
   wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%- && notify_mic_user
@@ -114,7 +114,7 @@ dec_mic_volume() {
 
 # Toggle Mic
 toggle_mic() {
-  if [ "$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)" =~ "MUTED" ]; then
+  if [[ "$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)" =~ "MUTED" ]]; then
     wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 0 && notify-send -e -u low -i "$iDIR/microphone.png" "Microphone Switched ON"
   else
     wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1 && notify-send -e -u low -i "$iDIR/microphone-mute.png" "Microphone Switched OFF"

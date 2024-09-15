@@ -3,8 +3,6 @@
   pacman:
     name:
       - "i3-gaps"
-      - "rofi"
-      - "rofi-calc"
       - "xclip"
       - "xcb-util-xrm"
     state: "present"
@@ -33,25 +31,6 @@
     - { name: "audio.sh", mode: "0700" }
     - { name: "bb.sh", mode: "0700" }
     - { name: "monitor-handler.sh", mode: "0700" }
-
-- name: "Create folder for rofi configuration and themes"
-  file:
-    path: "{{ item }}"
-    state: "directory"
-    mode: "0700"
-  with_items:
-    - "{{ rofi_directory }}"
-    - "{{ rofi_directory }}/themes"
-
-- name: "Copy rofi configurations"
-  template:
-    src: "rofi/{{ item }}.j2"
-    dest: "{{ rofi_directory }}/{{ item }}"
-    mode: "0600"
-  with_items:
-    - "config.rasi"
-    - "themes/default.rasi"
-    - "themes/clipboard.rasi"
 
 - name: "Create folder for polybar configuration"
   file:

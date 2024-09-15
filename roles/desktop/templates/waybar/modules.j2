@@ -229,14 +229,6 @@
     }
   },
 
-  "actions":  {
-    "on-click-right": "mode",
-    "on-click-forward": "tz_up",
-    "on-click-backward": "tz_down",
-    "on-scroll-up": "shift_up",
-    "on-scroll-down": "shift_down"
-  },
-
   "cpu": {
     "format": "{usage}% 󰍛",
     "interval": 1,
@@ -291,19 +283,6 @@
     }
   },
 
-  "keyboard-state": {
-    //"numlock": true,
-    "capslock": true,
-    "format": {
-      "numlock": "N {icon}",
-      "capslock":"󰪛 {icon}",
-    },
-    "format-icons": {
-      "locked": "",
-      "unlocked": ""
-    },
-  },
-
   "memory": {
     "interval": 10,
     "format": "{used:0.1f}G 󰾆",
@@ -311,7 +290,7 @@
     "format-alt-click": "click",
     "tooltip": true,
     "tooltip-format": "{used:0.1f}GB/{total:0.1f}G",
-    "on-click": "kitty --title btop sh -c 'btop'"
+    "on-click": "alacritty --title btop -e btop"
   },
 
   "mpris": {
@@ -417,7 +396,7 @@
     "format-critical": "{temperatureC}°C {icon}",
     "format": "{temperatureC}°C {icon}",
     "format-icons": ["󰈸"],
-    "on-click": "kitty --title nvtop sh -c 'nvtop'"
+    "on-click": "alacritty --title nvtop -e nvtop"
   },
 
   "tray": {
@@ -486,15 +465,6 @@
     "on-click": "sleep 0.1 && swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true,
-  },
-
-  // NOTE:! This is only for Arch and Arch Based Distros
-  "custom/updater":{
-    "format": " {}",
-    "exec": "checkupdates | wc -l",
-    "exec-if": "[[ $(checkupdates | wc -l) ]]",
-    "interval": 15,
-    "on-click": "kitty -T update paru -Syu || yay -Syu && notify-send 'The system has been updated'",
   },
 
   "custom/weather": {
@@ -594,7 +564,7 @@
     "format-alt-click": "click",
     "tooltip": true,
     "tooltip-format": "{used:0.1f}GB/{total:0.1f}G",
-    "on-click": "kitty --title btop sh -c 'btop'",
+    "on-click": "alacritty --title btop -e btop",
   },
 
   "pulseaudio#vertical": {
@@ -643,14 +613,6 @@
     "format-critical": "{icon}\n{temperatureC}°C",
     "format": " {icon}",
     "format-icons": ["󰈸"],
-    "on-click": "kitty --title nvtop sh -c 'nvtop'"
+    "on-click": "alacritty --title nvtop -e nvtop"
   },
-
-  "custom/power_vertical": {
-    "format": "⏻",
-    "exec": "echo ; echo 󰟡 power // blur",
-    "on-click": "{{ hyprland_directory }}/scripts/wlogout.sh",
-    "interval" : 86400, // once every day
-    "tooltip": true,
-  }
 }

@@ -1,0 +1,27 @@
+---
+- name: "Install Rofi"
+  pacman:
+    name:
+      - "rofi"
+      - "rofi-calc"
+    state: "present"
+  become: yes
+
+- name: "Create folder for rofi configuration and themes"
+  file:
+    path: "{{ item }}"
+    state: "directory"
+    mode: "0700"
+  with_items:
+    - "{{ rofi_directory }}"
+    - "{{ rofi_directory }}/themes"
+
+- name: "Copy rofi configurations"
+  template:
+    src: "rofi/{{ item }}.j2"
+    dest: "{{ rofi_directory }}/{{ item }}"
+    mode: "0600"
+  with_items:
+    - "config.rasi"
+    - "themes/default.rasi"
+    - "themes/clipboard.rasi"
