@@ -12,16 +12,16 @@ syncthing_port: "8384"
 wallpaper: "landscape.jpg"
 
 workspaces:
-  - { key: "1", keybinding: "1", name: "", assigned: "Slack" }
-  - { key: "2", keybinding: "2", name: "", assigned: "firefox" }
-  - { key: "3", keybinding: "3", name: "" }
-  - { key: "4", keybinding: "4", name: "4" }
-  - { key: "5", keybinding: "5", name: "5" }
-  - { key: "6", keybinding: "6", name: "6" }
-  - { key: "7", keybinding: "7", name: "7" }
-  - { key: "8", keybinding: "8", name: "8" }
-  - { key: "9", keybinding: "9", name: "9" }
-  - { key: "10", keybinding: "0", name: "10" }
+  - { key: "1", keybinding: "1", symbol: "", assigned: "Slack" }
+  - { key: "2", keybinding: "2", symbol: "", assigned: "firefox" }
+  - { key: "3", keybinding: "3", symbol: "" }
+  - { key: "4", keybinding: "4", symbol: "" }
+  - { key: "5", keybinding: "5", symbol: "V" }
+  - { key: "6", keybinding: "6", symbol: "VI" }
+  - { key: "7", keybinding: "7", symbol: "VII" }
+  - { key: "8", keybinding: "8", symbol: "VIII" }
+  - { key: "9", keybinding: "9", symbol: "IX" }
+  - { key: "10", keybinding: "0", symbol: "X" }
 
 startup_applications:
   - "sleep 3 && keepassxc"

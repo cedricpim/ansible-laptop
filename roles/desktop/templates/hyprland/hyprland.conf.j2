@@ -264,7 +264,6 @@ bind = $mainMod SHIFT, L, movewindow, r
 {% for workspace in workspaces %}
 bind = $mainMod, {{ workspace.keybinding }}, workspace, {{ workspace.key }}
 bind = $mainMod SHIFT, {{ workspace.keybinding }}, movetoworkspace, {{ workspace.key }}
-workspace = {{ workspace.key }}, defaultName:{{ workspace.name }}
 {% if workspace.assigned is defined %}
 windowrulev2 = workspace {{ workspace.key }} silent, class:^({{ workspace.assigned }})$
 {% endif %}

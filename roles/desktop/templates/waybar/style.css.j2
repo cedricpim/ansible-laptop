@@ -124,13 +124,12 @@ tooltip label {
 #mode,
 #mpris,
 #network,
-#pulseaudio,
-#pulseaudio-slider,
+#wireplumber,
+#wireplumber-slider,
 #taskbar,
 #temperature,
 #tray,
 #window,
-#wireplumber,
 #workspaces,
 #custom-backlight,
 #custom-cava_mviz,
@@ -161,6 +160,10 @@ tooltip label {
   padding-bottom: 3px;
   padding-right: 6px;
   padding-left: 6px;
+}
+
+#custom-power {
+  padding-right: 0px;
 }
 
 #temperature.critical {
@@ -197,7 +200,7 @@ tooltip label {
   animation-direction: alternate;
 }
 
-#pulseaudio-slider slider {
+#wireplumber-slider slider {
   min-width: 0px;
   min-height: 0px;
   opacity: 0;
@@ -206,13 +209,13 @@ tooltip label {
   box-shadow: none;
 }
 
-#pulseaudio-slider trough {
+#wireplumber-slider trough {
   min-width: 80px;
   min-height: 5px;
   border-radius: 5px;
 }
 
-#pulseaudio-slider highlight {
+#wireplumber-slider highlight {
   min-height: 10px;
   border-radius: 5px;
 }
