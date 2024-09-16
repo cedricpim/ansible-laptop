@@ -335,6 +335,8 @@ submap = reset
 {% for application in scratchpad_applications %}
 windowrulev2 = float, class:{{ application.name }}
 windowrulev2 = workspace special:{{ application.name | lower }}, class:{{ application.name }}
+windowrulev2 = size 50% 50%, class:{{ application.name }}
+windowrulev2 = center, class:{{ application.name }}
 bind = $mainMod, {{ application.keybinding }}, exec, {{ hyprland_directory }}/scripts/special-launcher.sh {{ application.name | lower }} {{ application.launcher }}
 
 {% endfor %}
@@ -343,6 +345,8 @@ windowrulev2 = float, title:^(Calculator)$
 windowrulev2 = float, class:^(nm-connection-editor)$
 windowrulev2 = float, class:^(blueman-manager)$
 windowrulev2 = float, class:pavucontrol
+windowrulev2 = size 50% 50%, class:pavucontrol
+windowrulev2 = center, class:pavucontrol
 
 windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
 
