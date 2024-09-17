@@ -28,13 +28,13 @@ startup_applications:
   - "xcompmgr" # Used for screensharing
 
 scratchpad_applications:
-  - { name: "todowork", keybinding: "T", launcher: "terminal" }
+  - { name: "todowork", keybinding: "T", launcher: "terminal", size: "80% 80%" }
   - { name: "yt", keybinding: "Y", launcher: "terminal" }
   - { name: "ikhal", keybinding: "A", launcher: "terminal" }
-  - { name: "neomutt", keybinding: "E", launcher: "terminal" }
+  - { name: "neomutt", keybinding: "E", launcher: "terminal", size: "80% 80%" }
   - { name: "newsboat", keybinding: "N", launcher: "terminal" }
-  - { name: "Spotify", keybinding: "S", launcher: "spotify" }
-  - { name: "Signal", keybinding: "M", launcher: "signal-desktop" }
+  - { name: "Spotify", keybinding: "S", launcher: "spotify", size: "80% 80%" }
+  - { name: "Signal", keybinding: "M", launcher: "signal-desktop", class: "[Ss]ignal", size: "80% 80%" }
   - { name: "pilorama", keybinding: "P", launcher: "pilorama" }
 
 colorscheme_name: "nord"

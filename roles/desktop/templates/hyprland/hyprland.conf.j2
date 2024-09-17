@@ -315,12 +315,15 @@ submap = displays
 bind = , E, exec, hyprctl keyword monitor DP-1, enable
 bind = , E, exec, hyprctl keyword monitor eDP-1, disable
 bind = , E, submap, reset
+bind = , E, exec, hyprctl reload
 bind = , A, exec, hyprctl keyword monitor DP-1, enable
 bind = , A, exec, hyprctl keyword monitor eDP-1, enable
 bind = , A, submap, reset
+bind = , A, exec, hyprctl reload
 bind = , I, exec, hyprctl keyword monitor eDP-1, enable
 bind = , I, exec, hyprctl keyword monitor DP-1, disable
 bind = , I, submap, reset
+bind = , I, exec, hyprctl reload
 
 bind = , escape, submap, reset
 submap = reset
@@ -334,10 +337,10 @@ submap = reset
 # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
 
 {% for application in scratchpad_applications %}
-windowrulev2 = float, class:{{ application.name }}
-windowrulev2 = workspace special:{{ application.name | lower }}, class:{{ application.name }}
-windowrulev2 = size 50% 50%, class:{{ application.name }}
-windowrulev2 = center, class:{{ application.name }}
+windowrulev2 = float, class:{{ application.class | default(application.name) }}
+windowrulev2 = workspace special:{{ application.name | lower }}, class:{{ application.class | default(application.name) }}
+windowrulev2 = size {{ application.size | default("50% 50%") }}, class:{{ application.class | default(application.name) }}
+windowrulev2 = center, class:{{ application.class | default(application.name) }}
 bind = $mainMod, {{ application.keybinding }}, exec, {{ hyprland_directory }}/scripts/special-launcher.sh {{ application.name | lower }} {{ application.launcher }}
 
 {% endfor %}

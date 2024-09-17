@@ -29,13 +29,13 @@ startup_applications:
   - "sleep 3 && firefox"
 
 scratchpad_applications:
-  - { name: "todo", keybinding: "T", launcher: "terminal" }
+  - { name: "todo", keybinding: "T", launcher: "terminal", size: "80% 80%" }
   - { name: "yt", keybinding: "Y", launcher: "terminal" }
   - { name: "ikhal", keybinding: "A", launcher: "terminal" }
-  - { name: "neomutt", keybinding: "E", launcher: "terminal" }
+  - { name: "neomutt", keybinding: "E", launcher: "terminal", size: "80% 80%" }
   - { name: "newsboat", keybinding: "N", launcher: "terminal" }
-  - { name: "Spotify", keybinding: "S", launcher: "spotify" }
-  - { name: "Signal", keybinding: "M", launcher: "signal-desktop" }
+  - { name: "Spotify", keybinding: "S", launcher: "spotify", size: "80% 80%" }
+  - { name: "Signal", keybinding: "M", launcher: "signal-desktop", class: "[Ss]ignal", size: "80% 80%" }
   - { name: "pilorama", keybinding: "P", launcher: "pilorama" }
 
 colorscheme_name: "catppuccin-mocha"
