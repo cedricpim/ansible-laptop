@@ -20,6 +20,11 @@
     dest: "{{ zsh_directory }}/.zpreztorc"
     mode: "0600"
 
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "oh-my-posh"
+
 - name: "Create folder for zsh configuration files"
   file:
     path: "{{ item }}"
@@ -34,12 +39,6 @@
     dest: "/etc/zsh/zshenv"
     mode: "0644"
   become: yes
-
-- name: "Copy p10k configuration file"
-  template:
-    src: "p10k.zsh.j2"
-    dest: "{{ zsh_directory }}/p10k.zsh"
-    mode: "0600"
 
 - name: "Copy main zsh configuration files"
   template:
