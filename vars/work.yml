@@ -37,7 +37,7 @@ scratchpad_applications:
   - { name: "Signal", keybinding: "M", launcher: "signal-desktop", class: "[Ss]ignal", size: "80% 80%" }
   - { name: "pilorama", keybinding: "P", launcher: "pilorama" }
 
-colorscheme_name: "nord"
+colorscheme_name: "wal"
 
 colorscheme:
   foreground: "#D8DEE9"
