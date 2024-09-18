@@ -64,3 +64,5 @@ fi
 [ -f /opt/asdf-vm/asdf.sh ] && source /opt/asdf-vm/asdf.sh
 
 eval "$(oh-my-posh init zsh --config {{ prompt_theme_directory }}/{{ prompt_theme }})"
+
+source {{ wal_cache_directory }}/colors-tty.sh
