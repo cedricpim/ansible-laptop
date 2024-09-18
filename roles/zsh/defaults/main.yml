@@ -5,7 +5,6 @@ terminal_configuration: "~/.config/alacritty/alacritty.toml"
 terminal_term: "alacritty"
 prompt_theme_directory: "/usr/share/oh-my-posh/themes"
 prompt_theme: "emodipt-extend.omp.json"
-wal_cache_directory: "~/.cache/wal"
 
 gnupg_directory: "~/.local/share/gnupg"
 

@@ -8,5 +8,4 @@ wiki: "~/.config/wiki"
 colorscheme_name: "solarized"
 background_color: "dark"
 colorscheme_style: ""
-
-dpi: 144
+wal_cache_directory: "~/.cache/wal"

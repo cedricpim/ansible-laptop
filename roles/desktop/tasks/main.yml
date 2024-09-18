@@ -1,12 +1,8 @@
 ---
 - include_role:
     name: "yay"
-  with_items:
-    - "caffeine-ng"
-    - "flameshot"
-    - "yewtube"
-  loop_control:
-    loop_var: "pkg_name"
+  vars:
+    pkg_name: "yewtube"
 
 - name: "Install feh"
   pacman:
@@ -25,15 +21,6 @@
     dest: "{{ wallpaper_directory }}/wallpaper{{ wallpaper | splitext | last }}"
     mode: "0600"
 
-- name: "Copy Xprofile configuration"
-  template:
-    src: "{{ item }}.j2"
-    dest: "~/.{{ item }}"
-    mode: "0600"
-  with_items:
-    - "xprofile"
-    - "Xresources"
-
 - name: "Install Media Player related packages"
   pacman:
     name:
@@ -42,13 +29,36 @@
     state: "present"
   become: yes
 
-- import_tasks: "display.yml"
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "pywal-git"
+
+- name: "Create folder for Wal templates"
+  file:
+    path: "{{ item }}"
+    state: "directory"
+    mode: "0700"
+  with_items:
+    - "{{ wal_directory }}"
+    - "{{ wal_directory }}/templates"
+
+- name: "Add Hyprland template for wal"
+  template:
+    src: "wal/{{ item }}.j2"
+    dest: "{{ wal_directory }}/templates/{{ item }}"
+    mode: "0600"
+  with_items:
+    - "colors-hyprland.conf"
+    - "colors-alacritty.toml"
+
+- name: "Set colors"
+  command: "wal -i {{ wallpaper_directory }}/wallpaper.jpg"
+
 - import_tasks: "gammastep.yml"
 - import_tasks: "fonts.yml"
 - import_tasks: "file.yml"
-- import_tasks: "notifications.yml"
 - import_tasks: "terminal.yml"
-- import_tasks: "window.yml"
 - import_tasks: "hyprland.yml"
 - import_tasks: "wlogout.yml"
 - import_tasks: "swaync.yml"
