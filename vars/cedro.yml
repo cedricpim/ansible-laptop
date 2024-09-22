@@ -23,11 +23,6 @@ workspaces:
   - { key: "9", keybinding: "9", symbol: "IX" }
   - { key: "10", keybinding: "0", symbol: "X" }
 
-startup_applications:
-  - "sleep 3 && keepassxc"
-  - "slack"
-  - "sleep 3 && firefox"
-
 scratchpad_applications:
   - { name: "todo", keybinding: "T", launcher: "terminal", size: "80% 80%" }
   - { name: "yt", keybinding: "Y", launcher: "terminal" }

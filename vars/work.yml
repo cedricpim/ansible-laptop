@@ -11,12 +11,7 @@ wallpaper: "your-wallpaper.jpg"
 
 workspaces:
   - { key: "1", keybinding: "1", symbol: "", assigned: "Slack" }
-  - {
-      key: "2",
-      keybinding: "2",
-      symbol: "",
-      assigned: "firefox-developer-edition",
-    }
+  - { key: "2", keybinding: "2", symbol: "", assigned: "firefox-developer-edition" }
   - { key: "3", keybinding: "3", symbol: "" }
   - { key: "4", keybinding: "4", symbol: "" }
   - { key: "5", keybinding: "5", symbol: "V" }
@@ -25,12 +20,6 @@ workspaces:
   - { key: "8", keybinding: "8", symbol: "VIII" }
   - { key: "9", keybinding: "9", symbol: "IX" }
   - { key: "10", keybinding: "0", symbol: "" }
-
-startup_applications:
-  - "sleep 3 && keepassxc"
-  - "slack"
-  - "sleep 3 && firefox-developer-edition"
-  - "xcompmgr" # Used for screensharing
 
 scratchpad_applications:
   - { name: "todowork", keybinding: "T", launcher: "terminal", size: "80% 80%" }

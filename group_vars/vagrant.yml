@@ -97,47 +97,23 @@ ledger_exchange_key: "some_key"
 background_color: "dark"
 
 workspaces:
-  - { key: "$ws1",  keybinding: "1",  name: "1:", assigned: "Slack" }
-  - { key: "$ws2",  keybinding: "2",  name: "2:", assigned: "Firefox" }
-  - { key: "$ws3",  keybinding: "3",  name: "3:" }
-  - { key: "$ws4",  keybinding: "4",  name: "4" }
-  - { key: "$ws5",  keybinding: "5",  name: "5" }
-  - { key: "$ws6",  keybinding: "6",  name: "6" }
-  - { key: "$ws7",  keybinding: "7",  name: "7" }
-  - { key: "$ws8",  keybinding: "8",  name: "8" }
-  - { key: "$ws9",  keybinding: "9",  name: "9" }
-  - { key: "$ws10", keybinding: "10", name: "10" }
-
-startup_applications:
-  - "keepassxc"
-  - "slack"
-  - "firefox"
+  - { key: "1", keybinding: "1", symbol: "", assigned: "Slack" }
+  - { key: "2", keybinding: "2", symbol: "", assigned: "firefox" }
+  - { key: "3", keybinding: "3", symbol: "" }
+  - { key: "4", keybinding: "4", symbol: "" }
+  - { key: "5", keybinding: "5", symbol: "V" }
+  - { key: "6", keybinding: "6", symbol: "VI" }
+  - { key: "7", keybinding: "7", symbol: "VII" }
+  - { key: "8", keybinding: "8", symbol: "VIII" }
+  - { key: "9", keybinding: "9", symbol: "IX" }
+  - { key: "10", keybinding: "0", symbol: "X" }
 
 scratchpad_applications:
-  - { name: "todo",     keybinding: "t", launcher: "scratchpad-launcher.sh" }
-  - { name: "yt",       keybinding: "m", launcher: "scratchpad-launcher.sh" }
-  - { name: "rikhal",   keybinding: "a", launcher: "scratchpad-launcher.sh" }
-  - { name: "neomutt",  keybinding: "e", launcher: "scratchpad-launcher.zsh" }
-  - { name: "newsboat", keybinding: "n", launcher: "scratchpad-launcher.sh" }
-
-colorscheme:
-  foreground: "#FFFFFF"
-  background: "#000000"
-  cursor: "#90949A"
-  colors:
-    - { name: "darkblack",   value: "#393939" }
-    - { name: "darkred",     value: "#DA4939" }
-    - { name: "darkgreen",   value: "#9ACC79" }
-    - { name: "darkyellow",  value: "#D0D26B" }
-    - { name: "darkblue",    value: "#6D9CBE" }
-    - { name: "darkmagenta", value: "#9F5079" }
-    - { name: "darkcyan",    value: "#435D75" }
-    - { name: "darkwhite",   value: "#C2C2C2" }
-    - { name: "black",       value: "#474747" }
-    - { name: "red",         value: "#FF6C5C" }
-    - { name: "green",       value: "#8FB676" }
-    - { name: "yellow",      value: "#C8BC45" }
-    - { name: "blue",        value: "#D0D0FF" }
-    - { name: "magenta",     value: "#A761C2" }
-    - { name: "cyan",        value: "#6E98A4" }
-    - { name: "white",       value: "#C2C2C2" }
+  - { name: "todo", keybinding: "T", launcher: "terminal", size: "80% 80%" }
+  - { name: "yt", keybinding: "Y", launcher: "terminal" }
+  - { name: "ikhal", keybinding: "A", launcher: "terminal" }
+  - { name: "neomutt", keybinding: "E", launcher: "terminal", size: "80% 80%" }
+  - { name: "newsboat", keybinding: "N", launcher: "terminal" }
+  - { name: "Spotify", keybinding: "S", launcher: "spotify", size: "80% 80%" }
+  - { name: "Signal", keybinding: "M", launcher: "signal-desktop", class: "[Ss]ignal", size: "80% 80%" }
+  - { name: "pilorama", keybinding: "P", launcher: "pilorama" }
