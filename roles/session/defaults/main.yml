@@ -1,5 +1,4 @@
 ---
-lightdm_directory: "/etc/lightdm"
 pam_directory: "/etc/pam.d"
 
 sddm_directory: "/etc"
