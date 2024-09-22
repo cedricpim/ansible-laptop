@@ -11,7 +11,12 @@ wallpaper: "your-wallpaper.jpg"
 
 workspaces:
   - { key: "1", keybinding: "1", symbol: "", assigned: "Slack" }
-  - { key: "2", keybinding: "2", symbol: "", assigned: "firefox-developer-edition" }
+  - {
+      key: "2",
+      keybinding: "2",
+      symbol: "",
+      assigned: "firefox-developer-edition",
+    }
   - { key: "3", keybinding: "3", symbol: "" }
   - { key: "4", keybinding: "4", symbol: "" }
   - { key: "5", keybinding: "5", symbol: "V" }
@@ -34,7 +39,13 @@ scratchpad_applications:
   - { name: "neomutt", keybinding: "E", launcher: "terminal", size: "80% 80%" }
   - { name: "newsboat", keybinding: "N", launcher: "terminal" }
   - { name: "Spotify", keybinding: "S", launcher: "spotify", size: "80% 80%" }
-  - { name: "Signal", keybinding: "M", launcher: "signal-desktop", class: "[Ss]ignal", size: "80% 80%" }
+  - {
+      name: "Signal",
+      keybinding: "M",
+      launcher: "signal-desktop",
+      class: "[Ss]ignal",
+      size: "80% 80%",
+    }
   - { name: "pilorama", keybinding: "P", launcher: "pilorama" }
 
 colorscheme_name: "wal"
@@ -87,5 +98,4 @@ colorscheme:
 
 ### Encrypted
 
-i3_extra: "{{ vault_i3_extra }}"
 neomutt_mailbox_extra: "{{ vault_neomutt_mailbox_extra }}"

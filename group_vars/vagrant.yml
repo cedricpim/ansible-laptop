@@ -110,8 +110,6 @@ workspaces:
 
 startup_applications:
   - "keepassxc"
-  - "copyq"
-  - "dunst"
   - "slack"
   - "firefox"
 
