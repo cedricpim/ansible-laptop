@@ -11,6 +11,7 @@
       - "qt5-wayland"
       - "qt6-wayland"
       - "wayland"
+      - "xorg-xwayland"
       - "wl-clipboard"
       - "gammastep"
       - "xdg-desktop-portal-hyprland"
