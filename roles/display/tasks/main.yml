@@ -23,4 +23,3 @@
   become: yes
 
 - import_tasks: "geoclue.yml"
-- import_tasks: "xorg.yml"
