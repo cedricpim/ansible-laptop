@@ -1,6 +1,4 @@
 ---
-copyq_directory: "~/.config/copyq"
-
 firefox_profiles_file: "~/.mozilla/firefox"
 
 firefox_profile: "Path=[a-z1-9]{8}.default"

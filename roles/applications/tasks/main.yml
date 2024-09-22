@@ -18,7 +18,6 @@
   become: yes
 
 - import_tasks: "syncthing.yml"
-- import_tasks: "copyq.yml"
 - import_tasks: "firefox.yml"
 - import_tasks: "opensnitch.yml"
 
