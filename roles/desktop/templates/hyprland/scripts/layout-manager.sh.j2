@@ -1,0 +1,65 @@
+#!/usr/bin/env sh
+set -euo pipefail
+IFS=$'\n\t'
+PATH=$PATH:/usr/local/bin
+
+{{ ansible_managed | comment }}
+
+INTERNAL_MONITOR_ON="eDP-1,enable,auto,1.5"
+INTERNAL_MONITOR_OFF="eDP-1,disable"
+EXTERNAL_MONITOR_ON="DP-2,enable"
+EXTERNAL_MONITOR_OFF="DP-2,disable"
+
+external_monitors_count() {
+  hyprctl monitors all -j | jq '[.[] | select(.name | startswith("eDP-") | not)] | length'
+}
+
+toggle_monitor() {
+  hyprctl keyword monitor "$1" > /dev/null 2>&1
+}
+
+on_monitor_layout() {
+  touch .layout.lock
+  case $1 in
+    *internal)
+      toggle_monitor $INTERNAL_MONITOR_ON
+      toggle_monitor $EXTERNAL_MONITOR_OFF
+      ;;
+    *external)
+      toggle_monitor $EXTERNAL_MONITOR_ON
+      toggle_monitor $INTERNAL_MONITOR_OFF
+      ;;
+    *multiple)
+      toggle_monitor $EXTERNAL_MONITOR_ON
+      toggle_monitor $INTERNAL_MONITOR_ON
+      ;;
+  esac
+  hyprctl dispatch event reset
+}
+
+on_monitor_added() {
+  if [[ ! -f .layout.lock ]] && [[ $(external_monitors_count) > 0 ]]; then
+    toggle_monitor $INTERNAL_MONITOR_OFF
+  fi
+}
+
+on_monitor_removal() {
+  if [[ $(external_monitors_count) = 0 ]]; then
+    toggle_monitor $INTERNAL_MONITOR_ON
+  fi
+}
+
+on_monitor_layout_reset() {
+  rm .layout.lock > /dev/null 2>&1
+}
+
+handle() {
+  case $1 in
+    *monitorlayout*) on_monitor_layout "$1";;
+    monitoraddedv2*) on_monitor_added "$1";;
+    monitorremoved*) on_monitor_removal "$1";;
+    *reset*) on_monitor_layout_reset;;
+  esac
+}
+
+socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read -r line; do handle "$line"; done

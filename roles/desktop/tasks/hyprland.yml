@@ -16,6 +16,8 @@
       - "xdg-desktop-portal-hyprland"
       - "cliphist"
       - "qt5ct"
+      - "jq"
+      - "socat"
     state: "present"
   become: yes
 
@@ -59,8 +61,9 @@
     dest: "{{ hyprland_directory }}/scripts/{{ item }}"
     mode: "0700"
   with_items:
-    - "clip_manager.sh"
-    - "media_control.sh"
+    - "clip-manager.sh"
+    - "layout-manager.sh"
+    - "media-control.sh"
     - "special-launcher.sh"
-    - "volume_control.sh"
+    - "volume-control.sh"
     - "wlogout.sh"

@@ -61,6 +61,7 @@ exec-once = signal-desktop --start-in-tray
 exec-once = wl-paste --type text --watch cliphist store
 exec-once = wl-paste --type image --watch cliphist store
 
+exec-once = {{ hyprland_directory }}/scripts/layout-manager.sh
 exec-once = {{ default_browser }}
 
 
@@ -246,7 +247,7 @@ bind = $mainMod SHIFT, R, exec, hyprctl reload
 bind = , Print, exec, hyprshot -m region --clipboard-only
 bind = $mainMod, Print, exec, hyprshot -m region
 bind = $mainMod SHIFT, P, exec, {{ hyprland_directory }}/scripts/wlogout.sh
-bindr = $mainMod, C, exec, pkill rofi || {{ hyprland_directory }}/scripts/clip_manager.sh
+bindr = $mainMod, C, exec, pkill rofi || {{ hyprland_directory }}/scripts/clip-manager.sh
 
 # Move focus with mainMod + arrow keys
 bind = $mainMod, LEFT, movefocus, l
@@ -283,14 +284,14 @@ bindm = $mainMod, mouse:272, movewindow
 bindm = $mainMod, mouse:273, resizewindow
 
 # Function keys
-bindel = , XF86AudioRaiseVolume, exec, {{ hyprland_directory }}/scripts/volume_control.sh --inc
-bindel = , XF86AudioLowerVolume, exec, {{ hyprland_directory }}/scripts/volume_control.sh --dec
-bindl = , XF86AudioMute, exec, {{ hyprland_directory }}/scripts/volume_control.sh --toggle
+bindel = , XF86AudioRaiseVolume, exec, {{ hyprland_directory }}/scripts/volume-control.sh --inc
+bindel = , XF86AudioLowerVolume, exec, {{ hyprland_directory }}/scripts/volume-control.sh --dec
+bindl = , XF86AudioMute, exec, {{ hyprland_directory }}/scripts/volume-control.sh --toggle
 bind = ,XF86MonBrightnessUp, exec, xbacklight -inc 10
 bind = ,XF86MonBrightnessDown, exec, xbacklight -dec 10
-bind = ,XF86AudioPlay, exec, {{ hyprland_directory }}/scripts/media_control.sh --pause
-bind = ,XF86AudioNext, exec, {{ hyprland_directory }}/scripts/media_control.sh --nxt
-bind = ,XF86AudioPrev, exec, {{ hyprland_directory }}/scripts/media_control.sh --prv
+bind = ,XF86AudioPlay, exec, {{ hyprland_directory }}/scripts/media-control.sh --pause
+bind = ,XF86AudioNext, exec, {{ hyprland_directory }}/scripts/media-control.sh --nxt
+bind = ,XF86AudioPrev, exec, {{ hyprland_directory }}/scripts/media-control.sh --prv
 
 bind = $mainMod SHIFT, S, submap, resize # switch to a submap called resize
 submap = resize # start a submap called "resize"
@@ -312,18 +313,12 @@ submap = reset # reset the submap, which will return to the global submap
 bind = $mainMod SHIFT, M, submap, displays
 submap = displays
 
-bind = , E, exec, hyprctl keyword monitor DP-1, enable
-bind = , E, exec, hyprctl keyword monitor eDP-1, disable
+bind = , E, event, monitorlayout external
 bind = , E, submap, reset
-bind = , E, exec, hyprctl reload
-bind = , M, exec, hyprctl keyword monitor DP-1, enable
-bind = , M, exec, hyprctl keyword monitor eDP-1, enable
+bind = , M, event, monitorlayout multiple
 bind = , M, submap, reset
-bind = , M, exec, hyprctl reload
-bind = , I, exec, hyprctl keyword monitor eDP-1, enable
-bind = , I, exec, hyprctl keyword monitor DP-1, disable
+bind = , I, event, monitorlayout internal
 bind = , I, submap, reset
-bind = , I, exec, hyprctl reload
 
 bind = , escape, submap, reset
 submap = reset
