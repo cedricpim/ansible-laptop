@@ -32,6 +32,7 @@ scratchpad_applications:
   - { name: "Spotify", keybinding: "S", launcher: "spotify", size: "80% 80%" }
   - { name: "Signal", keybinding: "M", launcher: "signal-desktop", class: "[Ss]ignal", size: "80% 80%" }
   - { name: "pilorama", keybinding: "P", launcher: "pilorama" }
+  - { name: "alacritty", keybinding: "O", size: "90% 90%" }
 
 colorscheme_name: "wal"
 

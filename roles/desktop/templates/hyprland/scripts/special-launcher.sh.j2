@@ -7,8 +7,10 @@ PATH=$PATH:/usr/local/bin
 
 hyprctl dispatch togglespecialworkspace $1
 
-if ! hyprctl clients | grep -i $1 >/dev/null; then
-  if [ "$2" == "terminal" ]; then
+if ! hyprctl clients | grep $1 >/dev/null; then
+  if [ "$1" == "alacritty" ]; then
+    alacritty --title "$1" --class "$1" &
+  elif [ "$2" == "terminal" ]; then
     alacritty --title "$1" --class "$1" -e "$1" &
   else
     ${@:2} &
