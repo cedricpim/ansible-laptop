@@ -16,3 +16,10 @@
     src: "gammastep/config.ini.j2"
     dest: "{{ gammastep_directory }}/config.ini"
     mode: "0600"
+
+- name: "Enable/start gammastep-indicator"
+  systemd:
+    name: "gammastep-indicator"
+    state: "started"
+    scope: "user"
+    enabled: yes
