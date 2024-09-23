@@ -9,7 +9,7 @@ if [[ "$TERM" == "{{ terminal_term }}" ]]; then
   }
 
   function original-color() {
-    grep colors.primary -A 2 {{ terminal_configuration }} | grep -m 1 $1 | sed -r "s/[^\"]*\"(.+)\"/\1/"
+    grep colors.primary -A 2 {{ wal_cache_directory }}/colors-alacritty.toml | grep -m 1 $1 | sed -r "s/[^\"]*\"(.+)\"/\1/"
   }
 
   function reset-colors() {
