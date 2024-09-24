@@ -68,3 +68,5 @@
     - "special-launcher.sh"
     - "volume-control.sh"
     - "wlogout.sh"
+
+- import_tasks: "hypr-plugins.yml"

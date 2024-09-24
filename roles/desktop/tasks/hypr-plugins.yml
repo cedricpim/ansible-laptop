@@ -1,0 +1,18 @@
+---
+- name: "Install hyprpm dependencies"
+  pacman:
+    name:
+      - "cmake"
+      - "meson"
+      - "cpio"
+    state: "present"
+  become: yes
+
+- name: "Update hyprpm"
+  command: "hyprpm update"
+
+- name: "Add Hy3"
+  command: "hyprpm add https://github.com/outfoxxed/hy3"
+
+- name: "Enable Hy3"
+  command: "hyprpm enable hy3"
