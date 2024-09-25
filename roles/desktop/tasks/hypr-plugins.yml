@@ -11,8 +11,14 @@
 - name: "Update hyprpm"
   command: "hyprpm update"
 
+- name: "Check if Hy3 is installed"
+  command: hyprpm list
+  changed_when: no
+  register: hyprpm_list
+
 - name: "Add Hy3"
   command: "hyprpm add https://github.com/outfoxxed/hy3"
+  when: hyprpm_list is defined and hyprpm_list.stdout.find("Plugin hy3") == -1
 
 - name: "Enable Hy3"
   command: "hyprpm enable hy3"
