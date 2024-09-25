@@ -12,6 +12,7 @@
       - "btop"
       - "nvtop"
       - "gnome-system-monitor"
+      - "gnome-power-manager"
     state: "present"
   become: yes
 
