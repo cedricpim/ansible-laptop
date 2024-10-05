@@ -335,10 +335,10 @@ submap = reset
 # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
 
 {% for application in scratchpad_applications %}
-windowrulev2 = float, class:{{ application.class | default(application.name) }}
-windowrulev2 = workspace special:{{ application.name | lower }}, class:{{ application.class | default(application.name) }}
-windowrulev2 = size {{ application.size | default("50% 50%") }}, class:{{ application.class | default(application.name) }}
-windowrulev2 = center, class:{{ application.class | default(application.name) }}
+windowrulev2 = float, class:^({{ application.class | default(application.name) }})$
+windowrulev2 = workspace special:{{ application.name | lower }}, class:^({{ application.class | default(application.name) }})$
+windowrulev2 = size {{ application.size | default("50% 50%") }}, class:^({{ application.class | default(application.name) }})$
+windowrulev2 = center, class:^({{ application.class | default(application.name) }})$
 bind = $mainMod, {{ application.keybinding }}, exec, {{ hyprland_directory }}/scripts/special-launcher.sh {{ application.name | lower }} {{ application.launcher | default("") }}
 
 {% endfor %}
