@@ -4,6 +4,7 @@
     name:
       - "borg"
       - "borgmatic"
+      - "vorta"
     state: "present"
   become: yes
 
