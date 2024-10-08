@@ -93,7 +93,9 @@ footer = "\n"
 # You'll need to have a "Repository ..." section for each one.
 localrepository = {{ account.name }}-Local
 remoterepository = {{ account.name }}-Remote
-maxage = 180
+{% if account.maxage is defined %}
+maxage = {{ account.maxage }}
+{% endif %}
 
 
 [Repository {{ account.name }}-Local]
@@ -101,39 +103,21 @@ maxage = 180
 # local repositories are Maildir, GmailMaildir and IMAP.
 type = Maildir
 
-# Specify local repository.  Your IMAP folders will be synchronized
-# to maildirs created under this path.  Offlineimap will create the
+# Specify local repository. Your IMAP folders will be synchronized
+# to maildirs created under this path. Offlineimap will create the
 # maildirs for you as needed.
-localfolders = {{ email_directory }}/{{ account.name }}
-{{ account.reverse_nametrans | default("") }}
-
+localfolders = {{ email_directory }}/{{ account.local_folder | default(account.name) }}
+{% for key, value in (account.local_configurations | default({})).items() %}
+{{ key }} = {{ value }}
+{% endfor %}
 
 [Repository {{ account.name }}-Remote]
 # The remote repository. We only support IMAP or Gmail here.
 type = {{ account.type }}
 
-remotehost = {{ account.host }}
-remoteuser = {{ account.user }}
-{% if account.password is defined %}
-remotepass = {{ account.password }}
-{% endif %}
-
-{% if account.auth_mechanisms is defined %}
-auth_mechanisms = {{ account.auth_mechanisms }}
-{% endif %}
-{% if account.oauth2_client_id is defined %}
-oauth2_client_id = {{ account.oauth2_client_id }}
-{% endif %}
-{% if account.oauth2_client_secret is defined %}
-oauth2_client_secret = {{ account.oauth2_client_secret }}
-{% endif %}
-{% if account.oauth2_request_url is defined %}
-oauth2_request_url = {{ account.oauth2_request_url }}
-{% endif %}
-{% if account.oauth2_refresh_token is defined %}
-oauth2_refresh_token = {{ account.oauth2_refresh_token }}
-{% endif %}
-{{ account.nametrans | default("") }}
+{% for key, value in (account.remote_configurations | default({})).items() %}
+{{ key }} = {{ value }}
+{% endfor %}
 
 
 {% endfor %}
