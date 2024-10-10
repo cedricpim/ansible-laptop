@@ -29,9 +29,10 @@ RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
 RestrictNamespaces=yes
 RestrictRealtime=yes
 RestrictSUIDSGID=yes
-SystemCallArchitectures=native
-SystemCallFilter=@system-service
-SystemCallErrorNumber=EPERM
+# Disable since it is not working with it
+#SystemCallArchitectures=native
+#SystemCallFilter=@system-service
+#SystemCallErrorNumber=EPERM
 # Restrict write access
 # Change to 'ProtectSystem=strict' and uncomment 'ProtectHome' to make the whole file
 # system read-only be default and uncomment 'ReadWritePaths' for the required write access.
