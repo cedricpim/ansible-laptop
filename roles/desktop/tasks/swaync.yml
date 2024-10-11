@@ -1,7 +1,9 @@
 ---
-- name: "Install SwayNotificationCenter"
+- name: "Install SwayNotificationCenter and dependencies"
   pacman:
-    name: "swaync"
+    name:
+      - "swaync"
+      - "nwg-look"
     state: "present"
   become: yes
 

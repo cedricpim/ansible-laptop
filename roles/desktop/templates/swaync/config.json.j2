@@ -73,11 +73,11 @@
       "actions": [
         {
           "label": " ",
-          "command": "amixer set Master toggle"
+          "command": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         },
         {
           "label": "",
-          "command": "amixer set Capture toggle"
+          "command": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
         },
         {
           "label": " ",
