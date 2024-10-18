@@ -59,15 +59,14 @@ exec-once = signal-desktop --start-in-tray
 exec-once = wl-paste --type text --watch cliphist store
 exec-once = wl-paste --type image --watch cliphist store
 
-# Starting it here since the regular automatic starting from systemd appears to not be working
-exec-once = systemctl --user start gammastep-indicator.service
-
 exec-once = {{ hyprland_directory }}/scripts/layout-manager.sh
 exec-once = {{ default_browser }}
 
 # These apps need to wait for a bit before starting so that they show in the system tray
 exec-once = sleep 1 && keepassxc
 exec-once = sleep 1 && mullvad-vpn
+# Starting it here since the regular automatic starting from systemd appears to not be working
+exec-once = sleep 5 && systemctl --user start gammastep-indicator.service
 
 
 #############################
