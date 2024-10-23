@@ -1,6 +1,7 @@
 {{ ansible_managed | comment }}
 
-import=["{{ wal_cache_directory }}/colors-alacritty.toml"]
+[general]
+  import=["{{ wal_cache_directory }}/colors-alacritty.toml"]
 
 [font]
   size = 15
