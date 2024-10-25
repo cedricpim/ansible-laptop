@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+set -eo pipefail
+IFS=$'\n\t'
+
+{{ ansible_managed | comment }}
+
+# Run with a smaller font size when using laptop monitor
+if [ `hyprctl monitors | grep -o "eDP-1"` ]; then
+  alacritty -o font.size=11 $@
+else
+  alacritty -o font.size=15 $@
+fi

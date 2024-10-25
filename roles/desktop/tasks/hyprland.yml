@@ -62,9 +62,11 @@
     dest: "{{ hyprland_directory }}/scripts/{{ item }}"
     mode: "0700"
   with_items:
+    - "alacritty.sh"
     - "clip-manager.sh"
     - "layout-manager.sh"
     - "media-control.sh"
+    - "rofi.sh"
     - "special-launcher.sh"
     - "volume-control.sh"
     - "wlogout.sh"

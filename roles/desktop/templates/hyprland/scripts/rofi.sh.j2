@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -eo pipefail
+IFS=$'\n\t'
+
+# Run with a higher DPI when using laptop monitor
+if [ `hyprctl monitors | grep -o "eDP-1"` ]; then
+  rofi -dpi 192 $@
+else
+  rofi $@
+fi

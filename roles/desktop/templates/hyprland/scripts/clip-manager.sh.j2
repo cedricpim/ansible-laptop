@@ -13,7 +13,7 @@ PATH=$PATH:/usr/local/bin
 
 while true; do
   result=$(
-    rofi -dmenu \
+    {{ hyprland_directory }}/scripts/rofi.sh -dmenu \
       -kb-custom-1 "Control-Delete" \
       -kb-custom-2 "Alt-Delete" \
       -config ~/.config/rofi/themes/clipboard.rasi < <(cliphist list)
