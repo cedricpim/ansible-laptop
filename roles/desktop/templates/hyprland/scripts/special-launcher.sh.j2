@@ -9,9 +9,9 @@ hyprctl dispatch togglespecialworkspace $1
 
 if ! hyprctl clients | grep $1 >/dev/null; then
   if [ "$1" == "alacritty" ]; then
-    alacritty --title "$1" --class "$1" &
+    ~/.config/hypr/scripts/alacritty.sh --title "$1" --class "$1" &
   elif [ "$2" == "terminal" ]; then
-    alacritty --title "$1" --class "$1" -e "$1" &
+    ~/.config/hypr/scripts/alacritty.sh --title "$1" --class "$1" -e "$1" &
   else
     ${@:2} &
   fi
