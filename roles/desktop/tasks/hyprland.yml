@@ -33,8 +33,11 @@
 
 - include_role:
     name: "yay"
-  vars:
-    pkg_name: "hyprshot"
+  with_items:
+    - "hyprshot"
+    - "hyprland-target"
+  loop_control:
+    loop_var: "pkg_name"
 
 - name: "Create folder for Hyprland configuration and scripts"
   file:

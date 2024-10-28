@@ -39,8 +39,8 @@ $menu = {{ hyprland_directory }}/scripts/rofi.sh -show drun -modi drun,filebrows
 
 exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = systemctl --user start hyprland-session.target
 
-exec-once = waybar
 exec-once = hyprpm reload -n
 exec-once = hyprpaper
 exec-once = hypridle
