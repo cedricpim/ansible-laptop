@@ -7,7 +7,6 @@ ranger_mountpoint: "~/Device"
 ranger_colorscheme: "dark"
 
 hyprland_directory: "~/.config/hypr"
-gammastep_directory: "~/.config/gammastep"
 wlogout_directory: "~/.config/wlogout"
 wal_directory: "~/.config/wal"
 swaync_directory: "~/.config/swaync"

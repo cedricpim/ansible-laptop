@@ -55,7 +55,6 @@
 - name: "Set colors"
   command: "wal -i {{ wallpaper_directory }}/wallpaper.jpg"
 
-- import_tasks: "gammastep.yml"
 - import_tasks: "fonts.yml"
 - import_tasks: "file.yml"
 - import_tasks: "terminal.yml"

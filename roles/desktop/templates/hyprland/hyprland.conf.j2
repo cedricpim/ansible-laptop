@@ -44,6 +44,7 @@ exec-once = systemctl --user start hyprland-session.target
 exec-once = hyprpm reload -n
 exec-once = hyprpaper
 exec-once = hypridle
+exec-once = hyprsunset
 
 exec-once = slack
 exec-once = swaync
@@ -65,8 +66,6 @@ exec-once = {{ default_browser }}
 # These apps need to wait for a bit before starting so that they show in the system tray
 exec-once = sleep 1 && keepassxc
 exec-once = sleep 1 && mullvad-vpn
-# Starting it here since the regular automatic starting from systemd appears to not be working
-exec-once = sleep 5 && systemctl --user start gammastep-indicator.service
 
 
 #############################

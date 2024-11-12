@@ -13,7 +13,6 @@
       - "wayland"
       - "xorg-xwayland"
       - "wl-clipboard"
-      - "gammastep"
       - "xdg-desktop-portal-hyprland"
       - "cliphist"
       - "qt5ct"
@@ -28,6 +27,7 @@
       - "hyprpaper"
       - "hypridle"
       - "hyprlock"
+      - "hyprsunset"
     state: "present"
   become: yes
 
