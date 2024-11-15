@@ -60,6 +60,7 @@
 [core]
   autocrlf = input
   editor = nvim
+  pager = delta
 
 [pager]
   diff = delta --diff-so-fancy
@@ -72,6 +73,8 @@
 
 [delta]
   features = side-by-side line-numbers
+  navigate = true
+  hyperlinks = true
 
 [color]
   # Use colors in Git commands that are capable of colored output when
@@ -106,7 +109,7 @@
 [merge]
   # Include summaries of merged commits in newly created merge commit messages
   log = true
-  conflictstyle = diff3
+  conflictstyle = zdiff3
 
 [push]
   default = simple
