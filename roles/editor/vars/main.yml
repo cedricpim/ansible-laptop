@@ -4,3 +4,5 @@ nvim_config_repo: "https://github.com/cedricpim/nvim.git"
 
 github_https_base: "https://github.com/"
 github_ssh_base: "git@github.com:"
+
+open_in_editor_repo: "https://github.com/dandavison/open-in-editor.git"
