@@ -28,20 +28,3 @@
     url: "{{ neovim_spell_url }}/{{ item }}"
     dest: "{{ neovim_spell_dest }}"
   with_items: "{{ neovim_spell_dictionaries }}"
-
-- name: "Install open-in-editor"
-  block:
-    - tempfile: suffix="open_in_editor" state="directory"
-      register: tempdir
-    - git: repo="{{ open_in_editor_repo }}" dest="{{ tempdir.path }}"
-    - command: "makepkg --noconfirm"
-      args:
-        chdir: "{{ tempdir.path }}"
-      become_user: "{{ lookup('env', 'USER') }}"
-    - shell: "pacman -U --noconfirm *.pkg.tar.zst"
-      args:
-        chdir: "{{ tempdir.path }}"
-      become: yes
-    - command: "xdg-mime default open-in-editor.desktop x-scheme-handler/file-line-column"
-  always:
-    - file: path="{{ tempdir.path }}" state="absent"

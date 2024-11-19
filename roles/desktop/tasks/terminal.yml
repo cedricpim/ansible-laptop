@@ -16,3 +16,9 @@
     src: "alacritty/alacritty.toml.j2"
     dest: "{{ terminal_directory }}/alacritty.toml"
     mode: "0600"
+
+- include_role:
+    name: "zsh"
+    tasks_from: "scripts"
+  vars:
+    script: "topen"

@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+set -eo pipefail
+IFS=$'\n\t'
+
+{{ ansible_managed | comment }}
+
+### topen — launch a link in a new terminal, directly into either nvim or just general xdg-open.
+###
+### Usage:
+###   topen <link>
+###
+### Options:
+###   <link>    Full path of the link to be read and parsed (must be on format {format}://{path}:{line})
+
+link="$1"
+
+# For file, open it with neovim
+if [[ $link =~ "file://" ]]; then
+  # Extract the file path and line number
+  file_path=$(echo "$link" | sed -E 's|file://([^:]*):?(.*)|\1|')
+  line_number=$(echo "$link" | sed -E 's|file://([^:]*):?(.*)|\2|' | awk '{print $0 == "" ? 1 : $0}')
+
+  # Open in nvim at the specified line
+  alacritty -e nvim +$line_number $file_path
+elif [[ -f $link ]]; then
+  alacritty -e nvim $link
+else
+  xdg-open $link
+fi

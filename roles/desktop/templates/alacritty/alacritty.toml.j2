@@ -24,3 +24,12 @@
     { key = "K", mods = "Shift", mode = "Vi|~Search", action = "ScrollPageUp" },
     { key = "J", mods = "Shift", mode = "Vi|~Search", action = "ScrollPageDown" }
   ]
+
+[hints]
+  [[hints.enabled]]
+  command = "topen"
+  hyperlinks = true
+  post_processing = true
+  persist = false
+  mouse.enabled = true
+  regex = "(file://|ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:||git://|ssh:|ftp://)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
