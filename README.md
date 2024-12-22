@@ -81,3 +81,16 @@ $ wpa_supplicant -B -i NETWORK_INTERFACE -c <(wpa_passphrase NETWORK_NAME NETWOR
 $ dhcpcd NETWORK_INTERFACE
 ```
 
+### Boot from Live
+
+Use `lsblk` and `blkid` to find the right partition.
+
+```
+$ mkdir /mnt/temp
+$ cryptsetup luksOpen partition arch
+$ vgscan
+$ vgchange -ay (result from vgscan)
+$ lvs
+$ mount /dev/(result from vgscan)/(result from lvs) /mnt/temp
+$ arch-root /mnt/temp
+```
