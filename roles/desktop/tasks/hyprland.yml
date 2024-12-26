@@ -37,6 +37,7 @@
     - "hyprshot"
     - "hyprland-target"
     - "hyprland-qtutils"
+    - "hy3"
   loop_control:
     loop_var: "pkg_name"
 
@@ -74,5 +75,3 @@
     - "special-launcher.sh"
     - "volume-control.sh"
     - "wlogout.sh"
-
-- import_tasks: "hypr-plugins.yml"
