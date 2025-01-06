@@ -47,3 +47,5 @@ ssh_entries: "{{ vault_ssh_entries }}"
 docker_data_directory: "{{ vault_docker_data_directory }}"
 
 extra_applications: "{{ vault_extra_applications | default([]) }}"
+
+anthropic_api_key: "{{ vault_anthropic_api_key }}"
