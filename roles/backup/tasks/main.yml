@@ -15,14 +15,11 @@
     mode: "0700"
   become: yes
 
-- name: "Copy configuration and excludes for borgmatic"
+- name: "Copy configuration for borgmatic"
   template:
-    src: "{{ item }}.j2"
-    dest: "{{ borgmatic_directory }}/{{ item }}"
+    src: "config.yaml.j2"
+    dest: "{{ borgmatic_directory }}/config.yaml"
     mode: "0600"
-  with_items:
-    - "config.yaml"
-    - "excludes"
   become: yes
 
 - name: "Generate SSH keys"

@@ -101,8 +101,11 @@ repositories:
 # and tildes are expanded. Note that a glob pattern must either start
 # with a glob or be an absolute path. Do not backslash spaces in path
 # names. See the output of "borg help patterns" for more details.
-# exclude_patterns:
-    # - '*.pyc'
+exclude_patterns:
+  {% for exclude in backup_excludes %}
+  - {{ exclude }}
+  {% endfor %}
+  # - '*.pyc'
     # - /home/*/.cache
     # - '*/.vim*.tmp'
     # - /etc/ssl
@@ -111,8 +114,8 @@ repositories:
 # Read exclude patterns from one or more separate named files, one
 # pattern per line. See the output of "borg help patterns" for more
 # details.
-exclude_from:
-  - {{ borgmatic_directory }}/excludes
+# exclude_from:
+    # - /etc/borgmatic/excludes
 
 # Exclude directories that contain a CACHEDIR.TAG file. See
 # http://www.brynosaurus.com/cachedir/spec.html for details. Defaults
