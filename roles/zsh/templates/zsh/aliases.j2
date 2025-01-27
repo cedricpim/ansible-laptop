@@ -123,13 +123,9 @@ function rg() {
 # Use MyTraceRoute to check internet conditions
 alias internet-report="sudo mtr 8.8.8.8"
 
-# Devcontainer
-function devc() {
-  if [ "$1" = "stop" ] || [ "$1" = "start" ]; then
-    docker compose -f .devcontainer/docker-compose.yml $1
-  elif [ -n "$1" ]; then
-    devcontainer exec --workspace-folder . $@
-  fi
+# Docker-compose
+function dce() {
+  docker compose -f .devcontainer/docker-compose.yml exec app "$@"
 }
 
 {{ ledger_aliases }}
