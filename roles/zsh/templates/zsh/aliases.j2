@@ -123,8 +123,8 @@ function rg() {
 # Use MyTraceRoute to check internet conditions
 alias internet-report="sudo mtr 8.8.8.8"
 
-# Docker-compose
-function dce() {
+# Docker compose app
+function dca() {
   if [ "$1" = "stop" ] || [ "$1" = "start" ]; then
     docker compose -f .devcontainer/docker-compose.yml $1
   elif [ -n "$1" ]; then
