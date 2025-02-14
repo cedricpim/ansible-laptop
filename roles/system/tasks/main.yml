@@ -21,6 +21,7 @@
 - import_tasks: "time_zone.yml"
 - import_tasks: "power.yml"
 - import_tasks: "journal.yml"
+- import_tasks: "printer.yml"
 
 - name: "Install card reader software"
   pacman:

@@ -1,0 +1,22 @@
+---
+- name: "Install printing CUPS"
+  pacman:
+    name:
+      - "cups"
+      - "cups-filters"
+      - "cups-pdf"
+      - "system-config-printer"
+    state: "present"
+  become: yes
+
+- include_role:
+    name: "yay"
+  vars:
+    pkg_name: "hpuld"
+
+- name: "Enable/start CUPS"
+  systemd:
+    name: "cups"
+    state: "started"
+    enabled: yes
+  become: yes
