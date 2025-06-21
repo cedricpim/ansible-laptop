@@ -4,11 +4,11 @@
     name: "root"
     password: "{{ root_password }}"
 
-- name: "Install firmware updater and gparted"
+- name: "Install firmware updater and gnome-disk-utility"
   pacman:
     name:
       - "fwupd"
-      - "gparted"
+      - "gnome-disk-utility"
     state: "present"
 
 - name: "Install tmux (useful for scrolling)"
