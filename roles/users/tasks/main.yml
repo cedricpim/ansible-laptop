@@ -5,6 +5,7 @@
       - "sudo"
       - "polkit"
       - "ntfs-3g"
+      - "dosfstools"
     state: "present"
   become: yes
 
