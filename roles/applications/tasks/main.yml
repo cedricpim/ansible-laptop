@@ -6,7 +6,6 @@
       - "chromium"
       - "ffmpeg"
       - "gnome-calculator"
-      - "vlc"
       - "vagrant"
       - "xournalpp"
       - "android-file-transfer"
@@ -14,6 +13,8 @@
       - "keepassxc"
       - "signal-desktop"
       - "obsidian"
+      - "vlc"
+      - "vlc-plugins-all"
     state: "present"
   become: yes
 
