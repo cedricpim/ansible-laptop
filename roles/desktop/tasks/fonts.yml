@@ -6,9 +6,9 @@
       - "ttf-liberation"
       - "ttf-hack"
       - "ttf-fira-code"
-      - "ttf-font-awesome"
       - "ttf-dejavu-nerd"
       - "ttf-roboto-mono-nerd"
+      - "woff2-font-awesome"
     state: "present"
   become: yes
 
