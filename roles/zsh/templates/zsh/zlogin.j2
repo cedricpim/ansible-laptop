@@ -15,6 +15,3 @@
 
 # Display system information on login
 if [ `command -v neofetch` ]; then neofetch; fi
-
-# Start always on tmux existing session
-if [ -z "$TMUX" ] && [ "$DESKTOP_SESSION" == "gnome" ]; then tmux attach > /dev/null 2>&1; fi
