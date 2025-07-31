@@ -18,6 +18,8 @@
       - "qt5ct"
       - "jq"
       - "socat"
+      - "uwsm"
+      - "libnewt"
     state: "present"
   become: yes
 
