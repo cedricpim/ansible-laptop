@@ -1,9 +1,4 @@
 ---
-- include_role:
-    name: "yay"
-  vars:
-    pkg_name: "yewtube"
-
 - name: "Install feh"
   pacman:
     name: "feh"

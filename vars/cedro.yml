@@ -25,7 +25,6 @@ workspaces:
 
 scratchpad_applications:
   - { name: "todo", keybinding: "T", launcher: "terminal", size: "80% 80%" }
-  - { name: "yt", keybinding: "Y", launcher: "terminal" }
   - { name: "ikhal", keybinding: "A", launcher: "terminal" }
   - { name: "neomutt", keybinding: "E", launcher: "terminal", size: "80% 80%" }
   - { name: "newsboat", keybinding: "N", launcher: "terminal" }
