@@ -1,4 +1,6 @@
 ---
+direnv_directory: "~/.config/direnv"
+
 git_directory: "~/.config/git"
 
 htop_directory: "~/.config/htop"
