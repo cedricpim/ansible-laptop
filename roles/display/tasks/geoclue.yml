@@ -12,13 +12,6 @@
     mode: "0755"
   become: yes
 
-- name: "Copy GeoClue configuration"
-  template:
-    src: "geoclue.conf.j2"
-    dest: "{{ geoclue_directory }}/geoclue.conf"
-    mode: "0644"
-  become: yes
-
 - name: "Copy GeoClue service configuration"
   template:
     src: "geoclue-agent.service.j2"
