@@ -8,6 +8,7 @@
       - "ttf-fira-code"
       - "ttf-dejavu-nerd"
       - "ttf-roboto-mono-nerd"
+      - "ttf-jetbrains-mono"
       - "woff2-font-awesome"
     state: "present"
   become: yes
