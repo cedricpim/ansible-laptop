@@ -5,6 +5,12 @@
     state: "present"
   become: yes
 
+- name: "Install terminal alternative to alacritty"
+  pacman:
+    name: "xterm"
+    state: "present"
+  become: yes
+
 - name: "Create folder for terminal configuration"
   file:
     path: "{{ terminal_directory }}"
