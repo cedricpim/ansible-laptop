@@ -38,8 +38,7 @@
   with_items:
     - "hyprshot"
     - "hyprland-target"
-    - "hyprland-qtutils"
-    - "hy3"
+    - "hy3-git"
   loop_control:
     loop_var: "pkg_name"
 
