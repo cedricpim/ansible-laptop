@@ -41,3 +41,10 @@
   loop_control:
     loop_var: "script"
   when: server is defined and server
+
+- name: "Enable/start GCR socket"
+  systemd:
+    name: "gcr-ssh-agent.socket"
+    scope: "user"
+    enabled: yes
+    state: "started"

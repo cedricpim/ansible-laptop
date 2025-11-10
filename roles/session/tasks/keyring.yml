@@ -25,10 +25,3 @@
     - "login"
     - "passwd"
   become: yes
-
-- name: "Enable/start GCR socket"
-  systemd:
-    name: "gcr-ssh-agent.socket"
-    state: "started"
-    enabled: yes
-  become: yes
