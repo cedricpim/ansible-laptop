@@ -47,3 +47,10 @@
     state: present
   with_items: "{{ firefox_options }}"
   when: st_prefs is defined and not st_prefs is skipped and st_prefs.stat.islnk is defined
+
+- name: "Set default browser"
+  community.general.xdg_mime:
+    mime_types:
+      - "x-scheme-handler/http"
+      - "x-scheme-handler/https"
+    handler: "{{ default_browser }}.desktop"
