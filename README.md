@@ -22,7 +22,7 @@ $ make install
 Reboot and then login to root and run:
 
 ```
-$ yay -Sy --mflags '--skippgpcheck' networkmanager-iwd mullvad-vpn
+$ yay -Sy --mflags '--skippgpcheck' mullvad-vpn
 $ SLOW_PACKAGES=1 make arch
 ```
 
