@@ -50,5 +50,4 @@
     name: "waybar"
     scope: "user"
     enabled: yes
-    daemon_reload: yes
-  become: yes
+    state: "started"
