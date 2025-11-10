@@ -4,6 +4,7 @@
     name:
       - "sddm"
       - "layer-shell-qt"
+      - "qt5-graphicaleffects"
       - "hyprland"
     state: "present"
   become: yes
