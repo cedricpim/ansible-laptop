@@ -4,6 +4,7 @@
     name:
       - "vdirsyncer"
       - "python-pipx"
+      - "python-aiohttp-oauthlib"
     state: "present"
   become: yes
   register: vdirsyncer_install
