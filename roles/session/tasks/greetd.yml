@@ -1,0 +1,28 @@
+---
+- name: "Install greetd"
+  pacman:
+    name:
+      - "greetd-regreet"
+      - "hyprland"
+    state: "present"
+  become: yes
+
+- name: "Copy greetd configurations"
+  template:
+    src: "greetd/greetd.toml.j2"
+    dest: "{{ greetd_directory }}/config.toml"
+    mode: "0644"
+  become: yes
+
+- name: "Copy greetd Hyprland configurations"
+  template:
+    src: "greetd/hyprland.conf.j2"
+    dest: "{{ greetd_directory }}/hyprland.conf"
+    mode: "0644"
+  become: yes
+
+- name: "Enable service for greetd"
+  systemd:
+    name: "greetd"
+    enabled: yes
+  become: yes

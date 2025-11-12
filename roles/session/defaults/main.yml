@@ -1,5 +1,4 @@
 ---
 pam_directory: "/etc/pam.d"
 
-sddm_directory: "/etc"
-ssdm_hyprland_conf: "/etc/hyprland.conf"
+greetd_directory: "/etc/greetd"
