@@ -10,9 +10,6 @@
 # Create your files separately and then link them to this file like this:
 source = ~/.cache/wal/colors-hyprland.conf
 
-# Enable hy3 from AUR
-plugin = /usr/lib/libhy3.so
-
 ################
 ### MONITORS ###
 ################
@@ -46,6 +43,7 @@ exec-once = systemctl --user start hyprland-session.target
 exec-once = hyprpaper
 exec-once = hypridle
 exec-once = hyprsunset
+exec-once = hyprpm reload -n
 
 exec-once = slack
 exec-once = swaync

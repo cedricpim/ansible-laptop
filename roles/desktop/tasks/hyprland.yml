@@ -20,6 +20,7 @@
       - "socat"
       - "uwsm"
       - "libnewt"
+      - "cpio"
     state: "present"
   become: yes
 
@@ -76,3 +77,11 @@
     - "special-launcher.sh"
     - "volume-control.sh"
     - "wlogout.sh"
+
+- name: "Update hyprpm"
+  command: "hyprpm update"
+
+- name: "Add and enable hy3"
+  block:
+    - command: "hyprpm add https://github.com/outfoxxed/hy3"
+    - command: "hyprpm enable hy3"
