@@ -268,7 +268,7 @@ bind = $mainMod SHIFT, L, movewindow, r
 bind = $mainMod, {{ workspace.keybinding }}, workspace, {{ workspace.key }}
 bind = $mainMod SHIFT, {{ workspace.keybinding }}, movetoworkspace, {{ workspace.key }}
 {% if workspace.assigned is defined %}
-windowrulev2 = workspace {{ workspace.key }} silent, class:^({{ workspace.assigned }})$
+windowrule = match:class ^({{ workspace.assigned }})$, workspace {{ workspace.key }} silent
 {% endif %}
 
 {% endfor %}
@@ -340,38 +340,24 @@ submap = reset
 # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
 
 {% for application in scratchpad_applications %}
-windowrulev2 = float, class:^({{ application.class | default(application.name) }})$
-windowrulev2 = workspace special:{{ application.name | lower }}, class:^({{ application.class | default(application.name) }})$
-windowrulev2 = size {{ application.size | default("50% 50%") }}, class:^({{ application.class | default(application.name) }})$
-windowrulev2 = center, class:^({{ application.class | default(application.name) }})$
+windowrule = match:class ^({{ application.class | default(application.name) }})$, float true, center true, workspace special:{{ application.name | lower }}, size {{ application.size | default("(monitor_w*0.9) (monitor_h*0.9)") }}
 bind = $mainMod, {{ application.keybinding }}, exec, {{ hyprland_directory }}/scripts/special-launcher.sh {{ application.name | lower }} {{ application.launcher | default("") }}
 
 {% endfor %}
 
-windowrulev2 = opacity 0.3, class:^(alacritty)$
-windowrulev2 = float, title:^(Calculator)$
-windowrulev2 = float, class:^(nm-connection-editor)$
-windowrulev2 = float, class:^(blueman-manager)$
-windowrulev2 = float, class:pavucontrol
-windowrulev2 = size 50% 50%, class:pavucontrol
-windowrulev2 = center, class:pavucontrol
+windowrule = match:class ^(alacritty)$, opacity 0.3
+windowrule = match:title ^(Calculator)$, float true
+windowrule = match:class ^(nm-connection-editor)$, float true
+windowrule = match:class ^(blueman-manager)$, float true
+windowrule = match:class org.pulseaudio.pavucontrol, float true, center true, size (monitor_w*0.5) (monitor_h*0.5)
+windowrule = match:class .*, suppress_event maximize
 
-windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
-
-layerrule = blur, logout_dialog
+layerrule = match:namespace logout_dialog, blur on
 
 # Rofi
-windowrulev2 = float, class:^([Rr]ofi)
-windowrulev2 = opacity 0.9 0.6, class:^([Rr]ofi)
-windowrulev2 = fullscreenstate 1, class:^([Rr]ofi)
-layerrule = unset, rofi
-layerrule = blur, rofi
-layerrule = ignorezero, rofi
+windowrule = match:class ^([Rr]ofi), float true, opacity 0.9 0.6, fullscreen_state 1
+layerrule = match:namespace rofi, blur on, ignore_alpha 0
 
 # Swaync
-layerrule = blur, swaync-control-center
-layerrule = blur, swaync-notification-window
-layerrule = ignorezero, swaync-control-center
-layerrule = ignorezero, swaync-notification-window
-layerrule = ignorealpha 0.5, swaync-control-center
-layerrule = ignorealpha 0.5, swaync-notification-window
+layerrule = match:namespace swaync-control-center, blur on, ignore_alpha 0
+layerrule = match:namespace swaync-notification-window, blur on, ignore_alpha 0

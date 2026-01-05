@@ -1,4 +1,6 @@
 {{ ansible_managed | comment }}
 
-preload = {{ wallpaper_directory }}/wallpaper.jpg
-wallpaper = , {{ wallpaper_directory }}/wallpaper.jpg
+wallpaper {
+  monitor =
+  path = {{ wallpaper_directory }}/wallpaper.jpg
+}
