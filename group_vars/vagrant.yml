@@ -113,6 +113,4 @@ scratchpad_applications:
   - { name: "ikhal", keybinding: "A", launcher: "terminal" }
   - { name: "neomutt", keybinding: "E", launcher: "terminal", size: "80% 80%" }
   - { name: "newsboat", keybinding: "N", launcher: "terminal" }
-  - { name: "Spotify", keybinding: "S", launcher: "spotify", size: "80% 80%" }
   - { name: "Signal", keybinding: "M", launcher: "signal-desktop", class: "[Ss]ignal", size: "80% 80%" }
-  - { name: "pilorama", keybinding: "P", launcher: "pilorama" }

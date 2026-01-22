@@ -30,7 +30,6 @@
     - "slack-desktop"
     - "yt-dlp"
     - "solaar"
-    - "pilorama-git"
     - "qpdfview"
     - "vagrant"
   loop_control:
