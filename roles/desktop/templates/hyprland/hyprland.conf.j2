@@ -25,7 +25,6 @@ monitor=,preferred,auto,auto
 # See https://wiki.hyprland.org/Configuring/Keywords/
 
 # Set programs that you use
-$terminal = {{ hyprland_directory }}/scripts/alacritty.sh
 $menu = {{ hyprland_directory }}/scripts/rofi.sh -show drun -modi drun,filebrowser,run,window
 
 
@@ -236,7 +235,7 @@ xwayland {
 $mainMod = SUPER # Sets "Windows" key as main modifier
 
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-bind = $mainMod, RETURN, exec, $terminal
+bind = $mainMod, RETURN, exec, wezterm
 bind = $mainMod, Q, killactive,
 bind = $mainMod, F, fullscreen
 bind = $mainMod SHIFT, O, togglefloating,
@@ -340,12 +339,12 @@ submap = reset
 # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
 
 {% for application in scratchpad_applications %}
-windowrule = match:class ^({{ application.class | default(application.name) }})$, float true, center true, workspace special:{{ application.name | lower }}, size {{ application.size | default("(monitor_w*0.9) (monitor_h*0.9)") }}
+windowrule = match:class ^({{ application.class | default(application.name) }})$, float true, center true, workspace special:{{ application.name | lower }}, size {{ application.size | default("(monitor_w*0.5) (monitor_h*0.5)") }}
 bind = $mainMod, {{ application.keybinding }}, exec, {{ hyprland_directory }}/scripts/special-launcher.sh {{ application.name | lower }} {{ application.launcher | default("") }}
 
 {% endfor %}
 
-windowrule = match:class ^(alacritty)$, opacity 0.3
+windowrule = match:class ^(terminal)$, opacity 0.3
 windowrule = match:title ^(Calculator)$, float true
 windowrule = match:class ^(nm-connection-editor)$, float true
 windowrule = match:class ^(blueman-manager)$, float true

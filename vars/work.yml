@@ -22,13 +22,12 @@ workspaces:
   - { key: "10", keybinding: "0", symbol: "" }
 
 scratchpad_applications:
-  - { name: "todowork", keybinding: "T", launcher: "terminal", size: "80% 80%" }
+  - { name: "todowork", keybinding: "T", launcher: "terminal", size: "(monitor_w*0.8) (monitor_h*0.8)" }
   - { name: "ikhal", keybinding: "A", launcher: "terminal" }
-  - { name: "neomutt", keybinding: "E", launcher: "terminal", size: "80% 80%" }
+  - { name: "neomutt", keybinding: "E", launcher: "terminal", size: "(monitor_w*0.8) (monitor_h*0.8)" }
   - { name: "newsboat", keybinding: "N", launcher: "terminal" }
-  - { name: "Spotify", keybinding: "S", launcher: "spotify", size: "80% 80%" }
-  - { name: "Signal", keybinding: "M", launcher: "signal-desktop", class: "[Ss]ignal", size: "80% 80%", }
-  - { name: "alacritty", keybinding: "O", size: "90% 90%" }
+  - { name: "Signal", keybinding: "M", launcher: "signal-desktop", class: "[Ss]ignal", size: "(monitor_w*0.8) (monitor_h*0.8)", }
+  - { name: "terminal", keybinding: "O", size: "(monitor_w*0.9) (monitor_h*0.9)" }
 
 colorscheme_name: "lushwal"
 
