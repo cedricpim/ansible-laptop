@@ -1,30 +1,27 @@
 ---
 - name: "Install terminal related packages"
   pacman:
-    name: "alacritty"
+    name:
+      - "alacritty"
+      - "wezterm"
+      - "xterm"
     state: "present"
   become: yes
 
-- name: "Install terminal alternative to alacritty"
-  pacman:
-    name: "xterm"
-    state: "present"
-  become: yes
-
-- name: "Create folder for terminal configuration"
+- name: "Create folder for terminal configurations"
   file:
-    path: "{{ terminal_directory }}"
+    path: "{{ item }}"
     state: "directory"
     mode: "0700"
+  with_items:
+    - "{{ wezterm_directory }}"
+    - "{{ alacritty_directory }}"
 
-- name: "Copy terminal configuration"
+- name: "Copy terminal configurations"
   template:
-    src: "alacritty/alacritty.toml.j2"
-    dest: "{{ terminal_directory }}/alacritty.toml"
+    src: "{{ item.directory }}/{{ item.file }}.j2"
+    dest: "{{ item.destination }}/{{ item.file }}"
     mode: "0600"
-
-- include_role:
-    name: "zsh"
-    tasks_from: "scripts"
-  vars:
-    script: "topen"
+  with_items:
+    - { destination: "{{ alacritty_directory }}", directory: "alacritty", file: "alacritty.toml" }
+    - { destination: "{{ wezterm_directory }}", directory: "wezterm", file: "wezterm.lua" }

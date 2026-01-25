@@ -1,0 +1,417 @@
+{{ ansible_managed | comment(decoration='-- ') }}
+
+local wezterm = require("wezterm") ---@type Wezterm
+local config = wezterm.config_builder() ---@type Config
+
+--- ---------------------------------------------------------------------------
+--- Variables
+--- ---------------------------------------------------------------------------
+local DEFAULT_TRANSPARENCY_STEP = 0.05
+local DEFAULT_BACKGROUND_OPACITY = 0.5
+local STATUS_STYLE = "minimal" -- minimal, active
+local STATUS_COMPONENTS = {
+	vpn = true,
+	ssh = true,
+	mode = true,
+	leader = true,
+}
+--- ---------------------------------------------------------------------------
+--- Global State
+--- ---------------------------------------------------------------------------
+---@class GlobalState
+---@field pre_toggle_opacity number
+---@field light_mode boolean
+
+local global = wezterm.GLOBAL --[[@as GlobalState]]
+global.pre_toggle_opacity = global.pre_toggle_opacity or DEFAULT_BACKGROUND_OPACITY
+global.light_mode = global.light_mode or false
+
+--- ---------------------------------------------------------------------------
+--- Theme
+--- ---------------------------------------------------------------------------
+-- theme: 'Ayu Mirage' 'Tokyo Night Day'
+--         'Catppuccin Mocha' Catppuccin Macchiato' 'Catppuccin Frappe' 'Catppuccin Latte'
+-- highlight: orange:#ffcc66 blue:#0284c7 salmon:#df5b61
+-- overlay: "#1f2430" "#0a0e13"
+local CUSTOM_COLOURS = {
+	dark = {
+		theme = "Elementary (Gogh)",
+		highlight = "#ffcc66",
+		dim = wezterm.color.get_builtin_schemes()["Elementary (Gogh)"]["cursor_bg"],
+		overlay = "#0f172a",
+	},
+	light = {
+		theme = "Tomorrow (Gogh)",
+		highlight = "#0284c7",
+		dim = wezterm.color.get_builtin_schemes()["Tomorrow (Gogh)"]["cursor_bg"],
+		overlay = "#cbd5e1",
+	},
+}
+-- local CUSTOM_COLOURS = {
+-- 	dark = {
+-- 		theme = "Catppuccin Macchiato",
+-- 		highlight = "#ffcc66",
+-- 		dim = wezterm.color.get_builtin_schemes()["Catppuccin Macchiato"]["selection_bg"],
+-- 		overlay = "#0f172a",
+-- 	},
+-- 	light = {
+-- 		theme = "Catppuccin Latte",
+-- 		highlight = "#0284c7",
+-- 		dim = wezterm.color.get_builtin_schemes()["Catppuccin Latte"]["selection_bg"],
+-- 		overlay = "#cbd5e1",
+-- 	},
+-- }
+--- ---------------------------------------------------------------------------
+--- Functions
+--- ---------------------------------------------------------------------------
+local function get_current_theme()
+	return global.light_mode and CUSTOM_COLOURS.light or CUSTOM_COLOURS.dark
+end
+
+---@return Color
+local function set_alpha(c, a)
+	local fh, fs, fl, _ = wezterm.color.parse(c):hsla()
+	return wezterm.color.from_hsla(fh, fs, fl, a)
+end
+
+local function check_vpn_status(interface)
+	local handle = assert(io.popen(string.format("ifconfig | grep -c %s", interface)))
+	local result = handle:read("*a")
+	handle:close()
+	return tonumber(result) > 0
+end
+
+local function add_status_element(cells, text, is_active)
+	-- there are two styles: "active" and "minimal"
+	-- in the active state we show an active and inactive icon
+	-- in the minimal state we show an active icon only
+	local theme = get_current_theme()
+	local icon_color = is_active and theme.highlight or theme.dim
+
+	if STATUS_STYLE == "active" or (STATUS_STYLE == "minimal" and is_active) then
+		table.insert(cells, { Foreground = { Color = icon_color } })
+		table.insert(cells, { Background = { Color = "none" } })
+		table.insert(cells, { Text = " " .. text .. " " })
+	end
+end
+
+local function padded_launch_menu(entries, total, default)
+	for _ = #entries + 1, total do
+		table.insert(entries, default)
+	end
+	return entries
+end
+
+local function is_ssh_active(pane)
+	local process_name = pane:get_foreground_process_name()
+	if process_name and process_name:lower():find("ssh") then
+		return true
+	end
+
+	-- mock ssh status for testing
+	-- printf "\033]1337;SetUserVar=SSH_MOCK=MQ==\007"  fish - on
+	-- printf "\033]1337;SetUserVar=SSH_MOCK=MA==\007"  fish - off
+	-- printf "\033]1337;SetUserVar=SSH_MOCK=1\007"     bash - on
+	-- printf "\033]1337;SetUserVar=SSH_MOCK=0\007"     bash - off
+	local user_vars = pane:get_user_vars()
+	return user_vars.SSH_MOCK == "1"
+end
+
+local function create_tab_bar_colors(theme)
+	return {
+		background = "none",
+		new_tab = { bg_color = "none", fg_color = theme.dim },
+		new_tab_hover = { bg_color = "none", fg_color = theme.highlight },
+		inactive_tab = { bg_color = "none", fg_color = theme.dim },
+		inactive_tab_hover = {
+			bg_color = "none",
+			fg_color = wezterm.color.parse(wezterm.color.get_builtin_schemes()[theme.theme]["cursor_bg"]):lighten(0.3),
+		},
+		active_tab = { bg_color = "none", fg_color = theme.highlight, intensity = "Bold" },
+		inactive_tab_edge = "none",
+	}
+end
+
+--- ---------------------------------------------------------------------------
+--- Configuration
+--- ---------------------------------------------------------------------------
+-- general
+config.status_update_interval = 5000
+
+-- font
+config.font = wezterm.font_with_fallback({
+	{ family = "JetBrains Mono", weight = "Bold" },
+	{ family = "Fira Code",      stretch = "Expanded", weight = "Regular", italic = false },
+	{ family = "LXGW WenKai",    stretch = "Expanded", weight = "Regular", italic = false },
+})
+config.cell_width = 0.9
+config.command_palette_font_size = 18
+
+-- launch menu
+config.launch_menu = padded_launch_menu({
+	{ label = " zsh", args = { "/usr/bin/zsh" } },
+	-- { label = " k9s", args = { "/usr/bin/zsh", "-c", "k9s" } },
+}, 9, { label = "-", args = { "/usr/bin/zsh" } })
+
+-- window and tab bar
+config.hide_tab_bar_if_only_one_tab = true
+config.tab_bar_at_bottom = false
+config.use_fancy_tab_bar = true
+config.window_decorations = "RESIZE"
+config.window_frame = {
+	font = wezterm.font_with_fallback({
+		{ family = "JetBrains Mono", weight = "Bold" },
+		{ family = "Fira Code",      stretch = "Expanded", weight = "Regular", italic = false },
+		{ family = "LXGW WenKai",    stretch = "Expanded", weight = "Regular", italic = false },
+	}),                           -- fancy bar only
+	active_titlebar_bg = "none",  -- fancy bar only
+	inactive_titlebar_bg = "none", -- fancy bar only
+	font_size = 18,               -- fancy bar only
+}
+
+-- colors
+local initial_theme = CUSTOM_COLOURS.dark
+
+config.inactive_pane_hsb = { saturation = 1, brightness = 1 }
+config.color_scheme = initial_theme.theme
+
+config.colors = {
+	cursor_bg = initial_theme.highlight,
+	cursor_border = initial_theme.highlight,
+	split = tostring(set_alpha(wezterm.color.get_builtin_schemes()[initial_theme.theme]["cursor_bg"], 0.9)),
+	tab_bar = create_tab_bar_colors(initial_theme),
+}
+
+-- background
+-- Independent of whether I use fancy bar, light/dark mode works until
+-- I split a pane in the light theme. When splitting, the tab is
+-- rendered with the opposite color. Mitigated by applying background
+-- layer.
+local custom_bg =
+		wezterm.color.parse(wezterm.color.get_builtin_schemes()[get_current_theme().theme]["background"]):lighten(0.1)
+
+config.background = {
+	{
+		source = { Color = tostring(custom_bg) },
+		width = "100%",
+		height = "100%",
+		opacity = DEFAULT_BACKGROUND_OPACITY,
+	},
+}
+
+--- ---------------------------------------------------------------------------
+--- Keys
+--- ---------------------------------------------------------------------------
+
+-- leader
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
+
+config.keys = {
+	-- LEADER
+	{ key = "v", mods = "LEADER", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = "s", mods = "LEADER", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "o", mods = "LEADER", action = wezterm.action.TogglePaneZoomState },
+	{ key = "F", mods = "LEADER", action = wezterm.action.ToggleFullScreen },
+	{ key = "c", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
+	{ key = "e", mods = "LEADER", action = wezterm.action.QuickSelect },
+	{ key = "f", mods = "LEADER", action = wezterm.action.Search({ Regex = "\\w*@\\w+:|❯" }) },
+	{ key = "h", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Left") },
+	{ key = "l", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Right") },
+	{ key = "k", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Up") },
+	{ key = "j", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Down") },
+	{ key = "l", mods = "LEADER", action = wezterm.action.ShowLauncher },
+	-- NAVIGATION
+	{ key = "d", mods = "SUPER", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "D", mods = "SUPER|SHIFT", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = "w", mods = "SUPER", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
+	{ key = "p", mods = "SUPER", action = wezterm.action.ActivateCommandPalette },
+	{ key = "t", mods = "CTRL|SHIFT", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
+	{ key = "y", mods = "ALT", action = wezterm.action.ShowTabNavigator },
+	-- 	-- Create a new workspace with a random name and switch to it
+	{ key = "h", mods = "CTRL|SHIFT", action = wezterm.action.SwitchToWorkspace },
+	{ key = "w", mods = "LEADER", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
+	-- EVENTS
+	{ key = "s", mods = "SUPER", action = wezterm.action.EmitEvent("new-ssh-tab") },
+	{ key = "[", mods = "CTRL", action = wezterm.action.EmitEvent("opacity-dec") },
+	{ key = "]", mods = "CTRL", action = wezterm.action.EmitEvent("opacity-inc") },
+	{ key = "t", mods = "CTRL", action = wezterm.action.EmitEvent("toggle-light-mode") },
+	{ key = "o", mods = "CTRL", action = wezterm.action.EmitEvent("toggle-transparency") },
+	{
+		key = "v",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action_callback(function(window, pane)
+			local success, stdout = wezterm.run_child_process({ "wl-paste", "--no-newline" })
+			if success then
+				pane:paste(stdout)
+			end
+		end),
+	},
+	{
+		key = " ",
+		mods = "LEADER",
+		action = wezterm.action.ActivateKeyTable({ name = "move_pane", timeout_milliseconds = 600, one_shot = false }),
+	},
+	{
+		key = "W",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.PromptInputLine({
+			description = wezterm.format({
+				{ Attribute = { Intensity = "Bold" } },
+				{ Foreground = { AnsiColor = "Fuchsia" } },
+				{ Text = "Enter name for new workspace" },
+			}),
+			action = wezterm.action_callback(function(window, pane, line)
+				-- line will be `nil` if they hit escape without entering anything
+				-- An empty string if they just hit enter
+				-- Or the actual line of text they wrote
+				if line then
+					window:perform_action(wezterm.action.SwitchToWorkspace({ name = line }), pane)
+				end
+			end),
+		}),
+	},
+	{
+		key = "l",
+		mods = "LEADER",
+		action = wezterm.action.PromptInputLine({
+			description = "Enter new name for tab",
+			action = wezterm.action_callback(function(window, pane, line)
+				if line then
+					window:active_tab():set_title(line)
+				end
+			end),
+		}),
+	},
+}
+
+config.key_tables = {
+	move_pane = {
+		{ key = "h",      action = wezterm.action.ActivatePaneDirection("Left") },
+		{ key = "l",      action = wezterm.action.ActivatePaneDirection("Right") },
+		{ key = "k",      action = wezterm.action.ActivatePaneDirection("Up") },
+		{ key = "j",      action = wezterm.action.ActivatePaneDirection("Down") },
+		-- Cancel the mode by pressing escape
+		{ key = "Escape", action = "PopKeyTable" },
+		-- Cancel the mode by pressing escape
+		{ key = ";",      action = "PopKeyTable" },
+	},
+}
+
+--- ---------------------------------------------------------------------------
+--- Events
+--- ---------------------------------------------------------------------------
+wezterm.on("new-ssh-tab", function(_, pane)
+	local tab = pane:window():spawn_tab({})
+	tab:set_title("ssh")
+end)
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, _, hover, max_width)
+	local title = tab.tab_title
+	local main_title = "󰋝"
+	if title and #title > 0 then
+		title = tab.tab_title
+	elseif tab.tab_index == 0 then
+		title = main_title
+	else
+		title = ""
+	end
+	return { { Text = " " .. title .. " " } }
+end)
+
+wezterm.on("toggle-transparency", function(window, _)
+	local overrides = window:get_config_overrides() or {}
+	overrides.background = overrides.background or config.background
+
+	local current = overrides.background[1].opacity or 1.0
+	local is_transparent = current < 1.0
+
+	if is_transparent then
+		global.pre_toggle_opacity = current
+	end
+	overrides.background[1].opacity = is_transparent and 1.0 or global.pre_toggle_opacity
+	window:set_config_overrides(overrides)
+end)
+
+wezterm.on("opacity-inc", function(window, _)
+	local overrides = window:get_config_overrides() or {}
+	overrides.background = overrides.background or config.background
+
+	local current = overrides.background[1].opacity or 1.0
+	overrides.background[1].opacity = math.min(current + DEFAULT_TRANSPARENCY_STEP, 1.0)
+
+	window:set_config_overrides(overrides)
+end)
+
+wezterm.on("opacity-dec", function(window, _)
+	local overrides = window:get_config_overrides() or {}
+	overrides.background = overrides.background or config.background
+
+	local current = overrides.background[1].opacity or 1.0
+	overrides.background[1].opacity = math.max(current - DEFAULT_TRANSPARENCY_STEP, 0.2)
+
+	window:set_config_overrides(overrides)
+end)
+
+wezterm.on("toggle-light-mode", function(window, _)
+	local overrides = window:get_config_overrides() or {}
+
+	global.light_mode = not global.light_mode
+	local theme = get_current_theme()
+
+	overrides.color_scheme = theme.theme
+	overrides.colors = {
+		cursor_bg = theme.highlight,
+		cursor_border = theme.highlight,
+		split = tostring(set_alpha(wezterm.color.get_builtin_schemes()[theme.theme]["cursor_bg"], 0.9)),
+		tab_bar = create_tab_bar_colors(theme),
+	}
+
+	if overrides.background then
+		overrides.background = {
+			{
+				source = { Color = wezterm.color.get_builtin_schemes()[theme.theme]["background"] },
+				width = "100%",
+				height = "100%",
+				opacity = overrides.background[1].opacity,
+			},
+		}
+	end
+
+	window:set_config_overrides(overrides)
+end)
+
+wezterm.on("update-status", function(window, pane)
+	local cells = {}
+
+	if STATUS_COMPONENTS.leader then
+		add_status_element(cells, "󰬓", window:leader_is_active())
+	end
+	if STATUS_COMPONENTS.mode then
+		add_status_element(cells, "󰔎", not global.light_mode)
+	end
+	if STATUS_COMPONENTS.ssh then
+		add_status_element(cells, "󰲝󰣀", is_ssh_active(pane))
+	end
+	if STATUS_COMPONENTS.vpn then
+		add_status_element(cells, "󱘖", check_vpn_status("mullvad"))
+	end
+
+	-- add some padding after status icons to match LHS
+	table.insert(cells, { Text = "   " })
+	window:set_right_status(wezterm.format(cells))
+end)
+
+wezterm.on("window-resized", function(window, pane)
+	local font_size
+
+	if window:get_dimensions().dpi < 192 then
+		font_size = 15.0
+	else
+		font_size = 11.0
+	end
+
+	window:set_config_overrides({ font_size = font_size })
+end)
+
+return config
+

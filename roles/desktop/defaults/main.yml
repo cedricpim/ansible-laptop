@@ -1,7 +1,8 @@
 ---
 wallpaper_directory: "~/Pictures"
 rofi_directory: "~/.config/rofi"
-terminal_directory: "~/.config/alacritty"
+wezterm_directory: "~/.config/wezterm"
+alacritty_directory: "~/.config/alacritty"
 ranger_directory: "~/.config/ranger"
 ranger_mountpoint: "~/Device"
 ranger_colorscheme: "dark"
