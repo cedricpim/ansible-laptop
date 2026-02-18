@@ -46,7 +46,7 @@
     - "weather.sh"
 
 - name: "Enable Waybar service"
- systemd:
-   name: "waybar"
-   scope: "user"
-   enabled: yes
+  systemd:
+    name: "waybar"
+    scope: "user"
+    enabled: yes
