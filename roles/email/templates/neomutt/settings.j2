@@ -41,7 +41,7 @@ set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 alternative_order text/plain text/enriched text/html
 auto_view text/html
 set query_command= "khard email --parsable %s"
-set nm_default_uri = "notmuch://{{ '~' | regex_replace('~', ansible_env.HOME) }}/.cache/Mail"
+set nm_default_uri = "notmuch://{{ '~' | regex_replace('~', ansible_facts['env']['HOME']) }}/.cache/Mail"
 
 ### Forgotten Attachment
 # Ask if the user wishes to abort sending if $attach_keyword is found in the

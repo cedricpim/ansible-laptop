@@ -13,7 +13,7 @@
 # configured here named ".notmuch".
 #
 [database]
-path={{ email_directory | regex_replace('~', ansible_env.HOME) }}
+path={{ email_directory | regex_replace('~', ansible_facts['env']['HOME']) }}
 
 # User configuration
 #
