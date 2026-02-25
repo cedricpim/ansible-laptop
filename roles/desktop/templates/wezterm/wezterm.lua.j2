@@ -74,6 +74,33 @@ local function set_alpha(c, a)
 	return wezterm.color.from_hsla(fh, fs, fl, a)
 end
 
+local function open_git_commit(pane, hash)
+	local cwd = pane:get_current_working_dir()
+	if not cwd then
+		return false
+	end
+
+	local success, stdout = wezterm.run_child_process({
+		"git",
+		"-C",
+		cwd.file_path,
+		"config",
+		"--get",
+		"remote.origin.url",
+	})
+
+	if not success then
+		return false
+	end
+
+	local url = stdout:gsub("%s+$", ""):gsub("^git@github.com:", "https://github.com/"):gsub("%.git$", "")
+		.. "/commit/"
+		.. hash
+
+	wezterm.open_with(url)
+	return true
+end
+
 local function check_vpn_status(interface)
 	local handle = assert(io.popen(string.format("ifconfig | grep -c %s", interface)))
 	local result = handle:read("*a")
@@ -283,6 +310,43 @@ config.keys = {
 			end),
 		}),
 	},
+	{
+		key = "g",
+		mods = "LEADER",
+		action = wezterm.action.QuickSelectArgs({
+			patterns = { "\\b[0-9a-f]{7,40}\\b" },
+			action = wezterm.action_callback(function(window, pane)
+				local hash = window:get_selection_text_for_pane(pane)
+				open_git_commit(pane, hash)
+			end),
+		}),
+	},
+	{
+		key = "o",
+		mods = "LEADER",
+		action = wezterm.action.QuickSelectArgs({
+			label = "open file",
+			patterns = {
+				-- Paths with slashes
+				"[.~]?/?[^\\s:]+/[^\\s:]*(?::\\d+)?(?::\\d+)?",
+				-- Simple filenames with extensions (a.txt, main.rs, etc.)
+				"\\b[a-zA-Z0-9_.-]+\\.[a-zA-Z0-9]+(?::\\d+)?(?::\\d+)?\\b",
+				-- Common files without extensions (Makefile, Dockerfile, etc.)
+				"\\b[A-Z][a-zA-Z]+file\\b",
+				-- README, LICENSE, etc.
+				"\\b(?:README|LICENSE|CHANGELOG|CONTRIBUTING|TODO)(?:\\.[a-z]+)?\\b",
+			},
+			action = wezterm.action_callback(function(window, pane)
+				local file_path = window:get_selection_text_for_pane(pane)
+				window:perform_action(
+					wezterm.action_callback(function(w, p)
+						wezterm.emit("open-uri", w, p, "file://" .. file_path)
+					end),
+					pane
+				)
+			end),
+		}),
+	},
 }
 
 config.key_tables = {
@@ -413,6 +477,55 @@ wezterm.on("window-resized", function(window, pane)
 
 	window:set_config_overrides({ font_size = font_size })
 end)
+
+
+config.hyperlink_rules = wezterm.default_hyperlink_rules()
+table.insert(config.hyperlink_rules, { regex = "\\b[0-9a-f]{7,40}\\b", format = "commit:$0" })
+table.insert(config.hyperlink_rules, { regex = "[.~]?/?[^\\s:]+/[^\\s:]*(?::\\d+)?(?::\\d+)?", format = "file://$0" })
+
+wezterm.on("open-uri", function(window, pane, uri)
+	-- Handle git commits
+	local hash = uri:match("^commit:(%x+)$")
+	if hash then
+		if open_git_commit(pane, hash) then
+			return false
+		end
+	end
+
+	-- Handle file paths
+	if uri:match("^file://") then
+		local target = uri:gsub("^file://", "")
+		local path, line, col = target:match("^(.+):(%d+):(%d+)$")
+
+		if not path then
+			path, line = target:match("^(.+):(%d+)$")
+		end
+
+		path = path or target
+		line = line or "1"
+
+		window:perform_action(
+			wezterm.action.SpawnCommandInNewTab({
+				args = { "nvim", "+" .. line, path },
+			}),
+			pane
+		)
+
+		return false
+	end
+end)
+
+-- you may also use the "https://github.com/Xarvex/presentation.wez" mirror
+wezterm.plugin.require("https://gitlab.com/xarvex/presentation.wez").apply_to_config(config, {
+	font_size_multiplier = 1.8, -- sets for both "presentation" and "presentation_full"
+	presentation = {
+		keybind = { key = "t", mods = "SHIFT|SUPER" }, -- setting a keybind
+	},
+	presentation_full = {
+		font_weight = "Bold",
+		font_size_multiplier = 2.4, -- overwrites "font_size_multiplier" for "presentation_full"
+	},
+})
 
 return config
 
