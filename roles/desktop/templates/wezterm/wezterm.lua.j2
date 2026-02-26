@@ -242,7 +242,7 @@ config.keys = {
 	{ key = "F", mods = "LEADER", action = wezterm.action.ToggleFullScreen },
 	{ key = "c", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
 	{ key = "e", mods = "LEADER", action = wezterm.action.QuickSelect },
-	{ key = "f", mods = "LEADER", action = wezterm.action.Search({ Regex = "\\w*@\\w+:|❯" }) },
+	{ key = "f", mods = "LEADER", action = wezterm.action.Search({ CaseInSensitiveString = "" }) },
 	{ key = "h", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Left") },
 	{ key = "l", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Right") },
 	{ key = "k", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Up") },
