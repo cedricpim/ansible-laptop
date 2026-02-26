@@ -248,6 +248,7 @@ config.keys = {
 	{ key = "k", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Up") },
 	{ key = "j", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Down") },
 	{ key = "l", mods = "LEADER", action = wezterm.action.ShowLauncher },
+	{ key = "t", mods = "LEADER", action = wezterm.action.EmitEvent("toggle-transparency") },
 	-- NAVIGATION
 	{ key = "d", mods = "SUPER", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "D", mods = "SUPER|SHIFT", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
@@ -262,8 +263,6 @@ config.keys = {
 	{ key = "s", mods = "SUPER", action = wezterm.action.EmitEvent("new-ssh-tab") },
 	{ key = "[", mods = "CTRL", action = wezterm.action.EmitEvent("opacity-dec") },
 	{ key = "]", mods = "CTRL", action = wezterm.action.EmitEvent("opacity-inc") },
-	{ key = "t", mods = "CTRL", action = wezterm.action.EmitEvent("toggle-light-mode") },
-	{ key = "o", mods = "CTRL", action = wezterm.action.EmitEvent("toggle-transparency") },
 	{
 		key = "v",
 		mods = "CTRL|SHIFT",
@@ -413,34 +412,6 @@ wezterm.on("opacity-dec", function(window, _)
 
 	local current = overrides.background[1].opacity or 1.0
 	overrides.background[1].opacity = math.max(current - DEFAULT_TRANSPARENCY_STEP, 0.2)
-
-	window:set_config_overrides(overrides)
-end)
-
-wezterm.on("toggle-light-mode", function(window, _)
-	local overrides = window:get_config_overrides() or {}
-
-	global.light_mode = not global.light_mode
-	local theme = get_current_theme()
-
-	overrides.color_scheme = theme.theme
-	overrides.colors = {
-		cursor_bg = theme.highlight,
-		cursor_border = theme.highlight,
-		split = tostring(set_alpha(wezterm.color.get_builtin_schemes()[theme.theme]["cursor_bg"], 0.9)),
-		tab_bar = create_tab_bar_colors(theme),
-	}
-
-	if overrides.background then
-		overrides.background = {
-			{
-				source = { Color = wezterm.color.get_builtin_schemes()[theme.theme]["background"] },
-				width = "100%",
-				height = "100%",
-				opacity = overrides.background[1].opacity,
-			},
-		}
-	end
 
 	window:set_config_overrides(overrides)
 end)
