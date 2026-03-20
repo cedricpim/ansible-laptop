@@ -5,16 +5,9 @@
       - "docker"
       - "docker-buildx"
       - "minikube"
+      - "ctop"
     state: "present"
   become: yes
-
-- include_role:
-    name: "yay"
-  with_items:
-    - "devcontainer-cli"
-    - "lazydocker"
-  loop_control:
-    loop_var: "pkg_name"
 
 - name: "Restart service for docker"
   systemd:
