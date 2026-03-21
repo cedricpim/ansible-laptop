@@ -4,21 +4,21 @@
 
 if [[ "$TERM" == "{{ terminal_term }}" ]]; then
   function change-color() {
-    printf "\033]10;$1\007" # foreground
-    printf "\033]11;$2\007" # background
+    kitten @ set-colors foreground=$1
+    kitten @ set-colors background=$2
   }
 
   function original-color() {
-    grep colors.primary -A 2 {{ wal_cache_directory }}/colors-alacritty.toml | grep -m 1 $1 | sed -r "s/[^\"]*\"(.+)\"/\1/"
+    grep $1 {{ kitty_directory }}/colors.conf | sed -r "s/[^#]*(#.+)/\1/"
   }
 
   function reset-colors() {
-    change-color "$(original-color 'foreground =')" "$(original-color 'background =')"
+    change-color "$(original-color 'foreground')" "$(original-color 'background')"
   }
 
   function colorproduction() {
     if {{ production_commands | map('regex_replace', '^(.*)$', '[[ "$1" =~ "^\\1" ]]') | join(' || ') }}; then
-      change-color "#FFFFFF" "#471C1C"
+      change-color "#FFFFFF" "#b31717"
     else
       reset-colors
     fi

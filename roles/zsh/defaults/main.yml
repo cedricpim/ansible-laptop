@@ -1,7 +1,7 @@
 ---
 zprezto_dest: "{{ zsh_directory }}/.zprezto"
 zsh_directory: "~/.config/zsh"
-terminal_term: "alacritty"
+terminal_term: "xterm-kitty"
 prompt_theme_directory: "/usr/share/oh-my-posh/themes"
 prompt_theme: "emodipt-extend.omp.json"
 

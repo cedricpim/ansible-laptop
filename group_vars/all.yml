@@ -9,6 +9,7 @@ colorscheme_name: "solarized"
 background_color: "dark"
 colorscheme_style: ""
 wal_cache_directory: "~/.cache/wal"
+kitty_directory: "~/.config/kitty"
 
 ansible_managed: |
   WARNING: This file is managed by Ansible

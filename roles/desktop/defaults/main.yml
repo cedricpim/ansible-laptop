@@ -1,7 +1,6 @@
 ---
 wallpaper_directory: "~/Pictures"
 rofi_directory: "~/.config/rofi"
-kitty_directory: "~/.config/kitty"
 alacritty_directory: "~/.config/alacritty"
 ranger_directory: "~/.config/ranger"
 ranger_mountpoint: "~/Device"
