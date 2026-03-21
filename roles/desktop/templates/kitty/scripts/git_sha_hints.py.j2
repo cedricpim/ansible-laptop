@@ -1,0 +1,70 @@
+{{ ansible_managed | comment }}
+
+import re
+import subprocess
+
+
+SHA_PATTERN = re.compile(r"\b[0-9a-f]{7,40}\b", re.IGNORECASE)
+
+
+def mark(text, args, Mark, extra_cli_args, *unused):
+    for idx, match in enumerate(SHA_PATTERN.finditer(text)):
+        start, end = match.span()
+        value = match.group(0)
+        yield Mark(idx, start, end, value, {})
+
+
+def _selected_matches(data):
+    for match, groupdict in zip(data.get("match", ()), data.get("groupdicts", ())):
+        if match:
+            yield match, groupdict
+
+
+def _window_cwd(boss, target_window_id):
+    window = boss.window_id_map.get(target_window_id)
+    if window is None:
+        return None
+    cwd = getattr(window, "cwd_of_child", None)
+    if not cwd:
+        return None
+    return str(cwd)
+
+
+def _github_commit_url(cwd, sha):
+    if not cwd:
+        return None
+
+    result = subprocess.run(
+        ["git", "-C", cwd, "config", "--get", "remote.origin.url"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    remote = result.stdout.strip()
+    if result.returncode != 0 or not remote:
+        return None
+
+    if remote.startswith("git@github.com:"):
+        base = remote.replace("git@github.com:", "https://github.com/", 1)
+    elif remote.startswith("ssh://git@github.com/"):
+        base = remote.replace("ssh://git@github.com/", "https://github.com/", 1)
+    elif remote.startswith("https://github.com/"):
+        base = remote
+    elif remote.startswith("http://github.com/"):
+        base = "https://" + remote[len("http://") :]
+    else:
+        return None
+
+    if base.endswith(".git"):
+        base = base[:-4]
+    return f"{base}/commit/{sha}"
+
+
+def handle_result(args, data, target_window_id, boss, extra_cli_args, *unused):
+    cwd = _window_cwd(boss, target_window_id)
+
+    for sha, _groupdict in _selected_matches(data):
+        url = _github_commit_url(cwd, sha)
+        if url:
+            boss.open_url(url)
+

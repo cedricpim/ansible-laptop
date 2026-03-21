@@ -3,7 +3,7 @@
   pacman:
     name:
       - "alacritty"
-      - "wezterm"
+      - "kitty"
       - "xterm"
     state: "present"
   become: yes
@@ -14,7 +14,7 @@
     state: "directory"
     mode: "0700"
   with_items:
-    - "{{ wezterm_directory }}"
+    - "{{ kitty_directory }}"
     - "{{ alacritty_directory }}"
 
 - name: "Copy terminal configurations"
@@ -24,4 +24,23 @@
     mode: "0600"
   with_items:
     - { destination: "{{ alacritty_directory }}", directory: "alacritty", file: "alacritty.toml" }
-    - { destination: "{{ wezterm_directory }}", directory: "wezterm", file: "wezterm.lua" }
+    - { destination: "{{ kitty_directory }}", directory: "kitty", file: "kitty.conf" }
+    - { destination: "{{ kitty_directory }}", directory: "kitty", file: "colors.conf" }
+    - { destination: "{{ kitty_directory }}", directory: "kitty", file: "grab.conf" }
+    - { destination: "{{ kitty_directory }}", directory: "kitty", file: "open-actions.conf" }
+
+- name: "Copy kitty scripts configurations"
+  template:
+    src: "kitty/scripts/{{ item }}.j2"
+    dest: "{{ kitty_directory }}/scripts/{{ item }}"
+    mode: "0700"
+  with_items:
+    - "git_sha_hints.py"
+    - "toggle-font-size"
+
+- name: "Download kitty_grab repository"
+  git:
+    repo: "{{ kitty_grab_repo }}"
+    dest: "{{ kitty_directory }}/kitty_grab"
+    clone: yes
+    update: yes

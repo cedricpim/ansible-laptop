@@ -1,0 +1,13 @@
+{{ ansible_managed | comment }}
+
+# Ctrl+Shift+click file hyperlinks emitted by tools such as:
+# - ls --hyperlink=auto
+# - rg --hyperlink-format=kitty
+#
+protocol file
+fragment_matches [0-9]+
+action launch --type=tab --cwd=current nvim +${FRAGMENT} -- ${FILE_PATH}
+
+protocol file
+mime text/*
+action launch --type=tab --cwd=current nvim -- ${FILE_PATH}

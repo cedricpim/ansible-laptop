@@ -5,16 +5,16 @@ PATH=$PATH:/usr/local/bin
 
 {{ ansible_managed | comment }}
 
-hyprctl dispatch togglespecialworkspace $1
-
-if ! hyprctl clients | grep $1 >/dev/null; then
+if hyprctl clients -j | grep -q "\"name\": \"special:$1\""; then
+  # App is running, just toggle visibility
+  hyprctl dispatch togglespecialworkspace "$1"
+else
+  # App not running, launch it — windowrule will place it on the right workspace
   if [ "$1" == "terminal" ]; then
-    wezterm start --class "$1" &
+    kitty --class "$1" &
   elif [ "$2" == "terminal" ]; then
-    wezterm start --class "$1" "$1" &
+    kitty --class "$1" "$1" &
   else
     ${@:2} &
   fi
-
-  hyprctl dispatch focuscurrentorlast
 fi

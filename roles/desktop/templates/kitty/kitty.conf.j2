@@ -1,0 +1,62 @@
+{{ ansible_managed | comment }}
+
+include colors.conf
+
+font_family      "JetBrains Mono"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# Default value if font-size.conf is not present
+font_size 15.0
+include font-size.conf
+map kitty_mod+s remote_control_script scripts/toggle-font-size
+
+background_opacity         0.5
+dynamic_background_opacity yes
+allow_hyperlinks           yes
+shell_integration          enabled
+confirm_os_window_close    0
+
+# Splits and pane navigation
+map ctrl+a>v launch --cwd=current --location=vsplit
+map ctrl+a>s launch --cwd=current --location=hsplit
+map ctrl+a>h neighboring_window left
+map ctrl+a>j neighboring_window down
+map ctrl+a>k neighboring_window up
+map ctrl+a>l neighboring_window right
+map --new-mode move_pane --on-unknown ignore ctrl+a>space
+map --mode move_pane h neighboring_window left
+map --mode move_pane j neighboring_window down
+map --mode move_pane k neighboring_window up
+map --mode move_pane l neighboring_window right
+map --mode move_pane escape pop_keyboard_mode
+map --mode move_pane ; pop_keyboard_mode
+
+## Hints
+map ctrl+shift+p>e kitten hints
+
+# Select a path/filename and insert it into the terminal. Useful, for instance
+# to run git commands on a filename output from a previous git command.
+map ctrl+shift+p>f kitten hints --type path --program -
+# Select a path/filename and open it with the default open program.
+map ctrl+shift+p>shift+f kitten hints --type path --program "launch --cwd=current nvim"
+# Open file:line matches in a new kitty tab with nvim.
+map ctrl+shift+p>shift+l kitten hints --type=linenum --linenum-action=tab nvim +{line} {path}
+
+# Select something that looks like a hash and insert it into the terminal. Useful
+# with git, which uses SHA1 hashes to identify commits.
+map ctrl+shift+p>h kitten hints --type hash --program -
+# Select SHA-like hashes and open the GitHub commit page inferred from the
+# current window's git remote and cwd.
+map ctrl+shift+p>shift+h kitten hints --customize-processing scripts/git_sha_hints.py
+
+# Select a hyperlink (i.e. a URL that has been marked as such by the terminal
+# program, for example, by ls --hyperlink=auto).
+map ctrl+shift+p>y kitten hints --type hyperlink
+
+# Copy/search/select equivalents
+map kitty_mod+h show_scrollback
+map kitty_mod+/ search_scrollback
+map ctrl+a>c kitten kitty_grab/grab.py
+scrollback_pager env LESSUTFBINFMT='*n%C' less -R --quit-if-one-screen --chop-long-lines +INPUT_LINE_NUMBER
+scrollback_lines 10000

@@ -1,3 +1,5 @@
 ---
 ranger_icons_repo: "https://github.com/alexanderjeurissen/ranger_devicons.git"
 ranger_icons_directory: "{{ ranger_directory }}/plugins/ranger_devicons"
+
+kitty_grab_repo: "https://github.com/yurikhan/kitty_grab.git"

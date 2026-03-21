@@ -1,0 +1,20 @@
+#!/bin/sh
+set -eu
+
+{{ ansible_managed | comment }}
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+STATE_FILE="$SCRIPT_DIR/../font-size.conf"
+
+current_size=15.0
+if [ -f "$STATE_FILE" ]; then
+  current_size=$(awk '/^[[:space:]]*font_size[[:space:]]+/ { print $2; exit }' "$STATE_FILE")
+fi
+
+case "$current_size" in
+  11|11.0) new_size=15.0 ;;
+  *) new_size=11.0 ;;
+esac
+
+printf 'font_size %s\n' "$new_size" > "$STATE_FILE"
+kitten @ set-font-size --all "$new_size"
