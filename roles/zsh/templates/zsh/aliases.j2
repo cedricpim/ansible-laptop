@@ -8,17 +8,6 @@ alias cp="nocorrect cp -i -p"
 # Personal aliases
 alias travel="ikhal -a travel"
 
-# Ruby
-alias be="bundle exec"
-alias rs="be rails s -b 0.0.0.0"
-alias rc="be rails c"
-alias rsp="be rspec"
-alias rrsp="be rescue rspec"
-alias sk="be sidekiq -C config/sidekiq.yml"
-alias cucumber="be cucumber"
-alias rake="be rake"
-alias rails="be rails"
-
 ## Application
 alias vim="nvim"
 alias feh="feh -F"
@@ -53,7 +42,7 @@ alias h="history"
 alias j="jobs"
 
 # Always use color output for `ls` and group directories
-alias ls="ls --color=auto --group-directories-first"
+alias ls="ls --color=auto --group-directories-first --hyperlink=auto"
 
 # List all files colorized in long format
 alias l="ls -l"
@@ -85,9 +74,6 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 # find . -name .gitattributes | map dirname
 alias map="xargs -n1"
 
-# Update pip
-alias pip-update="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U --user"
-
 alias reload!="source {{ zsh_directory }}/.zshrc"
 
 # Alias wget to use a custom hsts cache file location
@@ -114,22 +100,13 @@ function loggo() {
 # Use pager with ripgrep
 function rg() {
   if [ -t 1 ]; then
-      command rg -p -L --hidden --sort-files "$@" | less -RMFXK
+    command rg -p -L --hidden --sort-files "$@" --hyperlink-format=kitty | less -RMFXK
   else
-      command rg "$@"
+    command rg  --hyperlink-format=kitty "$@"
   fi
 }
 
 # Use MyTraceRoute to check internet conditions
 alias internet-report="sudo mtr 8.8.8.8"
-
-# Docker compose app
-function dca() {
-  if [ "$1" = "stop" ] || [ "$1" = "start" ]; then
-    docker compose -f .devcontainer/docker-compose.yml $1
-  elif [ -n "$1" ]; then
-    docker compose -f .devcontainer/docker-compose.yml exec app "$@"
-  fi
-}
 
 {{ ledger_aliases }}
