@@ -15,6 +15,7 @@
     mode: "0700"
   with_items:
     - "{{ kitty_directory }}"
+    - "{{ kitty_directory }}/scripts"
     - "{{ alacritty_directory }}"
 
 - name: "Copy terminal configurations"
