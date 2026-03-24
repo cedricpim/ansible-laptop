@@ -36,6 +36,17 @@ map --mode move_pane ; pop_keyboard_mode
 ## Hints
 map ctrl+shift+p>e kitten hints
 
+# Copy any text match to clipboard
+map ctrl+shift+c>e kitten hints --program @
+# Copy a path/filename to clipboard
+map ctrl+shift+c>f kitten hints --type path --program @
+# Copy a hash to clipboard
+map ctrl+shift+c>h kitten hints --type hash --program @
+# Copy a hyperlink to clipboard
+map ctrl+shift+c>y kitten hints --type hyperlink --program @
+# Copy a line to clipboard
+map ctrl+shift+c>l kitten hints --type line --program @
+
 # Select a path/filename and insert it into the terminal. Useful, for instance
 # to run git commands on a filename output from a previous git command.
 map ctrl+shift+p>f kitten hints --type path --program -
