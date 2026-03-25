@@ -9,7 +9,6 @@
       - "ripgrep"
       - "gdu"
       - "libvterm"
-      - "pandoc"
     state: "present"
   become: yes
 
