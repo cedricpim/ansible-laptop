@@ -12,7 +12,7 @@ syncthing_port: "8384"
 wallpaper: "landscape.jpg"
 
 workspaces:
-  - { key: "1", keybinding: "1", symbol: "", assigned: "Slack" }
+  - { key: "1", keybinding: "1", symbol: "", assigned: "slack" }
   - { key: "2", keybinding: "2", symbol: "", assigned: "firefox" }
   - { key: "3", keybinding: "3", symbol: "" }
   - { key: "4", keybinding: "4", symbol: "" }
