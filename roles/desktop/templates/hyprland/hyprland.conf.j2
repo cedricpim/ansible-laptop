@@ -158,12 +158,6 @@ animations {
     animation = workspaces, 1, 6, default
 }
 
-# See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
-dwindle {
-    pseudotile = true # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
-    preserve_split = true # You probably want this
-}
-
 # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
 master {
     new_status = master
@@ -240,7 +234,6 @@ bind = $mainMod, Q, killactive,
 bind = $mainMod, F, fullscreen
 bind = $mainMod SHIFT, O, togglefloating,
 bindr = $mainMod, D, exec, pkill rofi || $menu
-bind = $mainMod SHIFT, J, togglesplit, # dwindle
 bind = $mainMod, GRAVE, exec, swaync-client --toggle-dnd
 bind = $mainMod SHIFT, GRAVE, exec, swaync-client -t -sw # swayNC panel
 bind = $mainMod, Tab, cyclenext, prev
