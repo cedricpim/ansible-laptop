@@ -44,7 +44,6 @@
     dest: "{{ wal_directory }}/templates/{{ item }}"
     mode: "0600"
   with_items:
-    - "colors-hyprland.conf"
     - "colors-hyprland.lua"
     - "colors-alacritty.toml"
 

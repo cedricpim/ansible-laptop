@@ -57,7 +57,6 @@
     dest: "{{ hyprland_directory }}/{{ item }}"
     mode: "0600"
   with_items:
-    - "hyprland.conf"
     - "hyprland.lua"
     - "hyprpaper.conf"
     - "hypridle.conf"
@@ -71,7 +70,6 @@
   with_items:
     - "alacritty.sh"
     - "clip-manager.sh"
-    - "layout-manager.sh"
     - "media-control.sh"
     - "rofi.sh"
     - "special-launcher.sh"
