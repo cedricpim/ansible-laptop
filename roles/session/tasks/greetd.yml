@@ -16,8 +16,8 @@
 
 - name: "Copy greetd Hyprland configurations"
   template:
-    src: "greetd/hyprland.conf.j2"
-    dest: "{{ greetd_directory }}/hyprland.conf"
+    src: "greetd/hyprland.lua.j2"
+    dest: "{{ greetd_directory }}/hyprland.lua"
     mode: "0644"
   become: yes
 
