@@ -45,6 +45,7 @@
     mode: "0600"
   with_items:
     - "colors-hyprland.conf"
+    - "colors-hyprland.lua"
     - "colors-alacritty.toml"
 
 - name: "Set colors"

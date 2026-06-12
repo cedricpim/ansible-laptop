@@ -58,6 +58,7 @@
     mode: "0600"
   with_items:
     - "hyprland.conf"
+    - "hyprland.lua"
     - "hyprpaper.conf"
     - "hypridle.conf"
     - "hyprlock.conf"
