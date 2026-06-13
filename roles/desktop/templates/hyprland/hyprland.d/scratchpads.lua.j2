@@ -1,0 +1,21 @@
+{{ ansible_managed | comment(decoration='-- ', prefix='--[[', postfix='--]]') }}
+
+return function(context)
+    local hyprlandDirectory = context.hyprlandDirectory
+    local mainMod = context.mainMod
+
+{% for application in scratchpad_applications %}
+    hl.window_rule({
+        match = { class = [==[^({{ application.class | default(application.name) }})$]==] },
+        float = true,
+        center = true,
+        workspace = [==[special:{{ application.name | lower }}]==],
+        size = [==[{{ application.size | default("(monitor_w*0.5) (monitor_h*0.5)") }}]==],
+    })
+    hl.bind(
+        mainMod .. " + " .. [==[{{ application.keybinding }}]==],
+        hl.dsp.exec_cmd(hyprlandDirectory .. [==[/scripts/special-launcher.sh {{ application.name | lower }} {{ application.launcher | default("") }}]==])
+    )
+
+{% endfor %}
+end

@@ -1,0 +1,39 @@
+{{ ansible_managed | comment(decoration='-- ', prefix='--[[', postfix='--]]') }}
+
+return function(context)
+    local setMonitorLayout = context.setMonitorLayout
+
+    hl.define_submap("resize", function()
+        hl.bind("RIGHT", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
+        hl.bind("LEFT", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
+        hl.bind("UP", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
+        hl.bind("DOWN", hl.dsp.window.resize({ x = 0, y = 10, relative = true }), { repeating = true })
+
+        hl.bind("H", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
+        hl.bind("L", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
+        hl.bind("K", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
+        hl.bind("J", hl.dsp.window.resize({ x = 0, y = 1, relative = true }), { repeating = true })
+
+        hl.bind("escape", hl.dsp.submap("reset"))
+    end)
+
+    hl.define_submap("displays", function()
+        hl.bind("E", function()
+            setMonitorLayout("external")
+            hl.dispatch(hl.dsp.submap("reset"))
+        end)
+        hl.bind("M", function()
+            setMonitorLayout("multiple")
+            hl.dispatch(hl.dsp.submap("reset"))
+        end)
+        hl.bind("I", function()
+            setMonitorLayout("internal")
+            hl.dispatch(hl.dsp.submap("reset"))
+        end)
+        hl.bind("escape", hl.dsp.submap("reset"))
+    end)
+
+    hl.define_submap("passthrough", function()
+        hl.bind("ALT + L", hl.dsp.submap("reset"))
+    end)
+end

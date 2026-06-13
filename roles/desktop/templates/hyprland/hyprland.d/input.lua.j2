@@ -1,0 +1,8 @@
+{{ ansible_managed | comment(decoration='-- ', prefix='--[[', postfix='--]]') }}
+
+return function()
+    hl.device({
+        name = "epic-mouse-v1",
+        sensitivity = -0.5,
+    })
+end

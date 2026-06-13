@@ -1,0 +1,30 @@
+{{ ansible_managed | comment(decoration='-- ', prefix='--[[', postfix='--]]') }}
+
+return function()
+    hl.on("hyprland.start", function()
+        hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+        hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+        hl.exec_cmd("systemctl --user start hyprland-session.target")
+
+        hl.exec_cmd("hyprpaper")
+        hl.exec_cmd("hypridle")
+        hl.exec_cmd("hyprsunset")
+        hl.exec_cmd("hyprpm reload -n")
+
+        hl.exec_cmd("slack")
+        hl.exec_cmd("swaync")
+        hl.exec_cmd("udiskie -ans")
+        hl.exec_cmd("blueman-applet")
+        hl.exec_cmd("solaar -w hide")
+        hl.exec_cmd("nm-applet --indicator")
+        hl.exec_cmd("sudo rm /tmp/osui.sock >/dev/null 2>&1 || true && opensnitch-ui --background")
+        hl.exec_cmd("signal-desktop --start-in-tray")
+        hl.exec_cmd("wl-paste --type text --watch cliphist store")
+        hl.exec_cmd("wl-paste --type image --watch cliphist store")
+
+        hl.exec_cmd([==[{{ default_browser }}]==])
+
+        hl.exec_cmd("sleep 1 && keepassxc")
+        hl.exec_cmd("sleep 1 && mullvad-vpn")
+    end)
+end

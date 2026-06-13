@@ -1,0 +1,89 @@
+{{ ansible_managed | comment(decoration='-- ', prefix='--[[', postfix='--]]') }}
+
+return function(context)
+    local walColors = context.walColors
+
+    hl.config({
+        ecosystem = {
+            no_update_news = true,
+            no_donation_nag = true,
+        },
+
+        general = {
+            gaps_in = 5,
+            gaps_out = 20,
+            border_size = 2,
+            col = {
+                active_border = {
+                    colors = {
+                        walColors.color6 or "rgba(33ccffee)",
+                        walColors.color3 or "rgba(00ff99ee)",
+                    },
+                    angle = 90,
+                },
+                inactive_border = "rgba(000000A0)",
+            },
+            resize_on_border = false,
+            allow_tearing = false,
+            layout = "hy3",
+        },
+
+        decoration = {
+            rounding = 10,
+            active_opacity = 1.0,
+            inactive_opacity = 0.9,
+            dim_inactive = true,
+            dim_strength = 0.35,
+            blur = {
+                enabled = true,
+                size = 5,
+                passes = 3,
+                ignore_opacity = true,
+                new_optimizations = true,
+            },
+        },
+
+        animations = {
+            enabled = true,
+        },
+
+        master = {
+            new_status = "master",
+        },
+
+        misc = {
+            force_default_wallpaper = -1,
+            disable_hyprland_logo = true,
+            disable_splash_rendering = true,
+            mouse_move_enables_dpms = true,
+            vrr = 2,
+        },
+
+        input = {
+            kb_layout = "us",
+            kb_variant = "",
+            kb_model = "",
+            kb_options = "compose:ralt",
+            kb_rules = "",
+            follow_mouse = 1,
+            sensitivity = 0,
+            repeat_rate = 25,
+            repeat_delay = 200,
+            numlock_by_default = 1,
+            touchpad = {
+                disable_while_typing = 1,
+                natural_scroll = false,
+                clickfinger_behavior = 1,
+            },
+        },
+
+        binds = {
+            workspace_back_and_forth = true,
+            allow_workspace_cycles = true,
+        },
+
+        xwayland = {
+            force_zero_scaling = true,
+        },
+    })
+end

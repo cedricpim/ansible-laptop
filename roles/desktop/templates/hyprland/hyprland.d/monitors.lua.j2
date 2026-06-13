@@ -1,0 +1,84 @@
+{{ ansible_managed | comment(decoration='-- ', prefix='--[[', postfix='--]]') }}
+
+return function(context)
+    local layoutLocked = false
+
+    local function setInternalMonitor(enabled)
+        hl.monitor({
+            output = "eDP-1",
+            disabled = not enabled,
+            mode = "preferred",
+            position = "auto",
+            scale = 1.5,
+        })
+    end
+
+    local function setExternalMonitor(enabled)
+        hl.monitor({
+            output = "DP-2",
+            disabled = not enabled,
+            mode = "preferred",
+            position = "auto",
+            scale = 1,
+        })
+    end
+
+    local function externalMonitorCount()
+        local count = 0
+
+        for _, monitor in ipairs(hl.get_monitors()) do
+            if not monitor.name:match("^eDP%-") then
+                count = count + 1
+            end
+        end
+
+        return count
+    end
+
+    local function unlockLayoutSoon()
+        hl.timer(function()
+            layoutLocked = false
+        end, {
+            timeout = 500,
+            type = "oneshot",
+        })
+    end
+
+    local function setMonitorLayout(layout)
+        layoutLocked = true
+
+        if layout == "internal" then
+            setInternalMonitor(true)
+            setExternalMonitor(false)
+        elseif layout == "external" then
+            setExternalMonitor(true)
+            setInternalMonitor(false)
+        elseif layout == "multiple" then
+            setExternalMonitor(true)
+            setInternalMonitor(true)
+        end
+
+        unlockLayoutSoon()
+    end
+
+    context.setMonitorLayout = setMonitorLayout
+
+    hl.on("monitor.added", function()
+        if not layoutLocked and externalMonitorCount() > 0 then
+            setInternalMonitor(false)
+        end
+    end)
+
+    hl.on("monitor.removed", function()
+        if externalMonitorCount() == 0 then
+            setInternalMonitor(true)
+        end
+    end)
+
+    hl.monitor({
+        output = "",
+        mode = "preferred",
+        position = "auto",
+        scale = "auto",
+    })
+end

@@ -49,6 +49,7 @@
     mode: "0700"
   with_items:
     - "{{ hyprland_directory }}"
+    - "{{ hyprland_directory }}/hyprland.d"
     - "{{ hyprland_directory }}/scripts"
 
 - name: "Copy Hyprland configurations"
@@ -57,10 +58,20 @@
     dest: "{{ hyprland_directory }}/{{ item }}"
     mode: "0600"
   with_items:
-    - "hyprland.lua"
     - "hyprpaper.conf"
     - "hypridle.conf"
     - "hyprlock.conf"
+    - "hyprland.d/animations.lua"
+    - "hyprland.d/appearance.lua"
+    - "hyprland.d/environment.lua"
+    - "hyprland.d/input.lua"
+    - "hyprland.d/keybindings.lua"
+    - "hyprland.d/monitors.lua"
+    - "hyprland.d/scratchpads.lua"
+    - "hyprland.d/startup.lua"
+    - "hyprland.d/submaps.lua"
+    - "hyprland.d/window-rules.lua"
+    - "hyprland.lua"
 
 - name: "Copy Hyprland scripts"
   template:
