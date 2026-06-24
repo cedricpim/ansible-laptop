@@ -9,8 +9,8 @@
     "format": "{icon}",
     "show-special": false,
     "on-click": "activate",
-    "on-scroll-up": "hyprctl dispatch workspace e+1",
-    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'" ,
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'" ,
     "persistent-workspaces": {
       "1": [],
       "2": [],
@@ -29,8 +29,8 @@
     "format": "{icon}",
     "show-special": false,
     "on-click": "activate",
-    "on-scroll-up": "hyprctl dispatch workspace e+1",
-    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'" ,
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'" ,
     "all-outputs": true,
     "sort-by-number": true,
     "format-icons": {
