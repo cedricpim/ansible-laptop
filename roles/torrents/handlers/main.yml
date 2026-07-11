@@ -5,13 +5,13 @@
 
 - name: "Stop transmission"
   systemd:
-    name: "transmission"
+    name: "transmission-daemon"
     state: "stopped"
   become: yes
 
 - name: "Restart transmission"
   systemd:
-    name: "transmission"
+    name: "transmission-daemon"
     state: "restarted"
   become: yes
 

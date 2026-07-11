@@ -72,7 +72,7 @@
 
 - name: "Start and enable service for transmission-cli"
   systemd:
-    name: "transmission"
+    name: "transmission-daemon"
     state: "started"
     enabled: yes
   become: yes
