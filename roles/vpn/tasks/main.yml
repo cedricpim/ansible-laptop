@@ -17,3 +17,36 @@
     state: "started"
     enabled: yes
   become: yes
+
+- name: "Install Tailscale"
+  pacman:
+    name: "tailscale"
+    state: "present"
+  become: yes
+
+- name: "Enable/start Tailscale daemon"
+  systemd:
+    name: "tailscaled"
+    state: "started"
+    enabled: yes
+  become: yes
+
+- name: "Configure Tailscale systray systemd startup"
+  command: "tailscale configure systray --enable-startup=systemd"
+  changed_when: no
+
+- name: "Enable/start Tailscale systray"
+  systemd:
+    name: "tailscale-systray"
+    scope: "user"
+    state: "started"
+    enabled: yes
+
+- name: "Allow user to configure the Tailscale operator"
+  lineinfile:
+    path: "/etc/sudoers"
+    regexp: "^{{ user | regex_escape }} ALL=\\(root\\) NOPASSWD: /usr/bin/tailscale set --operator={{ user | regex_escape }}$"
+    line: "{{ user }} ALL=(root) NOPASSWD: /usr/bin/tailscale set --operator={{ user }}"
+    validate: "visudo -cf %s"
+    backup: yes
+  become: yes
