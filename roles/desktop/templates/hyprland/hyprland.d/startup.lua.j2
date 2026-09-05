@@ -27,5 +27,9 @@ return function()
 
         hl.exec_cmd("sleep 1 && keepassxc")
         hl.exec_cmd("sleep 1 && mullvad-vpn")
+        -- Preferences are profile-specific, so switch as root first and then set
+        -- the operator on the newly active profile. Keep both in one command so
+        -- hl.exec_cmd cannot run them concurrently.
+        hl.exec_cmd([==[sudo -n /usr/bin/tailscale switch "$USER" && sudo -n /usr/bin/tailscale set --operator="$USER"]==])
     end)
 end

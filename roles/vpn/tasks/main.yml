@@ -46,7 +46,16 @@
   lineinfile:
     path: "/etc/sudoers"
     regexp: "^{{ user | regex_escape }} ALL=\\(root\\) NOPASSWD: /usr/bin/tailscale set --operator={{ user | regex_escape }}$"
-    line: "{{ user }} ALL=(root) NOPASSWD: /usr/bin/tailscale set --operator={{ user }}"
+    line: "{{ user | regex_escape }} ALL=(root) NOPASSWD: /usr/bin/tailscale set --operator={{ user | regex_escape }}"
+    validate: "visudo -cf %s"
+    backup: yes
+  become: yes
+
+- name: "Allow user to configure the Tailscale profile"
+  lineinfile:
+    path: "/etc/sudoers"
+    regexp: "^{{ user | regex_escape }} ALL=\\(root\\) NOPASSWD: /usr/bin/tailscale switch {{ user | regex_escape }}$"
+    line: "{{ user | regex_escape }} ALL=(root) NOPASSWD: /usr/bin/tailscale switch {{ user | regex_escape }}"
     validate: "visudo -cf %s"
     backup: yes
   become: yes
