@@ -21,6 +21,7 @@
       - "uwsm"
       - "libnewt"
       - "cpio"
+      - "hyprpm"
     state: "present"
   become: yes
 
