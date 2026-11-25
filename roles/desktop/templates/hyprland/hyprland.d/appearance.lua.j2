@@ -1,5 +1,15 @@
 {{ ansible_managed | comment(decoration='-- ', prefix='--[[', postfix='--]]') }}
 
+hl.layout.register("balanced", {
+	recalculate = function(ctx)
+		local n = #ctx.targets
+
+		for i, target in ipairs(ctx.targets) do
+			target:place(ctx:grid_cell(i, n))
+		end
+	end,
+})
+
 return function(context)
     local walColors = context.walColors
 
@@ -25,7 +35,7 @@ return function(context)
             },
             resize_on_border = false,
             allow_tearing = false,
-            layout = "hy3",
+			layout = "lua:balanced",
         },
 
         decoration = {
